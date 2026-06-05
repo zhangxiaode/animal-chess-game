@@ -1,0 +1,4 @@
+5-25-2026 18:15:31 - error: Object has been destroyedTypeError: Object has been destroyed
+    at Timeout._onTimeout (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@base/electron-windows/lib/browser.ccc:1:3984)
+    at listOnTimeout (node:internal/timers:573:17)
+    at process.processTimers (node:internal/timers:514:7)

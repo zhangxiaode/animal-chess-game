@@ -1,0 +1,272 @@
+{
+  "version": "1.0.1",
+  "map": {
+    "prefabs": {
+      "time": 1778555100477.259,
+      "uuid": "43964ec5-c883-4384-878c-4c5d1f8376a0"
+    },
+    "resources": {
+      "time": 1778587221228.1992,
+      "uuid": "2180a15f-e33d-42a7-9127-7591c96aa3cb"
+    },
+    "scenes": {
+      "time": 1778555172704.1653,
+      "uuid": "58761854-15ee-4c76-9641-e7b4215d20d8"
+    },
+    "scripts": {
+      "time": 1778574671365.9075,
+      "uuid": "bc11df94-5d9b-46f3-a110-ee3ce95207d5"
+    },
+    "static": {
+      "time": 1778554211979.1084,
+      "uuid": "4dff25ac-5273-42cc-aa03-c1a7d6f64faa"
+    },
+    "prefabs/pages": {
+      "time": 1778554254088.9954,
+      "uuid": "5ac17572-65c2-46a9-9685-6e9a70086911"
+    },
+    "prefabs/popups": {
+      "time": 1778554260755.5232,
+      "uuid": "f4cd014c-439e-4224-815e-e1fb52dd51f2"
+    },
+    "resources/images": {
+      "time": 1778587279512.4883,
+      "uuid": "3ddd492f-d3ae-4772-b2b1-7514bb816956"
+    },
+    "resources/prefabs": {
+      "time": 1778555100478.1252,
+      "uuid": "a8ee7670-d3e2-452d-a076-4c84ef7373e3"
+    },
+    "resources/sounds": {
+      "time": 1778554315948.7734,
+      "uuid": "67e579f9-8acb-4002-ad54-06da3387c0c2"
+    },
+    "scripts/framework": {
+      "time": 1778555100478.9863,
+      "uuid": "109d3b83-7663-43ef-9466-108cb86d30ad"
+    },
+    "scripts/pages": {
+      "time": 1778571032931.8823,
+      "uuid": "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af"
+    },
+    "scripts/popups": {
+      "time": 1778555100479.1748,
+      "uuid": "aa115011-db3f-4d67-9e8d-e895dbcc9d75"
+    },
+    "scripts/utils": {
+      "time": 1778555100479.2659,
+      "uuid": "067cce4e-4c73-4565-9cf9-f3f38590c7ec"
+    },
+    "resources/prefabs/pages": {
+      "time": 1778554345429.626,
+      "uuid": "517e9ceb-91a2-45da-ae5c-840d74a7fa00"
+    },
+    "resources/prefabs/popups": {
+      "time": 1778568926646.1443,
+      "uuid": "5d33d264-c977-477a-8b8c-15757094c815"
+    },
+    "scripts/GameMain.ts": {
+      "time": 1778574531290.294,
+      "uuid": "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5"
+    },
+    "scripts/framework/DataManager.ts": {
+      "time": 1778554538484.7256,
+      "uuid": "39a79309-cacc-4fc8-90a6-6b2b336e9504"
+    },
+    "scripts/framework/HttpManager.ts": {
+      "time": 1778557678621.551,
+      "uuid": "4b961aa1-1832-46d4-b37b-5dba2d3ec1bd"
+    },
+    "scripts/framework/PopupManager.ts": {
+      "time": 1778557895341.586,
+      "uuid": "d74c19c7-3728-40bd-b3df-c69b00057541"
+    },
+    "scripts/framework/ResManager.ts": {
+      "time": 1778570489022.3816,
+      "uuid": "2de71241-6a95-4c71-8941-759c6862ec7c"
+    },
+    "scripts/framework/Singleton.ts": {
+      "time": 1778557678621.4485,
+      "uuid": "478dd293-4d96-405d-b4e0-6f720e03d3e2"
+    },
+    "scripts/framework/SoundManager.ts": {
+      "time": 1778570767796.9297,
+      "uuid": "4e629007-d0c7-442d-b6e2-95a2ac37f8be"
+    },
+    "scripts/framework/UIManager.ts": {
+      "time": 1778570987109.7937,
+      "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
+    },
+    "scripts/pages/GamePage.ts": {
+      "time": 1778590243944.402,
+      "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
+    },
+    "scripts/pages/HomePage.ts": {
+      "time": 1778590575942.3086,
+      "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
+    },
+    "scripts/popups/SettingPopup.ts": {
+      "time": 1778554932218.2822,
+      "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
+    },
+    "scripts/utils/Constants.ts": {
+      "time": 1778586248350.7605,
+      "uuid": "9c011705-076a-481a-aebf-8b5842df6744"
+    },
+    "prefabs.meta": {
+      "time": 1778555100480.3745
+    },
+    "resources.meta": {
+      "time": 1778555100480.486
+    },
+    "scenes.meta": {
+      "time": 1778555100480.5703
+    },
+    "scripts.meta": {
+      "time": 1778555100480.6465
+    },
+    "static.meta": {
+      "time": 1778555100480.726
+    },
+    "prefabs/pages.meta": {
+      "time": 1778555100481.0059
+    },
+    "prefabs/popups.meta": {
+      "time": 1778555100481.1746
+    },
+    "resources/images.meta": {
+      "time": 1778555100481.3418
+    },
+    "resources/prefabs.meta": {
+      "time": 1778555100481.4912
+    },
+    "resources/sounds.meta": {
+      "time": 1778555100481.6484
+    },
+    "scripts/framework.meta": {
+      "time": 1778555100482.5156
+    },
+    "scripts/pages.meta": {
+      "time": 1778555100482.8015
+    },
+    "scripts/popups.meta": {
+      "time": 1778555100483.044
+    },
+    "scripts/utils.meta": {
+      "time": 1778555100483.2703
+    },
+    "resources/prefabs/pages.meta": {
+      "time": 1778555100483.7598
+    },
+    "resources/prefabs/popups.meta": {
+      "time": 1778555100484.02
+    },
+    "scripts/GameMain.ts.meta": {
+      "time": 1778555100488.4102
+    },
+    "scripts/framework/DataManager.ts.meta": {
+      "time": 1778555100488.8125
+    },
+    "scripts/framework/HttpManager.ts.meta": {
+      "time": 1778555100489.1912
+    },
+    "scripts/framework/PopupManager.ts.meta": {
+      "time": 1778555100489.3232
+    },
+    "scripts/framework/ResManager.ts.meta": {
+      "time": 1778555100489.4602
+    },
+    "scripts/framework/Singleton.ts.meta": {
+      "time": 1778555100493.1912
+    },
+    "scripts/framework/SoundManager.ts.meta": {
+      "time": 1778555100493.5303
+    },
+    "scripts/framework/UIManager.ts.meta": {
+      "time": 1778555100493.6995
+    },
+    "scripts/pages/GamePage.ts.meta": {
+      "time": 1778566613844.0012
+    },
+    "scripts/pages/HomePage.ts.meta": {
+      "time": 1778555100493.819
+    },
+    "scripts/popups/SettingPopup.ts.meta": {
+      "time": 1778555100493.9429
+    },
+    "scripts/utils/Constants.ts.meta": {
+      "time": 1778555100495.3582
+    },
+    "scenes/Main.scene": {
+      "time": 1778569633118.2708,
+      "uuid": "de734e68-f879-44d5-9f8c-06a7f6b793ca"
+    },
+    "scenes/Main.scene.meta": {
+      "time": 1778567909387.4324
+    },
+    "scripts/pages/RulesPage.ts.meta": {
+      "time": 1778571032932.952
+    },
+    "scripts/pages/RulesPage.ts": {
+      "time": 1778572573401.3406,
+      "uuid": "b2266d1f-bcda-4502-806b-3d90bed4ab65"
+    },
+    "scripts/game.meta": {
+      "time": 1778574671367.545
+    },
+    "scripts/system.meta": {
+      "time": 1778574671367.7075
+    },
+    "scripts/game/GameRuleSystem.ts.meta": {
+      "time": 1778574671370.1548
+    },
+    "scripts/game/RankSystem.ts.meta": {
+      "time": 1778574671370.4014
+    },
+    "scripts/system/UserSystem.ts.meta": {
+      "time": 1778574671370.5667
+    },
+    "scripts/game": {
+      "time": 1778577427104.9683,
+      "uuid": "871bf569-e870-4d86-a7aa-2ef5f564c933"
+    },
+    "scripts/system": {
+      "time": 1778574671366.396,
+      "uuid": "6d0e1b43-4b2d-4263-ac05-dbe287c3f5ba"
+    },
+    "scripts/game/GameRuleSystem.ts": {
+      "time": 1778579743354.6143,
+      "uuid": "e544c647-4f02-49d6-a3fa-f2376cdd9748"
+    },
+    "scripts/game/RankSystem.ts": {
+      "time": 1778574207621.3857,
+      "uuid": "9bd79e9b-f32b-4b7a-8b9f-2ed63db0bcdd"
+    },
+    "scripts/system/UserSystem.ts": {
+      "time": 1778583606601.9995,
+      "uuid": "d4874a71-0f86-4b00-b30b-7973872455d9"
+    },
+    "resources/images/photo-default.png.meta": {
+      "time": 1778575974160.1614
+    },
+    "resources/images/photo-default.png": {
+      "time": 1778575914144.0317,
+      "uuid": "6bae981f-c3fc-446a-9381-16dc3c7fa7d5"
+    },
+    "scripts/game/AIOpponentSystem.ts.meta": {
+      "time": 1778577427107.5806
+    },
+    "scripts/game/AIOpponentSystem.ts": {
+      "time": 1778577722740.3525,
+      "uuid": "89a2f602-0d22-493f-a0ac-f8cf969220e1"
+    },
+    "resources/images/logo.png.meta": {
+      "time": 1778586434004.562
+    },
+    "resources/images/logo.png": {
+      "time": 1778587267929.4495,
+      "uuid": "aa142981-b0ca-4b68-bf1f-2dd777fe560a"
+    }
+  },
+  "missing": {}
+}

@@ -1,0 +1,235 @@
+{
+  "43964ec5-c883-4384-878c-4c5d1f8376a0": {
+    "url": "db://assets/prefabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "2180a15f-e33d-42a7-9127-7591c96aa3cb": {
+    "url": "db://assets/resources",
+    "value": {},
+    "versionCode": 1
+  },
+  "58761854-15ee-4c76-9641-e7b4215d20d8": {
+    "url": "db://assets/scenes",
+    "value": {},
+    "versionCode": 1
+  },
+  "bc11df94-5d9b-46f3-a110-ee3ce95207d5": {
+    "url": "db://assets/scripts",
+    "value": {},
+    "versionCode": 1
+  },
+  "4dff25ac-5273-42cc-aa03-c1a7d6f64faa": {
+    "url": "db://assets/static",
+    "value": {},
+    "versionCode": 1
+  },
+  "5ac17572-65c2-46a9-9685-6e9a70086911": {
+    "url": "db://assets/prefabs/pages",
+    "value": {},
+    "versionCode": 1
+  },
+  "f4cd014c-439e-4224-815e-e1fb52dd51f2": {
+    "url": "db://assets/prefabs/popups",
+    "value": {},
+    "versionCode": 1
+  },
+  "3ddd492f-d3ae-4772-b2b1-7514bb816956": {
+    "url": "db://assets/resources/images",
+    "value": {},
+    "versionCode": 1
+  },
+  "a8ee7670-d3e2-452d-a076-4c84ef7373e3": {
+    "url": "db://assets/resources/prefabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "67e579f9-8acb-4002-ad54-06da3387c0c2": {
+    "url": "db://assets/resources/sounds",
+    "value": {},
+    "versionCode": 1
+  },
+  "109d3b83-7663-43ef-9466-108cb86d30ad": {
+    "url": "db://assets/scripts/framework",
+    "value": {},
+    "versionCode": 1
+  },
+  "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af": {
+    "url": "db://assets/scripts/pages",
+    "value": {},
+    "versionCode": 1
+  },
+  "aa115011-db3f-4d67-9e8d-e895dbcc9d75": {
+    "url": "db://assets/scripts/popups",
+    "value": {},
+    "versionCode": 1
+  },
+  "067cce4e-4c73-4565-9cf9-f3f38590c7ec": {
+    "url": "db://assets/scripts/utils",
+    "value": {},
+    "versionCode": 1
+  },
+  "517e9ceb-91a2-45da-ae5c-840d74a7fa00": {
+    "url": "db://assets/resources/prefabs/pages",
+    "value": {},
+    "versionCode": 1
+  },
+  "5d33d264-c977-477a-8b8c-15757094c815": {
+    "url": "db://assets/resources/prefabs/popups",
+    "value": {},
+    "versionCode": 1
+  },
+  "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5": {
+    "url": "db://assets/scripts/GameMain.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "39a79309-cacc-4fc8-90a6-6b2b336e9504": {
+    "url": "db://assets/scripts/framework/DataManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "4b961aa1-1832-46d4-b37b-5dba2d3ec1bd": {
+    "url": "db://assets/scripts/framework/HttpManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "d74c19c7-3728-40bd-b3df-c69b00057541": {
+    "url": "db://assets/scripts/framework/PopupManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "2de71241-6a95-4c71-8941-759c6862ec7c": {
+    "url": "db://assets/scripts/framework/ResManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "478dd293-4d96-405d-b4e0-6f720e03d3e2": {
+    "url": "db://assets/scripts/framework/Singleton.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "4e629007-d0c7-442d-b6e2-95a2ac37f8be": {
+    "url": "db://assets/scripts/framework/SoundManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "f6610e04-f6d5-451b-8a0c-b62e5702b3a4": {
+    "url": "db://assets/scripts/framework/UIManager.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "8b116674-f2e6-4548-b399-dde759e84de8": {
+    "url": "db://assets/scripts/pages/GamePage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "8233ba82-a6dc-48d4-87d8-a60ff07d27c2": {
+    "url": "db://assets/scripts/pages/HomePage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "64a46179-628a-4e39-b8e7-bf094e451786": {
+    "url": "db://assets/scripts/popups/SettingPopup.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "9c011705-076a-481a-aebf-8b5842df6744": {
+    "url": "db://assets/scripts/utils/Constants.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "de734e68-f879-44d5-9f8c-06a7f6b793ca": {
+    "url": "db://assets/scenes/Main.scene",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "b2266d1f-bcda-4502-806b-3d90bed4ab65": {
+    "url": "db://assets/scripts/pages/RulesPage.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "e544c647-4f02-49d6-a3fa-f2376cdd9748": {
+    "url": "db://assets/scripts/game/GameRuleSystem.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "9bd79e9b-f32b-4b7a-8b9f-2ed63db0bcdd": {
+    "url": "db://assets/scripts/game/RankSystem.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "d4874a71-0f86-4b00-b30b-7973872455d9": {
+    "url": "db://assets/scripts/system/UserSystem.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "871bf569-e870-4d86-a7aa-2ef5f564c933": {
+    "url": "db://assets/scripts/game",
+    "value": {},
+    "versionCode": 1
+  },
+  "6d0e1b43-4b2d-4263-ac05-dbe287c3f5ba": {
+    "url": "db://assets/scripts/system",
+    "value": {},
+    "versionCode": 1
+  },
+  "6bae981f-c3fc-446a-9381-16dc3c7fa7d5": {
+    "url": "db://assets/resources/images/photo-default.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "6bae981f-c3fc-446a-9381-16dc3c7fa7d5@6c48a": {
+    "url": "db://assets/resources/images/photo-default.png@6c48a",
+    "value": {
+      "depends": [
+        "6bae981f-c3fc-446a-9381-16dc3c7fa7d5"
+      ]
+    },
+    "versionCode": 1
+  },
+  "6bae981f-c3fc-446a-9381-16dc3c7fa7d5@f9941": {
+    "url": "db://assets/resources/images/photo-default.png@f9941",
+    "value": {
+      "depends": [
+        "6bae981f-c3fc-446a-9381-16dc3c7fa7d5@6c48a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "89a2f602-0d22-493f-a0ac-f8cf969220e1": {
+    "url": "db://assets/scripts/game/AIOpponentSystem.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "aa142981-b0ca-4b68-bf1f-2dd777fe560a": {
+    "url": "db://assets/resources/images/logo.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "aa142981-b0ca-4b68-bf1f-2dd777fe560a@6c48a": {
+    "url": "db://assets/resources/images/logo.png@6c48a",
+    "value": {
+      "depends": [
+        "aa142981-b0ca-4b68-bf1f-2dd777fe560a"
+      ]
+    },
+    "versionCode": 1
+  },
+  "aa142981-b0ca-4b68-bf1f-2dd777fe560a@f9941": {
+    "url": "db://assets/resources/images/logo.png@f9941",
+    "value": {
+      "depends": [
+        "aa142981-b0ca-4b68-bf1f-2dd777fe560a@6c48a"
+      ]
+    },
+    "versionCode": 1
+  }
+}
