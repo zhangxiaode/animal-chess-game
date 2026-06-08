@@ -15,7 +15,7 @@
         "/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/editor/assets/*"
       ],
       "db://assets/*": [
-        "/Users/zxd/workspace/person/kuaisha/assets/*"
+        "/Users/zxd/workspace/person/animal-chess-game/assets/*"
       ]
     },
     "experimentalDecorators": true,

@@ -6,7 +6,7 @@
       "uuid": "43964ec5-c883-4384-878c-4c5d1f8376a0"
     },
     "resources": {
-      "time": 1778587221228.1992,
+      "time": 1778587221228.1995,
       "uuid": "2180a15f-e33d-42a7-9127-7591c96aa3cb"
     },
     "scenes": {
@@ -30,7 +30,7 @@
       "uuid": "f4cd014c-439e-4224-815e-e1fb52dd51f2"
     },
     "resources/images": {
-      "time": 1778587279512.4883,
+      "time": 1780652159292.5864,
       "uuid": "3ddd492f-d3ae-4772-b2b1-7514bb816956"
     },
     "resources/prefabs": {
@@ -46,7 +46,7 @@
       "uuid": "109d3b83-7663-43ef-9466-108cb86d30ad"
     },
     "scripts/pages": {
-      "time": 1778571032931.8823,
+      "time": 1780641877679.8782,
       "uuid": "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af"
     },
     "scripts/popups": {
@@ -94,7 +94,7 @@
       "uuid": "4e629007-d0c7-442d-b6e2-95a2ac37f8be"
     },
     "scripts/framework/UIManager.ts": {
-      "time": 1778570987109.7937,
+      "time": 1780641877973.9353,
       "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
     },
     "scripts/pages/GamePage.ts": {
@@ -215,7 +215,7 @@
       "time": 1778574671367.545
     },
     "scripts/system.meta": {
-      "time": 1778574671367.7075
+      "time": 1778574671367.7073
     },
     "scripts/game/GameRuleSystem.ts.meta": {
       "time": 1778574671370.1548
@@ -261,11 +261,39 @@
       "uuid": "89a2f602-0d22-493f-a0ac-f8cf969220e1"
     },
     "resources/images/logo.png.meta": {
-      "time": 1778586434004.562
+      "time": 1778586434004.5623
     },
     "resources/images/logo.png": {
       "time": 1778587267929.4495,
       "uuid": "aa142981-b0ca-4b68-bf1f-2dd777fe560a"
+    },
+    "resources/images/home.meta": {
+      "time": 1780652159294.577
+    },
+    "resources/images/loading.meta": {
+      "time": 1780652159294.7217
+    },
+    "resources/images/play.meta": {
+      "time": 1780652159294.846
+    },
+    "scripts/pages/LoadingPage.ts.meta": {
+      "time": 1780641877679.9514
+    },
+    "resources/images/home": {
+      "time": 1780648825942.359,
+      "uuid": "235619ea-e160-4739-a5e4-44c03af8b10f"
+    },
+    "resources/images/loading": {
+      "time": 1780648820060.521,
+      "uuid": "c6501726-9ed2-48ec-8957-1c9145f24f25"
+    },
+    "resources/images/play": {
+      "time": 1780648829392.1458,
+      "uuid": "d4d34d6b-803e-4c64-9825-bff809636ddf"
+    },
+    "scripts/pages/LoadingPage.ts": {
+      "time": 1780641877300.824,
+      "uuid": "745d7788-84c0-4c01-88aa-229fad69a227"
     }
   },
   "missing": {}

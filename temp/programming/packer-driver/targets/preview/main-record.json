@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 7426.439916,
+      "mTimestamp": 5464.571959,
       "chunkId": "93ba276ea7b26ffcdc433fab14afc1ed6f05647b",
       "imports": [
         {
@@ -514,7 +514,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 9338.058291,
+      "mTimestamp": 6387.460625,
       "chunkId": "6d8fd2b0177941b032ddc0733af48a561fb60657",
       "imports": [
         {
@@ -602,7 +602,7 @@
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/GameMain.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/GameMain.ts",
           "resolved": "__unresolved_6",
           "loc": {
             "start": {
@@ -611,12 +611,12 @@
             },
             "end": {
               "line": 10,
-              "column": 78
+              "column": 88
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/DataManager.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/DataManager.ts",
           "resolved": "__unresolved_7",
           "loc": {
             "start": {
@@ -625,12 +625,12 @@
             },
             "end": {
               "line": 11,
-              "column": 91
+              "column": 101
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/HttpManager.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/HttpManager.ts",
           "resolved": "__unresolved_8",
           "loc": {
             "start": {
@@ -639,12 +639,12 @@
             },
             "end": {
               "line": 12,
-              "column": 91
+              "column": 101
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/PopupManager.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/PopupManager.ts",
           "resolved": "__unresolved_9",
           "loc": {
             "start": {
@@ -653,12 +653,12 @@
             },
             "end": {
               "line": 13,
-              "column": 92
+              "column": 102
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/ResManager.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts",
           "resolved": "__unresolved_10",
           "loc": {
             "start": {
@@ -667,12 +667,12 @@
             },
             "end": {
               "line": 14,
-              "column": 90
+              "column": 100
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/Singleton.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts",
           "resolved": "__unresolved_11",
           "loc": {
             "start": {
@@ -681,12 +681,12 @@
             },
             "end": {
               "line": 15,
-              "column": 89
+              "column": 99
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/SoundManager.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts",
           "resolved": "__unresolved_12",
           "loc": {
             "start": {
@@ -695,12 +695,12 @@
             },
             "end": {
               "line": 16,
-              "column": 92
+              "column": 102
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/UIManager.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts",
           "resolved": "__unresolved_13",
           "loc": {
             "start": {
@@ -709,12 +709,12 @@
             },
             "end": {
               "line": 17,
-              "column": 89
+              "column": 99
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/game/AIOpponentSystem.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/AIOpponentSystem.ts",
           "resolved": "__unresolved_14",
           "loc": {
             "start": {
@@ -723,12 +723,12 @@
             },
             "end": {
               "line": 18,
-              "column": 91
+              "column": 101
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/game/GameRuleSystem.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/GameRuleSystem.ts",
           "resolved": "__unresolved_15",
           "loc": {
             "start": {
@@ -737,12 +737,12 @@
             },
             "end": {
               "line": 19,
-              "column": 89
+              "column": 99
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/game/RankSystem.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/RankSystem.ts",
           "resolved": "__unresolved_16",
           "loc": {
             "start": {
@@ -751,12 +751,12 @@
             },
             "end": {
               "line": 20,
-              "column": 85
+              "column": 95
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/pages/GamePage.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.ts",
           "resolved": "__unresolved_17",
           "loc": {
             "start": {
@@ -765,12 +765,12 @@
             },
             "end": {
               "line": 21,
-              "column": 84
+              "column": 94
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/pages/HomePage.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/HomePage.ts",
           "resolved": "__unresolved_18",
           "loc": {
             "start": {
@@ -779,12 +779,12 @@
             },
             "end": {
               "line": 22,
-              "column": 84
+              "column": 94
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/pages/RulesPage.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts",
           "resolved": "__unresolved_19",
           "loc": {
             "start": {
@@ -793,12 +793,12 @@
             },
             "end": {
               "line": 23,
-              "column": 85
+              "column": 97
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/popups/SettingPopup.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/RulesPage.ts",
           "resolved": "__unresolved_20",
           "loc": {
             "start": {
@@ -807,12 +807,12 @@
             },
             "end": {
               "line": 24,
-              "column": 89
+              "column": 95
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/system/UserSystem.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/popups/SettingPopup.ts",
           "resolved": "__unresolved_21",
           "loc": {
             "start": {
@@ -821,12 +821,12 @@
             },
             "end": {
               "line": 25,
-              "column": 87
+              "column": 99
             }
           }
         },
         {
-          "value": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/utils/Constants.ts",
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/system/UserSystem.ts",
           "resolved": "__unresolved_22",
           "loc": {
             "start": {
@@ -835,7 +835,21 @@
             },
             "end": {
               "line": 26,
-              "column": 85
+              "column": 97
+            }
+          }
+        },
+        {
+          "value": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/utils/Constants.ts",
+          "resolved": "__unresolved_23",
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 7
+            },
+            "end": {
+              "line": 27,
+              "column": 95
             }
           }
         }
@@ -887,119 +901,126 @@
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/GameMain.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/GameMain.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/DataManager.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/DataManager.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/HttpManager.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/HttpManager.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/PopupManager.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/PopupManager.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/ResManager.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/Singleton.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/SoundManager.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/framework/UIManager.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/game/AIOpponentSystem.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/AIOpponentSystem.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/game/GameRuleSystem.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/GameRuleSystem.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/game/RankSystem.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/RankSystem.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/pages/GamePage.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/pages/HomePage.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/HomePage.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/pages/RulesPage.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/popups/SettingPopup.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/RulesPage.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/system/UserSystem.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/popups/SettingPopup.ts"
           },
           "messages": []
         },
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/kuaisha/assets/scripts/utils/Constants.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/system/UserSystem.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/utils/Constants.ts"
           },
           "messages": []
         }
@@ -2914,7 +2935,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1779701778415,
+      "mTimestamp": 1780880977037,
       "chunkId": "6a5019a719a9014c047e67aa1cf34453ab8392ce",
       "imports": [],
       "type": "esm",
@@ -4707,6 +4728,1650 @@
       ],
       "type": "esm",
       "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/GameMain.ts": {
+      "mTimestamp": {
+        "mtime": 1778574531290.294,
+        "uuid": "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5"
+      },
+      "chunkId": "674419a804a675bdc259110656ab1bc65e04f002",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 67
+            },
+            "end": {
+              "line": 1,
+              "column": 71
+            }
+          }
+        },
+        {
+          "value": "./framework/UIManager",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 49
+            }
+          }
+        },
+        {
+          "value": "./framework/PopupManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 29
+            },
+            "end": {
+              "line": 3,
+              "column": 55
+            }
+          }
+        },
+        {
+          "value": "./framework/SoundManager",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 29
+            },
+            "end": {
+              "line": 4,
+              "column": 55
+            }
+          }
+        },
+        {
+          "value": "./framework/DataManager",
+          "resolved": "__unresolved_4",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 28
+            },
+            "end": {
+              "line": 5,
+              "column": 53
+            }
+          }
+        },
+        {
+          "value": "./framework/HttpManager",
+          "resolved": "__unresolved_5",
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 28
+            },
+            "end": {
+              "line": 6,
+              "column": 53
+            }
+          }
+        },
+        {
+          "value": "./utils/Constants",
+          "resolved": "__unresolved_6",
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 56
+            },
+            "end": {
+              "line": 7,
+              "column": 75
+            }
+          }
+        },
+        {
+          "value": "./pages/HomePage",
+          "resolved": "__unresolved_7",
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 25
+            },
+            "end": {
+              "line": 8,
+              "column": 43
+            }
+          }
+        },
+        {
+          "value": "./system/UserSystem",
+          "resolved": "__unresolved_8",
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 27
+            },
+            "end": {
+              "line": 9,
+              "column": 48
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/PopupManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/DataManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/HttpManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/utils/Constants.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/HomePage.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/system/UserSystem.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/DataManager.ts": {
+      "mTimestamp": {
+        "mtime": 1778554538484.7256,
+        "uuid": "39a79309-cacc-4fc8-90a6-6b2b336e9504"
+      },
+      "chunkId": "237757f898bea2d77e719b22285426f1f9ec6476",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 32
+            },
+            "end": {
+              "line": 1,
+              "column": 36
+            }
+          }
+        },
+        {
+          "value": "./Singleton",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/HttpManager.ts": {
+      "mTimestamp": {
+        "mtime": 1778557678621.551,
+        "uuid": "4b961aa1-1832-46d4-b37b-5dba2d3ec1bd"
+      },
+      "chunkId": "e910cb3eaa96a186fae8422624fd637735800e8a",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 32
+            },
+            "end": {
+              "line": 1,
+              "column": 36
+            }
+          }
+        },
+        {
+          "value": "./Singleton",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          }
+        },
+        {
+          "value": "./DataManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 28
+            },
+            "end": {
+              "line": 3,
+              "column": 43
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/DataManager.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/PopupManager.ts": {
+      "mTimestamp": {
+        "mtime": 1778557895341.586,
+        "uuid": "d74c19c7-3728-40bd-b3df-c69b00057541"
+      },
+      "chunkId": "6d4a2ee5b359f4785621b060323b5ce8484bee11",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 136
+            },
+            "end": {
+              "line": 1,
+              "column": 140
+            }
+          }
+        },
+        {
+          "value": "./Singleton",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts": {
+      "mTimestamp": {
+        "mtime": 1778570489022.3816,
+        "uuid": "2de71241-6a95-4c71-8941-759c6862ec7c"
+      },
+      "chunkId": "8501847ea404b2c9de4eb76de25022f4e472d006",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 77
+            },
+            "end": {
+              "line": 1,
+              "column": 81
+            }
+          }
+        },
+        {
+          "value": "./Singleton",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts": {
+      "mTimestamp": {
+        "mtime": 1778557678621.4485,
+        "uuid": "478dd293-4d96-405d-b4e0-6f720e03d3e2"
+      },
+      "chunkId": "b8da35b56d1023f35a5ca3c3935c1f34238dca05",
+      "imports": [
+        {
+          "value": "cc"
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts": {
+      "mTimestamp": {
+        "mtime": 1778570767796.9297,
+        "uuid": "4e629007-d0c7-442d-b6e2-95a2ac37f8be"
+      },
+      "chunkId": "6ff53d6523a6076de3e742eaf538792a9b5b0063",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 69
+            },
+            "end": {
+              "line": 1,
+              "column": 73
+            }
+          }
+        },
+        {
+          "value": "./Singleton",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          }
+        },
+        {
+          "value": "./ResManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 27
+            },
+            "end": {
+              "line": 3,
+              "column": 41
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts": {
+      "mTimestamp": {
+        "mtime": 1780641877973.9353,
+        "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
+      },
+      "chunkId": "67ef7aacb0534ffc34f984c40683bb6c1ffb736e",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 96
+            },
+            "end": {
+              "line": 1,
+              "column": 100
+            }
+          }
+        },
+        {
+          "value": "./Singleton",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 39
+            }
+          }
+        },
+        {
+          "value": "../pages/LoadingPage",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 43
+            },
+            "end": {
+              "line": 8,
+              "column": 65
+            }
+          }
+        },
+        {
+          "value": "../pages/HomePage",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 40
+            },
+            "end": {
+              "line": 9,
+              "column": 59
+            }
+          }
+        },
+        {
+          "value": "../pages/GamePage",
+          "resolved": "__unresolved_4",
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 40
+            },
+            "end": {
+              "line": 10,
+              "column": 59
+            }
+          }
+        },
+        {
+          "value": "../pages/RulesPage",
+          "resolved": "__unresolved_5",
+          "loc": {
+            "start": {
+              "line": 11,
+              "column": 41
+            },
+            "end": {
+              "line": 11,
+              "column": 61
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/Singleton.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/HomePage.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/RulesPage.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/AIOpponentSystem.ts": {
+      "mTimestamp": {
+        "mtime": 1778577722740.3525,
+        "uuid": "89a2f602-0d22-493f-a0ac-f8cf969220e1"
+      },
+      "chunkId": "a103d0ae56e0d5bdd978d14fe4d3a0b011e51561",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "./GameRuleSystem",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 41
+            },
+            "end": {
+              "line": 2,
+              "column": 59
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/GameRuleSystem.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/GameRuleSystem.ts": {
+      "mTimestamp": {
+        "mtime": 1778579743354.6143,
+        "uuid": "e544c647-4f02-49d6-a3fa-f2376cdd9748"
+      },
+      "chunkId": "77e1603ad62a50d9ecc8fcb107ad19c9f99fd918",
+      "imports": [
+        {
+          "value": "cc"
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/RankSystem.ts": {
+      "mTimestamp": {
+        "mtime": 1778574207621.3857,
+        "uuid": "9bd79e9b-f32b-4b7a-8b9f-2ed63db0bcdd"
+      },
+      "chunkId": "e3aebd6417d7f8f9cd55c0d7f28997bf6a2a1019",
+      "imports": [
+        {
+          "value": "cc"
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.ts": {
+      "mTimestamp": {
+        "mtime": 1778590243944.402,
+        "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
+      },
+      "chunkId": "848fe469dcc60a4988d015a0af6329f6c3412ea8",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 139
+            },
+            "end": {
+              "line": 1,
+              "column": 143
+            }
+          }
+        },
+        {
+          "value": "../framework/UIManager",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 50
+            }
+          }
+        },
+        {
+          "value": "../framework/SoundManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 29
+            },
+            "end": {
+              "line": 3,
+              "column": 56
+            }
+          }
+        },
+        {
+          "value": "../game/GameRuleSystem",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 41
+            },
+            "end": {
+              "line": 4,
+              "column": 65
+            }
+          }
+        },
+        {
+          "value": "../system/UserSystem",
+          "resolved": "__unresolved_4",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 27
+            },
+            "end": {
+              "line": 5,
+              "column": 49
+            }
+          }
+        },
+        {
+          "value": "../game/RankSystem",
+          "resolved": "__unresolved_5",
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 48
+            },
+            "end": {
+              "line": 6,
+              "column": 68
+            }
+          }
+        },
+        {
+          "value": "../game/AIOpponentSystem",
+          "resolved": "__unresolved_6",
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 33
+            },
+            "end": {
+              "line": 7,
+              "column": 59
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/GameRuleSystem.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/system/UserSystem.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/RankSystem.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/AIOpponentSystem.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/HomePage.ts": {
+      "mTimestamp": {
+        "mtime": 1778590575942.3086,
+        "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
+      },
+      "chunkId": "27f7d2dcaceeafc067989faa637fb436045f6323",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 103
+            },
+            "end": {
+              "line": 1,
+              "column": 107
+            }
+          }
+        },
+        {
+          "value": "../framework/UIManager",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 50
+            }
+          }
+        },
+        {
+          "value": "../framework/SoundManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 29
+            },
+            "end": {
+              "line": 3,
+              "column": 56
+            }
+          }
+        },
+        {
+          "value": "../system/UserSystem",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 27
+            },
+            "end": {
+              "line": 4,
+              "column": 49
+            }
+          }
+        },
+        {
+          "value": "../game/RankSystem",
+          "resolved": "__unresolved_4",
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 27
+            },
+            "end": {
+              "line": 5,
+              "column": 47
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/system/UserSystem.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/game/RankSystem.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/RulesPage.ts": {
+      "mTimestamp": {
+        "mtime": 1778572573401.3406,
+        "uuid": "b2266d1f-bcda-4502-806b-3d90bed4ab65"
+      },
+      "chunkId": "6667e0b77234e83ab6d321cc849150030c26b545",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 95
+            },
+            "end": {
+              "line": 1,
+              "column": 99
+            }
+          }
+        },
+        {
+          "value": "../framework/UIManager",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 26
+            },
+            "end": {
+              "line": 2,
+              "column": 50
+            }
+          }
+        },
+        {
+          "value": "../framework/SoundManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 29
+            },
+            "end": {
+              "line": 3,
+              "column": 56
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/popups/SettingPopup.ts": {
+      "mTimestamp": {
+        "mtime": 1778554932218.2822,
+        "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
+      },
+      "chunkId": "0d402ab8eb38bca077e3adb03fde75526f6f2b86",
+      "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 54
+            },
+            "end": {
+              "line": 1,
+              "column": 58
+            }
+          }
+        },
+        {
+          "value": "../framework/PopupManager",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 29
+            },
+            "end": {
+              "line": 2,
+              "column": 56
+            }
+          }
+        },
+        {
+          "value": "../framework/SoundManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 29
+            },
+            "end": {
+              "line": 3,
+              "column": 56
+            }
+          }
+        },
+        {
+          "value": "../framework/DataManager",
+          "resolved": "__unresolved_3",
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 28
+            },
+            "end": {
+              "line": 4,
+              "column": 54
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/code-quality/cr.mjs"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/PopupManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/SoundManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/DataManager.ts"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/system/UserSystem.ts": {
+      "mTimestamp": {
+        "mtime": 1778583606601.9995,
+        "uuid": "d4874a71-0f86-4b00-b30b-7973872455d9"
+      },
+      "chunkId": "12f6905c2b0e2c07f2e2b57d5108a32579b557ba",
+      "imports": [
+        {
+          "value": "cc"
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/utils/Constants.ts": {
+      "mTimestamp": {
+        "mtime": 1778586248350.7605,
+        "uuid": "9c011705-076a-481a-aebf-8b5842df6744"
+      },
+      "chunkId": "6df476d10f79c18bd324d0420f268e7c9b104429",
+      "imports": [
+        {
+          "value": "cc"
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        }
+      ]
+    },
+    "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts": {
+      "mTimestamp": {
+        "mtime": 1780641877300.824,
+        "uuid": "745d7788-84c0-4c01-88aa-229fad69a227"
+      },
+      "chunkId": "ffe9cd0e8cb59dde53df7b5ab2ff09cbfa7c4bc7",
+      "imports": [
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc"
+        },
+        {
+          "value": "cc",
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 38
+            },
+            "end": {
+              "line": 1,
+              "column": 42
+            }
+          }
+        }
+      ],
+      "type": "esm",
+      "resolutions": [
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
         {
           "resolved": {
             "type": "module",

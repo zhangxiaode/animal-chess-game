@@ -5,6 +5,7 @@ const { ccclass } = _decorator;
 
 // 延迟加载页面脚本，避免 UIManager 与页面脚本之间的循环依赖
 const PAGE_MODULE_MAP: Record<string, () => Promise<any>> = {
+    LoadingPage: async () => (await import('../pages/LoadingPage')).LoadingPage,
     HomePage: async () => (await import('../pages/HomePage')).HomePage,
     GamePage: async () => (await import('../pages/GamePage')).GamePage,
     RulesPage: async () => (await import('../pages/RulesPage')).RulesPage,

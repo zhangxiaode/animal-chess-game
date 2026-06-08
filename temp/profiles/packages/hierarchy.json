@@ -135,5 +135,19 @@
       "0_0",
       "0_0_0"
     ]
+  },
+  "1b29b11e-3c14-4c67-973e-14cd506ab9df": {
+    "assetUuid": "1b29b11e-3c14-4c67-973e-14cd506ab9df",
+    "animationUuid": "",
+    "expandLevels": [
+      "0"
+    ]
+  },
+  "bcf74ec8-1e9d-4f92-a50b-75f21ca06450": {
+    "assetUuid": "bcf74ec8-1e9d-4f92-a50b-75f21ca06450",
+    "animationUuid": "",
+    "expandLevels": [
+      "0"
+    ]
   }
 }

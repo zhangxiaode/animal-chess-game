@@ -1,4 +1,4 @@
-import { _decorator, Component, Button, Label, Node, Graphics, UITransform, Color, Vec3, Sprite, SpriteFrame, resources, EventTouch } from 'cc';
+import { _decorator, Component, Button, Label, Node, Graphics, UITransform, Color, Vec3, Sprite, SpriteFrame, resources, EventTouch, Font } from 'cc';
 import { UIManager } from '../framework/UIManager';
 import { SoundManager } from '../framework/SoundManager';
 import { GameRuleSystem, Position } from '../game/GameRuleSystem';
@@ -7,6 +7,7 @@ import { RankSystem, RankTier, RankPhase } from '../game/RankSystem';
 import { AIOpponentSystem } from '../game/AIOpponentSystem';
 
 const { ccclass } = _decorator;
+const PASSION_ONE_BOLD_FONT_PATH = 'fonts/PassionOne-Bold';
 
 interface OpponentInfo {
     username: string;
@@ -60,6 +61,9 @@ export class GamePage extends Component {
     private _resultPopupRoot: Node | null = null;
     private _resultPopupTitle: Label | null = null;
     private _resultPopupMessage: Label | null = null;
+    private _passionOneBoldFont: Font | null = null;
+    private _isPassionOneBoldFontLoading = false;
+    private _passionOneBoldFontLabels: Label[] = [];
 
     private _getUiScale(pageTransform?: UITransform | null): number {
         const content = pageTransform?.contentSize ?? this.node.getComponent(UITransform)?.contentSize;
@@ -302,8 +306,39 @@ export class GamePage extends Component {
         label.string = text;
         label.fontSize = this._scaled(24, uiScale);
         label.color = new Color(255, 255, 255, 255);
+        if (nodeName === 'CloseResultBtn' || nodeName === 'HomeResultBtn' || nodeName === 'NextResultBtn') {
+            this._applyPassionOneBoldFont(label);
+        }
 
         return button;
+    }
+
+    private _applyPassionOneBoldFont(label: Label) {
+        if (this._passionOneBoldFont) {
+            label.font = this._passionOneBoldFont;
+            return;
+        }
+
+        this._passionOneBoldFontLabels.push(label);
+        if (this._isPassionOneBoldFontLoading) return;
+
+        this._isPassionOneBoldFontLoading = true;
+        resources.load(PASSION_ONE_BOLD_FONT_PATH, Font, (err, font) => {
+            this._isPassionOneBoldFontLoading = false;
+            if (err || !font) {
+                console.warn(`[GamePage] 字体加载失败: ${PASSION_ONE_BOLD_FONT_PATH}`, err);
+                this._passionOneBoldFontLabels.length = 0;
+                return;
+            }
+
+            this._passionOneBoldFont = font;
+            this._passionOneBoldFontLabels.forEach((pendingLabel) => {
+                if (pendingLabel?.isValid) {
+                    pendingLabel.font = font;
+                }
+            });
+            this._passionOneBoldFontLabels.length = 0;
+        });
     }
 
     private _createResultPopup(parent: Node) {
@@ -364,8 +399,11 @@ export class GamePage extends Component {
         this._resultPopupMessage.color = new Color(60, 60, 60, 255);
         this._resultPopupMessage.horizontalAlign = Label.HorizontalAlign.CENTER;
 
-        const closeBtn = this._createPopupButton(dialogNode, 'CloseResultBtn', '确定', new Vec3(0, this._scaled(-70, uiScale), 0));
-        closeBtn.node.on(Button.EventType.CLICK, this._closeResultPopup, this);
+        const homeBtn = this._createPopupButton(dialogNode, 'HomeResultBtn', 'Homepage', new Vec3(this._scaled(-90, uiScale), this._scaled(-70, uiScale), 0));
+        homeBtn.node.on(Button.EventType.CLICK, this._goHomeFromResult, this);
+
+        const nextBtn = this._createPopupButton(dialogNode, 'NextResultBtn', 'Next', new Vec3(this._scaled(90, uiScale), this._scaled(-70, uiScale), 0));
+        nextBtn.node.on(Button.EventType.CLICK, this._goNextLevelFromResult, this);
     }
 
     /**
@@ -915,7 +953,9 @@ export class GamePage extends Component {
         this._lastPlacerType = 1;
         this._selectedMovePiece = null;
         this._pendingDiscardPoint = null;
+        this._pendingCaptureDecision = null;
         this._hideDiscardPopup();
+        this._hideCapturePopup();
     }
 
     /**
@@ -1378,6 +1418,22 @@ export class GamePage extends Component {
         if (this._resultPopupRoot) {
             this._resultPopupRoot.active = false;
         }
+    }
+
+    private _goHomeFromResult() {
+        SoundManager.getInstance().playEffect('sounds/click');
+        this._closeResultPopup();
+        UIManager.getInstance().backToHome();
+    }
+
+    private _goNextLevelFromResult() {
+        SoundManager.getInstance().playEffect('sounds/click');
+        this._currentLevel += 1;
+        this._closeResultPopup();
+        this._initBoardState();
+        this._updateOpponentInfoDisplay();
+        this._updateActionTip();
+        this._drawGameBoard();
     }
 
     /**
