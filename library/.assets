@@ -43,7 +43,15 @@
             "scripts/utils/Constants.ts",
             "scenes/Main.scene",
             "resources/images/logo.png",
-            "resources/images/photo-default.png"
+            "resources/images/photo-default.png",
+            "resources/images/loading/bg.png",
+            "resources/images/loading/dragon.png",
+            "resources/images/loading/elephant.png",
+            "resources/images/loading/lion.png",
+            "resources/images/loading/loading-actived.png",
+            "resources/images/loading/loading.png",
+            "resources/images/loading/logo.png",
+            "resources/images/loading/tiger.png"
         ]
     }
 }

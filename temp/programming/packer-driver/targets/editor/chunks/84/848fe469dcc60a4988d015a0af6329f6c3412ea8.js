@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Button, Label, Node, Graphics, UITransform, Color, Vec3, Sprite, SpriteFrame, resources, UIManager, SoundManager, GameRuleSystem, UserSystem, RankSystem, RankTier, RankPhase, AIOpponentSystem, _dec, _class, _crd, ccclass, MatchPhase, GamePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Button, Label, Node, Graphics, UITransform, Color, Vec3, Sprite, SpriteFrame, resources, Font, UIManager, SoundManager, GameRuleSystem, UserSystem, RankSystem, RankTier, RankPhase, AIOpponentSystem, _dec, _class, _crd, ccclass, PASSION_ONE_BOLD_FONT_PATH, MatchPhase, GamePage;
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
@@ -58,6 +58,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       Sprite = _cc.Sprite;
       SpriteFrame = _cc.SpriteFrame;
       resources = _cc.resources;
+      Font = _cc.Font;
     }, function (_unresolved_2) {
       UIManager = _unresolved_2.UIManager;
     }, function (_unresolved_3) {
@@ -78,11 +79,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
       _cclegacy._RF.push({}, "8b116Z08uZFSLOZ3edZ6E3o", "GamePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Button', 'Label', 'Node', 'Graphics', 'UITransform', 'Color', 'Vec3', 'Sprite', 'SpriteFrame', 'resources', 'EventTouch']);
+      __checkObsolete__(['_decorator', 'Component', 'Button', 'Label', 'Node', 'Graphics', 'UITransform', 'Color', 'Vec3', 'Sprite', 'SpriteFrame', 'resources', 'EventTouch', 'Font']);
 
       ({
         ccclass
       } = _decorator);
+      PASSION_ONE_BOLD_FONT_PATH = 'fonts/PassionOne-Bold';
 
       MatchPhase = /*#__PURE__*/function (MatchPhase) {
         MatchPhase[MatchPhase["PLACEMENT"] = 1] = "PLACEMENT";
@@ -138,6 +140,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._resultPopupRoot = null;
           this._resultPopupTitle = null;
           this._resultPopupMessage = null;
+          this._passionOneBoldFont = null;
+          this._isPassionOneBoldFontLoading = false;
+          this._passionOneBoldFontLabels = [];
         }
 
         _getUiScale(pageTransform) {
@@ -415,7 +420,43 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           label.string = text;
           label.fontSize = this._scaled(24, uiScale);
           label.color = new Color(255, 255, 255, 255);
+
+          if (nodeName === 'CloseResultBtn' || nodeName === 'HomeResultBtn' || nodeName === 'NextResultBtn') {
+            this._applyPassionOneBoldFont(label);
+          }
+
           return button;
+        }
+
+        _applyPassionOneBoldFont(label) {
+          if (this._passionOneBoldFont) {
+            label.font = this._passionOneBoldFont;
+            return;
+          }
+
+          this._passionOneBoldFontLabels.push(label);
+
+          if (this._isPassionOneBoldFontLoading) return;
+          this._isPassionOneBoldFontLoading = true;
+          resources.load(PASSION_ONE_BOLD_FONT_PATH, Font, (err, font) => {
+            this._isPassionOneBoldFontLoading = false;
+
+            if (err || !font) {
+              console.warn(`[GamePage] 字体加载失败: ${PASSION_ONE_BOLD_FONT_PATH}`, err);
+              this._passionOneBoldFontLabels.length = 0;
+              return;
+            }
+
+            this._passionOneBoldFont = font;
+
+            this._passionOneBoldFontLabels.forEach(pendingLabel => {
+              if (pendingLabel != null && pendingLabel.isValid) {
+                pendingLabel.font = font;
+              }
+            });
+
+            this._passionOneBoldFontLabels.length = 0;
+          });
         }
 
         _createResultPopup(parent) {
@@ -482,9 +523,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._resultPopupMessage.color = new Color(60, 60, 60, 255);
           this._resultPopupMessage.horizontalAlign = Label.HorizontalAlign.CENTER;
 
-          const closeBtn = this._createPopupButton(dialogNode, 'CloseResultBtn', '确定', new Vec3(0, this._scaled(-70, uiScale), 0));
+          const homeBtn = this._createPopupButton(dialogNode, 'HomeResultBtn', 'Homepage', new Vec3(this._scaled(-90, uiScale), this._scaled(-70, uiScale), 0));
 
-          closeBtn.node.on(Button.EventType.CLICK, this._closeResultPopup, this);
+          homeBtn.node.on(Button.EventType.CLICK, this._goHomeFromResult, this);
+
+          const nextBtn = this._createPopupButton(dialogNode, 'NextResultBtn', 'Next', new Vec3(this._scaled(90, uiScale), this._scaled(-70, uiScale), 0));
+
+          nextBtn.node.on(Button.EventType.CLICK, this._goNextLevelFromResult, this);
         }
         /**
          * 绑定棋盘触摸事件
@@ -1081,8 +1126,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._lastPlacerType = 1;
           this._selectedMovePiece = null;
           this._pendingDiscardPoint = null;
+          this._pendingCaptureDecision = null;
 
           this._hideDiscardPopup();
+
+          this._hideCapturePopup();
         }
         /**
          * 处理棋盘触摸并转换为落子坐标
@@ -1630,6 +1678,35 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           if (this._resultPopupRoot) {
             this._resultPopupRoot.active = false;
           }
+        }
+
+        _goHomeFromResult() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+
+          this._closeResultPopup();
+
+          (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
+            error: Error()
+          }), UIManager) : UIManager).getInstance().backToHome();
+        }
+
+        _goNextLevelFromResult() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          this._currentLevel += 1;
+
+          this._closeResultPopup();
+
+          this._initBoardState();
+
+          this._updateOpponentInfoDisplay();
+
+          this._updateActionTip();
+
+          this._drawGameBoard();
         }
         /**
          * 判断是否因棋子被吃完而结束

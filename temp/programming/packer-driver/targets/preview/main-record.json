@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 5464.571959,
+      "mTimestamp": 6459.842292,
       "chunkId": "93ba276ea7b26ffcdc433fab14afc1ed6f05647b",
       "imports": [
         {
@@ -514,7 +514,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 6387.460625,
+      "mTimestamp": 8477.841959,
       "chunkId": "6d8fd2b0177941b032ddc0733af48a561fb60657",
       "imports": [
         {
@@ -2935,7 +2935,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1780880977037,
+      "mTimestamp": 1780915154915,
       "chunkId": "6a5019a719a9014c047e67aa1cf34453ab8392ce",
       "imports": [],
       "type": "esm",
@@ -5720,7 +5720,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.ts": {
       "mTimestamp": {
-        "mtime": 1778590243944.402,
+        "mtime": 1780886269064.2705,
         "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
       },
       "chunkId": "848fe469dcc60a4988d015a0af6329f6c3412ea8",
@@ -5740,11 +5740,11 @@
           "loc": {
             "start": {
               "line": 1,
-              "column": 139
+              "column": 145
             },
             "end": {
               "line": 1,
-              "column": 143
+              "column": 149
             }
           }
         },
@@ -6331,11 +6331,15 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts": {
       "mTimestamp": {
-        "mtime": 1780641877300.824,
+        "mtime": 1780914686304.689,
         "uuid": "745d7788-84c0-4c01-88aa-229fad69a227"
       },
       "chunkId": "ffe9cd0e8cb59dde53df7b5ab2ff09cbfa7c4bc7",
       "imports": [
+        {
+          "value": "cce:/internal/code-quality/cr.mjs",
+          "resolved": "__unresolved_0"
+        },
         {
           "value": "cc"
         },
@@ -6347,11 +6351,25 @@
           "loc": {
             "start": {
               "line": 1,
-              "column": 38
+              "column": 84
             },
             "end": {
               "line": 1,
-              "column": 42
+              "column": 88
+            }
+          }
+        },
+        {
+          "value": "../framework/ResManager",
+          "resolved": "__unresolved_1",
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 27
+            },
+            "end": {
+              "line": 2,
+              "column": 52
             }
           }
         }
@@ -6361,7 +6379,7 @@
         {
           "resolved": {
             "type": "module",
-            "url": "cce:/internal/x/cc"
+            "url": "cce:/internal/code-quality/cr.mjs"
           },
           "messages": []
         },
@@ -6376,6 +6394,20 @@
           "resolved": {
             "type": "module",
             "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "cce:/internal/x/cc"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts"
           },
           "messages": []
         }

@@ -98,7 +98,7 @@
       "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
     },
     "scripts/pages/GamePage.ts": {
-      "time": 1778590243944.402,
+      "time": 1780886269064.2705,
       "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
     },
     "scripts/pages/HomePage.ts": {
@@ -284,7 +284,7 @@
       "uuid": "235619ea-e160-4739-a5e4-44c03af8b10f"
     },
     "resources/images/loading": {
-      "time": 1780648820060.521,
+      "time": 1780914799316.4324,
       "uuid": "c6501726-9ed2-48ec-8957-1c9145f24f25"
     },
     "resources/images/play": {
@@ -292,8 +292,64 @@
       "uuid": "d4d34d6b-803e-4c64-9825-bff809636ddf"
     },
     "scripts/pages/LoadingPage.ts": {
-      "time": 1780641877300.824,
+      "time": 1780914686304.689,
       "uuid": "745d7788-84c0-4c01-88aa-229fad69a227"
+    },
+    "resources/images/loading/bg.png": {
+      "time": 1780887068356.052,
+      "uuid": "627cc9c3-97ab-4897-8ccd-4762cf4367f3"
+    },
+    "resources/images/loading/dragon.png": {
+      "time": 1780887063399.719,
+      "uuid": "9098b182-0e8c-44a2-9242-5b7f5a44ca2a"
+    },
+    "resources/images/loading/elephant.png": {
+      "time": 1780887064173.4941,
+      "uuid": "d668005e-8e4d-4a27-acbd-c94d5f515b64"
+    },
+    "resources/images/loading/lion.png": {
+      "time": 1780887064873.81,
+      "uuid": "230054e8-4610-451c-b8e5-84553923bf56"
+    },
+    "resources/images/loading/loading-actived.png": {
+      "time": 1780887065518.4495,
+      "uuid": "142777af-2d28-4704-b94d-226bec944da1"
+    },
+    "resources/images/loading/loading.png": {
+      "time": 1780887066261.756,
+      "uuid": "5b026a64-2af0-43e7-8927-0a73380c7320"
+    },
+    "resources/images/loading/logo.png": {
+      "time": 1780887066906.0305,
+      "uuid": "233be121-61fa-4d4f-8024-521825f99fb4"
+    },
+    "resources/images/loading/tiger.png": {
+      "time": 1780887068247.8635,
+      "uuid": "bf4a1997-15f6-4f57-917a-e8913033e8a3"
+    },
+    "resources/images/loading/dragon.png.meta": {
+      "time": 1780914799324.9207
+    },
+    "resources/images/loading/loading-actived.png.meta": {
+      "time": 1780914799325.2097
+    },
+    "resources/images/loading/elephant.png.meta": {
+      "time": 1780914799325.978
+    },
+    "resources/images/loading/lion.png.meta": {
+      "time": 1780914799326.2932
+    },
+    "resources/images/loading/logo.png.meta": {
+      "time": 1780914799330.6565
+    },
+    "resources/images/loading/tiger.png.meta": {
+      "time": 1780914799331.1655
+    },
+    "resources/images/loading/loading.png.meta": {
+      "time": 1780914799331.3933
+    },
+    "resources/images/loading/bg.png.meta": {
+      "time": 1780914758783.5132
     }
   },
   "missing": {}
