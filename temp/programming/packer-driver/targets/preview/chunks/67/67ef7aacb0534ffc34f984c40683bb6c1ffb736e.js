@@ -171,6 +171,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
               }
             }
 
+            pageNode.layer = _this._root.layer;
             pageNode.parent = _this._root;
 
             var rootTransform = _this._root.getComponent(UITransform);

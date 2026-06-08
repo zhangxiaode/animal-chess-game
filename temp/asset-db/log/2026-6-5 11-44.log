@@ -1,163 +1,0 @@
-2026-6-5 11:44:28-log: Cannot access game frame or container.
-2026-6-5 11:44:30-debug: asset-db:require-engine-code (1665ms)
-2026-6-5 11:44:30-log: [box2d]:box2d wasm lib loaded.
-2026-6-5 11:44:30-log: [bullet]:bullet wasm lib loaded.
-2026-6-5 11:44:30-log: meshopt wasm decoder initialized
-2026-6-5 11:44:30-log: Cocos Creator v3.8.8
-2026-6-5 11:44:30-log: Using legacy pipeline
-2026-6-5 11:44:30-log: Forward render pipeline initialized.
-2026-6-5 11:44:30-debug: [Assets Memory track]: asset-db:worker-init: initEngine start:30.53MB, end 121.65MB, increase: 91.13MB
-2026-6-5 11:44:32-debug: [Assets Memory track]: asset-db:worker-init: initPlugin start:78.65MB, end 220.66MB, increase: 142.01MB
-2026-6-5 11:44:32-debug: asset-db:worker-init: initPlugin (2340ms)
-2026-6-5 11:44:32-debug: [Assets Memory track]: asset-db:worker-init start:30.52MB, end 220.78MB, increase: 190.26MB
-2026-6-5 11:44:32-debug: Run asset db hook engine-extends:beforePreStart success!
-2026-6-5 11:44:32-debug: Run asset db hook programming:beforePreStart success!
-2026-6-5 11:44:32-debug: Run asset db hook engine-extends:beforePreStart ...
-2026-6-5 11:44:32-debug: Run asset db hook programming:beforePreStart ...
-2026-6-5 11:44:32-debug: asset-db:worker-init (4162ms)
-2026-6-5 11:44:32-debug: asset-db-hook-programming-beforePreStart (87ms)
-2026-6-5 11:44:32-debug: asset-db-hook-engine-extends-beforePreStart (88ms)
-2026-6-5 11:44:32-debug: Preimport db internal success
-2026-6-5 11:44:32-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resourcesbackground: #aaff85; color: #000;color: #000;
-2026-6-5 11:44:32-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/scripts/systembackground: #aaff85; color: #000;color: #000;
-2026-6-5 11:44:32-debug: Preimport db assets success
-2026-6-5 11:44:32-debug: Run asset db hook programming:afterPreStart ...
-2026-6-5 11:44:32-debug: starting packer-driver...
-2026-6-5 11:44:33-debug: initialize scripting environment...
-2026-6-5 11:44:33-debug: [[Executor]] prepare before lock
-2026-6-5 11:44:33-debug: Set detail map pack:///resolution-detail-map.json: {}
-2026-6-5 11:44:33-debug: [[Executor]] prepare after unlock
-2026-6-5 11:44:33-debug: Run asset db hook programming:afterPreStart success!
-2026-6-5 11:44:33-debug: Run asset db hook engine-extends:afterPreStart ...
-2026-6-5 11:44:33-debug: Run asset db hook engine-extends:afterPreStart success!
-2026-6-5 11:44:33-debug: [Assets Memory track]: asset-db:worker-init: preStart start:220.79MB, end 225.00MB, increase: 4.21MB
-2026-6-5 11:44:33-debug: Start up the 'internal' database...
-2026-6-5 11:44:34-debug: asset-db-hook-programming-afterPreStart (1447ms)
-2026-6-5 11:44:34-debug: asset-db:worker-effect-data-processing (217ms)
-2026-6-5 11:44:34-debug: asset-db-hook-engine-extends-afterPreStart (218ms)
-2026-6-5 11:44:34-debug: Run asset db hook engine-extends:afterStartDB ...
-2026-6-5 11:44:34-debug: recompile effect.bin success
-2026-6-5 11:44:34-debug: asset-db:worker-effect-data-processing (313ms)
-2026-6-5 11:44:34-debug: asset-db-hook-engine-extends-afterStartDB (314ms)
-2026-6-5 11:44:34-debug: Run asset db hook engine-extends:afterStartDB success!
-2026-6-5 11:44:34-debug: Start up the 'assets' database...
-2026-6-5 11:44:34-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/logo.pngbackground: #aaff85; color: #000;color: #000;
-2026-6-5 11:44:34-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/logo.png@6c48abackground: #aaff85; color: #000;color: #000;
-2026-6-5 11:44:34-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/logo.png@f9941background: #aaff85; color: #000;color: #000;
-2026-6-5 11:44:34-debug: Run asset db hook engine-extends:afterStartDB ...
-2026-6-5 11:44:35-debug: recompile effect.bin success
-2026-6-5 11:44:35-debug: lazy register asset handler text
-2026-6-5 11:44:35-debug: lazy register asset handler *
-2026-6-5 11:44:35-debug: lazy register asset handler json
-2026-6-5 11:44:35-debug: [Assets Memory track]: asset-db:worker-init: startup start:225.01MB, end 243.22MB, increase: 18.21MB
-2026-6-5 11:44:35-debug: lazy register asset handler spine-data
-2026-6-5 11:44:35-debug: lazy register asset handler terrain
-2026-6-5 11:44:35-debug: lazy register asset handler javascript
-2026-6-5 11:44:35-debug: lazy register asset handler typescript
-2026-6-5 11:44:35-debug: lazy register asset handler scene
-2026-6-5 11:44:35-debug: lazy register asset handler prefab
-2026-6-5 11:44:35-debug: lazy register asset handler sprite-frame
-2026-6-5 11:44:35-debug: lazy register asset handler dragonbones
-2026-6-5 11:44:35-debug: lazy register asset handler buffer
-2026-6-5 11:44:35-debug: lazy register asset handler image
-2026-6-5 11:44:35-debug: lazy register asset handler sign-image
-2026-6-5 11:44:35-debug: lazy register asset handler tiled-map
-2026-6-5 11:44:35-debug: lazy register asset handler alpha-image
-2026-6-5 11:44:35-debug: lazy register asset handler dragonbones-atlas
-2026-6-5 11:44:35-debug: lazy register asset handler texture-cube
-2026-6-5 11:44:35-debug: lazy register asset handler erp-texture-cube
-2026-6-5 11:44:35-debug: lazy register asset handler directory
-2026-6-5 11:44:35-debug: lazy register asset handler texture
-2026-6-5 11:44:35-debug: lazy register asset handler rt-sprite-frame
-2026-6-5 11:44:35-debug: lazy register asset handler render-texture
-2026-6-5 11:44:35-debug: lazy register asset handler gltf-mesh
-2026-6-5 11:44:35-debug: lazy register asset handler gltf-animation
-2026-6-5 11:44:35-debug: lazy register asset handler gltf-skeleton
-2026-6-5 11:44:35-debug: lazy register asset handler gltf-material
-2026-6-5 11:44:35-debug: lazy register asset handler gltf-scene
-2026-6-5 11:44:35-debug: lazy register asset handler gltf-embeded-image
-2026-6-5 11:44:35-debug: lazy register asset handler gltf
-2026-6-5 11:44:35-debug: lazy register asset handler fbx
-2026-6-5 11:44:35-debug: lazy register asset handler physics-material
-2026-6-5 11:44:35-debug: lazy register asset handler texture-cube-face
-2026-6-5 11:44:35-debug: lazy register asset handler effect-header
-2026-6-5 11:44:35-debug: lazy register asset handler material
-2026-6-5 11:44:35-debug: lazy register asset handler animation-clip
-2026-6-5 11:44:35-debug: lazy register asset handler animation-graph
-2026-6-5 11:44:35-debug: lazy register asset handler animation-graph-variant
-2026-6-5 11:44:35-debug: lazy register asset handler animation-mask
-2026-6-5 11:44:35-debug: lazy register asset handler ttf-font
-2026-6-5 11:44:35-debug: lazy register asset handler bitmap-font
-2026-6-5 11:44:35-debug: lazy register asset handler particle
-2026-6-5 11:44:35-debug: lazy register asset handler sprite-atlas
-2026-6-5 11:44:35-debug: lazy register asset handler auto-atlas
-2026-6-5 11:44:35-debug: lazy register asset handler label-atlas
-2026-6-5 11:44:35-debug: lazy register asset handler render-pipeline
-2026-6-5 11:44:35-debug: lazy register asset handler render-stage
-2026-6-5 11:44:35-debug: lazy register asset handler render-flow
-2026-6-5 11:44:35-debug: lazy register asset handler instantiation-material
-2026-6-5 11:44:35-debug: lazy register asset handler instantiation-mesh
-2026-6-5 11:44:35-debug: lazy register asset handler instantiation-skeleton
-2026-6-5 11:44:35-debug: lazy register asset handler instantiation-animation
-2026-6-5 11:44:35-debug: lazy register asset handler video-clip
-2026-6-5 11:44:35-debug: Run asset db hook engine-extends:afterStartDB success!
-2026-6-5 11:44:35-debug: lazy register asset handler effect
-2026-6-5 11:44:35-debug: lazy register asset handler audio-clip
-2026-6-5 11:44:35-debug: asset-db:worker-effect-data-processing (989ms)
-2026-6-5 11:44:35-debug: asset-db-hook-engine-extends-afterStartDB (990ms)
-2026-6-5 11:44:35-debug: asset-db:ready (8834ms)
-2026-6-5 11:44:35-debug: asset-db:start-database (2962ms)
-2026-6-5 11:44:35-debug: init worker message success
-2026-6-5 11:44:35-debug: programming:execute-script (309ms)
-2026-6-5 11:44:35-debug: [Build Memory track]: builder:worker-init start:247.03MB, end 256.31MB, increase: 9.28MB
-2026-6-5 11:44:35-debug: builder:worker-init (315ms)
-2026-6-5 11:44:35-debug: Query all assets info in project
-2026-6-5 11:44:35-debug: init custom config: keepNodeUuid: false, useCache: true
-2026-6-5 11:44:35-debug: Skip compress image, progress: 0%
-2026-6-5 11:44:35-debug: Init all bundles start..., progress: 0%
-2026-6-5 11:44:35-debug: Init bundle root assets start..., progress: 0%
-2026-6-5 11:44:35-debug: 查询 Asset Bundle start, progress: 0%
-2026-6-5 11:44:35-debug: // ---- build task 查询 Asset Bundle ----
-2026-6-5 11:44:35-debug: Num of bundles: 3..., progress: 0%
-2026-6-5 11:44:35-debug:   Number of all scenes: 1
-2026-6-5 11:44:35-debug: Init bundle root assets success..., progress: 0%
-2026-6-5 11:44:35-debug:   Number of all scripts: 23
-2026-6-5 11:44:35-debug: Query preload assets/scripts from cc.config.json: 60f7195c-ec2a-45eb-ba94-8955f60e81d0,1c02ae6f-4492-4915-b8f8-7492a3b1e4cd,810e96e4-e456-4468-9b59-f4e8f39732c0,efe8e2a3-eace-427b-b4f1-cb8a937ec77d,e9aa9a3e-5b2b-4ac7-a2c7-073de2b2b24f,8bbdbcdd-5cd4-4100-b6d5-b7c9625b6107,50f4348b-c883-4e2f-8f11-ce233b859fa1,fda095cb-831d-4601-ad94-846013963de8,f92806d7-1768-443f-afe8-12bcde84d0f0,dd3a144d-ab7f-41f0-82b8-2e43a090d496,f0416e68-0200-4b77-a926-4f9d16e494da,970b0598-bcb0-4714-91fb-2e81440dccd8,bcd64cc6-2dd9-43f6-abbe-66318d332032,d930590d-bb92-4cc8-8bd1-23cd027f9edf,a3cd009f-0ab0-420d-9278-b9fdab939bbc,6a2d0734-bd9e-4ddf-946e-caa52498cb75,c27215d8-6835-4b68-bfbb-bdeac6100c04,b5d6115f-0370-4d7c-aad3-c194cc71cf98,871c3b6c-7379-419d-bda3-794b239ab90d,ff9b0199-ce04-4cfe-86cc-6c719f08d6e4,de1c2107-70c8-4021-8459-6399f24d01c6,cbf30902-517f-40dc-af90-a550bac27cf1,5c601d96-e4c7-4698-991b-7ee674b11079
-2026-6-5 11:44:35-debug:   Number of other assets: 317
-2026-6-5 11:44:35-debug: // ---- build task 查询 Asset Bundle ---- (13ms)
-2026-6-5 11:44:35-debug: [Build Memory track]: 查询 Asset Bundle start:254.35MB, end 254.65MB, increase: 300.40KB
-2026-6-5 11:44:35-log: run build task 查询 Asset Bundle success in 13 ms√, progress: 5%
-2026-6-5 11:44:35-debug: // ---- build task 查询 Asset Bundle ----
-2026-6-5 11:44:35-debug: 查询 Asset Bundle start, progress: 5%
-2026-6-5 11:44:35-debug: // ---- build task 查询 Asset Bundle ---- (8ms)
-2026-6-5 11:44:35-log: run build task 查询 Asset Bundle success in 8 ms√, progress: 10%
-2026-6-5 11:44:35-debug: 整理部分构建选项内数据到 settings.json start, progress: 10%
-2026-6-5 11:44:35-debug: // ---- build task 整理部分构建选项内数据到 settings.json ----
-2026-6-5 11:44:35-debug: [Build Memory track]: 查询 Asset Bundle start:254.68MB, end 254.80MB, increase: 118.82KB
-2026-6-5 11:44:35-debug: // ---- build task 整理部分构建选项内数据到 settings.json ---- (5ms)
-2026-6-5 11:44:35-log: run build task 整理部分构建选项内数据到 settings.json success in 5 ms√, progress: 12%
-2026-6-5 11:44:35-debug: [Build Memory track]: 整理部分构建选项内数据到 settings.json start:255.49MB, end 254.89MB, increase: -614.77KB
-2026-6-5 11:44:35-debug: 填充脚本数据到 settings.json start, progress: 12%
-2026-6-5 11:44:35-debug: // ---- build task 填充脚本数据到 settings.json ----
-2026-6-5 11:44:35-debug: // ---- build task 填充脚本数据到 settings.json ---- (2ms)
-2026-6-5 11:44:35-log: run build task 填充脚本数据到 settings.json success in 2 ms√, progress: 13%
-2026-6-5 11:44:35-debug: [Build Memory track]: 填充脚本数据到 settings.json start:254.93MB, end 255.60MB, increase: 691.14KB
-2026-6-5 11:44:35-debug: 整理部分构建选项内数据到 settings.json start, progress: 13%
-2026-6-5 11:44:35-debug: // ---- build task 整理部分构建选项内数据到 settings.json ----
-2026-6-5 11:44:35-debug: // ---- build task 整理部分构建选项内数据到 settings.json ---- (11ms)
-2026-6-5 11:44:35-log: run build task 整理部分构建选项内数据到 settings.json success in 11 ms√, progress: 15%
-2026-6-5 11:44:35-debug: [Build Memory track]: 整理部分构建选项内数据到 settings.json start:255.00MB, end 255.16MB, increase: 160.60KB
-2026-6-5 17:35:59-debug: refresh db internal success
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.tsbackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/homebackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/loadingbackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/playbackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/imagesbackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/scripts/pagesbackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.tsbackground: #aaff85; color: #000;color: #000;
-2026-6-5 17:35:59-debug: refresh db assets success
-2026-6-5 17:35:59-debug: Run asset db hook engine-extends:afterRefresh ...
-2026-6-5 17:35:59-debug: Run asset db hook engine-extends:afterRefresh success!
-2026-6-5 17:35:59-debug: asset-db:refresh-all-database (78ms)
-2026-6-5 17:35:59-debug: asset-db:worker-effect-data-processing (2ms)
-2026-6-5 17:35:59-debug: asset-db-hook-engine-extends-afterRefresh (3ms)

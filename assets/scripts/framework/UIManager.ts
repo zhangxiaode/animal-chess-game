@@ -77,6 +77,7 @@ export class UIManager extends Singleton<UIManager> {
             }
         }
 
+        pageNode.layer = this._root.layer;
         pageNode.parent = this._root;
         const rootTransform = this._root.getComponent(UITransform);
         const pageTransform = pageNode.getComponent(UITransform) ?? pageNode.addComponent(UITransform);

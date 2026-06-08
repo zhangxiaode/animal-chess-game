@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7", "__unresolved_8"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, HomePage, UserSystem, _dec, _class, _class2, _crd, ccclass, property, GameMain;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, LoadingPage, UserSystem, _dec, _class, _class2, _crd, ccclass, property, GameMain;
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "./framework/UIManager", _context.meta, extras);
@@ -31,8 +31,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
     _reporterNs.report("getPlatformGameInfo", "./utils/Constants", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfHomePage(extras) {
-    _reporterNs.report("HomePage", "./pages/HomePage", _context.meta, extras);
+  function _reportPossibleCrUseOfLoadingPage(extras) {
+    _reporterNs.report("LoadingPage", "./pages/LoadingPage", _context.meta, extras);
   }
 
   function _reportPossibleCrUseOfUserSystem(extras) {
@@ -66,7 +66,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       getCurrentPlatform = _unresolved_7.getCurrentPlatform;
       getPlatformGameInfo = _unresolved_7.getPlatformGameInfo;
     }, function (_unresolved_8) {
-      HomePage = _unresolved_8.HomePage;
+      LoadingPage = _unresolved_8.LoadingPage;
     }, function (_unresolved_9) {
       UserSystem = _unresolved_9.UserSystem;
     }],
@@ -99,6 +99,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           game.frameRate = 60; // 动态创建 UIRoot
 
           this._uiRoot = new Node('UIRoot');
+          this._uiRoot.layer = this.node.layer;
           this._uiRoot.parent = this.node;
 
           var uiTransform = this._uiRoot.addComponent(UITransform);
@@ -111,6 +112,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
 
           this._popupRoot = new Node('PopupRoot');
+          this._popupRoot.layer = this.node.layer;
           this._popupRoot.parent = this.node;
 
           var popupTransform = this._popupRoot.addComponent(UITransform);
@@ -158,24 +160,24 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         start() {
-          // 动态创建首页
-          var homePageNode = new Node('HomePage');
-          homePageNode.parent = this._uiRoot;
-          var homeTransform = homePageNode.addComponent(UITransform);
+          // 动态创建加载页
+          var loadingPageNode = new Node('LoadingPage');
+          loadingPageNode.layer = this._uiRoot.layer;
+          loadingPageNode.parent = this._uiRoot;
+          var loadingTransform = loadingPageNode.addComponent(UITransform);
 
           var uiTransform = this._uiRoot.getComponent(UITransform);
 
           if (uiTransform) {
-            homeTransform.setContentSize(uiTransform.contentSize);
+            loadingTransform.setContentSize(uiTransform.contentSize);
           }
 
-          var homePage = homePageNode.addComponent(_crd && HomePage === void 0 ? (_reportPossibleCrUseOfHomePage({
+          loadingPageNode.addComponent(_crd && LoadingPage === void 0 ? (_reportPossibleCrUseOfLoadingPage({
             error: Error()
-          }), HomePage) : HomePage);
+          }), LoadingPage) : LoadingPage);
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
-          }), UIManager) : UIManager).getInstance().registerInitialPage(homePageNode, 'HomePage');
-          homePage.onShow();
+          }), UIManager) : UIManager).getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
         }
 
       }, _class2.ui = void 0, _class2.popup = void 0, _class2.sound = void 0, _class2.data = void 0, _class2.http = void 0, _class2)) || _class)); // 兼容场景中使用类名或脚本 UUID 的反序列化查找。

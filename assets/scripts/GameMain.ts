@@ -5,7 +5,7 @@ import { SoundManager } from './framework/SoundManager';
 import { DataManager } from './framework/DataManager';
 import { HttpManager } from './framework/HttpManager';
 import { getCurrentPlatform, getPlatformGameInfo } from './utils/Constants';
-import { HomePage } from './pages/HomePage';
+import { LoadingPage } from './pages/LoadingPage';
 import { UserSystem } from './system/UserSystem';
 
 const { ccclass, property } = _decorator;
@@ -29,6 +29,7 @@ export class GameMain extends Component {
 
         // 动态创建 UIRoot
         this._uiRoot = new Node('UIRoot');
+        this._uiRoot.layer = this.node.layer;
         this._uiRoot.parent = this.node;
         const uiTransform = this._uiRoot.addComponent(UITransform);
         const canvasTransform = this.node.getComponent(UITransform);
@@ -38,6 +39,7 @@ export class GameMain extends Component {
 
         // 动态创建 PopupRoot
         this._popupRoot = new Node('PopupRoot');
+        this._popupRoot.layer = this.node.layer;
         this._popupRoot.parent = this.node;
         const popupTransform = this._popupRoot.addComponent(UITransform);
         if (canvasTransform) {
@@ -64,19 +66,19 @@ export class GameMain extends Component {
     }
 
     start() {
-        // 动态创建首页
-        const homePageNode = new Node('HomePage');
-        homePageNode.parent = this._uiRoot;
+        // 动态创建加载页
+        const loadingPageNode = new Node('LoadingPage');
+        loadingPageNode.layer = this._uiRoot.layer;
+        loadingPageNode.parent = this._uiRoot;
 
-        const homeTransform = homePageNode.addComponent(UITransform);
+        const loadingTransform = loadingPageNode.addComponent(UITransform);
         const uiTransform = this._uiRoot.getComponent(UITransform);
         if (uiTransform) {
-            homeTransform.setContentSize(uiTransform.contentSize);
+            loadingTransform.setContentSize(uiTransform.contentSize);
         }
 
-        const homePage = homePageNode.addComponent(HomePage);
-        UIManager.getInstance().registerInitialPage(homePageNode, 'HomePage');
-        homePage.onShow();
+        loadingPageNode.addComponent(LoadingPage);
+        UIManager.getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
     }
 }
 

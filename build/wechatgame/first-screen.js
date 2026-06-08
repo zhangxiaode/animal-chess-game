@@ -90,12 +90,12 @@ let afterTick = null;
 let backgroundFilp = 1.0; // set 0 to not flip
 let displayRatio = 1;
 let bgColor = [0.01568627450980392,0.03529411764705882,0.0392156862745098,0.00392156862745098];
-let useCustomBg = false;
-let useLogo = true;
-let useDefaultLogo = true;
+let useCustomBg = true;
+let useLogo = false;
+let useDefaultLogo = false;
 let logoName = 'logo.png';
 let bgName = 'background.png';
-let fitWidth = true;
+let fitWidth = false;
 let fitHeight = false;
 
 function initShaders(vshader, fshader) {
@@ -418,8 +418,6 @@ function draw() {
     useLogo && drawTexture(gl, program, logoTexture, vertexBuffer, 4);
     // draw slogan
     useLogo && useDefaultLogo && drawTexture(gl, program, sloganTexture, sloganVertexBuffer, 4);
-    // draw progress bar
-    drawProgressBar(gl, programProgress, vertexBufferProgress, 3, progress, progressBarColor, progressBackground);
 }
 
 function tick() {

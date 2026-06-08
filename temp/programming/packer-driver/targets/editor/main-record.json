@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 6430.85025,
+      "mTimestamp": 6177.763167,
       "chunkId": "93ba276ea7b26ffcdc433fab14afc1ed6f05647b",
       "imports": [
         {
@@ -997,7 +997,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 8375.682834,
+      "mTimestamp": 7968.773458,
       "chunkId": "6d8fd2b0177941b032ddc0733af48a561fb60657",
       "imports": [
         {
@@ -3418,7 +3418,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1780915154915,
+      "mTimestamp": 1780923299058,
       "chunkId": "6a5019a719a9014c047e67aa1cf34453ab8392ce",
       "imports": [],
       "type": "esm",
@@ -5222,7 +5222,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/GameMain.ts": {
       "mTimestamp": {
-        "mtime": 1778574531290.294,
+        "mtime": 1780918129142.5837,
         "uuid": "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5"
       },
       "chunkId": "674419a804a675bdc259110656ab1bc65e04f002",
@@ -5335,16 +5335,16 @@
           }
         },
         {
-          "value": "./pages/HomePage",
+          "value": "./pages/LoadingPage",
           "resolved": "__unresolved_7",
           "loc": {
             "start": {
               "line": 8,
-              "column": 25
+              "column": 28
             },
             "end": {
               "line": 8,
-              "column": 43
+              "column": 49
             }
           }
         },
@@ -5438,7 +5438,7 @@
         {
           "resolved": {
             "type": "module",
-            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/HomePage.ts"
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts"
           },
           "messages": []
         },
@@ -5726,7 +5726,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts": {
       "mTimestamp": {
-        "mtime": 1778570489022.3816,
+        "mtime": 1780918684722.4492,
         "uuid": "2de71241-6a95-4c71-8941-759c6862ec7c"
       },
       "chunkId": "8501847ea404b2c9de4eb76de25022f4e472d006",
@@ -5937,7 +5937,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts": {
       "mTimestamp": {
-        "mtime": 1780641877973.9353,
+        "mtime": 1780918163686.042,
         "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
       },
       "chunkId": "67ef7aacb0534ffc34f984c40683bb6c1ffb736e",
@@ -6814,7 +6814,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/LoadingPage.ts": {
       "mTimestamp": {
-        "mtime": 1780914686304.689,
+        "mtime": 1780923254391.3018,
         "uuid": "745d7788-84c0-4c01-88aa-229fad69a227"
       },
       "chunkId": "ffe9cd0e8cb59dde53df7b5ab2ff09cbfa7c4bc7",
@@ -6834,11 +6834,11 @@
           "loc": {
             "start": {
               "line": 1,
-              "column": 84
+              "column": 127
             },
             "end": {
               "line": 1,
-              "column": 88
+              "column": 131
             }
           }
         },
@@ -6853,6 +6853,20 @@
             "end": {
               "line": 2,
               "column": 52
+            }
+          }
+        },
+        {
+          "value": "../framework/UIManager",
+          "resolved": "__unresolved_2",
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 26
+            },
+            "end": {
+              "line": 3,
+              "column": 50
             }
           }
         }
@@ -6891,6 +6905,13 @@
           "resolved": {
             "type": "module",
             "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/ResManager.ts"
+          },
+          "messages": []
+        },
+        {
+          "resolved": {
+            "type": "module",
+            "url": "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts"
           },
           "messages": []
         }

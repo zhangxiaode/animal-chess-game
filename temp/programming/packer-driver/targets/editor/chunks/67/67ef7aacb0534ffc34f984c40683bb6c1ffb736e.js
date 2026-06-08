@@ -120,6 +120,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
             }
           }
 
+          pageNode.layer = this._root.layer;
           pageNode.parent = this._root;
 
           const rootTransform = this._root.getComponent(UITransform);

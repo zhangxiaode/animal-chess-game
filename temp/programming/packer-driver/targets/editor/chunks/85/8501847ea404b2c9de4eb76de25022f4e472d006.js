@@ -51,18 +51,37 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
             return this._cache.get(path);
           }
 
-          try {
-            const asset = await resources.load(path, type);
+          return new Promise(resolve => {
+            resources.load(path, type, (error, asset) => {
+              if (error || !asset) {
+                console.warn(`[ResManager] 资源加载失败: ${path}`, error);
+                resolve(null);
+                return;
+              }
+
+              this._cache.set(path, asset);
+
+              resolve(asset);
+            });
+          });
+        }
+        /**
+         * 尝试按多个路径加载同一种资源
+         * @param paths 资源路径数组
+         * @param type 资源类型
+         */
+
+
+        async loadFirst(paths, type) {
+          for (const path of paths) {
+            const asset = await this.load(path, type);
 
             if (asset) {
-              this._cache.set(path, asset);
+              return asset;
             }
-
-            return asset;
-          } catch (error) {
-            console.warn(`[ResManager] 资源加载失败: ${path}`, error);
-            return null;
           }
+
+          return null;
         }
         /**
          * 加载多个资源

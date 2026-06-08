@@ -17,16 +17,34 @@ export class ResManager extends Singleton<ResManager> {
             return this._cache.get(path) as T;
         }
 
-        try {
-            const asset = (await resources.load(path, type)) as unknown as T;
-            if (asset) {
+        return new Promise<T>((resolve) => {
+            resources.load(path, type, (error, asset) => {
+                if (error || !asset) {
+                    console.warn(`[ResManager] 资源加载失败: ${path}`, error);
+                    resolve(null as T);
+                    return;
+                }
+
                 this._cache.set(path, asset);
+                resolve(asset as T);
+            });
+        });
+    }
+
+    /**
+     * 尝试按多个路径加载同一种资源
+     * @param paths 资源路径数组
+     * @param type 资源类型
+     */
+    async loadFirst<T extends Asset>(paths: string[], type: new () => T): Promise<T> {
+        for (const path of paths) {
+            const asset = await this.load(path, type);
+            if (asset) {
+                return asset;
             }
-            return asset;
-        } catch (error) {
-            console.warn(`[ResManager] 资源加载失败: ${path}`, error);
-            return null as T;
         }
+
+        return null as T;
     }
 
     /**

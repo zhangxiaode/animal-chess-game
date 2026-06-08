@@ -58,18 +58,41 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
               return _this._cache.get(path);
             }
 
-            try {
-              var asset = yield resources.load(path, type);
+            return new Promise(resolve => {
+              resources.load(path, type, (error, asset) => {
+                if (error || !asset) {
+                  console.warn("[ResManager] \u8D44\u6E90\u52A0\u8F7D\u5931\u8D25: " + path, error);
+                  resolve(null);
+                  return;
+                }
+
+                _this._cache.set(path, asset);
+
+                resolve(asset);
+              });
+            });
+          })();
+        }
+        /**
+         * 尝试按多个路径加载同一种资源
+         * @param paths 资源路径数组
+         * @param type 资源类型
+         */
+
+
+        loadFirst(paths, type) {
+          var _this2 = this;
+
+          return _asyncToGenerator(function* () {
+            for (var path of paths) {
+              var asset = yield _this2.load(path, type);
 
               if (asset) {
-                _this._cache.set(path, asset);
+                return asset;
               }
-
-              return asset;
-            } catch (error) {
-              console.warn("[ResManager] \u8D44\u6E90\u52A0\u8F7D\u5931\u8D25: " + path, error);
-              return null;
             }
+
+            return null;
           })();
         }
         /**
@@ -80,10 +103,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
 
         loadAll(paths, type) {
-          var _this2 = this;
+          var _this3 = this;
 
           return _asyncToGenerator(function* () {
-            var promises = paths.map(path => _this2.load(path, type));
+            var promises = paths.map(path => _this3.load(path, type));
             return Promise.all(promises);
           })();
         }
@@ -94,10 +117,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
 
         loadSpriteFrame(path) {
-          var _this3 = this;
+          var _this4 = this;
 
           return _asyncToGenerator(function* () {
-            return _this3.load(path + '/spriteFrame', SpriteFrame);
+            return _this4.load(path + '/spriteFrame', SpriteFrame);
           })();
         }
         /**
@@ -107,10 +130,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
 
         loadAudioClip(path) {
-          var _this4 = this;
+          var _this5 = this;
 
           return _asyncToGenerator(function* () {
-            return _this4.load(path, AudioClip);
+            return _this5.load(path, AudioClip);
           })();
         }
         /**
@@ -120,10 +143,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
 
         loadPrefab(path) {
-          var _this5 = this;
+          var _this6 = this;
 
           return _asyncToGenerator(function* () {
-            return _this5.load(path, Prefab);
+            return _this6.load(path, Prefab);
           })();
         }
         /**
