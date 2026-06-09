@@ -1,17 +1,19 @@
-import { _decorator, Component, Node, game, UITransform, js } from 'cc';
+import { _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, resources } from 'cc';
 import { UIManager } from './framework/UIManager';
 import { PopupManager } from './framework/PopupManager';
 import { SoundManager } from './framework/SoundManager';
 import { DataManager } from './framework/DataManager';
 import { HttpManager } from './framework/HttpManager';
 import { getCurrentPlatform, getPlatformGameInfo } from './utils/Constants';
-import { LoadingPage } from './pages/LoadingPage';
 import { UserSystem } from './system/UserSystem';
 
 const { ccclass, property } = _decorator;
 
 @ccclass('GameMain')
 export class GameMain extends Component {
+    @property(Prefab)
+    public loadingPagePrefab: Prefab | null = null;
+
     public static ui: UIManager;
     public static popup: PopupManager;
     public static sound: SoundManager;
@@ -65,20 +67,43 @@ export class GameMain extends Component {
         console.log(`[GameMain] platform=${platform}, app=${gameInfo.appName}`);
     }
 
-    start() {
-        // 动态创建加载页
-        const loadingPageNode = new Node('LoadingPage');
+    async start() {
+        const loadingPageNode = await this._createLoadingPage();
         loadingPageNode.layer = this._uiRoot.layer;
         loadingPageNode.parent = this._uiRoot;
 
-        const loadingTransform = loadingPageNode.addComponent(UITransform);
+        const loadingTransform = loadingPageNode.getComponent(UITransform) ?? loadingPageNode.addComponent(UITransform);
         const uiTransform = this._uiRoot.getComponent(UITransform);
         if (uiTransform) {
             loadingTransform.setContentSize(uiTransform.contentSize);
         }
 
-        loadingPageNode.addComponent(LoadingPage);
         UIManager.getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
+    }
+
+    private async _createLoadingPage(): Promise<Node> {
+        const prefab = this.loadingPagePrefab ?? await this._loadLoadingPrefab();
+        if (prefab) {
+            return instantiate(prefab) as Node;
+        }
+
+        const loadingPageNode = new Node('LoadingPage');
+        const { LoadingPage } = await import('./pages/LoadingPage');
+        loadingPageNode.addComponent(LoadingPage);
+        return loadingPageNode;
+    }
+
+    private _loadLoadingPrefab(): Promise<Prefab | null> {
+        return new Promise((resolve) => {
+            resources.load('prefabs/pages/LoadingPage', Prefab, (error, prefab) => {
+                if (error || !prefab) {
+                    resolve(null);
+                    return;
+                }
+
+                resolve(prefab);
+            });
+        });
     }
 }
 

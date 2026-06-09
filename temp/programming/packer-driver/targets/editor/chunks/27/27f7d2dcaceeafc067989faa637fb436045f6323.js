@@ -1,22 +1,18 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Button, Label, Node, UITransform, Color, Graphics, Vec3, UIManager, SoundManager, UserSystem, RankSystem, _dec, _class, _crd, ccclass, HomePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Label, LabelOutline, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, ResManager, SoundManager, UIManager, _dec, _class, _crd, ccclass, HomePage;
 
-  function _reportPossibleCrUseOfUIManager(extras) {
-    _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
+  function _reportPossibleCrUseOfResManager(extras) {
+    _reporterNs.report("ResManager", "../framework/ResManager", _context.meta, extras);
   }
 
   function _reportPossibleCrUseOfSoundManager(extras) {
     _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfUserSystem(extras) {
-    _reporterNs.report("UserSystem", "../system/UserSystem", _context.meta, extras);
-  }
-
-  function _reportPossibleCrUseOfRankSystem(extras) {
-    _reporterNs.report("RankSystem", "../game/RankSystem", _context.meta, extras);
+  function _reportPossibleCrUseOfUIManager(extras) {
+    _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
   }
 
   return {
@@ -27,306 +23,325 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
-      Component = _cc.Component;
       Button = _cc.Button;
-      Label = _cc.Label;
-      Node = _cc.Node;
-      UITransform = _cc.UITransform;
       Color = _cc.Color;
-      Graphics = _cc.Graphics;
+      Component = _cc.Component;
+      Label = _cc.Label;
+      LabelOutline = _cc.LabelOutline;
+      Node = _cc.Node;
+      Rect = _cc.Rect;
+      Size = _cc.Size;
+      Sprite = _cc.Sprite;
+      SpriteFrame = _cc.SpriteFrame;
+      Texture2D = _cc.Texture2D;
+      UITransform = _cc.UITransform;
+      Vec2 = _cc.Vec2;
       Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
-      UIManager = _unresolved_2.UIManager;
+      ResManager = _unresolved_2.ResManager;
     }, function (_unresolved_3) {
       SoundManager = _unresolved_3.SoundManager;
     }, function (_unresolved_4) {
-      UserSystem = _unresolved_4.UserSystem;
-    }, function (_unresolved_5) {
-      RankSystem = _unresolved_5.RankSystem;
+      UIManager = _unresolved_4.UIManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "8233bqCptxI1IfYpg/wfSfC", "HomePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Button', 'Label', 'Node', 'UITransform', 'Color', 'Sprite', 'Graphics', 'Vec3']);
+      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Label', 'LabelOutline', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
         ccclass
       } = _decorator);
 
       _export("HomePage", HomePage = (_dec = ccclass('HomePage'), _dec(_class = class HomePage extends Component {
-        constructor(...args) {
-          super(...args);
-          this._startGameBtn = null;
-          this._rulesBtn = null;
-          this._userInfoPanel = null;
-        }
-
-        _getUiScale(pageTransform) {
-          var _pageTransform$conten, _this$node$getCompone, _content$width, _content$height;
-
-          const content = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize) != null ? _pageTransform$conten : (_this$node$getCompone = this.node.getComponent(UITransform)) == null ? void 0 : _this$node$getCompone.contentSize;
-          const pageWidth = (_content$width = content == null ? void 0 : content.width) != null ? _content$width : 640;
-          const pageHeight = (_content$height = content == null ? void 0 : content.height) != null ? _content$height : 960;
-          const scale = Math.min(pageWidth / 640, pageHeight / 960);
-          return Math.max(1, scale);
-        }
-
-        _scaled(value, scale) {
-          return Math.round(value * scale);
-        }
-
         start() {
-          this._createUI();
+          this._createBackground();
+
+          this._createSettingButton();
+
+          this._createLogoImage();
+
+          this._createSideButtons();
+
+          this._createLevelBadge();
+
+          this._createStartGameButton();
         }
-        /**
-         * 动态创建UI元素
-         */
 
+        onShow(params) {
+          console.log('首页显示');
+        }
 
-        _createUI() {
-          var _pageSize$height;
+        onHide() {
+          console.log('首页隐藏');
+        }
 
-          const pageRoot = this.node;
-          const pageTransform = pageRoot.getComponent(UITransform);
+        async _createBackground() {
+          var _pageTransform$conten, _pageTransform$conten2;
 
-          const uiScale = this._getUiScale(pageTransform);
-
-          const pageSize = pageTransform == null ? void 0 : pageTransform.contentSize;
-          const pageHeight = (_pageSize$height = pageSize == null ? void 0 : pageSize.height) != null ? _pageSize$height : 960;
+          const pageTransform = this.node.getComponent(UITransform);
+          const pageWidth = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten : 750;
+          const pageHeight = (_pageTransform$conten2 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten2 : 1334;
           const backgroundNode = new Node('Background');
-          backgroundNode.parent = pageRoot;
+          backgroundNode.layer = this.node.layer;
+          backgroundNode.parent = this.node;
           backgroundNode.setPosition(Vec3.ZERO);
+          backgroundNode.setSiblingIndex(0);
           const backgroundTransform = backgroundNode.addComponent(UITransform);
+          backgroundTransform.setContentSize(pageWidth, pageHeight);
+          const backgroundSprite = backgroundNode.addComponent(Sprite);
+          backgroundSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const spriteFrame = await this._loadBackgroundSpriteFrame();
 
-          if (pageTransform) {
-            backgroundTransform.setContentSize(pageTransform.contentSize);
+          if (!spriteFrame || !backgroundNode.isValid) {
+            console.warn('[HomePage] 背景图加载失败: images/home/bg');
+            return;
           }
 
-          const backgroundGraphics = backgroundNode.addComponent(Graphics);
-          backgroundGraphics.fillColor = new Color(238, 238, 238, 255);
-          const backgroundSize = backgroundTransform.contentSize;
-          backgroundGraphics.rect(-backgroundSize.width / 2, -backgroundSize.height / 2, backgroundSize.width, backgroundSize.height);
-          backgroundGraphics.fill(); // 创建用户信息面板
+          backgroundSprite.spriteFrame = spriteFrame;
 
-          this._createUserInfoPanel(pageRoot, uiScale, pageHeight);
-
-          const btnGroupCenterY = -pageHeight * 0.02;
-          this._startGameBtn = this._createButton(pageRoot, 'StartGameBtn', '开始游戏', new Vec3(0, btnGroupCenterY + this._scaled(55, uiScale), 0), uiScale);
-          this._rulesBtn = this._createButton(pageRoot, 'RulesBtn', '游戏规则', new Vec3(0, btnGroupCenterY - this._scaled(25, uiScale), 0), uiScale);
-
-          if (this._startGameBtn) {
-            this._startGameBtn.node.on(Button.EventType.CLICK, this._onStartGame, this);
-          }
-
-          if (this._rulesBtn) {
-            this._rulesBtn.node.on(Button.EventType.CLICK, this._onShowRules, this);
-          }
-
-          console.log('[HomePage] 按钮创建成功');
-        }
-        /**
-         * 创建用户信息面板
-         */
-
-
-        _createUserInfoPanel(parent, uiScale, pageHeight) {
-          const userSystem = (_crd && UserSystem === void 0 ? (_reportPossibleCrUseOfUserSystem({
-            error: Error()
-          }), UserSystem) : UserSystem).getInstance();
-          const rankSystem = (_crd && RankSystem === void 0 ? (_reportPossibleCrUseOfRankSystem({
-            error: Error()
-          }), RankSystem) : RankSystem).getInstance(); // 创建用户信息面板容器
-
-          this._userInfoPanel = new Node('UserInfoPanel');
-          this._userInfoPanel.parent = parent;
-
-          this._userInfoPanel.setPosition(new Vec3(0, pageHeight * 0.18, 0));
-
-          const panelTransform = this._userInfoPanel.addComponent(UITransform);
-
-          const panelWidth = this._scaled(400, uiScale);
-
-          const panelHeight = this._scaled(160, uiScale);
-
-          panelTransform.setContentSize(panelWidth, panelHeight); // 绘制面板背景
-
-          const panelGraphics = this._userInfoPanel.addComponent(Graphics);
-
-          panelGraphics.fillColor = new Color(70, 120, 180, 200);
-          panelGraphics.roundRect(-panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight, this._scaled(12, uiScale));
-          panelGraphics.fill();
-          panelGraphics.strokeColor = new Color(40, 80, 140, 255);
-          panelGraphics.lineWidth = 2;
-          panelGraphics.roundRect(-panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight, this._scaled(12, uiScale));
-          panelGraphics.stroke(); // 用户名标签 - 第一行，左侧
-
-          const usernameNode = new Node('UsernameLabel');
-          usernameNode.parent = this._userInfoPanel;
-          usernameNode.setPosition(new Vec3(this._scaled(-90, uiScale), this._scaled(30, uiScale), 0));
-          const usernameTransform = usernameNode.addComponent(UITransform);
-          usernameTransform.setContentSize(this._scaled(180, uiScale), this._scaled(50, uiScale));
-          const usernameLabel = usernameNode.addComponent(Label);
-          usernameLabel.string = userSystem.getUsername();
-          usernameLabel.fontSize = this._scaled(28, uiScale);
-          usernameLabel.color = new Color(255, 255, 255, 255);
-          usernameLabel.overflow = Label.Overflow.CLAMP;
-          usernameLabel.horizontalAlign = Label.HorizontalAlign.LEFT; // 星数标签 - 第一行，右侧
-
-          const starsNode = new Node('StarsLabel');
-          starsNode.parent = this._userInfoPanel;
-          starsNode.setPosition(new Vec3(this._scaled(120, uiScale), this._scaled(30, uiScale), 0));
-          const starsTransform = starsNode.addComponent(UITransform);
-          starsTransform.setContentSize(this._scaled(110, uiScale), this._scaled(50, uiScale));
-          const starsLabel = starsNode.addComponent(Label);
-          starsLabel.string = `⭐ ${userSystem.getStars()}`;
-          starsLabel.fontSize = this._scaled(28, uiScale);
-          starsLabel.color = new Color(255, 255, 100, 255);
-          starsLabel.overflow = Label.Overflow.CLAMP;
-          starsLabel.horizontalAlign = Label.HorizontalAlign.RIGHT; // 段位标签 - 第二行，左对齐
-
-          const rankNode = new Node('RankLabel');
-          rankNode.parent = this._userInfoPanel;
-          rankNode.setPosition(new Vec3(this._scaled(-30, uiScale), this._scaled(-32, uiScale), 0));
-          const rankTransform = rankNode.addComponent(UITransform);
-          rankTransform.setContentSize(this._scaled(300, uiScale), this._scaled(50, uiScale));
-          const rankLabel = rankNode.addComponent(Label);
-          rankLabel.string = rankSystem.getCurrentRankDisplayName();
-          rankLabel.fontSize = this._scaled(28, uiScale);
-          rankLabel.color = new Color(255, 228, 181, 255);
-          rankLabel.overflow = Label.Overflow.CLAMP;
-          rankLabel.horizontalAlign = Label.HorizontalAlign.LEFT;
+          this._setCoverSize(backgroundTransform, spriteFrame, pageWidth, pageHeight);
         }
 
-        _createButton(parent, nodeName, text, position, uiScale) {
+        async _loadBackgroundSpriteFrame() {
+          return this._loadImageSpriteFrame('images/home/bg');
+        }
+
+        async _createSettingButton() {
+          var _pageTransform$conten3, _pageTransform$conten4;
+
+          const pageTransform = this.node.getComponent(UITransform);
+          const pageWidth = (_pageTransform$conten3 = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten3 : 750;
+          const pageHeight = (_pageTransform$conten4 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten4 : 1334;
+          const buttonSize = 96;
+          const margin = 36;
+          const settingNode = new Node('SettingButton');
+          settingNode.layer = this.node.layer;
+          settingNode.parent = this.node;
+          settingNode.setPosition(new Vec3(-pageWidth / 2 + buttonSize / 2 + margin, pageHeight / 2 - buttonSize / 2 - margin, 0));
+          const settingTransform = settingNode.addComponent(UITransform);
+          settingTransform.setContentSize(buttonSize, buttonSize);
+          const settingSprite = settingNode.addComponent(Sprite);
+          settingSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const settingButton = settingNode.addComponent(Button);
+          settingButton.interactable = true;
+          const spriteFrame = await this._loadImageSpriteFrame('images/home/setting');
+
+          if (!spriteFrame || !settingNode.isValid) {
+            console.warn('[HomePage] 设置按钮图片加载失败: images/home/setting');
+            return;
+          }
+
+          settingSprite.spriteFrame = spriteFrame;
+        }
+
+        async _createLogoImage() {
+          var _pageTransform$conten5;
+
+          const pageTransform = this.node.getComponent(UITransform);
+          const pageHeight = (_pageTransform$conten5 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten5 : 1334;
+          const logoNode = new Node('Logo');
+          logoNode.layer = this.node.layer;
+          logoNode.parent = this.node;
+          logoNode.setPosition(new Vec3(0, pageHeight / 2 - 220, 0));
+          const logoTransform = logoNode.addComponent(UITransform);
+          logoTransform.setContentSize(240, 200);
+          const logoSprite = logoNode.addComponent(Sprite);
+          logoSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const spriteFrame = await this._loadImageSpriteFrame('images/home/logo');
+
+          if (!spriteFrame || !logoNode.isValid) {
+            console.warn('[HomePage] Logo 图片加载失败: images/home/logo');
+            return;
+          }
+
+          logoSprite.spriteFrame = spriteFrame;
+        }
+
+        _createSideButtons() {
+          var _pageTransform$conten6, _pageTransform$conten7;
+
+          const pageTransform = this.node.getComponent(UITransform);
+          const pageWidth = (_pageTransform$conten6 = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten6 : 750;
+          const pageHeight = (_pageTransform$conten7 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten7 : 1334;
+          const buttonSize = 144;
+          const sideMargin = 56;
+          const horizontalOffset = 66;
+          const leftX = -pageWidth / 2 + sideMargin + buttonSize / 2 - horizontalOffset;
+          const rightX = pageWidth / 2 - sideMargin - buttonSize / 2 + horizontalOffset;
+          const inwardOffset = 16;
+          const adjustedLeftX = leftX + inwardOffset;
+          const adjustedRightX = rightX - inwardOffset;
+          const verticalOffset = 120;
+          const topY = -pageHeight * 0.06 + verticalOffset;
+          const bottomY = -pageHeight * 0.2 + verticalOffset;
+
+          this._createImageButton('RewardButton', 'images/home/reward', new Vec3(adjustedLeftX, topY, 0), buttonSize, '[HomePage] 奖励按钮图片加载失败: images/home/reward');
+
+          this._createImageButton('RankingButton', 'images/home/ranking', new Vec3(adjustedLeftX, bottomY, 0), buttonSize, '[HomePage] 排行按钮图片加载失败: images/home/ranking');
+
+          this._createImageButton('FeedbackButton', 'images/home/feedback', new Vec3(adjustedRightX, topY, 0), buttonSize, '[HomePage] 反馈按钮图片加载失败: images/home/feedback');
+
+          this._createImageButton('CollectButton', 'images/home/collect', new Vec3(adjustedRightX, bottomY, 0), buttonSize, '[HomePage] 收藏按钮图片加载失败: images/home/collect');
+        }
+
+        async _createImageButton(nodeName, imagePath, position, size, failMessage) {
           const buttonNode = new Node(nodeName);
-          buttonNode.parent = parent;
+          buttonNode.layer = this.node.layer;
+          buttonNode.parent = this.node;
           buttonNode.setPosition(position);
           const buttonTransform = buttonNode.addComponent(UITransform);
-
-          const buttonWidth = this._scaled(200, uiScale);
-
-          const buttonHeight = this._scaled(80, uiScale);
-
-          buttonTransform.setContentSize(buttonWidth, buttonHeight);
-          const graphics = buttonNode.addComponent(Graphics);
-          graphics.fillColor = new Color(100, 150, 200, 255);
-          graphics.rect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight);
-          graphics.fill();
-          graphics.strokeColor = new Color(50, 100, 150, 255);
-          graphics.lineWidth = 2;
-          graphics.rect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight);
-          graphics.stroke();
+          buttonTransform.setContentSize(size, size);
+          const buttonSprite = buttonNode.addComponent(Sprite);
+          buttonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
           const button = buttonNode.addComponent(Button);
           button.interactable = true;
-          const labelNode = new Node('Label');
-          labelNode.parent = buttonNode;
-          labelNode.addComponent(UITransform);
-          const buttonLabel = labelNode.addComponent(Label);
-          buttonLabel.string = text;
-          buttonLabel.fontSize = this._scaled(28, uiScale);
-          buttonLabel.color = new Color(255, 255, 255, 255);
-          return button;
-        }
-        /**
-         * 点击开始游戏按钮
-         */
+          const spriteFrame = await this._loadImageSpriteFrame(imagePath);
 
+          if (!spriteFrame || !buttonNode.isValid) {
+            console.warn(failMessage);
+            return;
+          }
+
+          buttonSprite.spriteFrame = spriteFrame;
+        }
+
+        async _createLevelBadge() {
+          var _pageTransform$conten8;
+
+          const pageTransform = this.node.getComponent(UITransform);
+          const pageHeight = (_pageTransform$conten8 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten8 : 1334;
+          const badgeWidth = 314;
+          const badgeHeight = 114;
+          const badgeNode = new Node('LevelBadge');
+          badgeNode.layer = this.node.layer;
+          badgeNode.parent = this.node;
+          badgeNode.setPosition(new Vec3(0, -pageHeight * 0.34, 0));
+          const badgeTransform = badgeNode.addComponent(UITransform);
+          badgeTransform.setContentSize(badgeWidth, badgeHeight);
+          const badgeSprite = badgeNode.addComponent(Sprite);
+          badgeSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const levelLabelNode = new Node('LevelLabel');
+          levelLabelNode.layer = this.node.layer;
+          levelLabelNode.parent = badgeNode;
+          levelLabelNode.setPosition(new Vec3(0, 4, 0));
+          const levelLabelTransform = levelLabelNode.addComponent(UITransform);
+          levelLabelTransform.setContentSize(badgeWidth, badgeHeight);
+          const levelLabel = levelLabelNode.addComponent(Label);
+          levelLabel.string = '第1关';
+          levelLabel.fontSize = 36;
+          levelLabel.color = new Color(128, 77, 44, 255);
+          levelLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
+          levelLabel.verticalAlign = Label.VerticalAlign.CENTER;
+          levelLabel.overflow = Label.Overflow.CLAMP;
+          const spriteFrame = await this._loadImageSpriteFrame('images/home/level_bg');
+
+          if (!spriteFrame || !badgeNode.isValid) {
+            console.warn('[HomePage] 关卡背景图片加载失败: images/home/level_bg');
+            return;
+          }
+
+          badgeSprite.spriteFrame = spriteFrame;
+        }
+
+        async _createStartGameButton() {
+          var _pageTransform$conten9;
+
+          const pageTransform = this.node.getComponent(UITransform);
+          const pageHeight = (_pageTransform$conten9 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten9 : 1334;
+          const buttonWidth = 418;
+          const buttonHeight = 162;
+          const buttonNode = new Node('StartGameButton');
+          buttonNode.layer = this.node.layer;
+          buttonNode.parent = this.node;
+          buttonNode.setPosition(new Vec3(0, -pageHeight * 0.45 + 40, 0));
+          const buttonTransform = buttonNode.addComponent(UITransform);
+          buttonTransform.setContentSize(buttonWidth, buttonHeight);
+          const buttonSprite = buttonNode.addComponent(Sprite);
+          buttonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const button = buttonNode.addComponent(Button);
+          button.interactable = true;
+          buttonNode.on(Button.EventType.CLICK, this._onStartGame, this);
+          const labelNode = new Node('Label');
+          labelNode.layer = this.node.layer;
+          labelNode.parent = buttonNode;
+          labelNode.setPosition(new Vec3(0, 4, 0));
+          const labelTransform = labelNode.addComponent(UITransform);
+          labelTransform.setContentSize(buttonWidth, buttonHeight);
+          const label = labelNode.addComponent(Label);
+          label.string = '开始游戏';
+          label.fontSize = 42;
+          label.color = new Color(255, 255, 255, 255);
+          label.horizontalAlign = Label.HorizontalAlign.CENTER;
+          label.verticalAlign = Label.VerticalAlign.CENTER;
+          label.overflow = Label.Overflow.CLAMP;
+          const labelOutline = labelNode.addComponent(LabelOutline);
+          labelOutline.color = new Color(144, 88, 19, 255);
+          labelOutline.width = 3;
+          const spriteFrame = await this._loadImageSpriteFrame('images/home/btn_yellow');
+
+          if (!spriteFrame || !buttonNode.isValid) {
+            console.warn('[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow');
+            return;
+          }
+
+          buttonSprite.spriteFrame = spriteFrame;
+        }
 
         _onStartGame() {
-          // 播放点击音效
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click'); // 打开游戏页面，传递参数：关卡1
-
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().openPage('prefabs/pages/GamePage', {
             level: 1
           });
         }
-        /**
-         * 点击游戏规则按钮
-         */
 
-
-        _onShowRules() {
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+        async _loadImageSpriteFrame(path) {
+          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
-          (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
+          }), ResManager) : ResManager).getInstance().loadFirst([`${path}/spriteFrame`, path], SpriteFrame);
+          if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
+          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
             error: Error()
-          }), UIManager) : UIManager).getInstance().openPage('prefabs/pages/RulesPage');
+          }), ResManager) : ResManager).getInstance().load(`${path}/texture`, Texture2D);
+          if (!texture) return null;
+          const generatedSpriteFrame = new SpriteFrame();
+          generatedSpriteFrame.texture = texture;
+          return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
         }
-        /**
-         * 页面显示时自动调用
-         */
 
-
-        onShow(params) {
-          console.log('首页显示'); // 更新用户信息显示
-
-          this._updateUserInfoDisplay(); // 播放背景音乐
-
-
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playBGM('sounds/bgm_home');
+        _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
+          const originalSize = spriteFrame.originalSize;
+          const imageWidth = (originalSize == null ? void 0 : originalSize.width) || spriteFrame.width || containerWidth;
+          const imageHeight = (originalSize == null ? void 0 : originalSize.height) || spriteFrame.height || containerHeight;
+          const scale = Math.max(containerWidth / imageWidth, containerHeight / imageHeight);
+          transform.setContentSize(Math.ceil(imageWidth * scale), Math.ceil(imageHeight * scale));
         }
-        /**
-         * 更新用户信息显示
-         */
 
+        _ensureSpriteFrameSize(spriteFrame, fallbackWidth = 0, fallbackHeight = 0) {
+          const rect = spriteFrame.rect;
+          const originalSize = spriteFrame.originalSize;
+          const width = (rect == null ? void 0 : rect.width) || (originalSize == null ? void 0 : originalSize.width) || spriteFrame.width || fallbackWidth;
+          const height = (rect == null ? void 0 : rect.height) || (originalSize == null ? void 0 : originalSize.height) || spriteFrame.height || fallbackHeight;
 
-        _updateUserInfoDisplay() {
-          if (!this._userInfoPanel) return;
-          const userSystem = (_crd && UserSystem === void 0 ? (_reportPossibleCrUseOfUserSystem({
-            error: Error()
-          }), UserSystem) : UserSystem).getInstance();
-          const rankSystem = (_crd && RankSystem === void 0 ? (_reportPossibleCrUseOfRankSystem({
-            error: Error()
-          }), RankSystem) : RankSystem).getInstance(); // 更新用户名
-
-          const usernameNode = this._userInfoPanel.getChildByName('UsernameLabel');
-
-          if (usernameNode) {
-            const usernameLabel = usernameNode.getComponent(Label);
-
-            if (usernameLabel) {
-              usernameLabel.string = userSystem.getUsername();
+          if (width > 0 && height > 0) {
+            if (!rect || !rect.width || !rect.height) {
+              spriteFrame.rect = new Rect(0, 0, width, height);
             }
-          } // 更新段位
 
-
-          const rankNode = this._userInfoPanel.getChildByName('RankLabel');
-
-          if (rankNode) {
-            const rankLabel = rankNode.getComponent(Label);
-
-            if (rankLabel) {
-              rankLabel.string = rankSystem.getCurrentRankDisplayName();
+            if (!originalSize || !originalSize.width || !originalSize.height) {
+              spriteFrame.originalSize = new Size(width, height);
             }
-          } // 更新星数
 
-
-          const starsNode = this._userInfoPanel.getChildByName('StarsLabel');
-
-          if (starsNode) {
-            const starsLabel = starsNode.getComponent(Label);
-
-            if (starsLabel) {
-              starsLabel.string = `⭐ ${userSystem.getStars()}`;
-            }
+            spriteFrame.offset = Vec2.ZERO;
           }
-        }
-        /**
-         * 页面隐藏时自动调用
-         */
 
-
-        onHide() {
-          console.log('首页隐藏');
+          return spriteFrame;
         }
 
       }) || _class));

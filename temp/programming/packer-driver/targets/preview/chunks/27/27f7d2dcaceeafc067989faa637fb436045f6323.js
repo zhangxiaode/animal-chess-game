@@ -1,22 +1,22 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Button, Label, Node, UITransform, Color, Graphics, Vec3, UIManager, SoundManager, UserSystem, RankSystem, _dec, _class, _crd, ccclass, HomePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Label, LabelOutline, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, ResManager, SoundManager, UIManager, _dec, _class, _crd, ccclass, HomePage;
 
-  function _reportPossibleCrUseOfUIManager(extras) {
-    _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
+  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+  function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+  function _reportPossibleCrUseOfResManager(extras) {
+    _reporterNs.report("ResManager", "../framework/ResManager", _context.meta, extras);
   }
 
   function _reportPossibleCrUseOfSoundManager(extras) {
     _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfUserSystem(extras) {
-    _reporterNs.report("UserSystem", "../system/UserSystem", _context.meta, extras);
-  }
-
-  function _reportPossibleCrUseOfRankSystem(extras) {
-    _reporterNs.report("RankSystem", "../game/RankSystem", _context.meta, extras);
+  function _reportPossibleCrUseOfUIManager(extras) {
+    _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
   }
 
   return {
@@ -27,306 +27,370 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
-      Component = _cc.Component;
       Button = _cc.Button;
-      Label = _cc.Label;
-      Node = _cc.Node;
-      UITransform = _cc.UITransform;
       Color = _cc.Color;
-      Graphics = _cc.Graphics;
+      Component = _cc.Component;
+      Label = _cc.Label;
+      LabelOutline = _cc.LabelOutline;
+      Node = _cc.Node;
+      Rect = _cc.Rect;
+      Size = _cc.Size;
+      Sprite = _cc.Sprite;
+      SpriteFrame = _cc.SpriteFrame;
+      Texture2D = _cc.Texture2D;
+      UITransform = _cc.UITransform;
+      Vec2 = _cc.Vec2;
       Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
-      UIManager = _unresolved_2.UIManager;
+      ResManager = _unresolved_2.ResManager;
     }, function (_unresolved_3) {
       SoundManager = _unresolved_3.SoundManager;
     }, function (_unresolved_4) {
-      UserSystem = _unresolved_4.UserSystem;
-    }, function (_unresolved_5) {
-      RankSystem = _unresolved_5.RankSystem;
+      UIManager = _unresolved_4.UIManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "8233bqCptxI1IfYpg/wfSfC", "HomePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Button', 'Label', 'Node', 'UITransform', 'Color', 'Sprite', 'Graphics', 'Vec3']);
+      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Label', 'LabelOutline', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
         ccclass
       } = _decorator);
 
       _export("HomePage", HomePage = (_dec = ccclass('HomePage'), _dec(_class = class HomePage extends Component {
-        constructor() {
-          super(...arguments);
-          this._startGameBtn = null;
-          this._rulesBtn = null;
-          this._userInfoPanel = null;
-        }
-
-        _getUiScale(pageTransform) {
-          var _pageTransform$conten, _this$node$getCompone, _content$width, _content$height;
-
-          var content = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize) != null ? _pageTransform$conten : (_this$node$getCompone = this.node.getComponent(UITransform)) == null ? void 0 : _this$node$getCompone.contentSize;
-          var pageWidth = (_content$width = content == null ? void 0 : content.width) != null ? _content$width : 640;
-          var pageHeight = (_content$height = content == null ? void 0 : content.height) != null ? _content$height : 960;
-          var scale = Math.min(pageWidth / 640, pageHeight / 960);
-          return Math.max(1, scale);
-        }
-
-        _scaled(value, scale) {
-          return Math.round(value * scale);
-        }
-
         start() {
-          this._createUI();
-        }
-        /**
-         * 动态创建UI元素
-         */
+          this._createBackground();
 
+          this._createSettingButton();
 
-        _createUI() {
-          var _pageSize$height;
+          this._createLogoImage();
 
-          var pageRoot = this.node;
-          var pageTransform = pageRoot.getComponent(UITransform);
+          this._createSideButtons();
 
-          var uiScale = this._getUiScale(pageTransform);
+          this._createLevelBadge();
 
-          var pageSize = pageTransform == null ? void 0 : pageTransform.contentSize;
-          var pageHeight = (_pageSize$height = pageSize == null ? void 0 : pageSize.height) != null ? _pageSize$height : 960;
-          var backgroundNode = new Node('Background');
-          backgroundNode.parent = pageRoot;
-          backgroundNode.setPosition(Vec3.ZERO);
-          var backgroundTransform = backgroundNode.addComponent(UITransform);
-
-          if (pageTransform) {
-            backgroundTransform.setContentSize(pageTransform.contentSize);
-          }
-
-          var backgroundGraphics = backgroundNode.addComponent(Graphics);
-          backgroundGraphics.fillColor = new Color(238, 238, 238, 255);
-          var backgroundSize = backgroundTransform.contentSize;
-          backgroundGraphics.rect(-backgroundSize.width / 2, -backgroundSize.height / 2, backgroundSize.width, backgroundSize.height);
-          backgroundGraphics.fill(); // 创建用户信息面板
-
-          this._createUserInfoPanel(pageRoot, uiScale, pageHeight);
-
-          var btnGroupCenterY = -pageHeight * 0.02;
-          this._startGameBtn = this._createButton(pageRoot, 'StartGameBtn', '开始游戏', new Vec3(0, btnGroupCenterY + this._scaled(55, uiScale), 0), uiScale);
-          this._rulesBtn = this._createButton(pageRoot, 'RulesBtn', '游戏规则', new Vec3(0, btnGroupCenterY - this._scaled(25, uiScale), 0), uiScale);
-
-          if (this._startGameBtn) {
-            this._startGameBtn.node.on(Button.EventType.CLICK, this._onStartGame, this);
-          }
-
-          if (this._rulesBtn) {
-            this._rulesBtn.node.on(Button.EventType.CLICK, this._onShowRules, this);
-          }
-
-          console.log('[HomePage] 按钮创建成功');
-        }
-        /**
-         * 创建用户信息面板
-         */
-
-
-        _createUserInfoPanel(parent, uiScale, pageHeight) {
-          var userSystem = (_crd && UserSystem === void 0 ? (_reportPossibleCrUseOfUserSystem({
-            error: Error()
-          }), UserSystem) : UserSystem).getInstance();
-          var rankSystem = (_crd && RankSystem === void 0 ? (_reportPossibleCrUseOfRankSystem({
-            error: Error()
-          }), RankSystem) : RankSystem).getInstance(); // 创建用户信息面板容器
-
-          this._userInfoPanel = new Node('UserInfoPanel');
-          this._userInfoPanel.parent = parent;
-
-          this._userInfoPanel.setPosition(new Vec3(0, pageHeight * 0.18, 0));
-
-          var panelTransform = this._userInfoPanel.addComponent(UITransform);
-
-          var panelWidth = this._scaled(400, uiScale);
-
-          var panelHeight = this._scaled(160, uiScale);
-
-          panelTransform.setContentSize(panelWidth, panelHeight); // 绘制面板背景
-
-          var panelGraphics = this._userInfoPanel.addComponent(Graphics);
-
-          panelGraphics.fillColor = new Color(70, 120, 180, 200);
-          panelGraphics.roundRect(-panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight, this._scaled(12, uiScale));
-          panelGraphics.fill();
-          panelGraphics.strokeColor = new Color(40, 80, 140, 255);
-          panelGraphics.lineWidth = 2;
-          panelGraphics.roundRect(-panelWidth / 2, -panelHeight / 2, panelWidth, panelHeight, this._scaled(12, uiScale));
-          panelGraphics.stroke(); // 用户名标签 - 第一行，左侧
-
-          var usernameNode = new Node('UsernameLabel');
-          usernameNode.parent = this._userInfoPanel;
-          usernameNode.setPosition(new Vec3(this._scaled(-90, uiScale), this._scaled(30, uiScale), 0));
-          var usernameTransform = usernameNode.addComponent(UITransform);
-          usernameTransform.setContentSize(this._scaled(180, uiScale), this._scaled(50, uiScale));
-          var usernameLabel = usernameNode.addComponent(Label);
-          usernameLabel.string = userSystem.getUsername();
-          usernameLabel.fontSize = this._scaled(28, uiScale);
-          usernameLabel.color = new Color(255, 255, 255, 255);
-          usernameLabel.overflow = Label.Overflow.CLAMP;
-          usernameLabel.horizontalAlign = Label.HorizontalAlign.LEFT; // 星数标签 - 第一行，右侧
-
-          var starsNode = new Node('StarsLabel');
-          starsNode.parent = this._userInfoPanel;
-          starsNode.setPosition(new Vec3(this._scaled(120, uiScale), this._scaled(30, uiScale), 0));
-          var starsTransform = starsNode.addComponent(UITransform);
-          starsTransform.setContentSize(this._scaled(110, uiScale), this._scaled(50, uiScale));
-          var starsLabel = starsNode.addComponent(Label);
-          starsLabel.string = "\u2B50 " + userSystem.getStars();
-          starsLabel.fontSize = this._scaled(28, uiScale);
-          starsLabel.color = new Color(255, 255, 100, 255);
-          starsLabel.overflow = Label.Overflow.CLAMP;
-          starsLabel.horizontalAlign = Label.HorizontalAlign.RIGHT; // 段位标签 - 第二行，左对齐
-
-          var rankNode = new Node('RankLabel');
-          rankNode.parent = this._userInfoPanel;
-          rankNode.setPosition(new Vec3(this._scaled(-30, uiScale), this._scaled(-32, uiScale), 0));
-          var rankTransform = rankNode.addComponent(UITransform);
-          rankTransform.setContentSize(this._scaled(300, uiScale), this._scaled(50, uiScale));
-          var rankLabel = rankNode.addComponent(Label);
-          rankLabel.string = rankSystem.getCurrentRankDisplayName();
-          rankLabel.fontSize = this._scaled(28, uiScale);
-          rankLabel.color = new Color(255, 228, 181, 255);
-          rankLabel.overflow = Label.Overflow.CLAMP;
-          rankLabel.horizontalAlign = Label.HorizontalAlign.LEFT;
+          this._createStartGameButton();
         }
 
-        _createButton(parent, nodeName, text, position, uiScale) {
-          var buttonNode = new Node(nodeName);
-          buttonNode.parent = parent;
-          buttonNode.setPosition(position);
-          var buttonTransform = buttonNode.addComponent(UITransform);
-
-          var buttonWidth = this._scaled(200, uiScale);
-
-          var buttonHeight = this._scaled(80, uiScale);
-
-          buttonTransform.setContentSize(buttonWidth, buttonHeight);
-          var graphics = buttonNode.addComponent(Graphics);
-          graphics.fillColor = new Color(100, 150, 200, 255);
-          graphics.rect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight);
-          graphics.fill();
-          graphics.strokeColor = new Color(50, 100, 150, 255);
-          graphics.lineWidth = 2;
-          graphics.rect(-buttonWidth / 2, -buttonHeight / 2, buttonWidth, buttonHeight);
-          graphics.stroke();
-          var button = buttonNode.addComponent(Button);
-          button.interactable = true;
-          var labelNode = new Node('Label');
-          labelNode.parent = buttonNode;
-          labelNode.addComponent(UITransform);
-          var buttonLabel = labelNode.addComponent(Label);
-          buttonLabel.string = text;
-          buttonLabel.fontSize = this._scaled(28, uiScale);
-          buttonLabel.color = new Color(255, 255, 255, 255);
-          return button;
+        onShow(params) {
+          console.log('首页显示');
         }
-        /**
-         * 点击开始游戏按钮
-         */
 
+        onHide() {
+          console.log('首页隐藏');
+        }
+
+        _createBackground() {
+          var _this = this;
+
+          return _asyncToGenerator(function* () {
+            var _pageTransform$conten, _pageTransform$conten2;
+
+            var pageTransform = _this.node.getComponent(UITransform);
+
+            var pageWidth = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten : 750;
+            var pageHeight = (_pageTransform$conten2 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten2 : 1334;
+            var backgroundNode = new Node('Background');
+            backgroundNode.layer = _this.node.layer;
+            backgroundNode.parent = _this.node;
+            backgroundNode.setPosition(Vec3.ZERO);
+            backgroundNode.setSiblingIndex(0);
+            var backgroundTransform = backgroundNode.addComponent(UITransform);
+            backgroundTransform.setContentSize(pageWidth, pageHeight);
+            var backgroundSprite = backgroundNode.addComponent(Sprite);
+            backgroundSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var spriteFrame = yield _this._loadBackgroundSpriteFrame();
+
+            if (!spriteFrame || !backgroundNode.isValid) {
+              console.warn('[HomePage] 背景图加载失败: images/home/bg');
+              return;
+            }
+
+            backgroundSprite.spriteFrame = spriteFrame;
+
+            _this._setCoverSize(backgroundTransform, spriteFrame, pageWidth, pageHeight);
+          })();
+        }
+
+        _loadBackgroundSpriteFrame() {
+          var _this2 = this;
+
+          return _asyncToGenerator(function* () {
+            return _this2._loadImageSpriteFrame('images/home/bg');
+          })();
+        }
+
+        _createSettingButton() {
+          var _this3 = this;
+
+          return _asyncToGenerator(function* () {
+            var _pageTransform$conten3, _pageTransform$conten4;
+
+            var pageTransform = _this3.node.getComponent(UITransform);
+
+            var pageWidth = (_pageTransform$conten3 = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten3 : 750;
+            var pageHeight = (_pageTransform$conten4 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten4 : 1334;
+            var buttonSize = 96;
+            var margin = 36;
+            var settingNode = new Node('SettingButton');
+            settingNode.layer = _this3.node.layer;
+            settingNode.parent = _this3.node;
+            settingNode.setPosition(new Vec3(-pageWidth / 2 + buttonSize / 2 + margin, pageHeight / 2 - buttonSize / 2 - margin, 0));
+            var settingTransform = settingNode.addComponent(UITransform);
+            settingTransform.setContentSize(buttonSize, buttonSize);
+            var settingSprite = settingNode.addComponent(Sprite);
+            settingSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var settingButton = settingNode.addComponent(Button);
+            settingButton.interactable = true;
+            var spriteFrame = yield _this3._loadImageSpriteFrame('images/home/setting');
+
+            if (!spriteFrame || !settingNode.isValid) {
+              console.warn('[HomePage] 设置按钮图片加载失败: images/home/setting');
+              return;
+            }
+
+            settingSprite.spriteFrame = spriteFrame;
+          })();
+        }
+
+        _createLogoImage() {
+          var _this4 = this;
+
+          return _asyncToGenerator(function* () {
+            var _pageTransform$conten5;
+
+            var pageTransform = _this4.node.getComponent(UITransform);
+
+            var pageHeight = (_pageTransform$conten5 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten5 : 1334;
+            var logoNode = new Node('Logo');
+            logoNode.layer = _this4.node.layer;
+            logoNode.parent = _this4.node;
+            logoNode.setPosition(new Vec3(0, pageHeight / 2 - 220, 0));
+            var logoTransform = logoNode.addComponent(UITransform);
+            logoTransform.setContentSize(240, 200);
+            var logoSprite = logoNode.addComponent(Sprite);
+            logoSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var spriteFrame = yield _this4._loadImageSpriteFrame('images/home/logo');
+
+            if (!spriteFrame || !logoNode.isValid) {
+              console.warn('[HomePage] Logo 图片加载失败: images/home/logo');
+              return;
+            }
+
+            logoSprite.spriteFrame = spriteFrame;
+          })();
+        }
+
+        _createSideButtons() {
+          var _pageTransform$conten6, _pageTransform$conten7;
+
+          var pageTransform = this.node.getComponent(UITransform);
+          var pageWidth = (_pageTransform$conten6 = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten6 : 750;
+          var pageHeight = (_pageTransform$conten7 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten7 : 1334;
+          var buttonSize = 144;
+          var sideMargin = 56;
+          var horizontalOffset = 66;
+          var leftX = -pageWidth / 2 + sideMargin + buttonSize / 2 - horizontalOffset;
+          var rightX = pageWidth / 2 - sideMargin - buttonSize / 2 + horizontalOffset;
+          var inwardOffset = 16;
+          var adjustedLeftX = leftX + inwardOffset;
+          var adjustedRightX = rightX - inwardOffset;
+          var verticalOffset = 120;
+          var topY = -pageHeight * 0.06 + verticalOffset;
+          var bottomY = -pageHeight * 0.2 + verticalOffset;
+
+          this._createImageButton('RewardButton', 'images/home/reward', new Vec3(adjustedLeftX, topY, 0), buttonSize, '[HomePage] 奖励按钮图片加载失败: images/home/reward');
+
+          this._createImageButton('RankingButton', 'images/home/ranking', new Vec3(adjustedLeftX, bottomY, 0), buttonSize, '[HomePage] 排行按钮图片加载失败: images/home/ranking');
+
+          this._createImageButton('FeedbackButton', 'images/home/feedback', new Vec3(adjustedRightX, topY, 0), buttonSize, '[HomePage] 反馈按钮图片加载失败: images/home/feedback');
+
+          this._createImageButton('CollectButton', 'images/home/collect', new Vec3(adjustedRightX, bottomY, 0), buttonSize, '[HomePage] 收藏按钮图片加载失败: images/home/collect');
+        }
+
+        _createImageButton(nodeName, imagePath, position, size, failMessage) {
+          var _this5 = this;
+
+          return _asyncToGenerator(function* () {
+            var buttonNode = new Node(nodeName);
+            buttonNode.layer = _this5.node.layer;
+            buttonNode.parent = _this5.node;
+            buttonNode.setPosition(position);
+            var buttonTransform = buttonNode.addComponent(UITransform);
+            buttonTransform.setContentSize(size, size);
+            var buttonSprite = buttonNode.addComponent(Sprite);
+            buttonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var button = buttonNode.addComponent(Button);
+            button.interactable = true;
+            var spriteFrame = yield _this5._loadImageSpriteFrame(imagePath);
+
+            if (!spriteFrame || !buttonNode.isValid) {
+              console.warn(failMessage);
+              return;
+            }
+
+            buttonSprite.spriteFrame = spriteFrame;
+          })();
+        }
+
+        _createLevelBadge() {
+          var _this6 = this;
+
+          return _asyncToGenerator(function* () {
+            var _pageTransform$conten8;
+
+            var pageTransform = _this6.node.getComponent(UITransform);
+
+            var pageHeight = (_pageTransform$conten8 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten8 : 1334;
+            var badgeWidth = 314;
+            var badgeHeight = 114;
+            var badgeNode = new Node('LevelBadge');
+            badgeNode.layer = _this6.node.layer;
+            badgeNode.parent = _this6.node;
+            badgeNode.setPosition(new Vec3(0, -pageHeight * 0.34, 0));
+            var badgeTransform = badgeNode.addComponent(UITransform);
+            badgeTransform.setContentSize(badgeWidth, badgeHeight);
+            var badgeSprite = badgeNode.addComponent(Sprite);
+            badgeSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var levelLabelNode = new Node('LevelLabel');
+            levelLabelNode.layer = _this6.node.layer;
+            levelLabelNode.parent = badgeNode;
+            levelLabelNode.setPosition(new Vec3(0, 4, 0));
+            var levelLabelTransform = levelLabelNode.addComponent(UITransform);
+            levelLabelTransform.setContentSize(badgeWidth, badgeHeight);
+            var levelLabel = levelLabelNode.addComponent(Label);
+            levelLabel.string = '第1关';
+            levelLabel.fontSize = 36;
+            levelLabel.color = new Color(128, 77, 44, 255);
+            levelLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
+            levelLabel.verticalAlign = Label.VerticalAlign.CENTER;
+            levelLabel.overflow = Label.Overflow.CLAMP;
+            var spriteFrame = yield _this6._loadImageSpriteFrame('images/home/level_bg');
+
+            if (!spriteFrame || !badgeNode.isValid) {
+              console.warn('[HomePage] 关卡背景图片加载失败: images/home/level_bg');
+              return;
+            }
+
+            badgeSprite.spriteFrame = spriteFrame;
+          })();
+        }
+
+        _createStartGameButton() {
+          var _this7 = this;
+
+          return _asyncToGenerator(function* () {
+            var _pageTransform$conten9;
+
+            var pageTransform = _this7.node.getComponent(UITransform);
+
+            var pageHeight = (_pageTransform$conten9 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten9 : 1334;
+            var buttonWidth = 418;
+            var buttonHeight = 162;
+            var buttonNode = new Node('StartGameButton');
+            buttonNode.layer = _this7.node.layer;
+            buttonNode.parent = _this7.node;
+            buttonNode.setPosition(new Vec3(0, -pageHeight * 0.45 + 40, 0));
+            var buttonTransform = buttonNode.addComponent(UITransform);
+            buttonTransform.setContentSize(buttonWidth, buttonHeight);
+            var buttonSprite = buttonNode.addComponent(Sprite);
+            buttonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var button = buttonNode.addComponent(Button);
+            button.interactable = true;
+            buttonNode.on(Button.EventType.CLICK, _this7._onStartGame, _this7);
+            var labelNode = new Node('Label');
+            labelNode.layer = _this7.node.layer;
+            labelNode.parent = buttonNode;
+            labelNode.setPosition(new Vec3(0, 4, 0));
+            var labelTransform = labelNode.addComponent(UITransform);
+            labelTransform.setContentSize(buttonWidth, buttonHeight);
+            var label = labelNode.addComponent(Label);
+            label.string = '开始游戏';
+            label.fontSize = 42;
+            label.color = new Color(255, 255, 255, 255);
+            label.horizontalAlign = Label.HorizontalAlign.CENTER;
+            label.verticalAlign = Label.VerticalAlign.CENTER;
+            label.overflow = Label.Overflow.CLAMP;
+            var labelOutline = labelNode.addComponent(LabelOutline);
+            labelOutline.color = new Color(144, 88, 19, 255);
+            labelOutline.width = 3;
+            var spriteFrame = yield _this7._loadImageSpriteFrame('images/home/btn_yellow');
+
+            if (!spriteFrame || !buttonNode.isValid) {
+              console.warn('[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow');
+              return;
+            }
+
+            buttonSprite.spriteFrame = spriteFrame;
+          })();
+        }
 
         _onStartGame() {
-          // 播放点击音效
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click'); // 打开游戏页面，传递参数：关卡1
-
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().openPage('prefabs/pages/GamePage', {
             level: 1
           });
         }
-        /**
-         * 点击游戏规则按钮
-         */
 
+        _loadImageSpriteFrame(path) {
+          var _this8 = this;
 
-        _onShowRules() {
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
-          (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
-            error: Error()
-          }), UIManager) : UIManager).getInstance().openPage('prefabs/pages/RulesPage');
+          return _asyncToGenerator(function* () {
+            var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
+              error: Error()
+            }), ResManager) : ResManager).getInstance().loadFirst([path + "/spriteFrame", path], SpriteFrame);
+            if (spriteFrame) return _this8._ensureSpriteFrameSize(spriteFrame);
+            var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
+              error: Error()
+            }), ResManager) : ResManager).getInstance().load(path + "/texture", Texture2D);
+            if (!texture) return null;
+            var generatedSpriteFrame = new SpriteFrame();
+            generatedSpriteFrame.texture = texture;
+            return _this8._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+          })();
         }
-        /**
-         * 页面显示时自动调用
-         */
 
-
-        onShow(params) {
-          console.log('首页显示'); // 更新用户信息显示
-
-          this._updateUserInfoDisplay(); // 播放背景音乐
-
-
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playBGM('sounds/bgm_home');
+        _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
+          var originalSize = spriteFrame.originalSize;
+          var imageWidth = (originalSize == null ? void 0 : originalSize.width) || spriteFrame.width || containerWidth;
+          var imageHeight = (originalSize == null ? void 0 : originalSize.height) || spriteFrame.height || containerHeight;
+          var scale = Math.max(containerWidth / imageWidth, containerHeight / imageHeight);
+          transform.setContentSize(Math.ceil(imageWidth * scale), Math.ceil(imageHeight * scale));
         }
-        /**
-         * 更新用户信息显示
-         */
 
-
-        _updateUserInfoDisplay() {
-          if (!this._userInfoPanel) return;
-          var userSystem = (_crd && UserSystem === void 0 ? (_reportPossibleCrUseOfUserSystem({
-            error: Error()
-          }), UserSystem) : UserSystem).getInstance();
-          var rankSystem = (_crd && RankSystem === void 0 ? (_reportPossibleCrUseOfRankSystem({
-            error: Error()
-          }), RankSystem) : RankSystem).getInstance(); // 更新用户名
-
-          var usernameNode = this._userInfoPanel.getChildByName('UsernameLabel');
-
-          if (usernameNode) {
-            var usernameLabel = usernameNode.getComponent(Label);
-
-            if (usernameLabel) {
-              usernameLabel.string = userSystem.getUsername();
-            }
-          } // 更新段位
-
-
-          var rankNode = this._userInfoPanel.getChildByName('RankLabel');
-
-          if (rankNode) {
-            var rankLabel = rankNode.getComponent(Label);
-
-            if (rankLabel) {
-              rankLabel.string = rankSystem.getCurrentRankDisplayName();
-            }
-          } // 更新星数
-
-
-          var starsNode = this._userInfoPanel.getChildByName('StarsLabel');
-
-          if (starsNode) {
-            var starsLabel = starsNode.getComponent(Label);
-
-            if (starsLabel) {
-              starsLabel.string = "\u2B50 " + userSystem.getStars();
-            }
+        _ensureSpriteFrameSize(spriteFrame, fallbackWidth, fallbackHeight) {
+          if (fallbackWidth === void 0) {
+            fallbackWidth = 0;
           }
-        }
-        /**
-         * 页面隐藏时自动调用
-         */
 
+          if (fallbackHeight === void 0) {
+            fallbackHeight = 0;
+          }
 
-        onHide() {
-          console.log('首页隐藏');
+          var rect = spriteFrame.rect;
+          var originalSize = spriteFrame.originalSize;
+          var width = (rect == null ? void 0 : rect.width) || (originalSize == null ? void 0 : originalSize.width) || spriteFrame.width || fallbackWidth;
+          var height = (rect == null ? void 0 : rect.height) || (originalSize == null ? void 0 : originalSize.height) || spriteFrame.height || fallbackHeight;
+
+          if (width > 0 && height > 0) {
+            if (!rect || !rect.width || !rect.height) {
+              spriteFrame.rect = new Rect(0, 0, width, height);
+            }
+
+            if (!originalSize || !originalSize.width || !originalSize.height) {
+              spriteFrame.originalSize = new Size(width, height);
+            }
+
+            spriteFrame.offset = Vec2.ZERO;
+          }
+
+          return spriteFrame;
         }
 
       }) || _class));

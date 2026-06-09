@@ -1,7 +1,17 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7", "__unresolved_8"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, LoadingPage, UserSystem, _dec, _class, _class2, _crd, ccclass, property, GameMain;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, resources, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, UserSystem, _dec, _dec2, _class, _class2, _descriptor, _class3, _crd, ccclass, property, GameMain;
+
+  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+  function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'transform-class-properties is enabled and runs after the decorators transform.'); }
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "./framework/UIManager", _context.meta, extras);
@@ -31,10 +41,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
     _reporterNs.report("getPlatformGameInfo", "./utils/Constants", _context.meta, extras);
   }
 
-  function _reportPossibleCrUseOfLoadingPage(extras) {
-    _reporterNs.report("LoadingPage", "./pages/LoadingPage", _context.meta, extras);
-  }
-
   function _reportPossibleCrUseOfUserSystem(extras) {
     _reporterNs.report("UserSystem", "./system/UserSystem", _context.meta, extras);
   }
@@ -52,6 +58,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       game = _cc.game;
       UITransform = _cc.UITransform;
       js = _cc.js;
+      Prefab = _cc.Prefab;
+      instantiate = _cc.instantiate;
+      resources = _cc.resources;
     }, function (_unresolved_2) {
       UIManager = _unresolved_2.UIManager;
     }, function (_unresolved_3) {
@@ -66,25 +75,26 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       getCurrentPlatform = _unresolved_7.getCurrentPlatform;
       getPlatformGameInfo = _unresolved_7.getPlatformGameInfo;
     }, function (_unresolved_8) {
-      LoadingPage = _unresolved_8.LoadingPage;
-    }, function (_unresolved_9) {
-      UserSystem = _unresolved_9.UserSystem;
+      UserSystem = _unresolved_8.UserSystem;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "39bb6f/NKBBp698AMS0ih+l", "GameMain", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Node', 'game', 'UITransform', 'js']);
+      __checkObsolete__(['_decorator', 'Component', 'Node', 'game', 'UITransform', 'js', 'Prefab', 'instantiate', 'resources']);
 
       ({
         ccclass,
         property
       } = _decorator);
 
-      _export("GameMain", GameMain = (_dec = ccclass('GameMain'), _dec(_class = (_class2 = class GameMain extends Component {
+      _export("GameMain", GameMain = (_dec = ccclass('GameMain'), _dec2 = property(Prefab), _dec(_class = (_class2 = (_class3 = class GameMain extends Component {
         constructor() {
           super(...arguments);
+
+          _initializerDefineProperty(this, "loadingPagePrefab", _descriptor, this);
+
           this._uiRoot = null;
           this._popupRoot = null;
         }
@@ -160,27 +170,70 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         start() {
-          // 动态创建加载页
-          var loadingPageNode = new Node('LoadingPage');
-          loadingPageNode.layer = this._uiRoot.layer;
-          loadingPageNode.parent = this._uiRoot;
-          var loadingTransform = loadingPageNode.addComponent(UITransform);
+          var _this = this;
 
-          var uiTransform = this._uiRoot.getComponent(UITransform);
+          return _asyncToGenerator(function* () {
+            var _loadingPageNode$getC;
 
-          if (uiTransform) {
-            loadingTransform.setContentSize(uiTransform.contentSize);
-          }
+            var loadingPageNode = yield _this._createLoadingPage();
+            loadingPageNode.layer = _this._uiRoot.layer;
+            loadingPageNode.parent = _this._uiRoot;
+            var loadingTransform = (_loadingPageNode$getC = loadingPageNode.getComponent(UITransform)) != null ? _loadingPageNode$getC : loadingPageNode.addComponent(UITransform);
 
-          loadingPageNode.addComponent(_crd && LoadingPage === void 0 ? (_reportPossibleCrUseOfLoadingPage({
-            error: Error()
-          }), LoadingPage) : LoadingPage);
-          (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
-            error: Error()
-          }), UIManager) : UIManager).getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
+            var uiTransform = _this._uiRoot.getComponent(UITransform);
+
+            if (uiTransform) {
+              loadingTransform.setContentSize(uiTransform.contentSize);
+            }
+
+            (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
+              error: Error()
+            }), UIManager) : UIManager).getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
+          })();
         }
 
-      }, _class2.ui = void 0, _class2.popup = void 0, _class2.sound = void 0, _class2.data = void 0, _class2.http = void 0, _class2)) || _class)); // 兼容场景中使用类名或脚本 UUID 的反序列化查找。
+        _createLoadingPage() {
+          var _this2 = this;
+
+          return _asyncToGenerator(function* () {
+            var _this2$loadingPagePre;
+
+            var prefab = (_this2$loadingPagePre = _this2.loadingPagePrefab) != null ? _this2$loadingPagePre : yield _this2._loadLoadingPrefab();
+
+            if (prefab) {
+              return instantiate(prefab);
+            }
+
+            var loadingPageNode = new Node('LoadingPage');
+            var {
+              LoadingPage
+            } = yield _context.import("__unresolved_8");
+            loadingPageNode.addComponent(LoadingPage);
+            return loadingPageNode;
+          })();
+        }
+
+        _loadLoadingPrefab() {
+          return new Promise(resolve => {
+            resources.load('prefabs/pages/LoadingPage', Prefab, (error, prefab) => {
+              if (error || !prefab) {
+                resolve(null);
+                return;
+              }
+
+              resolve(prefab);
+            });
+          });
+        }
+
+      }, _class3.ui = void 0, _class3.popup = void 0, _class3.sound = void 0, _class3.data = void 0, _class3.http = void 0, _class3), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "loadingPagePrefab", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function initializer() {
+          return null;
+        }
+      })), _class2)) || _class)); // 兼容场景中使用类名或脚本 UUID 的反序列化查找。
 
 
       js.setClassAlias(GameMain, 'GameMain');

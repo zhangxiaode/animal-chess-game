@@ -1,7 +1,13 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Color, Component, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _class, _crd, ccclass, LoadingPage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Color, Component, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _crd, ccclass, property, LoadingPage;
+
+  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+
+  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'transform-class-properties is enabled and runs after the decorators transform.'); }
 
   function _reportPossibleCrUseOfResManager(extras) {
     _reporterNs.report("ResManager", "../framework/ResManager", _context.meta, extras);
@@ -44,42 +50,66 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       __checkObsolete__(['_decorator', 'Color', 'Component', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
-        ccclass
+        ccclass,
+        property
       } = _decorator);
 
-      _export("LoadingPage", LoadingPage = (_dec = ccclass('LoadingPage'), _dec(_class = class LoadingPage extends Component {
+      _export("LoadingPage", LoadingPage = (_dec = ccclass('LoadingPage'), _dec2 = property(Sprite), _dec3 = property(Sprite), _dec4 = property(Sprite), _dec5 = property(Sprite), _dec6 = property(Sprite), _dec7 = property(Sprite), _dec8 = property(Sprite), _dec9 = property(Sprite), _dec10 = property(Label), _dec11 = property(Label), _dec12 = property(Label), _dec13 = property(SpriteFrame), _dec14 = property(SpriteFrame), _dec15 = property(SpriteFrame), _dec16 = property(SpriteFrame), _dec17 = property(SpriteFrame), _dec18 = property(SpriteFrame), _dec19 = property(SpriteFrame), _dec20 = property(SpriteFrame), _dec(_class = (_class2 = class LoadingPage extends Component {
         constructor(...args) {
           super(...args);
+
+          _initializerDefineProperty(this, "backgroundSprite", _descriptor, this);
+
+          _initializerDefineProperty(this, "lionSprite", _descriptor2, this);
+
+          _initializerDefineProperty(this, "elephantSprite", _descriptor3, this);
+
+          _initializerDefineProperty(this, "tigerSprite", _descriptor4, this);
+
+          _initializerDefineProperty(this, "logoSprite", _descriptor5, this);
+
+          _initializerDefineProperty(this, "dragonSprite", _descriptor6, this);
+
+          _initializerDefineProperty(this, "progressBackgroundSprite", _descriptor7, this);
+
+          _initializerDefineProperty(this, "progressActivedSprite", _descriptor8, this);
+
+          _initializerDefineProperty(this, "subtitleLabel", _descriptor9, this);
+
+          _initializerDefineProperty(this, "enterTipLabel", _descriptor10, this);
+
+          _initializerDefineProperty(this, "progressLabel", _descriptor11, this);
+
+          _initializerDefineProperty(this, "backgroundFrame", _descriptor12, this);
+
+          _initializerDefineProperty(this, "lionFrame", _descriptor13, this);
+
+          _initializerDefineProperty(this, "elephantFrame", _descriptor14, this);
+
+          _initializerDefineProperty(this, "tigerFrame", _descriptor15, this);
+
+          _initializerDefineProperty(this, "logoFrame", _descriptor16, this);
+
+          _initializerDefineProperty(this, "dragonFrame", _descriptor17, this);
+
+          _initializerDefineProperty(this, "progressBackgroundFrame", _descriptor18, this);
+
+          _initializerDefineProperty(this, "progressActivedFrame", _descriptor19, this);
+
           this._hasEnteredHome = false;
-          this._activeProgressSprite = null;
-          this._progressLabel = null;
           this._loadedAssetCount = 0;
           this._loadingStartTime = 0;
           this._progress = 0;
           this._loadingAssetTotal = 8;
           this._minLoadingSeconds = 3;
-          this._animalConfigs = [{
-            name: 'Lion',
-            path: 'images/loading/lion',
-            size: 88,
-            x: -108
-          }, {
-            name: 'Elephant',
-            path: 'images/loading/elephant',
-            size: 120,
-            x: 0
-          }, {
-            name: 'Tiger',
-            path: 'images/loading/tiger',
-            size: 88,
-            x: 108
-          }];
         }
 
         start() {
           if (this.node.parent) {
             this.node.layer = this.node.parent.layer;
           }
+
+          this._bindPrefabReferences();
 
           this._startLoading();
         }
@@ -90,14 +120,15 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
         async _startLoading() {
           this._loadingStartTime = Date.now();
+          this._loadedAssetCount = 0;
 
           this._setLoadingProgress(0);
 
-          this._createSubtitle();
+          this._ensureTextContent();
 
-          this._createEnterTip();
+          this._ensureStaticLayout();
 
-          await Promise.all([this._createBackground(), this._createAnimalImages(), this._createLogoImage(), this._createDragonImage(), this._createProgressBar()]);
+          await this._ensureImageContent();
 
           this._setLoadingProgress(1);
 
@@ -106,31 +137,246 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._enterHome();
         }
 
-        async _createBackground() {
-          var _pageTransform$conten, _pageTransform$conten2;
+        _bindPrefabReferences() {
+          var _this$backgroundSprit, _this$lionSprite, _this$elephantSprite, _this$tigerSprite, _this$logoSprite, _this$dragonSprite, _this$progressBackgro, _this$progressActived, _this$subtitleLabel, _this$enterTipLabel, _this$progressLabel;
 
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageWidth = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten : 750;
-          const pageHeight = (_pageTransform$conten2 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten2 : 1334;
-          const backgroundNode = new Node('Background');
-          backgroundNode.layer = this.node.layer;
-          backgroundNode.parent = this.node;
-          backgroundNode.setPosition(Vec3.ZERO);
-          backgroundNode.setSiblingIndex(0);
-          const backgroundTransform = backgroundNode.addComponent(UITransform);
-          backgroundTransform.setContentSize(pageWidth, pageHeight);
-          const backgroundSprite = backgroundNode.addComponent(Sprite);
-          backgroundSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadBackgroundSpriteFrame();
+          (_this$backgroundSprit = this.backgroundSprite) != null ? _this$backgroundSprit : this.backgroundSprite = this._findSprite('Background');
+          (_this$lionSprite = this.lionSprite) != null ? _this$lionSprite : this.lionSprite = this._findSprite('Lion');
+          (_this$elephantSprite = this.elephantSprite) != null ? _this$elephantSprite : this.elephantSprite = this._findSprite('Elephant');
+          (_this$tigerSprite = this.tigerSprite) != null ? _this$tigerSprite : this.tigerSprite = this._findSprite('Tiger');
+          (_this$logoSprite = this.logoSprite) != null ? _this$logoSprite : this.logoSprite = this._findSprite('Logo');
+          (_this$dragonSprite = this.dragonSprite) != null ? _this$dragonSprite : this.dragonSprite = this._findSprite('Dragon');
+          (_this$progressBackgro = this.progressBackgroundSprite) != null ? _this$progressBackgro : this.progressBackgroundSprite = this._findSprite('ProgressBar/ProgressBackground');
+          (_this$progressActived = this.progressActivedSprite) != null ? _this$progressActived : this.progressActivedSprite = this._findSprite('ProgressBar/ProgressActived');
+          (_this$subtitleLabel = this.subtitleLabel) != null ? _this$subtitleLabel : this.subtitleLabel = this._findLabel('Subtitle');
+          (_this$enterTipLabel = this.enterTipLabel) != null ? _this$enterTipLabel : this.enterTipLabel = this._findLabel('EnterTip');
+          (_this$progressLabel = this.progressLabel) != null ? _this$progressLabel : this.progressLabel = this._findLabel('ProgressBar/ProgressPercent');
+        }
 
-          if (!spriteFrame || !backgroundNode.isValid) {
-            console.warn('[LoadingPage] 背景图加载失败: images/loading/bg');
+        _findSprite(path) {
+          var _this$_findNode$getCo, _this$_findNode;
+
+          return (_this$_findNode$getCo = (_this$_findNode = this._findNode(path)) == null ? void 0 : _this$_findNode.getComponent(Sprite)) != null ? _this$_findNode$getCo : null;
+        }
+
+        _findLabel(path) {
+          var _this$_findNode$getCo2, _this$_findNode2;
+
+          return (_this$_findNode$getCo2 = (_this$_findNode2 = this._findNode(path)) == null ? void 0 : _this$_findNode2.getComponent(Label)) != null ? _this$_findNode$getCo2 : null;
+        }
+
+        _findNode(path) {
+          const parts = path.split('/');
+          let current = this.node;
+
+          for (const part of parts) {
+            var _current$getChildByNa, _current;
+
+            current = (_current$getChildByNa = (_current = current) == null ? void 0 : _current.getChildByName(part)) != null ? _current$getChildByNa : null;
+            if (!current) return null;
+          }
+
+          return current;
+        }
+
+        _ensureTextContent() {
+          if (!this.subtitleLabel) {
+            this.subtitleLabel = this._createLabel('Subtitle', '经典策略 · 趣味对战', new Vec3(0, this._pageHeight / 2 - 540, 0), 360, 42, 30);
+          }
+
+          if (!this.enterTipLabel) {
+            this.enterTipLabel = this._createLabel('EnterTip', '正在进入游戏...', new Vec3(0, this._pageHeight / 2 - 970, 0), 360, 42, 28);
+          }
+
+          this.subtitleLabel.string = '经典策略 · 趣味对战';
+          this.enterTipLabel.string = '正在进入游戏...';
+        }
+
+        _ensureStaticLayout() {
+          var _this$backgroundSprit2, _this$lionSprite2, _this$elephantSprite2, _this$tigerSprite2, _this$logoSprite2, _this$dragonSprite2, _this$progressBackgro2, _this$progressActived2;
+
+          this._syncNodeSizeAndPosition((_this$backgroundSprit2 = this.backgroundSprite) == null ? void 0 : _this$backgroundSprit2.node, this._pageWidth, this._pageHeight, Vec3.ZERO, 0);
+
+          this._syncNodeSizeAndPosition((_this$lionSprite2 = this.lionSprite) == null ? void 0 : _this$lionSprite2.node, 88, 88, new Vec3(-108, this._pageHeight / 2 - 150, 0));
+
+          this._syncNodeSizeAndPosition((_this$elephantSprite2 = this.elephantSprite) == null ? void 0 : _this$elephantSprite2.node, 120, 120, new Vec3(0, this._pageHeight / 2 - 150, 0));
+
+          this._syncNodeSizeAndPosition((_this$tigerSprite2 = this.tigerSprite) == null ? void 0 : _this$tigerSprite2.node, 88, 88, new Vec3(108, this._pageHeight / 2 - 150, 0));
+
+          this._syncNodeSizeAndPosition((_this$logoSprite2 = this.logoSprite) == null ? void 0 : _this$logoSprite2.node, 240, 200, new Vec3(0, this._pageHeight / 2 - 420, 0));
+
+          this._syncNodeSizeAndPosition((_this$dragonSprite2 = this.dragonSprite) == null ? void 0 : _this$dragonSprite2.node, 320, 320, new Vec3(0, this._pageHeight / 2 - 770, 0));
+
+          this._syncNodeSizeAndPosition((_this$progressBackgro2 = this.progressBackgroundSprite) == null ? void 0 : _this$progressBackgro2.node, 310, 16, Vec3.ZERO);
+
+          this._syncNodeSizeAndPosition((_this$progressActived2 = this.progressActivedSprite) == null ? void 0 : _this$progressActived2.node, 310, 16, Vec3.ZERO);
+        }
+
+        async _ensureImageContent() {
+          var _this$backgroundSprit3, _this$lionSprite3, _this$elephantSprite3, _this$tigerSprite3, _this$logoSprite3, _this$dragonSprite3;
+
+          (_this$backgroundSprit3 = this.backgroundSprite) != null ? _this$backgroundSprit3 : this.backgroundSprite = this._createImage('Background', this._pageWidth, this._pageHeight, Vec3.ZERO, 0);
+          (_this$lionSprite3 = this.lionSprite) != null ? _this$lionSprite3 : this.lionSprite = this._createImage('Lion', 88, 88, new Vec3(-108, this._pageHeight / 2 - 150, 0));
+          (_this$elephantSprite3 = this.elephantSprite) != null ? _this$elephantSprite3 : this.elephantSprite = this._createImage('Elephant', 120, 120, new Vec3(0, this._pageHeight / 2 - 150, 0));
+          (_this$tigerSprite3 = this.tigerSprite) != null ? _this$tigerSprite3 : this.tigerSprite = this._createImage('Tiger', 88, 88, new Vec3(108, this._pageHeight / 2 - 150, 0));
+          (_this$logoSprite3 = this.logoSprite) != null ? _this$logoSprite3 : this.logoSprite = this._createImage('Logo', 240, 200, new Vec3(0, this._pageHeight / 2 - 420, 0));
+          (_this$dragonSprite3 = this.dragonSprite) != null ? _this$dragonSprite3 : this.dragonSprite = this._createImage('Dragon', 320, 320, new Vec3(0, this._pageHeight / 2 - 770, 0));
+
+          this._ensureProgressBar();
+
+          const imageConfigs = [{
+            name: 'Background',
+            path: 'images/loading/bg',
+            sprite: this.backgroundSprite,
+            frame: this.backgroundFrame
+          }, {
+            name: 'Lion',
+            path: 'images/loading/lion',
+            sprite: this.lionSprite,
+            frame: this.lionFrame
+          }, {
+            name: 'Elephant',
+            path: 'images/loading/elephant',
+            sprite: this.elephantSprite,
+            frame: this.elephantFrame
+          }, {
+            name: 'Tiger',
+            path: 'images/loading/tiger',
+            sprite: this.tigerSprite,
+            frame: this.tigerFrame
+          }, {
+            name: 'Logo',
+            path: 'images/loading/logo',
+            sprite: this.logoSprite,
+            frame: this.logoFrame
+          }, {
+            name: 'Dragon',
+            path: 'images/loading/dragon',
+            sprite: this.dragonSprite,
+            frame: this.dragonFrame
+          }, {
+            name: 'ProgressBackground',
+            path: 'images/loading/loading',
+            sprite: this.progressBackgroundSprite,
+            frame: this.progressBackgroundFrame
+          }, {
+            name: 'ProgressActived',
+            path: 'images/loading/loading-actived',
+            sprite: this.progressActivedSprite,
+            frame: this.progressActivedFrame
+          }];
+          await Promise.all(imageConfigs.map(config => this._applyImageConfig(config)));
+        }
+
+        _ensureProgressBar() {
+          var _this$progressBackgro3, _this$progressActived3;
+
+          let progressRoot = this._findNode('ProgressBar');
+
+          if (!progressRoot) {
+            progressRoot = new Node('ProgressBar');
+            progressRoot.layer = this.node.layer;
+            progressRoot.parent = this.node;
+            progressRoot.setPosition(new Vec3(0, this._pageHeight / 2 - 1060, 0));
+            progressRoot.addComponent(UITransform).setContentSize(310, 16);
+          }
+
+          (_this$progressBackgro3 = this.progressBackgroundSprite) != null ? _this$progressBackgro3 : this.progressBackgroundSprite = this._createImage('ProgressBackground', 310, 16, Vec3.ZERO, undefined, progressRoot);
+          (_this$progressActived3 = this.progressActivedSprite) != null ? _this$progressActived3 : this.progressActivedSprite = this._createImage('ProgressActived', 310, 16, Vec3.ZERO, undefined, progressRoot);
+
+          if (!this.progressLabel) {
+            this.progressLabel = this._createLabel('ProgressPercent', this._getProgressText(), new Vec3(0, -42, 0), 160, 36, 26, progressRoot);
+          }
+
+          if (!this._findNode('ProgressBar/FirstLoadTip')) {
+            const firstLoadTipLabel = this._createLabel('FirstLoadTip', '首次加载可能需要一些时间', new Vec3(0, -90, 0), 360, 36, 24, progressRoot);
+
+            firstLoadTipLabel.color = new Color(255, 255, 255, 128);
+          }
+
+          this._ensureStaticLayout();
+        }
+
+        async _applyImageConfig(config) {
+          var _config$frame;
+
+          const sprite = config.sprite;
+
+          if (!sprite) {
+            this._increaseLoadingProgress();
+
             return;
           }
 
-          backgroundSprite.spriteFrame = spriteFrame;
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const spriteFrame = (_config$frame = config.frame) != null ? _config$frame : await this._loadImageSpriteFrame(config.path);
 
-          this._setCoverSize(backgroundTransform, spriteFrame, pageWidth, pageHeight);
+          this._increaseLoadingProgress();
+
+          if (!spriteFrame || !sprite.node.isValid) {
+            console.warn(`[LoadingPage] 图片加载失败: ${config.path}`);
+            return;
+          }
+
+          sprite.spriteFrame = spriteFrame;
+
+          if (config.name === 'Background') {
+            const transform = sprite.node.getComponent(UITransform);
+
+            if (transform) {
+              this._setCoverSize(transform, spriteFrame, this._pageWidth, this._pageHeight);
+            }
+          }
+
+          if (config.name === 'ProgressActived') {
+            this._configureProgressFill(sprite);
+          }
+        }
+
+        _createImage(name, width, height, position, siblingIndex, parent = this.node) {
+          const imageNode = new Node(name);
+          imageNode.layer = this.node.layer;
+          imageNode.parent = parent;
+          imageNode.setPosition(position);
+
+          if (siblingIndex !== undefined) {
+            imageNode.setSiblingIndex(siblingIndex);
+          }
+
+          imageNode.addComponent(UITransform).setContentSize(width, height);
+          const sprite = imageNode.addComponent(Sprite);
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          return sprite;
+        }
+
+        _createLabel(name, text, position, width, height, fontSize, parent = this.node) {
+          const labelNode = new Node(name);
+          labelNode.layer = this.node.layer;
+          labelNode.parent = parent;
+          labelNode.setPosition(position);
+          labelNode.addComponent(UITransform).setContentSize(width, height);
+          const label = labelNode.addComponent(Label);
+          label.string = text;
+          label.fontSize = fontSize;
+          label.color = new Color(255, 255, 255, 255);
+          label.horizontalAlign = Label.HorizontalAlign.CENTER;
+          label.verticalAlign = Label.VerticalAlign.CENTER;
+          label.overflow = Label.Overflow.CLAMP;
+          return label;
+        }
+
+        _syncNodeSizeAndPosition(node, width, height, position, siblingIndex) {
+          var _node$getComponent;
+
+          if (!node) return;
+          node.layer = this.node.layer;
+          node.setPosition(position);
+          const transform = (_node$getComponent = node.getComponent(UITransform)) != null ? _node$getComponent : node.addComponent(UITransform);
+          transform.setContentSize(width, height);
+
+          if (siblingIndex !== undefined) {
+            node.setSiblingIndex(siblingIndex);
+          }
         }
 
         _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
@@ -139,192 +385,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           const imageHeight = (originalSize == null ? void 0 : originalSize.height) || spriteFrame.height || containerHeight;
           const scale = Math.max(containerWidth / imageWidth, containerHeight / imageHeight);
           transform.setContentSize(Math.ceil(imageWidth * scale), Math.ceil(imageHeight * scale));
-        }
-
-        async _loadBackgroundSpriteFrame() {
-          return this._loadTrackedImageSpriteFrame('images/loading/bg');
-        }
-
-        async _createAnimalImages() {
-          var _pageTransform$conten3;
-
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageHeight = (_pageTransform$conten3 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten3 : 1334;
-          const centerY = pageHeight / 2 - 150;
-
-          for (const config of this._animalConfigs) {
-            const animalNode = new Node(config.name);
-            animalNode.layer = this.node.layer;
-            animalNode.parent = this.node;
-            animalNode.setPosition(new Vec3(config.x, centerY, 0));
-            const animalTransform = animalNode.addComponent(UITransform);
-            animalTransform.setContentSize(config.size, config.size);
-            const animalSprite = animalNode.addComponent(Sprite);
-            animalSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-            const spriteFrame = await this._loadTrackedImageSpriteFrame(config.path);
-
-            if (!spriteFrame || !animalNode.isValid) {
-              console.warn(`[LoadingPage] 图片加载失败: ${config.path}`);
-              continue;
-            }
-
-            animalSprite.spriteFrame = spriteFrame;
-          }
-        }
-
-        async _createLogoImage() {
-          var _pageTransform$conten4;
-
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageHeight = (_pageTransform$conten4 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten4 : 1334;
-          const logoNode = new Node('Logo');
-          logoNode.layer = this.node.layer;
-          logoNode.parent = this.node;
-          logoNode.setPosition(new Vec3(0, pageHeight / 2 - 420, 0));
-          const logoTransform = logoNode.addComponent(UITransform);
-          logoTransform.setContentSize(240, 200);
-          const logoSprite = logoNode.addComponent(Sprite);
-          logoSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadTrackedImageSpriteFrame('images/loading/logo');
-
-          if (!spriteFrame || !logoNode.isValid) {
-            console.warn('[LoadingPage] 图片加载失败: images/loading/logo');
-            return;
-          }
-
-          logoSprite.spriteFrame = spriteFrame;
-        }
-
-        _createSubtitle() {
-          var _pageTransform$conten5;
-
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageHeight = (_pageTransform$conten5 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten5 : 1334;
-          const subtitleNode = new Node('Subtitle');
-          subtitleNode.layer = this.node.layer;
-          subtitleNode.parent = this.node;
-          subtitleNode.setPosition(new Vec3(0, pageHeight / 2 - 540, 0));
-          const subtitleTransform = subtitleNode.addComponent(UITransform);
-          subtitleTransform.setContentSize(360, 42);
-          const subtitleLabel = subtitleNode.addComponent(Label);
-          subtitleLabel.string = '经典策略 · 趣味对战';
-          subtitleLabel.fontSize = 30;
-          subtitleLabel.color = new Color(255, 255, 255, 255);
-          subtitleLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          subtitleLabel.verticalAlign = Label.VerticalAlign.CENTER;
-          subtitleLabel.overflow = Label.Overflow.CLAMP;
-        }
-
-        async _createDragonImage() {
-          var _pageTransform$conten6;
-
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageHeight = (_pageTransform$conten6 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten6 : 1334;
-          const dragonNode = new Node('Dragon');
-          dragonNode.layer = this.node.layer;
-          dragonNode.parent = this.node;
-          dragonNode.setPosition(new Vec3(0, pageHeight / 2 - 770, 0));
-          const dragonTransform = dragonNode.addComponent(UITransform);
-          dragonTransform.setContentSize(320, 320);
-          const dragonSprite = dragonNode.addComponent(Sprite);
-          dragonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadTrackedImageSpriteFrame('images/loading/dragon');
-
-          if (!spriteFrame || !dragonNode.isValid) {
-            console.warn('[LoadingPage] 图片加载失败: images/loading/dragon');
-            return;
-          }
-
-          dragonSprite.spriteFrame = spriteFrame;
-        }
-
-        async _createProgressBar() {
-          var _pageTransform$conten7;
-
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageHeight = (_pageTransform$conten7 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten7 : 1334;
-          const progressWidth = 310;
-          const progressHeight = 16;
-          const progressRoot = new Node('ProgressBar');
-          progressRoot.layer = this.node.layer;
-          progressRoot.parent = this.node;
-          progressRoot.setPosition(new Vec3(0, pageHeight / 2 - 1060, 0));
-          progressRoot.addComponent(UITransform).setContentSize(progressWidth, progressHeight);
-          const backgroundNode = new Node('ProgressBackground');
-          backgroundNode.layer = this.node.layer;
-          backgroundNode.parent = progressRoot;
-          backgroundNode.setPosition(Vec3.ZERO);
-          backgroundNode.addComponent(UITransform).setContentSize(progressWidth, progressHeight);
-          const backgroundSprite = backgroundNode.addComponent(Sprite);
-          backgroundSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const activeNode = new Node('ProgressActived');
-          activeNode.layer = this.node.layer;
-          activeNode.parent = progressRoot;
-          activeNode.setPosition(Vec3.ZERO);
-          activeNode.addComponent(UITransform).setContentSize(progressWidth, progressHeight);
-          this._activeProgressSprite = activeNode.addComponent(Sprite);
-          this._activeProgressSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          this._activeProgressSprite.type = Sprite.Type.FILLED;
-          this._activeProgressSprite.fillType = Sprite.FillType.HORIZONTAL;
-          const progressLabelNode = new Node('ProgressPercent');
-          progressLabelNode.layer = this.node.layer;
-          progressLabelNode.parent = progressRoot;
-          progressLabelNode.setPosition(new Vec3(0, -42, 0));
-          progressLabelNode.addComponent(UITransform).setContentSize(160, 36);
-          this._progressLabel = progressLabelNode.addComponent(Label);
-          this._progressLabel.string = this._getProgressText();
-          this._progressLabel.fontSize = 26;
-          this._progressLabel.color = new Color(255, 255, 255, 255);
-          this._progressLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          this._progressLabel.verticalAlign = Label.VerticalAlign.CENTER;
-          this._progressLabel.overflow = Label.Overflow.CLAMP;
-          const firstLoadTipNode = new Node('FirstLoadTip');
-          firstLoadTipNode.layer = this.node.layer;
-          firstLoadTipNode.parent = progressRoot;
-          firstLoadTipNode.setPosition(new Vec3(0, -90, 0));
-          firstLoadTipNode.addComponent(UITransform).setContentSize(360, 36);
-          const firstLoadTipLabel = firstLoadTipNode.addComponent(Label);
-          firstLoadTipLabel.string = '首次加载可能需要一些时间';
-          firstLoadTipLabel.fontSize = 24;
-          firstLoadTipLabel.color = new Color(255, 255, 255, 128);
-          firstLoadTipLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          firstLoadTipLabel.verticalAlign = Label.VerticalAlign.CENTER;
-          firstLoadTipLabel.overflow = Label.Overflow.CLAMP;
-          const [backgroundFrame, activeFrame] = await Promise.all([this._loadTrackedImageSpriteFrame('images/loading/loading'), this._loadTrackedImageSpriteFrame('images/loading/loading-actived')]);
-
-          if (backgroundFrame && backgroundNode.isValid) {
-            backgroundSprite.spriteFrame = backgroundFrame;
-          } else {
-            console.warn('[LoadingPage] 图片加载失败: images/loading/loading');
-          }
-
-          if (activeFrame && activeNode.isValid && this._activeProgressSprite) {
-            this._activeProgressSprite.spriteFrame = activeFrame;
-            this._activeProgressSprite.fillStart = 0;
-            this._activeProgressSprite.fillRange = this._progress;
-          } else {
-            console.warn('[LoadingPage] 图片加载失败: images/loading/loading-actived');
-          }
-        }
-
-        _createEnterTip() {
-          var _pageTransform$conten8;
-
-          const pageTransform = this.node.getComponent(UITransform);
-          const pageHeight = (_pageTransform$conten8 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten8 : 1334;
-          const tipNode = new Node('EnterTip');
-          tipNode.layer = this.node.layer;
-          tipNode.parent = this.node;
-          tipNode.setPosition(new Vec3(0, pageHeight / 2 - 970, 0));
-          const tipTransform = tipNode.addComponent(UITransform);
-          tipTransform.setContentSize(360, 42);
-          const tipLabel = tipNode.addComponent(Label);
-          tipLabel.string = '正在进入游戏...';
-          tipLabel.fontSize = 28;
-          tipLabel.color = new Color(255, 255, 255, 255);
-          tipLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          tipLabel.verticalAlign = Label.VerticalAlign.CENTER;
-          tipLabel.overflow = Label.Overflow.CLAMP;
         }
 
         async _loadImageSpriteFrame(path) {
@@ -362,27 +422,32 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           return spriteFrame;
         }
 
-        async _loadTrackedImageSpriteFrame(path) {
-          try {
-            return await this._loadImageSpriteFrame(path);
-          } finally {
-            this._loadedAssetCount++;
+        _increaseLoadingProgress() {
+          this._loadedAssetCount++;
 
-            this._setLoadingProgress(this._loadedAssetCount / this._loadingAssetTotal);
-          }
+          this._setLoadingProgress(this._loadedAssetCount / this._loadingAssetTotal);
+        }
+
+        _configureProgressFill(sprite) {
+          if (!sprite.spriteFrame) return;
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          sprite.type = Sprite.Type.FILLED;
+          sprite.fillType = Sprite.FillType.HORIZONTAL;
+          sprite.fillStart = 0;
+          sprite.fillRange = this._progress;
         }
 
         _setLoadingProgress(value) {
-          var _this$_activeProgress;
+          var _this$progressActived4;
 
           this._progress = Math.max(0, Math.min(1, value));
 
-          if ((_this$_activeProgress = this._activeProgressSprite) != null && _this$_activeProgress.spriteFrame) {
-            this._activeProgressSprite.fillRange = this._progress;
+          if ((_this$progressActived4 = this.progressActivedSprite) != null && _this$progressActived4.spriteFrame) {
+            this.progressActivedSprite.fillRange = this._progress;
           }
 
-          if (this._progressLabel) {
-            this._progressLabel.string = this._getProgressText();
+          if (this.progressLabel) {
+            this.progressLabel.string = this._getProgressText();
           }
         }
 
@@ -407,7 +472,152 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           }), UIManager) : UIManager).getInstance().openPage('HomePage');
         }
 
-      }) || _class));
+        get _pageWidth() {
+          var _this$node$getCompone, _this$node$getCompone2;
+
+          return (_this$node$getCompone = (_this$node$getCompone2 = this.node.getComponent(UITransform)) == null ? void 0 : _this$node$getCompone2.contentSize.width) != null ? _this$node$getCompone : 750;
+        }
+
+        get _pageHeight() {
+          var _this$node$getCompone3, _this$node$getCompone4;
+
+          return (_this$node$getCompone3 = (_this$node$getCompone4 = this.node.getComponent(UITransform)) == null ? void 0 : _this$node$getCompone4.contentSize.height) != null ? _this$node$getCompone3 : 1334;
+        }
+
+      }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "backgroundSprite", [_dec2], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "lionSprite", [_dec3], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "elephantSprite", [_dec4], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, "tigerSprite", [_dec5], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, "logoSprite", [_dec6], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, "dragonSprite", [_dec7], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, "progressBackgroundSprite", [_dec8], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, "progressActivedSprite", [_dec9], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, "subtitleLabel", [_dec10], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, "enterTipLabel", [_dec11], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, "progressLabel", [_dec12], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, "backgroundFrame", [_dec13], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, "lionFrame", [_dec14], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, "elephantFrame", [_dec15], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, "tigerFrame", [_dec16], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, "logoFrame", [_dec17], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, "dragonFrame", [_dec18], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, "progressBackgroundFrame", [_dec19], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      }), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, "progressActivedFrame", [_dec20], {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        initializer: function () {
+          return null;
+        }
+      })), _class2)) || _class));
 
       _cclegacy._RF.pop();
 
