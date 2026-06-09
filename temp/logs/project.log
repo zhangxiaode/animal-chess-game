@@ -62,3 +62,8 @@
     at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
     at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
     at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)
+6-9-2026 20:41:55 - warn: Object has been destroyedTypeError: Object has been destroyed
+    at WebContents._.send (node:electron/js2c/browser_init:2:74130)
+    at WindowSender.immediately (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@base/electron-base-ipc/dist/sender.ccc:1:2082)
+    at Immediate._onImmediate (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@base/electron-base-ipc/dist/sender.ccc:1:2008)
+    at processImmediate (node:internal/timers:478:21)
