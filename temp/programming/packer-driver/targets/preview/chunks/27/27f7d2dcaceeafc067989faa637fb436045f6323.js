@@ -189,17 +189,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           var pageTransform = this.node.getComponent(UITransform);
           var pageWidth = (_pageTransform$conten6 = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten6 : 750;
           var pageHeight = (_pageTransform$conten7 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten7 : 1334;
-          var buttonSize = 144;
+          var buttonSize = 120;
           var sideMargin = 56;
           var horizontalOffset = 66;
           var leftX = -pageWidth / 2 + sideMargin + buttonSize / 2 - horizontalOffset;
           var rightX = pageWidth / 2 - sideMargin - buttonSize / 2 + horizontalOffset;
-          var inwardOffset = 16;
+          var inwardOffset = 36;
           var adjustedLeftX = leftX + inwardOffset;
           var adjustedRightX = rightX - inwardOffset;
           var verticalOffset = 120;
           var topY = -pageHeight * 0.06 + verticalOffset;
-          var bottomY = -pageHeight * 0.2 + verticalOffset;
+          var bottomY = -pageHeight * 0.2 + verticalOffset + 34;
 
           this._createImageButton('RewardButton', 'images/home/reward', new Vec3(adjustedLeftX, topY, 0), buttonSize, '[HomePage] 奖励按钮图片加载失败: images/home/reward');
 

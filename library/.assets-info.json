@@ -102,7 +102,7 @@
       "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
     },
     "scripts/pages/HomePage.ts": {
-      "time": 1781003113253.4111,
+      "time": 1781008802403.0315,
       "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
     },
     "scripts/popups/SettingPopup.ts": {
@@ -280,11 +280,11 @@
       "time": 1780641877679.9514
     },
     "resources/images/home": {
-      "time": 1781002911098.4983,
+      "time": 1781008133595.7192,
       "uuid": "235619ea-e160-4739-a5e4-44c03af8b10f"
     },
     "resources/images/loading": {
-      "time": 1780921705254.3567,
+      "time": 1781007822205.4028,
       "uuid": "c6501726-9ed2-48ec-8957-1c9145f24f25"
     },
     "resources/images/play": {
@@ -300,7 +300,7 @@
       "uuid": "627cc9c3-97ab-4897-8ccd-4762cf4367f3"
     },
     "resources/images/loading/dragon.png": {
-      "time": 1780921685324.4844,
+      "time": 1781007822204.3594,
       "uuid": "9098b182-0e8c-44a2-9242-5b7f5a44ca2a"
     },
     "resources/images/loading/elephant.png": {
@@ -328,7 +328,7 @@
       "uuid": "bf4a1997-15f6-4f57-917a-e8913033e8a3"
     },
     "resources/images/loading/dragon.png.meta": {
-      "time": 1780921756754.8875
+      "time": 1781007556454.968
     },
     "resources/images/loading/loading-actived.png.meta": {
       "time": 1780914799325.2097
@@ -364,10 +364,10 @@
       "time": 1780996751465.6194
     },
     "resources/images/home/collect.png.meta": {
-      "time": 1780996751464.5554
+      "time": 1781007098760.4502
     },
     "resources/images/home/feedback.png.meta": {
-      "time": 1780996751468.6355
+      "time": 1781007098759.9124
     },
     "resources/images/home/level_bg.png.meta": {
       "time": 1780996751470.2124
@@ -376,10 +376,10 @@
       "time": 1780996751470.9841
     },
     "resources/images/home/ranking.png.meta": {
-      "time": 1780996751471.2646
+      "time": 1781007098761.3757
     },
     "resources/images/home/reward.png.meta": {
-      "time": 1780996751475.9727
+      "time": 1781007098761.134
     },
     "resources/images/home/setting.png.meta": {
       "time": 1780996751477.1135
@@ -392,7 +392,7 @@
       "uuid": "bbe0d7e6-744c-46e7-b139-0f2508b10e3b"
     },
     "resources/images/home/collect.png": {
-      "time": 1780996659509.288,
+      "time": 1781007630350.1384,
       "uuid": "05066383-4d40-498d-b904-bf49859b8694"
     },
     "resources/images/home/btn_green.png": {
@@ -404,11 +404,11 @@
       "uuid": "7935556c-18e1-4420-b3a8-10df61bc2de3"
     },
     "resources/images/home/bg.png": {
-      "time": 1780996664333.7837,
+      "time": 1781008117189.8398,
       "uuid": "7901ca3a-8aac-4e8a-a0cb-25dad591b541"
     },
     "resources/images/home/feedback.png": {
-      "time": 1780996666326.1167,
+      "time": 1781007085002.6995,
       "uuid": "bba26ea8-51c7-472c-81df-9eae06c7b2f2"
     },
     "resources/images/home/level_bg.png": {
@@ -420,15 +420,15 @@
       "uuid": "298967ba-a61e-4f9c-971a-d1e7ccb1982e"
     },
     "resources/images/home/ranking.png": {
-      "time": 1780996671567.6638,
+      "time": 1781007063041.4077,
       "uuid": "e49aa8a7-fc6a-4963-a00e-807770957b3b"
     },
     "resources/images/home/reward.png": {
-      "time": 1780996679628.7427,
+      "time": 1781007704714.1333,
       "uuid": "25280ce1-9e3c-4230-afba-7384bbf13f31"
     },
     "resources/images/home/setting.png": {
-      "time": 1781000331698.2405,
+      "time": 1781007265600.9062,
       "uuid": "6672be54-5355-48f3-8822-99d85318b832"
     },
     "resources/images/home/title_bg.png": {

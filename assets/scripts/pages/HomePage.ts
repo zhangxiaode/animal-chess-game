@@ -113,17 +113,17 @@ export class HomePage extends Component {
         const pageTransform = this.node.getComponent(UITransform);
         const pageWidth = pageTransform?.contentSize.width ?? 750;
         const pageHeight = pageTransform?.contentSize.height ?? 1334;
-        const buttonSize = 144;
+        const buttonSize = 120;
         const sideMargin = 56;
         const horizontalOffset = 66;
         const leftX = -pageWidth / 2 + sideMargin + buttonSize / 2 - horizontalOffset;
         const rightX = pageWidth / 2 - sideMargin - buttonSize / 2 + horizontalOffset;
-        const inwardOffset = 16;
+        const inwardOffset = 36;
         const adjustedLeftX = leftX + inwardOffset;
         const adjustedRightX = rightX - inwardOffset;
         const verticalOffset = 120;
         const topY = -pageHeight * 0.06 + verticalOffset;
-        const bottomY = -pageHeight * 0.2 + verticalOffset;
+        const bottomY = -pageHeight * 0.2 + verticalOffset + 34;
 
         this._createImageButton('RewardButton', 'images/home/reward', new Vec3(adjustedLeftX, topY, 0), buttonSize, '[HomePage] 奖励按钮图片加载失败: images/home/reward');
         this._createImageButton('RankingButton', 'images/home/ranking', new Vec3(adjustedLeftX, bottomY, 0), buttonSize, '[HomePage] 排行按钮图片加载失败: images/home/ranking');

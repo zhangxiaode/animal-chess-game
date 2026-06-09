@@ -166,17 +166,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           const pageTransform = this.node.getComponent(UITransform);
           const pageWidth = (_pageTransform$conten6 = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten6 : 750;
           const pageHeight = (_pageTransform$conten7 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten7 : 1334;
-          const buttonSize = 144;
+          const buttonSize = 120;
           const sideMargin = 56;
           const horizontalOffset = 66;
           const leftX = -pageWidth / 2 + sideMargin + buttonSize / 2 - horizontalOffset;
           const rightX = pageWidth / 2 - sideMargin - buttonSize / 2 + horizontalOffset;
-          const inwardOffset = 16;
+          const inwardOffset = 36;
           const adjustedLeftX = leftX + inwardOffset;
           const adjustedRightX = rightX - inwardOffset;
           const verticalOffset = 120;
           const topY = -pageHeight * 0.06 + verticalOffset;
-          const bottomY = -pageHeight * 0.2 + verticalOffset;
+          const bottomY = -pageHeight * 0.2 + verticalOffset + 34;
 
           this._createImageButton('RewardButton', 'images/home/reward', new Vec3(adjustedLeftX, topY, 0), buttonSize, '[HomePage] 奖励按钮图片加载失败: images/home/reward');
 
