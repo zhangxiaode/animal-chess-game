@@ -591,3 +591,10 @@
 2026-6-9 19:05:43-debug: // ---- build task 整理部分构建选项内数据到 settings.json ---- (5ms)
 2026-6-9 19:05:43-log: run build task 整理部分构建选项内数据到 settings.json success in 5 ms√, progress: 15%
 2026-6-9 19:05:43-debug: [Build Memory track]: 整理部分构建选项内数据到 settings.json start:233.13MB, end 233.26MB, increase: 128.40KB
+2026-6-9 19:06:41-debug: refresh db internal success
+2026-6-9 19:06:41-debug: refresh db assets success
+2026-6-9 19:06:41-debug: Run asset db hook engine-extends:afterRefresh ...
+2026-6-9 19:06:41-debug: Run asset db hook engine-extends:afterRefresh success!
+2026-6-9 19:06:41-debug: asset-db:refresh-all-database (39ms)
+2026-6-9 19:06:41-debug: asset-db:worker-effect-data-processing (1ms)
+2026-6-9 19:06:41-debug: asset-db-hook-engine-extends-afterRefresh (2ms)
