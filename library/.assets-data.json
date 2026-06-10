@@ -596,5 +596,117 @@
       ]
     },
     "versionCode": 1
+  },
+  "4777f472-476e-4f5d-bf2e-dc2db072dd3c": {
+    "url": "db://assets/resources/images/play/bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "4777f472-476e-4f5d-bf2e-dc2db072dd3c@6c48a": {
+    "url": "db://assets/resources/images/play/bg.png@6c48a",
+    "value": {
+      "depends": [
+        "4777f472-476e-4f5d-bf2e-dc2db072dd3c"
+      ]
+    },
+    "versionCode": 1
+  },
+  "b982680c-bb28-451c-8a9e-4abc2036715f": {
+    "url": "db://assets/resources/images/play/icon1.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "15a2fe44-1c2d-4592-9619-fafcabe7ccb2": {
+    "url": "db://assets/resources/images/play/icon2.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "16b21acf-1d72-4b19-9f9a-edbc40eb88bd": {
+    "url": "db://assets/resources/images/play/icon3.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "24fde945-5bde-4c15-b2c0-ade381d3a7aa": {
+    "url": "db://assets/resources/images/play/play_bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "daccf6d1-eea1-48c7-ab4e-31fc68d9710d": {
+    "url": "db://assets/resources/images/play/setting.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "b982680c-bb28-451c-8a9e-4abc2036715f@6c48a": {
+    "url": "db://assets/resources/images/play/icon1.png@6c48a",
+    "value": {
+      "depends": [
+        "b982680c-bb28-451c-8a9e-4abc2036715f"
+      ]
+    },
+    "versionCode": 1
+  },
+  "87f62d63-4437-4d50-bb3c-ceb5e0b2a581": {
+    "url": "db://assets/resources/images/play/title_bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "15a2fe44-1c2d-4592-9619-fafcabe7ccb2@6c48a": {
+    "url": "db://assets/resources/images/play/icon2.png@6c48a",
+    "value": {
+      "depends": [
+        "15a2fe44-1c2d-4592-9619-fafcabe7ccb2"
+      ]
+    },
+    "versionCode": 1
+  },
+  "16b21acf-1d72-4b19-9f9a-edbc40eb88bd@6c48a": {
+    "url": "db://assets/resources/images/play/icon3.png@6c48a",
+    "value": {
+      "depends": [
+        "16b21acf-1d72-4b19-9f9a-edbc40eb88bd"
+      ]
+    },
+    "versionCode": 1
+  },
+  "24fde945-5bde-4c15-b2c0-ade381d3a7aa@6c48a": {
+    "url": "db://assets/resources/images/play/play_bg.png@6c48a",
+    "value": {
+      "depends": [
+        "24fde945-5bde-4c15-b2c0-ade381d3a7aa"
+      ]
+    },
+    "versionCode": 1
+  },
+  "daccf6d1-eea1-48c7-ab4e-31fc68d9710d@6c48a": {
+    "url": "db://assets/resources/images/play/setting.png@6c48a",
+    "value": {
+      "depends": [
+        "daccf6d1-eea1-48c7-ab4e-31fc68d9710d"
+      ]
+    },
+    "versionCode": 1
+  },
+  "87f62d63-4437-4d50-bb3c-ceb5e0b2a581@6c48a": {
+    "url": "db://assets/resources/images/play/title_bg.png@6c48a",
+    "value": {
+      "depends": [
+        "87f62d63-4437-4d50-bb3c-ceb5e0b2a581"
+      ]
+    },
+    "versionCode": 1
   }
 }

@@ -13,7 +13,6 @@
             "resources/prefabs",
             "resources/sounds",
             "scripts/framework",
-            "scripts/game",
             "scripts/pages",
             "scripts/popups",
             "scripts/system",
@@ -31,9 +30,6 @@
             "scripts/framework/Singleton.ts",
             "scripts/framework/SoundManager.ts",
             "scripts/framework/UIManager.ts",
-            "scripts/game/AIOpponentSystem.ts",
-            "scripts/game/GameRuleSystem.ts",
-            "scripts/game/RankSystem.ts",
             "scripts/pages/GamePage.ts",
             "scripts/pages/HomePage.ts",
             "scripts/pages/LoadingPage.ts",
@@ -64,7 +60,14 @@
             "resources/images/loading/loading-actived.png",
             "resources/images/loading/loading.png",
             "resources/images/loading/logo.png",
-            "resources/images/loading/tiger.png"
+            "resources/images/loading/tiger.png",
+            "resources/images/play/bg.png",
+            "resources/images/play/icon1.png",
+            "resources/images/play/icon2.png",
+            "resources/images/play/icon3.png",
+            "resources/images/play/play_bg.png",
+            "resources/images/play/setting.png",
+            "resources/images/play/title_bg.png"
         ]
     }
 }
