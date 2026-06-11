@@ -75,6 +75,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._createTurnTip(pageRoot, pageHeight);
 
           await this._createBoard(pageRoot, pageHeight);
+          await this._createBottomActionButtons(pageRoot, pageHeight);
         }
 
         async _createBackground(parent, pageWidth, pageHeight) {
@@ -318,6 +319,70 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
             error: Error()
           }), ResManager) : ResManager).getInstance().load('images/play/play_bg/texture', Texture2D);
+          if (!texture) return null;
+          const generatedSpriteFrame = new SpriteFrame();
+          generatedSpriteFrame.texture = texture;
+          return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+        }
+
+        async _createBottomActionButtons(parent, pageHeight) {
+          const centerY = -pageHeight / 2 + 102;
+          const spacing = 150;
+          await this._createBottomActionButton(parent, 'RestartButton', 'images/play/icon1', '重来', new Vec3(-spacing, centerY, 0));
+          await this._createBottomActionButton(parent, 'UndoButton', 'images/play/icon2', '悔棋', new Vec3(0, centerY, 0));
+          await this._createBottomActionButton(parent, 'HintButton', 'images/play/icon3', '提示', new Vec3(spacing, centerY, 0));
+        }
+
+        async _createBottomActionButton(parent, nodeName, iconPath, text, position) {
+          const buttonWidth = 120;
+          const buttonHeight = 132;
+          const iconSize = 74;
+          const buttonNode = new Node(nodeName);
+          buttonNode.layer = parent.layer;
+          buttonNode.parent = parent;
+          buttonNode.setPosition(position);
+          const buttonTransform = buttonNode.addComponent(UITransform);
+          buttonTransform.setContentSize(buttonWidth, buttonHeight);
+          const button = buttonNode.addComponent(Button);
+          button.interactable = true;
+          const iconNode = new Node('Icon');
+          iconNode.layer = parent.layer;
+          iconNode.parent = buttonNode;
+          iconNode.setPosition(0, 24, 0);
+          const iconTransform = iconNode.addComponent(UITransform);
+          iconTransform.setContentSize(iconSize, iconSize);
+          const iconSprite = iconNode.addComponent(Sprite);
+          iconSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          const spriteFrame = await this._loadImageSpriteFrame(iconPath);
+
+          if (!spriteFrame || !buttonNode.isValid) {
+            console.warn(`[GamePage] 底部按钮图标加载失败: ${iconPath}`);
+          } else {
+            iconSprite.spriteFrame = spriteFrame;
+          }
+
+          const labelNode = new Node('Label');
+          labelNode.layer = parent.layer;
+          labelNode.parent = buttonNode;
+          labelNode.setPosition(0, -46, 0);
+          const labelTransform = labelNode.addComponent(UITransform);
+          labelTransform.setContentSize(buttonWidth, 40);
+          const label = labelNode.addComponent(Label);
+          label.string = text;
+          label.fontSize = 28;
+          label.color = new Color(255, 255, 255, 255);
+          label.horizontalAlign = Label.HorizontalAlign.CENTER;
+          label.verticalAlign = Label.VerticalAlign.CENTER;
+        }
+
+        async _loadImageSpriteFrame(path) {
+          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
+            error: Error()
+          }), ResManager) : ResManager).getInstance().loadFirst([`${path}/spriteFrame`, path], SpriteFrame);
+          if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
+          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
+            error: Error()
+          }), ResManager) : ResManager).getInstance().load(`${path}/texture`, Texture2D);
           if (!texture) return null;
           const generatedSpriteFrame = new SpriteFrame();
           generatedSpriteFrame.texture = texture;

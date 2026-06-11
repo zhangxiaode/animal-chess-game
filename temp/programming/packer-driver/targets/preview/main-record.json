@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 6817.258416,
+      "mTimestamp": 5431.315416,
       "chunkId": "93ba276ea7b26ffcdc433fab14afc1ed6f05647b",
       "imports": [
         {
@@ -514,7 +514,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 2679572.985625,
+      "mTimestamp": 6477.3825,
       "chunkId": "6d8fd2b0177941b032ddc0733af48a561fb60657",
       "imports": [
         {
@@ -2872,7 +2872,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1781084246089,
+      "mTimestamp": 1781139894831,
       "chunkId": "6a5019a719a9014c047e67aa1cf34453ab8392ce",
       "imports": [],
       "type": "esm",
@@ -5657,7 +5657,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.ts": {
       "mTimestamp": {
-        "mtime": 1781086839303.33,
+        "mtime": 1781086998122.0742,
         "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
       },
       "chunkId": "848fe469dcc60a4988d015a0af6329f6c3412ea8",

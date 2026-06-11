@@ -86,6 +86,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             _this2._createTurnTip(pageRoot, pageHeight);
 
             yield _this2._createBoard(pageRoot, pageHeight);
+            yield _this2._createBottomActionButtons(pageRoot, pageHeight);
           })();
         }
 
@@ -373,6 +374,82 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             var generatedSpriteFrame = new SpriteFrame();
             generatedSpriteFrame.texture = texture;
             return _this10._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+          })();
+        }
+
+        _createBottomActionButtons(parent, pageHeight) {
+          var _this11 = this;
+
+          return _asyncToGenerator(function* () {
+            var centerY = -pageHeight / 2 + 102;
+            var spacing = 150;
+            yield _this11._createBottomActionButton(parent, 'RestartButton', 'images/play/icon1', '重来', new Vec3(-spacing, centerY, 0));
+            yield _this11._createBottomActionButton(parent, 'UndoButton', 'images/play/icon2', '悔棋', new Vec3(0, centerY, 0));
+            yield _this11._createBottomActionButton(parent, 'HintButton', 'images/play/icon3', '提示', new Vec3(spacing, centerY, 0));
+          })();
+        }
+
+        _createBottomActionButton(parent, nodeName, iconPath, text, position) {
+          var _this12 = this;
+
+          return _asyncToGenerator(function* () {
+            var buttonWidth = 120;
+            var buttonHeight = 132;
+            var iconSize = 74;
+            var buttonNode = new Node(nodeName);
+            buttonNode.layer = parent.layer;
+            buttonNode.parent = parent;
+            buttonNode.setPosition(position);
+            var buttonTransform = buttonNode.addComponent(UITransform);
+            buttonTransform.setContentSize(buttonWidth, buttonHeight);
+            var button = buttonNode.addComponent(Button);
+            button.interactable = true;
+            var iconNode = new Node('Icon');
+            iconNode.layer = parent.layer;
+            iconNode.parent = buttonNode;
+            iconNode.setPosition(0, 24, 0);
+            var iconTransform = iconNode.addComponent(UITransform);
+            iconTransform.setContentSize(iconSize, iconSize);
+            var iconSprite = iconNode.addComponent(Sprite);
+            iconSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+            var spriteFrame = yield _this12._loadImageSpriteFrame(iconPath);
+
+            if (!spriteFrame || !buttonNode.isValid) {
+              console.warn("[GamePage] \u5E95\u90E8\u6309\u94AE\u56FE\u6807\u52A0\u8F7D\u5931\u8D25: " + iconPath);
+            } else {
+              iconSprite.spriteFrame = spriteFrame;
+            }
+
+            var labelNode = new Node('Label');
+            labelNode.layer = parent.layer;
+            labelNode.parent = buttonNode;
+            labelNode.setPosition(0, -46, 0);
+            var labelTransform = labelNode.addComponent(UITransform);
+            labelTransform.setContentSize(buttonWidth, 40);
+            var label = labelNode.addComponent(Label);
+            label.string = text;
+            label.fontSize = 28;
+            label.color = new Color(255, 255, 255, 255);
+            label.horizontalAlign = Label.HorizontalAlign.CENTER;
+            label.verticalAlign = Label.VerticalAlign.CENTER;
+          })();
+        }
+
+        _loadImageSpriteFrame(path) {
+          var _this13 = this;
+
+          return _asyncToGenerator(function* () {
+            var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
+              error: Error()
+            }), ResManager) : ResManager).getInstance().loadFirst([path + "/spriteFrame", path], SpriteFrame);
+            if (spriteFrame) return _this13._ensureSpriteFrameSize(spriteFrame);
+            var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
+              error: Error()
+            }), ResManager) : ResManager).getInstance().load(path + "/texture", Texture2D);
+            if (!texture) return null;
+            var generatedSpriteFrame = new SpriteFrame();
+            generatedSpriteFrame.texture = texture;
+            return _this13._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
           })();
         }
 
