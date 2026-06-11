@@ -27,7 +27,7 @@
         "message": "2026-5-12 19:14:00 build success in 41 s!",
         "detailMessage": "// ---- build task cocos-service：onBeforeCompressSettings ----\r",
         "options": {
-          "name": "kuaisha",
+          "name": "animal-chess",
           "server": "",
           "engineModulesConfigKey": "defaultConfig",
           "platform": "web-desktop",
@@ -98,7 +98,7 @@
         "message": "2026-5-12 20:57:39 build success in 5 s!",
         "detailMessage": "Build project script start..., progress: 49%\r",
         "options": {
-          "name": "kuaisha",
+          "name": "animal-chess",
           "server": "",
           "engineModulesConfigKey": "defaultConfig",
           "platform": "wechatgame",

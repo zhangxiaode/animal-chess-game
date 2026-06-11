@@ -379,7 +379,7 @@ System.register(["cc"], function (_export, _context) {
       });
 
       UserSystem.instance = void 0;
-      UserSystem.STORAGE_KEY = 'kuaisha_user_data';
+      UserSystem.STORAGE_KEY = 'animal_chess_user_data';
       UserSystem.MAX_USERNAME_LENGTH = 20;
 
       _cclegacy._RF.pop();

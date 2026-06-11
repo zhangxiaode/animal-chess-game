@@ -708,5 +708,21 @@
       ]
     },
     "versionCode": 1
+  },
+  "22d73e5e-afff-4dfa-be41-109be2cf57e2": {
+    "url": "db://assets/resources/images/play/piece_bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "22d73e5e-afff-4dfa-be41-109be2cf57e2@6c48a": {
+    "url": "db://assets/resources/images/play/piece_bg.png@6c48a",
+    "value": {
+      "depends": [
+        "22d73e5e-afff-4dfa-be41-109be2cf57e2"
+      ]
+    },
+    "versionCode": 1
   }
 }

@@ -15,7 +15,7 @@ export interface UserData {
 
 export class UserSystem {
   private static instance: UserSystem;
-  private static readonly STORAGE_KEY = 'kuaisha_user_data';
+  private static readonly STORAGE_KEY = 'animal_chess_user_data';
   private static readonly MAX_USERNAME_LENGTH = 20;
 
   private userData: UserData | null = null;

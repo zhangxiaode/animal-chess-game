@@ -51,7 +51,7 @@ System.register(["cc"], function (_export, _context) {
           apiBaseUrl: 'https://www.chengyaokj.com/apis',
           shareTitle: '来快杀，体验精彩的对弈！',
           shareImage: 'images/logo.png',
-          privacyPolicyUrl: 'https://www.chengyaokj.com/kuaisha/privacy.html',
+          privacyPolicyUrl: 'https://www.chengyaokj.com/animal-chess/privacy.html',
           serviceEmail: 'chengyaokeji4@126.com',
           adUnitIds: {
             banner: 'wechat-banner-unit-id',
@@ -68,7 +68,7 @@ System.register(["cc"], function (_export, _context) {
           apiBaseUrl: 'https://www.chengyaokj.com/apis',
           shareTitle: '来快杀，体验精彩的对弈！',
           shareImage: 'images/logo.png',
-          privacyPolicyUrl: 'https://www.chengyaokj.com/kuaisha/privacy.html',
+          privacyPolicyUrl: 'https://www.chengyaokj.com/animal-chess/privacy.html',
           serviceEmail: 'chengyaokeji4@126.com',
           adUnitIds: {
             banner: 'douyin-banner-unit-id',

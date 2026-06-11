@@ -347,3 +347,14 @@
 2026-6-11 10:49:59-log: run build task 整理部分构建选项内数据到 settings.json success in 9 ms√, progress: 15%
 2026-6-11 10:49:59-debug: // ---- build task 整理部分构建选项内数据到 settings.json ---- (9ms)
 2026-6-11 10:49:59-debug: [Build Memory track]: 整理部分构建选项内数据到 settings.json start:225.54MB, end 225.69MB, increase: 147.84KB
+2026-6-11 11:19:37-debug: refresh db internal success
+2026-6-11 11:19:37-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/play/piece_bg.pngbackground: #aaff85; color: #000;color: #000;
+2026-6-11 11:19:37-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/playbackground: #aaff85; color: #000;color: #000;
+2026-6-11 11:19:37-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/scripts/pages/GamePage.tsbackground: #aaff85; color: #000;color: #000;
+2026-6-11 11:19:37-debug: %cImport%c: /Users/zxd/workspace/person/animal-chess-game/assets/resources/images/play/piece_bg.png@6c48abackground: #aaff85; color: #000;color: #000;
+2026-6-11 11:19:37-debug: refresh db assets success
+2026-6-11 11:19:37-debug: Run asset db hook engine-extends:afterRefresh ...
+2026-6-11 11:19:37-debug: Run asset db hook engine-extends:afterRefresh success!
+2026-6-11 11:19:37-debug: asset-db:refresh-all-database (239ms)
+2026-6-11 11:19:37-debug: asset-db:worker-effect-data-processing (2ms)
+2026-6-11 11:19:37-debug: asset-db-hook-engine-extends-afterRefresh (3ms)
