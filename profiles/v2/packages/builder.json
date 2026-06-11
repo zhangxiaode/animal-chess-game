@@ -12,9 +12,10 @@
       "asyncFunctions": true
     },
     "buildPath": "project://build",
-    "outputName": "wechatgame",
+    "outputName": "bytedance-mini-game",
     "mainBundleCompressionType": "merge_dep",
-    "platform": "wechatgame"
+    "platform": "bytedance-mini-game",
+    "name": "欢乐斗兽棋"
   },
   "BuildTaskManager": {
     "taskMap": {
@@ -158,6 +159,77 @@
           "logDest": "project://temp/builder/log/wechatgame5-12-2026 19-36.log"
         },
         "time": "5-12-2026 20:57:33",
+        "dirty": false
+      },
+      "1781176847763": {
+        "type": "build",
+        "id": "1781176847763",
+        "progress": 0.19090909090909092,
+        "state": "processing",
+        "stage": "build",
+        "message": "构建引擎脚本 start...",
+        "detailMessage": "[buildEngineCommand]Rollup warning 'THIS_IS_UNDEFINED' is omitted for /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/node_modules/@cocos/dragonbones-js/out/d...",
+        "options": {
+          "name": "欢乐斗兽棋",
+          "server": "",
+          "engineModulesConfigKey": "defaultConfig",
+          "platform": "bytedance-mini-game",
+          "buildPath": "project://build",
+          "debug": false,
+          "buildMode": "normal",
+          "mangleProperties": false,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "overwriteProjectSettings": {
+            "macroConfig": {
+              "cleanupImageCache": "inherit-project-setting"
+            },
+            "includeModules": {
+              "physics": "inherit-project-setting",
+              "physics-2d": "inherit-project-setting",
+              "gfx-webgl2": "off"
+            }
+          },
+          "nativeCodeBundleMode": "both",
+          "polyfills": {
+            "asyncFunctions": false
+          },
+          "experimentalEraseModules": false,
+          "startSceneAssetBundle": false,
+          "bundleConfigs": [],
+          "inlineEnum": true,
+          "useBuiltinServer": false,
+          "md5CacheOptions": {
+            "excludes": [],
+            "includes": [],
+            "replaceOnly": [],
+            "handleTemplateMd5Link": true
+          },
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_dep",
+          "useSplashScreen": true,
+          "bundleCommonChunk": false,
+          "packAutoAtlas": true,
+          "startScene": "de734e68-f879-44d5-9f8c-06a7f6b793ca",
+          "outputName": "bytedance-mini-game",
+          "taskName": "bytedance-mini-game",
+          "scenes": [
+            {
+              "url": "db://assets/scenes/Main.scene",
+              "uuid": "de734e68-f879-44d5-9f8c-06a7f6b793ca"
+            }
+          ],
+          "wasmCompressionMode": false,
+          "binGroupConfig": {
+            "threshold": 16,
+            "enable": false
+          },
+          "packages": {},
+          "__version__": "1.3.9",
+          "logDest": "project://temp/builder/log/bytedance-mini-game6-11-2026 19-20.log"
+        },
+        "time": "6-11-2026 19:20:47",
         "dirty": false
       }
     }

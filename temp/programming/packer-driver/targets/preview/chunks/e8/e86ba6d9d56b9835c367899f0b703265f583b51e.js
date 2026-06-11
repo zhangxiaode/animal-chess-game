@@ -61,7 +61,7 @@ System.register(["cc"], function (_export, _context) {
         },
         douyin: {
           appName: '小游戏模板-抖音',
-          appId: 'tt_your_app_id',
+          appId: 'tt5eff2842c09bb6b802',
           envVersion: 'develop',
           version: '0.1.0',
           buildNumber: 1,

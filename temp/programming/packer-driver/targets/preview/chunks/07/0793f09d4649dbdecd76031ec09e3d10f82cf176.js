@@ -43,13 +43,13 @@ System.register(["cc"], function (_export, _context) {
 
       _export("GAME_INFO_CONFIG", GAME_INFO_CONFIG = {
         wechat: {
-          appName: '快杀对决',
+          appName: '欢乐斗兽棋',
           appId: 'wx32ba79b13ebc7f5b',
           envVersion: 'develop',
           version: '1.0.0',
           buildNumber: 1,
           apiBaseUrl: 'https://www.chengyaokj.com/apis',
-          shareTitle: '来快杀，体验精彩的对弈！',
+          shareTitle: '来欢乐斗兽棋，体验精彩的对弈！',
           shareImage: 'images/logo.png',
           privacyPolicyUrl: 'https://www.chengyaokj.com/animal-chess/privacy.html',
           serviceEmail: 'chengyaokeji4@126.com',
@@ -60,13 +60,13 @@ System.register(["cc"], function (_export, _context) {
           }
         },
         douyin: {
-          appName: '快杀对决',
-          appId: 'tt_your_app_id',
+          appName: '欢乐斗兽棋',
+          appId: 'tt5eff2842c09bb6b802',
           envVersion: 'develop',
           version: '1.0.0',
           buildNumber: 1,
           apiBaseUrl: 'https://www.chengyaokj.com/apis',
-          shareTitle: '来快杀，体验精彩的对弈！',
+          shareTitle: '来欢乐斗兽棋，体验精彩的对弈！',
           shareImage: 'images/logo.png',
           privacyPolicyUrl: 'https://www.chengyaokj.com/animal-chess/privacy.html',
           serviceEmail: 'chengyaokeji4@126.com',

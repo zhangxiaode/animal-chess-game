@@ -1,7 +1,7 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7", "__unresolved_8"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, resources, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, UserSystem, _dec, _dec2, _class, _class2, _descriptor, _class3, _crd, ccclass, property, GameMain;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, Widget, Vec3, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, UserSystem, _dec, _dec2, _class, _class2, _descriptor, _class3, _crd, ccclass, property, GameMain;
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -60,7 +60,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       js = _cc.js;
       Prefab = _cc.Prefab;
       instantiate = _cc.instantiate;
-      resources = _cc.resources;
+      Widget = _cc.Widget;
+      Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
       UIManager = _unresolved_2.UIManager;
     }, function (_unresolved_3) {
@@ -76,13 +77,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       getPlatformGameInfo = _unresolved_7.getPlatformGameInfo;
     }, function (_unresolved_8) {
       UserSystem = _unresolved_8.UserSystem;
-    }],
+    }, function (_unresolved_9) {}],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "39bb6f/NKBBp698AMS0ih+l", "GameMain", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Node', 'game', 'UITransform', 'js', 'Prefab', 'instantiate', 'resources']);
+      __checkObsolete__(['_decorator', 'Component', 'Node', 'game', 'UITransform', 'js', 'Prefab', 'instantiate', 'Widget', 'Vec3']);
 
       ({
         ccclass,
@@ -176,8 +177,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
             var _loadingPageNode$getC;
 
             var loadingPageNode = yield _this._createLoadingPage();
+            loadingPageNode.active = false;
             loadingPageNode.layer = _this._uiRoot.layer;
-            loadingPageNode.parent = _this._uiRoot;
+
+            _this._disableWidgets(loadingPageNode);
+
             var loadingTransform = (_loadingPageNode$getC = loadingPageNode.getComponent(UITransform)) != null ? _loadingPageNode$getC : loadingPageNode.addComponent(UITransform);
 
             var uiTransform = _this._uiRoot.getComponent(UITransform);
@@ -186,6 +190,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
               loadingTransform.setContentSize(uiTransform.contentSize);
             }
 
+            loadingPageNode.setPosition(Vec3.ZERO);
+            loadingPageNode.parent = _this._uiRoot;
+            loadingPageNode.active = true;
             (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
               error: Error()
             }), UIManager) : UIManager).getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
@@ -196,33 +203,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           var _this2 = this;
 
           return _asyncToGenerator(function* () {
-            var _this2$loadingPagePre;
-
-            var prefab = (_this2$loadingPagePre = _this2.loadingPagePrefab) != null ? _this2$loadingPagePre : yield _this2._loadLoadingPrefab();
-
-            if (prefab) {
-              return instantiate(prefab);
+            if (!_this2.loadingPagePrefab) {
+              throw new Error('[GameMain] 请在编辑器中绑定 assets/prefabs/pages/LoadingPage.prefab 到 loadingPagePrefab，Loading 页面不再使用 TS 动态渲染。');
             }
 
-            var loadingPageNode = new Node('LoadingPage');
-            var {
-              LoadingPage
-            } = yield _context.import("__unresolved_8");
-            loadingPageNode.addComponent(LoadingPage);
-            return loadingPageNode;
+            return instantiate(_this2.loadingPagePrefab);
           })();
         }
 
-        _loadLoadingPrefab() {
-          return new Promise(resolve => {
-            resources.load('prefabs/pages/LoadingPage', Prefab, (error, prefab) => {
-              if (error || !prefab) {
-                resolve(null);
-                return;
-              }
-
-              resolve(prefab);
-            });
+        _disableWidgets(root) {
+          root.getComponentsInChildren(Widget).forEach(widget => {
+            widget.enabled = false;
           });
         }
 

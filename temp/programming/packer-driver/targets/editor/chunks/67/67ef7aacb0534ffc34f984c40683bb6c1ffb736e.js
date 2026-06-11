@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Singleton, _dec, _class, _crd, ccclass, PAGE_MODULE_MAP, UIManager;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Vec3, Widget, Singleton, _dec, _class, _crd, ccclass, PAGE_MODULE_MAP, PAGE_PREFAB_UUID_MAP, UIManager;
 
   function _reportPossibleCrUseOfSingleton(extras) {
     _reporterNs.report("Singleton", "./Singleton", _context.meta, extras);
@@ -15,6 +15,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
+      assetManager = _cc.assetManager;
       Node = _cc.Node;
       Prefab = _cc.Prefab;
       resources = _cc.resources;
@@ -22,6 +23,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
       tween = _cc.tween;
       UITransform = _cc.UITransform;
       UIOpacity = _cc.UIOpacity;
+      Vec3 = _cc.Vec3;
+      Widget = _cc.Widget;
     }, function (_unresolved_2) {
       Singleton = _unresolved_2.Singleton;
     }],
@@ -30,7 +33,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
       _cclegacy._RF.push({}, "f66104E9tVFG4oMti5XArOk", "UIManager", undefined);
 
-      __checkObsolete__(['_decorator', 'Node', 'Prefab', 'resources', 'instantiate', 'tween', 'UITransform', 'UIOpacity']);
+      __checkObsolete__(['_decorator', 'assetManager', 'Node', 'Prefab', 'resources', 'instantiate', 'tween', 'UITransform', 'UIOpacity', 'Vec3', 'Widget']);
 
       ({
         ccclass
@@ -41,6 +44,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         HomePage: async () => (await _context.import("__unresolved_3")).HomePage,
         GamePage: async () => (await _context.import("__unresolved_4")).GamePage,
         RulesPage: async () => (await _context.import("__unresolved_5")).RulesPage
+      };
+      PAGE_PREFAB_UUID_MAP = {
+        LoadingPage: 'c5538084-1788-483f-8491-0796031b2813',
+        HomePage: '45fef6ee-bb46-4f3e-aa9f-6dcd82168974',
+        GamePage: '9c962845-cc39-4bcf-abff-fa0abdb40807'
       };
 
       _export("UIManager", UIManager = (_dec = ccclass('UIManager'), _dec(_class = class UIManager extends (_crd && Singleton === void 0 ? (_reportPossibleCrUseOfSingleton({
@@ -81,22 +89,37 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
 
         async openPage(prefabPath, params, animation = true) {
-          var _pageNode$getComponen;
+          var _pageNode$getComponen2;
 
-          // 隐藏上一个页面
-          if (this._pageStack.length > 0) {
-            const lastPage = this._pageStack[this._pageStack.length - 1].node;
-            lastPage.active = false;
-          } // 提取页面名称
-
-
+          // 提取页面名称
           const pageName = this._extractPageName(prefabPath);
 
           const loader = PAGE_MODULE_MAP[pageName];
           let pageNode;
-          let pageScript = null; // 当前页面只有脚本实现，没有对应 prefab，直接走动态创建。
+          let pageScript = null;
+          const shouldLoadPrefab = prefabPath.includes('/');
 
-          if (loader) {
+          if (shouldLoadPrefab) {
+            try {
+              var _pageNode$getComponen;
+
+              const ScriptClass = loader ? await loader() : null;
+              const prefab = await this._loadPagePrefab(prefabPath, pageName);
+
+              if (!prefab) {
+                throw new Error(`预制体不存在：${prefabPath}`);
+              }
+
+              pageNode = instantiate(prefab);
+
+              this._disableWidgets(pageNode);
+
+              pageScript = ScriptClass ? (_pageNode$getComponen = pageNode.getComponent(ScriptClass)) != null ? _pageNode$getComponen : pageNode.addComponent(ScriptClass) : null;
+            } catch (error) {
+              console.warn(`预制体加载失败 ${prefabPath}`, error);
+              return;
+            }
+          } else if (loader) {
             pageNode = new Node(pageName);
             const ScriptClass = await loader();
             pageScript = pageNode.addComponent(ScriptClass);
@@ -118,6 +141,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
               console.warn(`预制体加载失败 ${prefabPath}`, error);
               return;
             }
+          } // 新页面创建成功后再隐藏上一个页面，避免加载失败导致黑屏。
+
+
+          if (this._pageStack.length > 0) {
+            const lastPage = this._pageStack[this._pageStack.length - 1].node;
+            lastPage.active = false;
           }
 
           pageNode.layer = this._root.layer;
@@ -125,12 +154,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
           const rootTransform = this._root.getComponent(UITransform);
 
-          const pageTransform = (_pageNode$getComponen = pageNode.getComponent(UITransform)) != null ? _pageNode$getComponen : pageNode.addComponent(UITransform);
+          const pageTransform = (_pageNode$getComponen2 = pageNode.getComponent(UITransform)) != null ? _pageNode$getComponen2 : pageNode.addComponent(UITransform);
 
           if (rootTransform) {
             pageTransform.setContentSize(rootTransform.contentSize);
           }
 
+          pageNode.setPosition(Vec3.ZERO);
           const pageOpacity = pageNode.addComponent(UIOpacity); // 传递参数给页面脚本的 onShow 方法
 
           if (pageScript && pageScript.onShow) {
@@ -160,6 +190,40 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         _extractPageName(path) {
           const parts = path.split('/');
           return parts[parts.length - 1];
+        }
+
+        async _loadPagePrefab(prefabPath, pageName) {
+          const prefab = await this._loadResourcePrefab(prefabPath);
+          if (prefab) return prefab;
+          const uuid = PAGE_PREFAB_UUID_MAP[pageName];
+          if (!uuid) return null;
+          return new Promise(resolve => {
+            assetManager.loadAny({
+              uuid
+            }, Prefab, (error, asset) => {
+              if (error || !asset) {
+                console.warn(`预制体 UUID 加载失败 ${pageName}: ${uuid}`, error);
+                resolve(null);
+                return;
+              }
+
+              resolve(asset);
+            });
+          });
+        }
+
+        async _loadResourcePrefab(prefabPath) {
+          return new Promise(resolve => {
+            resources.load(prefabPath, Prefab, (error, prefab) => {
+              resolve(error || !prefab ? null : prefab);
+            });
+          });
+        }
+
+        _disableWidgets(root) {
+          root.getComponentsInChildren(Widget).forEach(widget => {
+            widget.enabled = false;
+          });
         }
         /**
          * 返回上一页

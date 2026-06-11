@@ -1,4 +1,4 @@
-import { _decorator, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity } from 'cc';
+import { _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Vec3, Widget } from 'cc';
 import { Singleton } from './Singleton';
 
 const { ccclass } = _decorator;
@@ -9,6 +9,12 @@ const PAGE_MODULE_MAP: Record<string, () => Promise<any>> = {
     HomePage: async () => (await import('../pages/HomePage')).HomePage,
     GamePage: async () => (await import('../pages/GamePage')).GamePage,
     RulesPage: async () => (await import('../pages/RulesPage')).RulesPage,
+};
+
+const PAGE_PREFAB_UUID_MAP: Record<string, string> = {
+    LoadingPage: 'c5538084-1788-483f-8491-0796031b2813',
+    HomePage: '45fef6ee-bb46-4f3e-aa9f-6dcd82168974',
+    GamePage: '9c962845-cc39-4bcf-abff-fa0abdb40807',
 };
 
 @ccclass('UIManager')
@@ -40,12 +46,6 @@ export class UIManager extends Singleton<UIManager> {
      * @param animation 是否显示切换动画
      */
     async openPage(prefabPath: string, params?: any, animation: boolean = true) {
-        // 隐藏上一个页面
-        if (this._pageStack.length > 0) {
-            const lastPage = this._pageStack[this._pageStack.length - 1].node;
-            lastPage.active = false;
-        }
-
         // 提取页面名称
         const pageName = this._extractPageName(prefabPath);
         const loader = PAGE_MODULE_MAP[pageName];
@@ -53,8 +53,24 @@ export class UIManager extends Singleton<UIManager> {
         let pageNode: Node;
         let pageScript: any = null;
 
-        // 当前页面只有脚本实现，没有对应 prefab，直接走动态创建。
-        if (loader) {
+        const shouldLoadPrefab = prefabPath.includes('/');
+
+        if (shouldLoadPrefab) {
+            try {
+                const ScriptClass = loader ? await loader() : null;
+                const prefab = await this._loadPagePrefab(prefabPath, pageName);
+                if (!prefab) {
+                    throw new Error(`预制体不存在：${prefabPath}`);
+                }
+
+                pageNode = instantiate(prefab) as Node;
+                this._disableWidgets(pageNode);
+                pageScript = ScriptClass ? (pageNode.getComponent(ScriptClass) ?? pageNode.addComponent(ScriptClass)) : null;
+            } catch (error) {
+                console.warn(`预制体加载失败 ${prefabPath}`, error);
+                return;
+            }
+        } else if (loader) {
             pageNode = new Node(pageName);
             const ScriptClass = await loader();
             pageScript = pageNode.addComponent(ScriptClass);
@@ -77,6 +93,12 @@ export class UIManager extends Singleton<UIManager> {
             }
         }
 
+        // 新页面创建成功后再隐藏上一个页面，避免加载失败导致黑屏。
+        if (this._pageStack.length > 0) {
+            const lastPage = this._pageStack[this._pageStack.length - 1].node;
+            lastPage.active = false;
+        }
+
         pageNode.layer = this._root.layer;
         pageNode.parent = this._root;
         const rootTransform = this._root.getComponent(UITransform);
@@ -84,6 +106,7 @@ export class UIManager extends Singleton<UIManager> {
         if (rootTransform) {
             pageTransform.setContentSize(rootTransform.contentSize);
         }
+        pageNode.setPosition(Vec3.ZERO);
 
         const pageOpacity = pageNode.addComponent(UIOpacity);
 
@@ -109,6 +132,40 @@ export class UIManager extends Singleton<UIManager> {
     private _extractPageName(path: string): string {
         const parts = path.split('/');
         return parts[parts.length - 1];
+    }
+
+    private async _loadPagePrefab(prefabPath: string, pageName: string): Promise<Prefab | null> {
+        const prefab = await this._loadResourcePrefab(prefabPath);
+        if (prefab) return prefab;
+
+        const uuid = PAGE_PREFAB_UUID_MAP[pageName];
+        if (!uuid) return null;
+
+        return new Promise<Prefab | null>((resolve) => {
+            assetManager.loadAny({ uuid }, Prefab, (error, asset) => {
+                if (error || !asset) {
+                    console.warn(`预制体 UUID 加载失败 ${pageName}: ${uuid}`, error);
+                    resolve(null);
+                    return;
+                }
+
+                resolve(asset as Prefab);
+            });
+        });
+    }
+
+    private async _loadResourcePrefab(prefabPath: string): Promise<Prefab | null> {
+        return new Promise<Prefab | null>((resolve) => {
+            resources.load(prefabPath, Prefab, (error, prefab) => {
+                resolve(error || !prefab ? null : prefab);
+            });
+        });
+    }
+
+    private _disableWidgets(root: Node) {
+        root.getComponentsInChildren(Widget).forEach((widget) => {
+            widget.enabled = false;
+        });
     }
 
     /**

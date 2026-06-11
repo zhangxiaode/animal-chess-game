@@ -2,6 +2,7 @@ import {
     _decorator,
     Color,
     Component,
+    js,
     Label,
     Node,
     Rect,
@@ -11,9 +12,8 @@ import {
     Texture2D,
     UITransform,
     Vec2,
-    Vec3,
+    resources,
 } from 'cc';
-import { ResManager } from '../framework/ResManager';
 import { UIManager } from '../framework/UIManager';
 
 const { ccclass, property } = _decorator;
@@ -84,6 +84,7 @@ export class LoadingPage extends Component {
     @property(SpriteFrame)
     public progressActivedFrame: SpriteFrame | null = null;
 
+    private _firstLoadTipLabel: Label | null = null;
     private _hasEnteredHome = false;
     private _loadedAssetCount = 0;
     private _loadingStartTime = 0;
@@ -96,7 +97,9 @@ export class LoadingPage extends Component {
             this.node.layer = this.node.parent.layer;
         }
 
+        this._hideLegacyEmptyNodes();
         this._bindPrefabReferences();
+        this._applyTextContent();
         this._startLoading();
     }
 
@@ -109,82 +112,63 @@ export class LoadingPage extends Component {
         this._loadedAssetCount = 0;
         this._setLoadingProgress(0);
 
-        this._ensureTextContent();
-        this._ensureStaticLayout();
-        await this._ensureImageContent();
+        await this._loadImageContent();
 
         this._setLoadingProgress(1);
         await this._waitMinLoadingTime();
         this._enterHome();
     }
 
+    private _hideLegacyEmptyNodes() {
+        ['background', 'content', 'ske'].forEach((name) => {
+            const node = this.node.getChildByName(name);
+            if (node) node.active = false;
+        });
+    }
+
     private _bindPrefabReferences() {
-        this.backgroundSprite ??= this._findSprite('Background');
-        this.lionSprite ??= this._findSprite('Lion');
-        this.elephantSprite ??= this._findSprite('Elephant');
-        this.tigerSprite ??= this._findSprite('Tiger');
-        this.logoSprite ??= this._findSprite('Logo');
-        this.dragonSprite ??= this._findSprite('Dragon');
-        this.progressBackgroundSprite ??= this._findSprite('ProgressBar/ProgressBackground');
-        this.progressActivedSprite ??= this._findSprite('ProgressBar/ProgressActived');
-        this.subtitleLabel ??= this._findLabel('Subtitle');
-        this.enterTipLabel ??= this._findLabel('EnterTip');
-        this.progressLabel ??= this._findLabel('ProgressBar/ProgressPercent');
+        this.backgroundSprite ??= this._bindSprite('Background');
+        this.lionSprite ??= this._bindSprite('Lion');
+        this.elephantSprite ??= this._bindSprite('Elephant');
+        this.tigerSprite ??= this._bindSprite('Tiger');
+        this.logoSprite ??= this._bindSprite('Logo');
+        this.dragonSprite ??= this._bindSprite('Dragon');
+        this.progressBackgroundSprite ??= this._bindSprite('ProgressBar/ProgressBackground');
+        this.progressActivedSprite ??= this._bindSprite('ProgressBar/ProgressActived');
+        this.subtitleLabel ??= this._bindLabel('Subtitle');
+        this.enterTipLabel ??= this._bindLabel('EnterTip');
+        this.progressLabel ??= this._bindLabel('ProgressBar/ProgressPercent');
+        this._firstLoadTipLabel = this._bindLabel('ProgressBar/FirstLoadTip');
     }
 
-    private _findSprite(path: string): Sprite | null {
-        return this._findNode(path)?.getComponent(Sprite) ?? null;
-    }
-
-    private _findLabel(path: string): Label | null {
-        return this._findNode(path)?.getComponent(Label) ?? null;
-    }
-
-    private _findNode(path: string): Node | null {
-        const parts = path.split('/');
-        let current: Node | null = this.node;
-
-        for (const part of parts) {
-            current = current?.getChildByName(part) ?? null;
-            if (!current) return null;
+    private _applyTextContent() {
+        if (this.subtitleLabel) {
+            this.subtitleLabel.string = '经典策略 · 趣味对战';
+            this.subtitleLabel.fontSize = 30;
+            this.subtitleLabel.lineHeight = 38;
         }
 
-        return current;
-    }
-
-    private _ensureTextContent() {
-        if (!this.subtitleLabel) {
-            this.subtitleLabel = this._createLabel('Subtitle', '经典策略 · 趣味对战', new Vec3(0, this._pageHeight / 2 - 540, 0), 360, 42, 30);
+        if (this.enterTipLabel) {
+            this.enterTipLabel.string = '正在进入游戏...';
+            this.enterTipLabel.fontSize = 28;
+            this.enterTipLabel.lineHeight = 36;
         }
 
-        if (!this.enterTipLabel) {
-            this.enterTipLabel = this._createLabel('EnterTip', '正在进入游戏...', new Vec3(0, this._pageHeight / 2 - 970, 0), 360, 42, 28);
+        if (this.progressLabel) {
+            this.progressLabel.fontSize = 26;
+            this.progressLabel.lineHeight = 34;
+            this.progressLabel.string = this._getProgressText();
         }
 
-        this.subtitleLabel.string = '经典策略 · 趣味对战';
-        this.enterTipLabel.string = '正在进入游戏...';
+        if (this._firstLoadTipLabel) {
+            this._firstLoadTipLabel.string = '首次加载可能需要一些时间';
+            this._firstLoadTipLabel.fontSize = 24;
+            this._firstLoadTipLabel.lineHeight = 32;
+            this._firstLoadTipLabel.color = new Color(255, 255, 255, 128);
+        }
     }
 
-    private _ensureStaticLayout() {
-        this._syncNodeSizeAndPosition(this.backgroundSprite?.node, this._pageWidth, this._pageHeight, Vec3.ZERO, 0);
-        this._syncNodeSizeAndPosition(this.lionSprite?.node, 88, 88, new Vec3(-108, this._pageHeight / 2 - 150, 0));
-        this._syncNodeSizeAndPosition(this.elephantSprite?.node, 120, 120, new Vec3(0, this._pageHeight / 2 - 150, 0));
-        this._syncNodeSizeAndPosition(this.tigerSprite?.node, 88, 88, new Vec3(108, this._pageHeight / 2 - 150, 0));
-        this._syncNodeSizeAndPosition(this.logoSprite?.node, 240, 200, new Vec3(0, this._pageHeight / 2 - 420, 0));
-        this._syncNodeSizeAndPosition(this.dragonSprite?.node, 320, 320, new Vec3(0, this._pageHeight / 2 - 770, 0));
-        this._syncNodeSizeAndPosition(this.progressBackgroundSprite?.node, 310, 16, Vec3.ZERO);
-        this._syncNodeSizeAndPosition(this.progressActivedSprite?.node, 310, 16, Vec3.ZERO);
-    }
-
-    private async _ensureImageContent() {
-        this.backgroundSprite ??= this._createImage('Background', this._pageWidth, this._pageHeight, Vec3.ZERO, 0);
-        this.lionSprite ??= this._createImage('Lion', 88, 88, new Vec3(-108, this._pageHeight / 2 - 150, 0));
-        this.elephantSprite ??= this._createImage('Elephant', 120, 120, new Vec3(0, this._pageHeight / 2 - 150, 0));
-        this.tigerSprite ??= this._createImage('Tiger', 88, 88, new Vec3(108, this._pageHeight / 2 - 150, 0));
-        this.logoSprite ??= this._createImage('Logo', 240, 200, new Vec3(0, this._pageHeight / 2 - 420, 0));
-        this.dragonSprite ??= this._createImage('Dragon', 320, 320, new Vec3(0, this._pageHeight / 2 - 770, 0));
-        this._ensureProgressBar();
-
+    private async _loadImageContent() {
         const imageConfigs: ImageConfig[] = [
             { name: 'Background', path: 'images/loading/bg', sprite: this.backgroundSprite, frame: this.backgroundFrame },
             { name: 'Lion', path: 'images/loading/lion', sprite: this.lionSprite, frame: this.lionFrame },
@@ -197,31 +181,6 @@ export class LoadingPage extends Component {
         ];
 
         await Promise.all(imageConfigs.map((config) => this._applyImageConfig(config)));
-    }
-
-    private _ensureProgressBar() {
-        let progressRoot = this._findNode('ProgressBar');
-        if (!progressRoot) {
-            progressRoot = new Node('ProgressBar');
-            progressRoot.layer = this.node.layer;
-            progressRoot.parent = this.node;
-            progressRoot.setPosition(new Vec3(0, this._pageHeight / 2 - 1060, 0));
-            progressRoot.addComponent(UITransform).setContentSize(310, 16);
-        }
-
-        this.progressBackgroundSprite ??= this._createImage('ProgressBackground', 310, 16, Vec3.ZERO, undefined, progressRoot);
-        this.progressActivedSprite ??= this._createImage('ProgressActived', 310, 16, Vec3.ZERO, undefined, progressRoot);
-
-        if (!this.progressLabel) {
-            this.progressLabel = this._createLabel('ProgressPercent', this._getProgressText(), new Vec3(0, -42, 0), 160, 36, 26, progressRoot);
-        }
-
-        if (!this._findNode('ProgressBar/FirstLoadTip')) {
-            const firstLoadTipLabel = this._createLabel('FirstLoadTip', '首次加载可能需要一些时间', new Vec3(0, -90, 0), 360, 36, 24, progressRoot);
-            firstLoadTipLabel.color = new Color(255, 255, 255, 128);
-        }
-
-        this._ensureStaticLayout();
     }
 
     private async _applyImageConfig(config: ImageConfig) {
@@ -242,10 +201,12 @@ export class LoadingPage extends Component {
         }
 
         sprite.spriteFrame = spriteFrame;
+
         if (config.name === 'Background') {
+            const pageTransform = this.node.getComponent(UITransform);
             const transform = sprite.node.getComponent(UITransform);
-            if (transform) {
-                this._setCoverSize(transform, spriteFrame, this._pageWidth, this._pageHeight);
+            if (pageTransform && transform) {
+                this._setCoverSize(transform, spriteFrame, pageTransform.contentSize.width, pageTransform.contentSize.height);
             }
         }
 
@@ -254,50 +215,40 @@ export class LoadingPage extends Component {
         }
     }
 
-    private _createImage(name: string, width: number, height: number, position: Vec3, siblingIndex?: number, parent: Node = this.node): Sprite {
-        const imageNode = new Node(name);
-        imageNode.layer = this.node.layer;
-        imageNode.parent = parent;
-        imageNode.setPosition(position);
+    private _bindSprite(path: string): Sprite | null {
+        const node = this._findPrefabNode(path);
+        if (!node) return null;
 
-        if (siblingIndex !== undefined) {
-            imageNode.setSiblingIndex(siblingIndex);
-        }
-
-        imageNode.addComponent(UITransform).setContentSize(width, height);
-        const sprite = imageNode.addComponent(Sprite);
+        this._preparePrefabNode(node);
+        const sprite = node.getComponent(Sprite) ?? node.addComponent(Sprite);
         sprite.sizeMode = Sprite.SizeMode.CUSTOM;
         return sprite;
     }
 
-    private _createLabel(name: string, text: string, position: Vec3, width: number, height: number, fontSize: number, parent: Node = this.node): Label {
-        const labelNode = new Node(name);
-        labelNode.layer = this.node.layer;
-        labelNode.parent = parent;
-        labelNode.setPosition(position);
-        labelNode.addComponent(UITransform).setContentSize(width, height);
+    private _bindLabel(path: string): Label | null {
+        const node = this._findPrefabNode(path);
+        if (!node) return null;
 
-        const label = labelNode.addComponent(Label);
-        label.string = text;
-        label.fontSize = fontSize;
-        label.color = new Color(255, 255, 255, 255);
+        this._preparePrefabNode(node);
+        const label = node.getComponent(Label) ?? node.addComponent(Label);
+        label.color = label.color ?? new Color(255, 255, 255, 255);
         label.horizontalAlign = Label.HorizontalAlign.CENTER;
         label.verticalAlign = Label.VerticalAlign.CENTER;
         label.overflow = Label.Overflow.CLAMP;
         return label;
     }
 
-    private _syncNodeSizeAndPosition(node: Node | null | undefined, width: number, height: number, position: Vec3, siblingIndex?: number) {
-        if (!node) return;
-
+    private _preparePrefabNode(node: Node) {
         node.layer = this.node.layer;
-        node.setPosition(position);
-        const transform = node.getComponent(UITransform) ?? node.addComponent(UITransform);
-        transform.setContentSize(width, height);
+        node.getComponent(UITransform) ?? node.addComponent(UITransform);
+    }
 
-        if (siblingIndex !== undefined) {
-            node.setSiblingIndex(siblingIndex);
+    private _findPrefabNode(path: string): Node | null {
+        const node = path.split('/').reduce<Node | null>((current, name) => current?.getChildByName(name) ?? null, this.node);
+        if (!node) {
+            console.warn(`[LoadingPage] prefab 缺少节点: ${path}`);
         }
+        return node;
     }
 
     private _setCoverSize(transform: UITransform, spriteFrame: SpriteFrame, containerWidth: number, containerHeight: number) {
@@ -310,18 +261,23 @@ export class LoadingPage extends Component {
     }
 
     private async _loadImageSpriteFrame(path: string): Promise<SpriteFrame | null> {
-        const spriteFrame = await ResManager.getInstance().loadFirst(
-            [`${path}/spriteFrame`, path],
-            SpriteFrame,
-        );
+        const spriteFrame = await this._loadOptional(`${path}/spriteFrame`, SpriteFrame);
         if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
 
-        const texture = await ResManager.getInstance().load(`${path}/texture`, Texture2D);
+        const texture = await this._loadOptional(`${path}/texture`, Texture2D);
         if (!texture) return null;
 
         const generatedSpriteFrame = new SpriteFrame();
         generatedSpriteFrame.texture = texture;
         return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+    }
+
+    private async _loadOptional<T extends SpriteFrame | Texture2D>(path: string, type: new () => T): Promise<T | null> {
+        return new Promise<T | null>((resolve) => {
+            resources.load(path, type, (error, asset) => {
+                resolve(error || !asset ? null : asset as T);
+            });
+        });
     }
 
     private _ensureSpriteFrameSize(spriteFrame: SpriteFrame, fallbackWidth = 0, fallbackHeight = 0) {
@@ -349,8 +305,6 @@ export class LoadingPage extends Component {
     }
 
     private _configureProgressFill(sprite: Sprite) {
-        if (!sprite.spriteFrame) return;
-
         sprite.sizeMode = Sprite.SizeMode.CUSTOM;
         sprite.type = Sprite.Type.FILLED;
         sprite.fillType = Sprite.FillType.HORIZONTAL;
@@ -360,7 +314,7 @@ export class LoadingPage extends Component {
 
     private _setLoadingProgress(value: number) {
         this._progress = Math.max(0, Math.min(1, value));
-        if (this.progressActivedSprite?.spriteFrame) {
+        if (this.progressActivedSprite) {
             this.progressActivedSprite.fillRange = this._progress;
         }
         if (this.progressLabel) {
@@ -386,14 +340,8 @@ export class LoadingPage extends Component {
         if (this._hasEnteredHome) return;
 
         this._hasEnteredHome = true;
-        UIManager.getInstance().openPage('HomePage');
-    }
-
-    private get _pageWidth() {
-        return this.node.getComponent(UITransform)?.contentSize.width ?? 750;
-    }
-
-    private get _pageHeight() {
-        return this.node.getComponent(UITransform)?.contentSize.height ?? 1334;
+        UIManager.getInstance().openPage('prefabs/pages/HomePage');
     }
 }
+
+js.setClassAlias(LoadingPage, 'LoadingPage');

@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, js, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
 
   function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -29,6 +29,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       Color = _cc.Color;
       Component = _cc.Component;
       Graphics = _cc.Graphics;
+      js = _cc.js;
       Label = _cc.Label;
       Node = _cc.Node;
       Rect = _cc.Rect;
@@ -50,7 +51,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
       _cclegacy._RF.push({}, "8b116Z08uZFSLOZ3edZ6E3o", "GamePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'tween', 'UITransform', 'Vec2', 'Vec3']);
+      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'js', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'tween', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
         ccclass
@@ -60,97 +61,59 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         constructor() {
           super(...arguments);
           this._backBtn = null;
+          this._backgroundSprite = null;
+          this._settingSprite = null;
+          this._titleSprite = null;
+          this._titleLabel = null;
+          this._boardNode = null;
+          this._boardSprite = null;
           this._pieceBackFrame = null;
           this._turnTipLabel = null;
           this._redInfoLabel = null;
           this._blueInfoLabel = null;
+          this._bottomIconSprites = {};
           this._pieces = [];
           this._selectedPiece = null;
           this._currentTurn = 'red';
+          this._playerCamp = null;
+          this._aiCamp = null;
           this._isBusy = false;
           this._isGameOver = false;
           this._aiProfile = null;
-          this._boardCellSize = 160;
-          this._boardStartX = -240;
-          this._boardStartY = 240;
+          this._cellHighlights = [];
+          this._pieceHighlights = new Map();
+          this._aiActionRepeatCounts = new Map();
+          this._isAICompromising = false;
+          this._boardDimension = 8;
+          this._boardCellWidth = 80;
+          this._boardCellHeight = 78.5;
+          this._boardStartX = -280;
+          this._boardStartY = 281;
         }
 
         start() {
           var _this = this;
 
           return _asyncToGenerator(function* () {
-            yield _this._createUI();
+            _this._hideLegacyEmptyNodes();
+
+            _this._bindPrefabReferences();
+
+            _this._applyStaticText();
+
+            _this._drawStaticGraphics();
+
+            _this._bindEvents();
+
+            yield _this._loadStaticImages();
+            yield _this._createPieces(_this._boardNode);
           })();
         }
 
-        _createUI() {
-          var _this2 = this;
+        onDestroy() {
+          var _this$_backBtn;
 
-          return _asyncToGenerator(function* () {
-            var _pageTransform$conten, _pageTransform$conten2;
-
-            var pageRoot = _this2.node;
-            var pageTransform = pageRoot.getComponent(UITransform);
-            var pageWidth = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten : 640;
-            var pageHeight = (_pageTransform$conten2 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten2 : 960;
-            yield _this2._createBackground(pageRoot, pageWidth, pageHeight);
-            yield _this2._createSettingButton(pageRoot, pageWidth, pageHeight);
-            yield _this2._createTitle(pageRoot, pageWidth, pageHeight);
-
-            _this2._createPlayerInfoBoxes(pageRoot, pageWidth, pageHeight);
-
-            _this2._createTurnTip(pageRoot, pageHeight);
-
-            yield _this2._createBoard(pageRoot, pageHeight);
-            yield _this2._createBottomActionButtons(pageRoot, pageHeight);
-          })();
-        }
-
-        _createBackground(parent, pageWidth, pageHeight) {
-          var _this3 = this;
-
-          return _asyncToGenerator(function* () {
-            var backgroundNode = new Node('Background');
-            backgroundNode.layer = parent.layer;
-            backgroundNode.parent = parent;
-            backgroundNode.setPosition(Vec3.ZERO);
-            backgroundNode.setSiblingIndex(0);
-            var backgroundTransform = backgroundNode.addComponent(UITransform);
-            backgroundTransform.setContentSize(pageWidth, pageHeight);
-            var backgroundSprite = backgroundNode.addComponent(Sprite);
-            backgroundSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-            var spriteFrame = yield _this3._loadBackgroundSpriteFrame();
-
-            if (!spriteFrame || !backgroundNode.isValid) {
-              var backgroundGraphics = backgroundNode.addComponent(Graphics);
-              backgroundGraphics.fillColor = new Color(245, 247, 250, 255);
-              backgroundGraphics.rect(-pageWidth / 2, -pageHeight / 2, pageWidth, pageHeight);
-              backgroundGraphics.fill();
-              return;
-            }
-
-            backgroundSprite.spriteFrame = spriteFrame;
-
-            _this3._setCoverSize(backgroundTransform, spriteFrame, pageWidth, pageHeight);
-          })();
-        }
-
-        _loadBackgroundSpriteFrame() {
-          var _this4 = this;
-
-          return _asyncToGenerator(function* () {
-            var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().loadFirst(['images/play/bg/spriteFrame', 'images/play/bg'], SpriteFrame);
-            if (spriteFrame) return _this4._ensureSpriteFrameSize(spriteFrame);
-            var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().load('images/play/bg/texture', Texture2D);
-            if (!texture) return null;
-            var generatedSpriteFrame = new SpriteFrame();
-            generatedSpriteFrame.texture = texture;
-            return _this4._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
-          })();
+          (_this$_backBtn = this._backBtn) == null || _this$_backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
         }
 
         _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
@@ -190,246 +153,276 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           return spriteFrame;
         }
 
-        _createSettingButton(parent, pageWidth, pageHeight) {
-          var _this5 = this;
-
-          return _asyncToGenerator(function* () {
-            var buttonSize = 96;
-            var margin = 36;
-            var settingBtnNode = new Node('SettingButton');
-            settingBtnNode.layer = parent.layer;
-            settingBtnNode.parent = parent;
-            settingBtnNode.setPosition(-pageWidth / 2 + buttonSize / 2 + margin, pageHeight / 2 - buttonSize / 2 - margin, 0);
-            var settingBtnTransform = settingBtnNode.addComponent(UITransform);
-            settingBtnTransform.setContentSize(buttonSize, buttonSize);
-            var settingSprite = settingBtnNode.addComponent(Sprite);
-            settingSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-            _this5._backBtn = settingBtnNode.addComponent(Button);
-            _this5._backBtn.interactable = true;
-
-            _this5._backBtn.node.on(Button.EventType.CLICK, _this5._onBack, _this5);
-
-            var spriteFrame = yield _this5._loadSettingSpriteFrame();
-
-            if (!spriteFrame || !settingBtnNode.isValid) {
-              console.warn('[GamePage] 设置按钮图片加载失败: images/play/setting');
-              return;
-            }
-
-            settingSprite.spriteFrame = spriteFrame;
-          })();
+        _hideLegacyEmptyNodes() {
+          ['background', 'content', 'ske'].forEach(name => {
+            var node = this.node.getChildByName(name);
+            if (node) node.active = false;
+          });
         }
 
-        _loadSettingSpriteFrame() {
-          var _this6 = this;
-
-          return _asyncToGenerator(function* () {
-            var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().loadFirst(['images/play/setting/spriteFrame', 'images/play/setting'], SpriteFrame);
-            if (spriteFrame) return _this6._ensureSpriteFrameSize(spriteFrame);
-            var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().load('images/play/setting/texture', Texture2D);
-            if (!texture) return null;
-            var generatedSpriteFrame = new SpriteFrame();
-            generatedSpriteFrame.texture = texture;
-            return _this6._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
-          })();
+        _bindPrefabReferences() {
+          this._backgroundSprite = this._bindSprite('Background');
+          this._settingSprite = this._bindSprite('SettingButton');
+          this._backBtn = this._bindButton('SettingButton');
+          this._titleSprite = this._bindSprite('Title');
+          this._titleLabel = this._bindLabel('Title/TitleLabel');
+          this._redInfoLabel = this._bindLabel('RedPlayerBox/Label');
+          this._blueInfoLabel = this._bindLabel('BluePlayerBox/Label');
+          this._turnTipLabel = this._bindLabel('TurnTip');
+          this._boardNode = this._findPrefabNode('Board');
+          this._boardSprite = this._bindSprite('Board');
+          this._bottomIconSprites = {
+            RestartButton: this._bindButtonIcon('RestartButton'),
+            UndoButton: this._bindButtonIcon('UndoButton'),
+            HintButton: this._bindButtonIcon('HintButton')
+          };
         }
 
-        _createTitle(parent, pageWidth, pageHeight) {
-          var _this7 = this;
+        _applyStaticText() {
+          if (this._titleLabel) {
+            this._titleLabel.string = '欢乐斗兽棋';
+            this._titleLabel.fontSize = 48;
+            this._titleLabel.lineHeight = 58;
+          }
 
-          return _asyncToGenerator(function* () {
-            var titleWidth = 488;
-            var titleHeight = 154;
-            var topMargin = 22;
-            var titleNode = new Node('Title');
-            titleNode.layer = parent.layer;
-            titleNode.parent = parent;
-            titleNode.setPosition(0, pageHeight / 2 - titleHeight / 2 - topMargin, 0);
-            var titleTransform = titleNode.addComponent(UITransform);
-            titleTransform.setContentSize(titleWidth, titleHeight);
-            var titleSprite = titleNode.addComponent(Sprite);
-            titleSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-            var spriteFrame = yield _this7._loadTitleSpriteFrame();
+          this._configureInfoLabel(this._redInfoLabel, '红方 16枚');
 
-            if (!spriteFrame || !titleNode.isValid) {
-              console.warn('[GamePage] 标题背景图片加载失败: images/play/title_bg');
-            } else {
-              titleSprite.spriteFrame = spriteFrame;
-            }
+          this._configureInfoLabel(this._blueInfoLabel, '蓝方 16枚');
 
-            var labelNode = new Node('TitleLabel');
-            labelNode.layer = parent.layer;
-            labelNode.parent = titleNode;
-            labelNode.setPosition(Vec3.ZERO);
-            var labelTransform = labelNode.addComponent(UITransform);
-            labelTransform.setContentSize(titleWidth, titleHeight);
-            var titleLabel = labelNode.addComponent(Label);
-            titleLabel.string = '欢乐斗兽棋';
-            titleLabel.fontSize = 48;
-            titleLabel.color = new Color(255, 255, 255, 255);
-            titleLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-            titleLabel.verticalAlign = Label.VerticalAlign.CENTER;
-          })();
+          if (this._turnTipLabel) {
+            this._turnTipLabel.string = '请翻开第一枚棋子决定阵营';
+            this._turnTipLabel.fontSize = 30;
+            this._turnTipLabel.lineHeight = 38;
+            this._turnTipLabel.color = new Color(255, 255, 255, 255);
+          }
+
+          this._configureBottomLabel('RestartButton/Label', '重来');
+
+          this._configureBottomLabel('UndoButton/Label', '悔棋');
+
+          this._configureBottomLabel('HintButton/Label', '提示');
         }
 
-        _loadTitleSpriteFrame() {
-          var _this8 = this;
-
-          return _asyncToGenerator(function* () {
-            var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().loadFirst(['images/play/title_bg/spriteFrame', 'images/play/title_bg'], SpriteFrame);
-            if (spriteFrame) return _this8._ensureSpriteFrameSize(spriteFrame);
-            var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().load('images/play/title_bg/texture', Texture2D);
-            if (!texture) return null;
-            var generatedSpriteFrame = new SpriteFrame();
-            generatedSpriteFrame.texture = texture;
-            return _this8._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
-          })();
-        }
-
-        _createPlayerInfoBoxes(parent, pageWidth, pageHeight) {
-          var boxWidth = 294;
-          var boxHeight = 164;
-          var centerY = pageHeight / 2 - 352;
-          var centerOffsetX = pageWidth * 0.26;
-          this._redInfoLabel = this._createPlayerInfoBox(parent, 'RedPlayerBox', '玩家红方 8枚', new Vec3(-centerOffsetX, centerY, 0), boxWidth, boxHeight, new Color(224, 68, 68, 255));
-          this._blueInfoLabel = this._createPlayerInfoBox(parent, 'BluePlayerBox', 'AI蓝方 8枚', new Vec3(centerOffsetX, centerY, 0), boxWidth, boxHeight, new Color(70, 142, 230, 255));
-        }
-
-        _createPlayerInfoBox(parent, nodeName, text, position, width, height, accentColor) {
-          var boxNode = new Node(nodeName);
-          boxNode.layer = parent.layer;
-          boxNode.parent = parent;
-          boxNode.setPosition(position);
-          var boxTransform = boxNode.addComponent(UITransform);
-          boxTransform.setContentSize(width, height);
-          var boxGraphics = boxNode.addComponent(Graphics);
-          boxGraphics.fillColor = new Color(5, 88, 55, 150);
-          boxGraphics.roundRect(-width / 2, -height / 2, width, height, 18);
-          boxGraphics.fill();
-          boxGraphics.strokeColor = accentColor;
-          boxGraphics.lineWidth = 4;
-          boxGraphics.roundRect(-width / 2, -height / 2, width, height, 18);
-          boxGraphics.stroke();
-          var labelNode = new Node('Label');
-          labelNode.layer = parent.layer;
-          labelNode.parent = boxNode;
-          labelNode.setPosition(Vec3.ZERO);
-          var labelTransform = labelNode.addComponent(UITransform);
-          labelTransform.setContentSize(width, height);
-          var label = labelNode.addComponent(Label);
+        _configureInfoLabel(label, text) {
+          if (!label) return;
           label.string = text;
           label.fontSize = 32;
           label.lineHeight = 42;
           label.color = new Color(255, 255, 255, 255);
-          label.horizontalAlign = Label.HorizontalAlign.CENTER;
-          label.verticalAlign = Label.VerticalAlign.CENTER;
-          return label;
         }
 
-        _createTurnTip(parent, pageHeight) {
-          var tipWidth = 360;
-          var tipHeight = 72;
-          var tipNode = new Node('TurnTip');
-          tipNode.layer = parent.layer;
-          tipNode.parent = parent;
-          tipNode.setPosition(0, pageHeight / 2 - 560, 0);
-          var tipTransform = tipNode.addComponent(UITransform);
-          tipTransform.setContentSize(tipWidth, tipHeight);
-          this._turnTipLabel = tipNode.addComponent(Label);
-          this._turnTipLabel.string = '红方回合 - 翻开暗子或选择己方棋子';
-          this._turnTipLabel.fontSize = 30;
-          this._turnTipLabel.color = new Color(255, 255, 255, 255);
-          this._turnTipLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          this._turnTipLabel.verticalAlign = Label.VerticalAlign.CENTER;
+        _configureBottomLabel(path, text) {
+          var label = this._bindLabel(path);
+
+          if (!label) return;
+          label.string = text;
+          label.fontSize = 28;
+          label.lineHeight = 36;
+          label.color = new Color(255, 255, 255, 255);
         }
 
-        _createBoard(parent, pageHeight) {
-          var _this9 = this;
+        _drawStaticGraphics() {
+          this._drawPlayerInfoBox('RedPlayerBox', new Color(224, 68, 68, 255));
+
+          this._drawPlayerInfoBox('BluePlayerBox', new Color(70, 142, 230, 255));
+        }
+
+        _drawPlayerInfoBox(path, accentColor) {
+          var _node$getComponent;
+
+          var node = this._findPrefabNode(path);
+
+          var transform = node == null ? void 0 : node.getComponent(UITransform);
+          if (!node || !transform) return;
+          var width = transform.contentSize.width;
+          var height = transform.contentSize.height;
+          var graphics = (_node$getComponent = node.getComponent(Graphics)) != null ? _node$getComponent : node.addComponent(Graphics);
+          graphics.clear();
+          graphics.fillColor = new Color(5, 88, 55, 150);
+          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
+          graphics.fill();
+          graphics.strokeColor = accentColor;
+          graphics.lineWidth = 4;
+          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
+          graphics.stroke();
+        }
+
+        _bindEvents() {
+          if (!this._backBtn) return;
+
+          this._backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
+
+          this._backBtn.node.on(Button.EventType.CLICK, this._onBack, this);
+        }
+
+        _loadStaticImages() {
+          var _this2 = this;
 
           return _asyncToGenerator(function* () {
-            var boardSize = 750;
-            var boardNode = new Node('Board');
-            boardNode.layer = parent.layer;
-            boardNode.parent = parent;
-            boardNode.setPosition(0, pageHeight / 2 - 990, 0);
-            var boardTransform = boardNode.addComponent(UITransform);
-            boardTransform.setContentSize(boardSize, boardSize);
-            var boardSprite = boardNode.addComponent(Sprite);
-            boardSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-            var spriteFrame = yield _this9._loadBoardSpriteFrame();
+            yield Promise.all([_this2._setSpriteFrame(_this2._backgroundSprite, 'images/play/bg', '[GamePage] 背景图加载失败: images/play/bg', true), _this2._setSpriteFrame(_this2._settingSprite, 'images/play/setting', '[GamePage] 设置按钮图片加载失败: images/play/setting'), _this2._setSpriteFrame(_this2._titleSprite, 'images/play/title_bg', '[GamePage] 标题背景图片加载失败: images/play/title_bg'), _this2._setSpriteFrame(_this2._boardSprite, 'images/play/play_bg', '[GamePage] 棋盘背景图片加载失败: images/play/play_bg'), _this2._setSpriteFrame(_this2._bottomIconSprites.RestartButton, 'images/play/icon1', '[GamePage] 底部按钮图标加载失败: images/play/icon1'), _this2._setSpriteFrame(_this2._bottomIconSprites.UndoButton, 'images/play/icon2', '[GamePage] 底部按钮图标加载失败: images/play/icon2'), _this2._setSpriteFrame(_this2._bottomIconSprites.HintButton, 'images/play/icon3', '[GamePage] 底部按钮图标加载失败: images/play/icon3')]);
+          })();
+        }
 
-            if (!spriteFrame || !boardNode.isValid) {
-              console.warn('[GamePage] 棋盘背景图片加载失败: images/play/play_bg');
+        _setSpriteFrame(sprite, imagePath, failMessage, coverPage) {
+          var _this3 = this;
+
+          return _asyncToGenerator(function* () {
+            if (coverPage === void 0) {
+              coverPage = false;
+            }
+
+            if (!sprite) {
+              console.warn(failMessage);
               return;
             }
 
-            boardSprite.spriteFrame = spriteFrame;
-            yield _this9._createPieces(boardNode);
+            var spriteFrame = yield _this3._loadImageSpriteFrame(imagePath);
+
+            if (!spriteFrame || !sprite.node.isValid) {
+              console.warn(failMessage);
+              return;
+            }
+
+            sprite.spriteFrame = spriteFrame;
+
+            if (coverPage) {
+              var pageTransform = _this3.node.getComponent(UITransform);
+
+              var transform = sprite.node.getComponent(UITransform);
+
+              if (pageTransform && transform) {
+                _this3._setCoverSize(transform, spriteFrame, pageTransform.contentSize.width, pageTransform.contentSize.height);
+              }
+            }
           })();
         }
 
-        _loadBoardSpriteFrame() {
-          var _this10 = this;
+        _bindButtonIcon(path) {
+          this._bindButton(path);
 
-          return _asyncToGenerator(function* () {
-            var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().loadFirst(['images/play/play_bg/spriteFrame', 'images/play/play_bg'], SpriteFrame);
-            if (spriteFrame) return _this10._ensureSpriteFrameSize(spriteFrame);
-            var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-              error: Error()
-            }), ResManager) : ResManager).getInstance().load('images/play/play_bg/texture', Texture2D);
-            if (!texture) return null;
-            var generatedSpriteFrame = new SpriteFrame();
-            generatedSpriteFrame.texture = texture;
-            return _this10._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
-          })();
+          return this._bindSprite(path + "/Icon");
+        }
+
+        _bindButton(path) {
+          var _node$getComponent2;
+
+          var node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          var button = (_node$getComponent2 = node.getComponent(Button)) != null ? _node$getComponent2 : node.addComponent(Button);
+          button.interactable = true;
+          return button;
+        }
+
+        _bindSprite(path) {
+          var _node$getComponent3;
+
+          var node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          var sprite = (_node$getComponent3 = node.getComponent(Sprite)) != null ? _node$getComponent3 : node.addComponent(Sprite);
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          return sprite;
+        }
+
+        _bindLabel(path) {
+          var _node$getComponent4;
+
+          var node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          var label = (_node$getComponent4 = node.getComponent(Label)) != null ? _node$getComponent4 : node.addComponent(Label);
+          label.horizontalAlign = Label.HorizontalAlign.CENTER;
+          label.verticalAlign = Label.VerticalAlign.CENTER;
+          label.overflow = Label.Overflow.CLAMP;
+          return label;
+        }
+
+        _preparePrefabNode(node) {
+          var _node$getComponent5;
+
+          node.layer = this.node.layer;
+          (_node$getComponent5 = node.getComponent(UITransform)) != null ? _node$getComponent5 : node.addComponent(UITransform);
+        }
+
+        _findPrefabNode(path) {
+          var node = path.split('/').reduce((current, name) => {
+            var _current$getChildByNa;
+
+            return (_current$getChildByNa = current == null ? void 0 : current.getChildByName(name)) != null ? _current$getChildByNa : null;
+          }, this.node);
+
+          if (!node) {
+            console.warn("[GamePage] prefab \u7F3A\u5C11\u8282\u70B9: " + path);
+          }
+
+          return node;
         }
 
         _createPieces(boardNode) {
-          var _this11 = this;
+          var _this4 = this;
 
           return _asyncToGenerator(function* () {
-            _this11._pieceBackFrame = yield _this11._loadImageSpriteFrame('images/play/piece_bg');
+            if (!boardNode) {
+              console.warn('[GamePage] prefab 缺少节点: Board');
+              return;
+            }
 
-            if (!_this11._pieceBackFrame) {
+            [...boardNode.children].forEach(child => child.destroy());
+            _this4._pieceBackFrame = yield _this4._loadImageSpriteFrame('images/play/piece_bg');
+
+            if (!_this4._pieceBackFrame) {
               console.warn('[GamePage] 棋子背面图片加载失败: images/play/piece_bg');
             }
 
-            _this11._pieces = [];
-            _this11._selectedPiece = null;
-            _this11._currentTurn = 'red';
-            _this11._isBusy = false;
-            _this11._isGameOver = false;
-            _this11._aiProfile = _this11._createRandomAIProfile();
+            _this4._pieces = [];
+            _this4._selectedPiece = null;
+            _this4._currentTurn = 'red';
+            _this4._playerCamp = null;
+            _this4._aiCamp = null;
+            _this4._isBusy = false;
+            _this4._isGameOver = false;
+            _this4._aiProfile = _this4._createRandomAIProfile();
+            _this4._cellHighlights = [];
 
-            var pieces = _this11._shufflePieces(_this11._createPieceData());
+            _this4._pieceHighlights.clear();
 
-            var pieceSize = 146;
+            _this4._aiActionRepeatCounts.clear();
 
-            _this11._createBoardCells(boardNode);
+            _this4._isAICompromising = false;
+
+            var pieces = _this4._shufflePieces(_this4._createPieceData());
+
+            var piecePositions = _this4._shufflePiecePositions(_this4._createPiecePositions());
+
+            var pieceSize = 70;
+
+            _this4._createBoardCells(boardNode);
 
             pieces.forEach((piece, index) => {
-              var row = Math.floor(index / 4);
-              var col = index % 4;
+              var {
+                row,
+                col
+              } = piecePositions[index];
 
-              var gamePiece = _this11._createPieceNode(piece, index, row, col, pieceSize, boardNode.layer);
+              var gamePiece = _this4._createPieceNode(piece, index, row, col, pieceSize, boardNode.layer);
 
               gamePiece.node.parent = boardNode;
-              gamePiece.node.setPosition(_this11._getCellPosition(row, col));
+              gamePiece.node.setPosition(_this4._getCellPosition(row, col));
 
-              _this11._pieces.push(gamePiece);
+              _this4._pieces.push(gamePiece);
             });
 
-            _this11._refreshGameInfo();
+            _this4._refreshGameInfo();
           })();
         }
 
@@ -442,7 +435,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.7,
             minThinkTime: 0.35,
             maxThinkTime: 0.95,
-            moodTexts: ['蓝方有点犹豫...', '蓝方随手试探', '蓝方想先看一眼局面']
+            moodTexts: ['AI有点犹豫...', 'AI随手试探', 'AI想先看一眼局面']
           }, {
             difficulty: '中级',
             depth: 1,
@@ -451,7 +444,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.35,
             minThinkTime: 0.55,
             maxThinkTime: 1.15,
-            moodTexts: ['蓝方正在权衡一步棋', '蓝方观察相邻威胁', '蓝方试着保持节奏']
+            moodTexts: ['AI正在权衡一步棋', 'AI观察相邻威胁', 'AI试着保持节奏']
           }, {
             difficulty: '高级',
             depth: 2,
@@ -460,7 +453,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.18,
             minThinkTime: 0.8,
             maxThinkTime: 1.45,
-            moodTexts: ['蓝方开始算后续变化', '蓝方盯上了关键位置', '蓝方放慢节奏寻找机会']
+            moodTexts: ['AI开始算后续变化', 'AI盯上了关键位置', 'AI放慢节奏寻找机会']
           }, {
             difficulty: '地狱',
             depth: 3,
@@ -469,54 +462,155 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.05,
             minThinkTime: 1.05,
             maxThinkTime: 1.75,
-            moodTexts: ['蓝方冷静计算三步变化', '蓝方几乎没有破绽', '蓝方在压缩你的活动空间']
+            moodTexts: ['AI冷静计算三步变化', 'AI几乎没有破绽', 'AI在压缩你的活动空间']
           }];
           return profiles[Math.floor(Math.random() * profiles.length)];
         }
 
+        _assignCamps(playerCamp) {
+          this._playerCamp = playerCamp;
+          this._aiCamp = playerCamp === 'red' ? 'blue' : 'red';
+          this._currentTurn = playerCamp;
+
+          this._refreshGameInfo();
+
+          this._setTurnTip("\u4F60\u6210\u4E3A" + this._getCampLabel(playerCamp) + "\uFF0CAI\u4E3A" + this._getCampLabel(this._aiCamp));
+        }
+
+        _isPlayerTurn() {
+          return !!this._playerCamp && this._currentTurn === this._playerCamp;
+        }
+
+        _isAITurn() {
+          return !!this._aiCamp && this._currentTurn === this._aiCamp;
+        }
+
+        _getCampLabel(camp) {
+          if (camp === 'red') return '红方';
+          if (camp === 'blue') return '蓝方';
+          return '';
+        }
+
         _createBoardCells(boardNode) {
-          var _this12 = this;
+          var _this5 = this;
 
           var _loop = function _loop(row) {
+            _this5._cellHighlights[row] = [];
+
             var _loop2 = function _loop2(col) {
               var cellNode = new Node("Cell_" + row + "_" + col);
               cellNode.layer = boardNode.layer;
               cellNode.parent = boardNode;
-              cellNode.setPosition(_this12._getCellPosition(row, col));
+              cellNode.setPosition(_this5._getCellPosition(row, col));
               var cellTransform = cellNode.addComponent(UITransform);
-              cellTransform.setContentSize(_this12._boardCellSize, _this12._boardCellSize);
+              cellTransform.setContentSize(_this5._boardCellWidth, _this5._boardCellHeight);
               var button = cellNode.addComponent(Button);
               button.interactable = true;
-              cellNode.on(Button.EventType.CLICK, () => _this12._onCellClick(row, col), _this12);
+              cellNode.on(Button.EventType.CLICK, () => _this5._onCellClick(row, col), _this5);
+              var highlightNode = new Node('MoveHighlight');
+              highlightNode.layer = boardNode.layer;
+              highlightNode.parent = cellNode;
+              highlightNode.active = false;
+              var highlightTransform = highlightNode.addComponent(UITransform);
+              highlightTransform.setContentSize(_this5._boardCellWidth - 18, _this5._boardCellHeight - 18);
+              var highlightGraphics = highlightNode.addComponent(Graphics);
+              var halfWidth = (_this5._boardCellWidth - 18) / 2;
+              var halfHeight = (_this5._boardCellHeight - 18) / 2;
+              highlightGraphics.fillColor = new Color(103, 232, 151, 90);
+              highlightGraphics.roundRect(-halfWidth, -halfHeight, _this5._boardCellWidth - 18, _this5._boardCellHeight - 18, 14);
+              highlightGraphics.fill();
+              highlightGraphics.strokeColor = new Color(103, 232, 151, 220);
+              highlightGraphics.lineWidth = 4;
+              highlightGraphics.roundRect(-halfWidth, -halfHeight, _this5._boardCellWidth - 18, _this5._boardCellHeight - 18, 14);
+              highlightGraphics.stroke();
+              _this5._cellHighlights[row][col] = highlightNode;
             };
 
-            for (var col = 0; col < 4; col++) {
+            for (var col = 0; col < _this5._boardDimension; col++) {
               _loop2(col);
             }
           };
 
-          for (var row = 0; row < 4; row++) {
+          for (var row = 0; row < this._boardDimension; row++) {
             _loop(row);
           }
         }
 
         _getCellPosition(row, col) {
-          return new Vec3(this._boardStartX + col * this._boardCellSize, this._boardStartY - row * this._boardCellSize, 0);
+          return new Vec3(this._boardStartX + col * this._boardCellWidth, this._boardStartY - row * this._boardCellHeight, 0);
         }
 
         _createPieceData() {
           var animals = ['象', '狮', '虎', '豹', '狼', '狗', '猫', '鼠'];
-          return [...animals.map(animal => ({
+          return [...animals.flatMap(animal => [{
             animal,
             camp: 'red'
-          })), ...animals.map(animal => ({
+          }, {
+            animal,
+            camp: 'red'
+          }]), ...animals.flatMap(animal => [{
             animal,
             camp: 'blue'
-          }))];
+          }, {
+            animal,
+            camp: 'blue'
+          }])];
+        }
+
+        _createPiecePositions() {
+          var positions = [];
+          var lastIndex = this._boardDimension - 1;
+
+          for (var col = 0; col < this._boardDimension; col++) {
+            positions.push({
+              row: 0,
+              col
+            });
+            positions.push({
+              row: lastIndex,
+              col
+            });
+          }
+
+          for (var row = 1; row < lastIndex; row++) {
+            positions.push({
+              row,
+              col: 0
+            });
+            positions.push({
+              row,
+              col: lastIndex
+            });
+          }
+
+          var centerLeft = this._boardDimension / 2 - 1;
+          var centerRight = this._boardDimension / 2;
+          positions.push({
+            row: centerLeft,
+            col: centerLeft
+          }, {
+            row: centerLeft,
+            col: centerRight
+          }, {
+            row: centerRight,
+            col: centerLeft
+          }, {
+            row: centerRight,
+            col: centerRight
+          });
+          return positions;
+        }
+
+        _shufflePiecePositions(positions) {
+          return this._shuffleArray(positions);
         }
 
         _shufflePieces(pieces) {
-          var shuffled = [...pieces];
+          return this._shuffleArray(pieces);
+        }
+
+        _shuffleArray(items) {
+          var shuffled = [...items];
 
           for (var i = shuffled.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -556,6 +650,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           frontNode.parent = pieceNode;
           frontNode.layer = layer;
           frontNode.active = false;
+
+          var highlightNode = this._createPieceHighlightNode(size, layer);
+
+          highlightNode.parent = pieceNode;
+          highlightNode.active = false;
           var gamePiece = {
             id,
             row,
@@ -569,7 +668,25 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             isAlive: true
           };
           pieceNode.on(Button.EventType.CLICK, () => this._onPieceClick(gamePiece), this);
+
+          this._pieceHighlights.set(id, highlightNode);
+
           return gamePiece;
+        }
+
+        _createPieceHighlightNode(size, layer) {
+          var highlightNode = new Node('CaptureHighlight');
+          highlightNode.layer = layer;
+          highlightNode.setPosition(Vec3.ZERO);
+          var transform = highlightNode.addComponent(UITransform);
+          transform.setContentSize(size + 14, size + 14);
+          var graphics = highlightNode.addComponent(Graphics);
+          var half = (size + 14) / 2;
+          graphics.strokeColor = new Color(255, 238, 88, 255);
+          graphics.lineWidth = Math.max(4, Math.round(size * 0.055));
+          graphics.roundRect(-half, -half, size + 14, size + 14, Math.round(size * 0.12));
+          graphics.stroke();
+          return highlightNode;
         }
 
         _createPieceFrontNode(piece, size, layer) {
@@ -581,11 +698,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var graphics = frontNode.addComponent(Graphics);
           var half = size / 2;
           graphics.fillColor = new Color(244, 189, 133, 255);
-          graphics.roundRect(-half, -half, size, size, 14);
+          graphics.roundRect(-half, -half, size, size, Math.round(size * 0.1));
           graphics.fill();
           graphics.strokeColor = piece.camp === 'red' ? new Color(225, 52, 44, 255) : new Color(40, 124, 232, 255);
-          graphics.lineWidth = 5;
-          graphics.roundRect(-half + 4, -half + 4, size - 8, size - 8, 12);
+          var lineWidth = Math.max(3, Math.round(size * 0.045));
+          graphics.lineWidth = lineWidth;
+          graphics.roundRect(-half + lineWidth, -half + lineWidth, size - lineWidth * 2, size - lineWidth * 2, Math.round(size * 0.09));
           graphics.stroke();
           var labelNode = new Node('Label');
           labelNode.parent = frontNode;
@@ -595,8 +713,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           labelTransform.setContentSize(size, size);
           var label = labelNode.addComponent(Label);
           label.string = piece.animal;
-          label.fontSize = 76;
-          label.lineHeight = 86;
+          label.fontSize = Math.round(size * 0.52);
+          label.lineHeight = Math.round(size * 0.6);
           label.color = piece.camp === 'red' ? new Color(214, 44, 36, 255) : new Color(34, 112, 224, 255);
           label.horizontalAlign = Label.HorizontalAlign.CENTER;
           label.verticalAlign = Label.VerticalAlign.CENTER;
@@ -607,16 +725,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var graphics = pieceNode.addComponent(Graphics);
           var half = size / 2;
           graphics.fillColor = new Color(147, 92, 46, 255);
-          graphics.roundRect(-half, -half, size, size, 14);
+          graphics.roundRect(-half, -half, size, size, Math.round(size * 0.1));
           graphics.fill();
           graphics.strokeColor = new Color(190, 130, 75, 255);
-          graphics.lineWidth = 4;
-          graphics.roundRect(-half + 3, -half + 3, size - 6, size - 6, 12);
+          var lineWidth = Math.max(3, Math.round(size * 0.04));
+          graphics.lineWidth = lineWidth;
+          graphics.roundRect(-half + lineWidth, -half + lineWidth, size - lineWidth * 2, size - lineWidth * 2, Math.round(size * 0.09));
           graphics.stroke();
         }
 
         _onCellClick(row, col) {
-          if (this._isBusy || this._isGameOver || this._currentTurn !== 'red' || !this._selectedPiece) return;
+          if (this._isBusy || this._isGameOver || !this._isPlayerTurn() || !this._selectedPiece) return;
           if (this._getAlivePieceAt(row, col)) return;
 
           if (!this._isAdjacent(this._selectedPiece.row, this._selectedPiece.col, row, col)) {
@@ -629,7 +748,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _onPieceClick(piece) {
-          if (this._isBusy || this._isGameOver || this._currentTurn !== 'red' || !piece.isAlive) return;
+          if (this._isBusy || this._isGameOver || !piece.isAlive) return;
+          if (!this._playerCamp && piece.isRevealed) return;
+          if (this._playerCamp && !this._isPlayerTurn()) return;
 
           if (!piece.isRevealed) {
             this._playRevealTurn(piece);
@@ -637,20 +758,20 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             return;
           }
 
-          if (piece.camp === 'red') {
+          if (piece.camp === this._playerCamp) {
             this._selectPiece(piece);
 
             return;
           }
 
           if (!this._selectedPiece) {
-            this._setTurnTip('请选择一个红方棋子');
+            this._setTurnTip("\u8BF7\u9009\u62E9\u4E00\u4E2A" + this._getCampLabel(this._playerCamp) + "\u68CB\u5B50");
 
             return;
           }
 
           if (!this._canMoveTo(this._selectedPiece, piece)) {
-            this._setTurnTip('只能攻击相邻的蓝方棋子');
+            this._setTurnTip("\u53EA\u80FD\u653B\u51FB\u76F8\u90BB\u7684" + this._getCampLabel(this._aiCamp) + "\u68CB\u5B50");
 
             return;
           }
@@ -669,12 +790,16 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._clearSelection();
 
-          this._setTurnTip('红方翻开棋子...');
+          this._setTurnTip(this._playerCamp ? this._getCampLabel(this._playerCamp) + "\u7FFB\u5F00\u68CB\u5B50..." : '首翻定阵营...');
 
           this._revealPiece(piece, () => {
+            if (!this._playerCamp) {
+              this._assignCamps(piece.camp);
+            }
+
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('blue');
+            this._switchTurn(this._aiCamp);
 
             this._scheduleAITurn();
           });
@@ -685,12 +810,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._clearSelection();
 
-          this._setTurnTip(attacker.animal === target.animal ? "\u7EA2\u65B9 " + attacker.animal + " \u4E0E " + target.animal + " \u706B\u5E76" : "\u7EA2\u65B9 " + attacker.animal + " \u5403\u6389 " + target.animal);
+          this._setTurnTip(attacker.animal === target.animal ? this._getCampLabel(attacker.camp) + " " + attacker.animal + " \u4E0E " + target.animal + " \u706B\u5E76" : this._getCampLabel(attacker.camp) + " " + attacker.animal + " \u5403\u6389 " + target.animal);
 
           this._capturePiece(attacker, target, () => {
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('blue');
+            this._switchTurn(this._aiCamp);
 
             this._scheduleAITurn();
           });
@@ -701,12 +826,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._clearSelection();
 
-          this._setTurnTip("\u7EA2\u65B9 " + piece.animal + " \u79FB\u52A8");
+          this._setTurnTip(this._getCampLabel(piece.camp) + " " + piece.animal + " \u79FB\u52A8");
 
           this._movePiece(piece, row, col, () => {
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('blue');
+            this._switchTurn(this._aiCamp);
 
             this._scheduleAITurn();
           });
@@ -725,12 +850,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _runAITurn() {
-          if (this._isGameOver || this._currentTurn !== 'blue') return;
+          if (this._isGameOver || !this._isAITurn()) return;
 
           var action = this._chooseAIAction();
 
           if (!action) {
-            this._switchTurn('red');
+            this._switchTurn(this._playerCamp);
 
             return;
           }
@@ -741,17 +866,19 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             var target = this._getPieceById(action.targetId);
 
             if (!attacker || !target) {
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
 
               return;
             }
 
-            this._setTurnTip(attacker.animal === target.animal ? "\u84DD\u65B9 " + attacker.animal + " \u4E0E " + target.animal + " \u706B\u5E76" : "\u84DD\u65B9 " + attacker.animal + " \u5403\u6389 " + target.animal);
+            this._setTurnTip(attacker.animal === target.animal ? this._getCampLabel(attacker.camp) + " " + attacker.animal + " \u4E0E " + target.animal + " \u706B\u5E76" : this._getCampLabel(attacker.camp) + " " + attacker.animal + " \u5403\u6389 " + target.animal);
+
+            this._recordAIAction(action, attacker);
 
             this._capturePiece(attacker, target, () => {
               if (this._finishTurnIfNeeded()) return;
 
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
             });
 
             return;
@@ -761,17 +888,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             var _piece = this._getPieceById(action.pieceId);
 
             if (!_piece) {
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
 
               return;
             }
 
-            this._setTurnTip('蓝方翻开棋子...');
+            this._setTurnTip(this._getCampLabel(this._aiCamp) + "\u7FFB\u5F00\u68CB\u5B50...");
 
             this._revealPiece(_piece, () => {
               if (this._finishTurnIfNeeded()) return;
 
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
             });
 
             return;
@@ -780,17 +907,19 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var piece = this._getPieceById(action.pieceId);
 
           if (!piece || action.row === undefined || action.col === undefined) {
-            this._switchTurn('red');
+            this._switchTurn(this._playerCamp);
 
             return;
           }
 
-          this._setTurnTip("\u84DD\u65B9 " + piece.animal + " \u79FB\u52A8");
+          this._setTurnTip(this._getCampLabel(piece.camp) + " " + piece.animal + " \u79FB\u52A8");
+
+          this._recordAIAction(action, piece);
 
           this._movePiece(piece, action.row, action.col, () => {
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('red');
+            this._switchTurn(this._playerCamp);
           });
         }
 
@@ -798,20 +927,29 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var _this$_aiProfile, _humanPool$pickIndex;
 
           var profile = (_this$_aiProfile = this._aiProfile) != null ? _this$_aiProfile : this._createRandomAIProfile();
+          var aiCamp = this._aiCamp;
+          var playerCamp = this._playerCamp;
+          if (!aiCamp || !playerCamp) return null;
 
           var simPieces = this._createSimPieces();
 
-          var actions = this._generateSimActions(simPieces, 'blue');
+          var actions = this._generateSimActions(simPieces, aiCamp);
 
           if (actions.length <= 0) return null;
           var scoredActions = actions.map(action => {
             var nextPieces = this._applySimAction(simPieces, action);
 
-            var futureScore = profile.depth <= 0 ? this._evaluateSimBoard(nextPieces, profile) : this._scoreFutureBoard(nextPieces, 'red', profile.depth, profile);
+            var futureScore = profile.depth <= 0 ? this._evaluateSimBoard(nextPieces, profile) : this._scoreFutureBoard(nextPieces, playerCamp, profile.depth, profile);
             return _extends({}, action, {
-              score: this._scoreImmediateAction(simPieces, action, 'blue', profile) + futureScore
+              score: this._scoreImmediateAction(simPieces, action, aiCamp, profile) + futureScore
             });
           }).sort((a, b) => b.score - a.score);
+          var compromiseActions = scoredActions.filter(action => !this._shouldAICompromiseOnAction(simPieces, action));
+          this._isAICompromising = compromiseActions.length > 0 && compromiseActions[0] !== scoredActions[0];
+
+          if (compromiseActions.length > 0) {
+            scoredActions = compromiseActions;
+          }
 
           if (Math.random() < profile.mistakeRate) {
             var mistakePoolSize = Math.max(1, Math.ceil(scoredActions.length * 0.45));
@@ -822,6 +960,41 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var humanPool = scoredActions.slice(0, Math.min(scoredActions.length, profile.difficulty === '地狱' ? 1 : 3));
           var pickIndex = profile.difficulty === '地狱' ? 0 : Math.floor(Math.random() * humanPool.length);
           return (_humanPool$pickIndex = humanPool[pickIndex]) != null ? _humanPool$pickIndex : scoredActions[0];
+        }
+
+        _shouldAICompromiseOnAction(pieces, action) {
+          var _this$_aiActionRepeat;
+
+          var key = this._getAIRepeatActionKey(pieces, action);
+
+          return !!key && ((_this$_aiActionRepeat = this._aiActionRepeatCounts.get(key)) != null ? _this$_aiActionRepeat : 0) >= 2;
+        }
+
+        _recordAIAction(action, piece) {
+          var _this$_aiActionRepeat2;
+
+          var key = this._getAIRepeatActionKey(this._createSimPieces(), action, piece);
+
+          if (!key) return;
+
+          this._aiActionRepeatCounts.set(key, ((_this$_aiActionRepeat2 = this._aiActionRepeatCounts.get(key)) != null ? _this$_aiActionRepeat2 : 0) + 1);
+
+          if (this._isAICompromising) {
+            this._setTurnTip('AI放弃重复追击，换一种走法');
+
+            this._isAICompromising = false;
+          }
+        }
+
+        _getAIRepeatActionKey(pieces, action, livePiece) {
+          if (action.type !== 'move') return null;
+          if (action.row === undefined || action.col === undefined) return null;
+          var piece = livePiece != null ? livePiece : pieces.find(item => item.id === action.pieceId);
+          if (!piece) return null;
+          var from = piece.row + "," + piece.col;
+          var to = action.row + "," + action.col;
+          var edge = [from, to].sort().join('<>');
+          return "move:" + piece.id + ":" + edge;
         }
 
         _createSimPieces() {
@@ -837,24 +1010,28 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _scoreFutureBoard(pieces, turn, depth, profile) {
+          var aiCamp = this._aiCamp;
+          var playerCamp = this._playerCamp;
+          if (!aiCamp || !playerCamp) return 0;
+
           var winner = this._getSimWinner(pieces);
 
-          if (winner === 'blue') return 10000 + depth * 100;
-          if (winner === 'red') return -10000 - depth * 100;
+          if (winner === aiCamp) return 10000 + depth * 100;
+          if (winner === playerCamp) return -10000 - depth * 100;
           if (winner === 'draw') return 0;
           if (depth <= 0) return this._evaluateSimBoard(pieces, profile);
 
           var actions = this._generateSimActions(pieces, turn).map(action => _extends({}, action, {
             score: this._scoreImmediateAction(pieces, action, turn, profile)
-          })).sort((a, b) => turn === 'blue' ? b.score - a.score : a.score - b.score).slice(0, profile.depth >= 2 ? 10 : 16);
+          })).sort((a, b) => turn === aiCamp ? b.score - a.score : a.score - b.score).slice(0, profile.depth >= 2 ? 10 : 16);
 
           if (actions.length <= 0) return this._evaluateSimBoard(pieces, profile);
           var scores = actions.map(action => {
             var nextPieces = this._applySimAction(pieces, action);
 
-            return this._scoreFutureBoard(nextPieces, turn === 'blue' ? 'red' : 'blue', depth - 1, profile);
+            return this._scoreFutureBoard(nextPieces, turn === aiCamp ? playerCamp : aiCamp, depth - 1, profile);
           });
-          return turn === 'blue' ? Math.max(...scores) : Math.min(...scores);
+          return turn === aiCamp ? Math.max(...scores) : Math.min(...scores);
         }
 
         _generateSimActions(pieces, camp) {
@@ -944,7 +1121,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           }
 
           if (action.type === 'reveal') {
-            var centerBias = 2 - (Math.abs(piece.row - 1.5) + Math.abs(piece.col - 1.5)) * 0.2;
+            var boardCenter = (this._boardDimension - 1) / 2;
+            var centerBias = 2 - (Math.abs(piece.row - boardCenter) + Math.abs(piece.col - boardCenter)) * 0.2;
             return profile.revealBias * 10 + centerBias;
           }
 
@@ -955,11 +1133,15 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _evaluateSimBoard(pieces, profile) {
-          var blueScore = this._evaluateCampInSim(pieces, 'blue', profile);
+          var aiCamp = this._aiCamp;
+          var playerCamp = this._playerCamp;
+          if (!aiCamp || !playerCamp) return 0;
 
-          var redScore = this._evaluateCampInSim(pieces, 'red', profile);
+          var aiScore = this._evaluateCampInSim(pieces, aiCamp, profile);
 
-          return blueScore - redScore;
+          var playerScore = this._evaluateCampInSim(pieces, playerCamp, profile);
+
+          return aiScore - playerScore;
         }
 
         _evaluateCampInSim(pieces, camp, profile) {
@@ -995,7 +1177,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             row,
             col: col + 1
           }];
-          return candidates.filter(cell => cell.row >= 0 && cell.row < 4 && cell.col >= 0 && cell.col < 4 && !pieces.some(piece => piece.isAlive && piece.row === cell.row && piece.col === cell.col));
+          return candidates.filter(cell => cell.row >= 0 && cell.row < this._boardDimension && cell.col >= 0 && cell.col < this._boardDimension && !pieces.some(piece => piece.isAlive && piece.row === cell.row && piece.col === cell.col));
         }
 
         _canSimCapture(attacker, target) {
@@ -1019,7 +1201,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         _revealPiece(piece, onComplete) {
           var button = piece.node.getComponent(Button);
           if (button) button.interactable = false;
-          tween(piece.node).to(0.12, {
+          piece.node.setScale(Vec3.ONE);
+          piece.backNode.setScale(Vec3.ONE);
+          piece.frontNode.setScale(new Vec3(0.04, 1.06, 1));
+          piece.backNode.active = true;
+          piece.frontNode.active = false;
+          tween(piece.backNode).to(0.12, {
             scale: new Vec3(0.04, 1.06, 1)
           }, {
             easing: 'quadIn'
@@ -1027,14 +1214,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             piece.isRevealed = true;
             piece.backNode.active = false;
             piece.frontNode.active = true;
-            if (button) button.interactable = true;
 
             this._refreshGameInfo();
-          }).to(0.16, {
-            scale: Vec3.ONE
-          }, {
-            easing: 'backOut'
-          }).call(onComplete).start();
+
+            tween(piece.frontNode).to(0.16, {
+              scale: Vec3.ONE
+            }, {
+              easing: 'backOut'
+            }).call(() => {
+              piece.node.setScale(Vec3.ONE);
+              piece.backNode.setScale(Vec3.ONE);
+              piece.frontNode.setScale(Vec3.ONE);
+              if (button) button.interactable = true;
+              onComplete();
+            }).start();
+          }).start();
         }
 
         _capturePiece(attacker, target, onComplete) {
@@ -1123,7 +1317,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           if (this._selectedPiece === piece) {
             this._clearSelection();
 
-            this._setTurnTip('红方回合 - 翻开暗子或选择己方棋子');
+            this._setTurnTip(this._getCampLabel(this._playerCamp) + "\u56DE\u5408 - \u7FFB\u5F00\u6697\u5B50\u6216\u9009\u62E9\u5DF1\u65B9\u68CB\u5B50");
 
             return;
           }
@@ -1133,17 +1327,51 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._selectedPiece = piece;
           piece.node.setScale(new Vec3(1.08, 1.08, 1));
 
-          this._setTurnTip("\u5DF2\u9009\u62E9\u7EA2\u65B9 " + piece.animal);
+          this._refreshSelectionHighlights(piece);
+
+          this._setTurnTip("\u5DF2\u9009\u62E9" + this._getCampLabel(piece.camp) + " " + piece.animal);
         }
 
         _clearSelection() {
+          this._clearHighlights();
+
           if (!this._selectedPiece) return;
 
-          if (this._selectedPiece.node.isValid) {
+          if (this._selectedPiece.node.isValid && this._selectedPiece.isAlive) {
             this._selectedPiece.node.setScale(Vec3.ONE);
           }
 
           this._selectedPiece = null;
+        }
+
+        _refreshSelectionHighlights(piece) {
+          this._clearHighlights();
+
+          this._getEmptyAdjacentCells(piece.row, piece.col).forEach(cell => {
+            var _this$_cellHighlights;
+
+            var highlight = (_this$_cellHighlights = this._cellHighlights[cell.row]) == null ? void 0 : _this$_cellHighlights[cell.col];
+            if (highlight) highlight.active = true;
+          });
+
+          this._pieces.forEach(target => {
+            if (!target.isAlive || !target.isRevealed || target.camp === piece.camp) return;
+            if (!this._canMoveTo(piece, target) || !this._canCapture(piece, target)) return;
+
+            var highlight = this._pieceHighlights.get(target.id);
+
+            if (highlight) highlight.active = true;
+          });
+        }
+
+        _clearHighlights() {
+          this._cellHighlights.forEach(row => row.forEach(highlight => {
+            if (highlight != null && highlight.isValid) highlight.active = false;
+          }));
+
+          this._pieceHighlights.forEach(highlight => {
+            if (highlight != null && highlight.isValid) highlight.active = false;
+          });
         }
 
         _switchTurn(turn) {
@@ -1167,7 +1395,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           if (winner === 'draw') {
             this._setTurnTip('双方同归于尽，平局！');
           } else {
-            this._setTurnTip(winner === 'red' ? '红方获胜！蓝方棋子已被吃完' : '蓝方获胜！红方棋子已被吃完');
+            var winnerRole = winner === this._playerCamp ? '你获胜' : 'AI获胜';
+
+            this._setTurnTip(winnerRole + "\uFF01" + this._getCampLabel(winner === 'red' ? 'blue' : 'red') + "\u68CB\u5B50\u5DF2\u88AB\u5403\u5B8C");
           }
 
           this._setAllPieceButtonsEnabled(false);
@@ -1196,6 +1426,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _refreshGameInfo() {
+          var _this$_aiProfile$diff, _this$_aiProfile2;
+
           var redAlive = this._countAlivePieces('red');
 
           var blueAlive = this._countAlivePieces('blue');
@@ -1204,18 +1436,26 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           var blueRevealed = this._countRevealedPieces('blue');
 
+          var aiDifficulty = (_this$_aiProfile$diff = (_this$_aiProfile2 = this._aiProfile) == null ? void 0 : _this$_aiProfile2.difficulty) != null ? _this$_aiProfile$diff : '';
+          var redRole = this._playerCamp === 'red' ? '玩家红方' : this._aiCamp === 'red' ? "AI" + aiDifficulty + "\u7EA2\u65B9" : '红方';
+          var blueRole = this._playerCamp === 'blue' ? '玩家蓝方' : this._aiCamp === 'blue' ? "AI" + aiDifficulty + "\u84DD\u65B9" : '蓝方';
+
           if (this._redInfoLabel) {
-            this._redInfoLabel.string = "\u73A9\u5BB6\u7EA2\u65B9 " + redAlive + "\u679A\n\u660E\u5B50 " + redRevealed;
+            this._redInfoLabel.string = redRole + " " + redAlive + "\u679A\n\u660E\u5B50 " + redRevealed;
           }
 
           if (this._blueInfoLabel) {
-            var _this$_aiProfile$diff, _this$_aiProfile2;
-
-            this._blueInfoLabel.string = "AI" + ((_this$_aiProfile$diff = (_this$_aiProfile2 = this._aiProfile) == null ? void 0 : _this$_aiProfile2.difficulty) != null ? _this$_aiProfile$diff : '蓝方') + " " + blueAlive + "\u679A\n\u660E\u5B50 " + blueRevealed;
+            this._blueInfoLabel.string = blueRole + " " + blueAlive + "\u679A\n\u660E\u5B50 " + blueRevealed;
           }
 
-          if (!this._isGameOver) {
-            this._setTurnTip(this._currentTurn === 'red' ? '红方回合 - 翻开暗子或选择己方棋子' : '蓝方回合 - AI思考中');
+          if (!this._isGameOver && !this._isBusy) {
+            if (!this._playerCamp) {
+              this._setTurnTip('请翻开第一枚棋子决定阵营');
+            } else if (this._isPlayerTurn()) {
+              this._setTurnTip(this._getCampLabel(this._playerCamp) + "\u56DE\u5408 - \u7FFB\u5F00\u6697\u5B50\u6216\u9009\u62E9\u5DF1\u65B9\u68CB\u5B50");
+            } else {
+              this._setTurnTip(this._getCampLabel(this._aiCamp) + "\u56DE\u5408 - AI\u601D\u8003\u4E2D");
+            }
           }
         }
 
@@ -1263,7 +1503,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             row,
             col: col + 1
           }];
-          return candidates.filter(cell => cell.row >= 0 && cell.row < 4 && cell.col >= 0 && cell.col < 4 && !this._getAlivePieceAt(cell.row, cell.col));
+          return candidates.filter(cell => cell.row >= 0 && cell.row < this._boardDimension && cell.col >= 0 && cell.col < this._boardDimension && !this._getAlivePieceAt(cell.row, cell.col));
         }
 
         _canCapture(attacker, target) {
@@ -1289,79 +1529,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           return (_powers$animal = powers[animal]) != null ? _powers$animal : 0;
         }
 
-        _createBottomActionButtons(parent, pageHeight) {
-          var _this13 = this;
-
-          return _asyncToGenerator(function* () {
-            var centerY = -pageHeight / 2 + 102;
-            var spacing = 150;
-            yield _this13._createBottomActionButton(parent, 'RestartButton', 'images/play/icon1', '重来', new Vec3(-spacing, centerY, 0));
-            yield _this13._createBottomActionButton(parent, 'UndoButton', 'images/play/icon2', '悔棋', new Vec3(0, centerY, 0));
-            yield _this13._createBottomActionButton(parent, 'HintButton', 'images/play/icon3', '提示', new Vec3(spacing, centerY, 0));
-          })();
-        }
-
-        _createBottomActionButton(parent, nodeName, iconPath, text, position) {
-          var _this14 = this;
-
-          return _asyncToGenerator(function* () {
-            var buttonWidth = 120;
-            var buttonHeight = 132;
-            var iconSize = 74;
-            var buttonNode = new Node(nodeName);
-            buttonNode.layer = parent.layer;
-            buttonNode.parent = parent;
-            buttonNode.setPosition(position);
-            var buttonTransform = buttonNode.addComponent(UITransform);
-            buttonTransform.setContentSize(buttonWidth, buttonHeight);
-            var button = buttonNode.addComponent(Button);
-            button.interactable = true;
-            var iconNode = new Node('Icon');
-            iconNode.layer = parent.layer;
-            iconNode.parent = buttonNode;
-            iconNode.setPosition(0, 24, 0);
-            var iconTransform = iconNode.addComponent(UITransform);
-            iconTransform.setContentSize(iconSize, iconSize);
-            var iconSprite = iconNode.addComponent(Sprite);
-            iconSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-            var spriteFrame = yield _this14._loadImageSpriteFrame(iconPath);
-
-            if (!spriteFrame || !buttonNode.isValid) {
-              console.warn("[GamePage] \u5E95\u90E8\u6309\u94AE\u56FE\u6807\u52A0\u8F7D\u5931\u8D25: " + iconPath);
-            } else {
-              iconSprite.spriteFrame = spriteFrame;
-            }
-
-            var labelNode = new Node('Label');
-            labelNode.layer = parent.layer;
-            labelNode.parent = buttonNode;
-            labelNode.setPosition(0, -46, 0);
-            var labelTransform = labelNode.addComponent(UITransform);
-            labelTransform.setContentSize(buttonWidth, 40);
-            var label = labelNode.addComponent(Label);
-            label.string = text;
-            label.fontSize = 28;
-            label.color = new Color(255, 255, 255, 255);
-            label.horizontalAlign = Label.HorizontalAlign.CENTER;
-            label.verticalAlign = Label.VerticalAlign.CENTER;
-          })();
-        }
-
         _loadImageSpriteFrame(path) {
-          var _this15 = this;
+          var _this6 = this;
 
           return _asyncToGenerator(function* () {
             var spriteFrame = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
               error: Error()
             }), ResManager) : ResManager).getInstance().loadFirst([path + "/spriteFrame", path], SpriteFrame);
-            if (spriteFrame) return _this15._ensureSpriteFrameSize(spriteFrame);
+            if (spriteFrame) return _this6._ensureSpriteFrameSize(spriteFrame);
             var texture = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
               error: Error()
             }), ResManager) : ResManager).getInstance().load(path + "/texture", Texture2D);
             if (!texture) return null;
             var generatedSpriteFrame = new SpriteFrame();
             generatedSpriteFrame.texture = texture;
-            return _this15._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+            return _this6._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
           })();
         }
 
@@ -1372,6 +1554,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
       }) || _class));
+
+      js.setClassAlias(GamePage, 'GamePage');
 
       _cclegacy._RF.pop();
 

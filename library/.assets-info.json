@@ -2,7 +2,7 @@
   "version": "1.0.1",
   "map": {
     "prefabs": {
-      "time": 1778555100477.259,
+      "time": 1781158968306.5947,
       "uuid": "43964ec5-c883-4384-878c-4c5d1f8376a0"
     },
     "resources": {
@@ -22,15 +22,15 @@
       "uuid": "4dff25ac-5273-42cc-aa03-c1a7d6f64faa"
     },
     "prefabs/pages": {
-      "time": 1778554254088.9954,
+      "time": 1781158166008.4983,
       "uuid": "5ac17572-65c2-46a9-9685-6e9a70086911"
     },
     "prefabs/popups": {
-      "time": 1778554260755.5232,
+      "time": 1781158166008.6636,
       "uuid": "f4cd014c-439e-4224-815e-e1fb52dd51f2"
     },
     "resources/images": {
-      "time": 1781081206172.1538,
+      "time": 1781166220415.6653,
       "uuid": "3ddd492f-d3ae-4772-b2b1-7514bb816956"
     },
     "resources/prefabs": {
@@ -46,7 +46,7 @@
       "uuid": "109d3b83-7663-43ef-9466-108cb86d30ad"
     },
     "scripts/pages": {
-      "time": 1781080776756.4717,
+      "time": 1781165858795.385,
       "uuid": "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af"
     },
     "scripts/popups": {
@@ -66,7 +66,7 @@
       "uuid": "5d33d264-c977-477a-8b8c-15757094c815"
     },
     "scripts/GameMain.ts": {
-      "time": 1780998435343.0479,
+      "time": 1781159715036.9595,
       "uuid": "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5"
     },
     "scripts/framework/DataManager.ts": {
@@ -94,15 +94,15 @@
       "uuid": "4e629007-d0c7-442d-b6e2-95a2ac37f8be"
     },
     "scripts/framework/UIManager.ts": {
-      "time": 1780918163686.042,
+      "time": 1781167304955.793,
       "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
     },
     "scripts/pages/GamePage.ts": {
-      "time": 1781150074740.6145,
+      "time": 1781176482521.9302,
       "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
     },
     "scripts/pages/HomePage.ts": {
-      "time": 1781008802403.0315,
+      "time": 1781170754295.7744,
       "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
     },
     "scripts/popups/SettingPopup.ts": {
@@ -110,7 +110,7 @@
       "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
     },
     "scripts/utils/Constants.ts": {
-      "time": 1781150074613.624,
+      "time": 1781176767713.034,
       "uuid": "9c011705-076a-481a-aebf-8b5842df6744"
     },
     "prefabs.meta": {
@@ -198,7 +198,7 @@
       "time": 1778555100495.3582
     },
     "scenes/Main.scene": {
-      "time": 1778569633118.2708,
+      "time": 1781159187329.7817,
       "uuid": "de734e68-f879-44d5-9f8c-06a7f6b793ca"
     },
     "scenes/Main.scene.meta": {
@@ -252,7 +252,7 @@
       "time": 1780641877679.9514
     },
     "resources/images/home": {
-      "time": 1781008133595.7192,
+      "time": 1781170363770.1272,
       "uuid": "235619ea-e160-4739-a5e4-44c03af8b10f"
     },
     "resources/images/loading": {
@@ -260,11 +260,11 @@
       "uuid": "c6501726-9ed2-48ec-8957-1c9145f24f25"
     },
     "resources/images/play": {
-      "time": 1781147977115.2983,
+      "time": 1781172503471.0603,
       "uuid": "d4d34d6b-803e-4c64-9825-bff809636ddf"
     },
     "scripts/pages/LoadingPage.ts": {
-      "time": 1780999635295.9077,
+      "time": 1781166996479.4248,
       "uuid": "745d7788-84c0-4c01-88aa-229fad69a227"
     },
     "resources/images/loading/bg.png": {
@@ -376,7 +376,7 @@
       "uuid": "7935556c-18e1-4420-b3a8-10df61bc2de3"
     },
     "resources/images/home/bg.png": {
-      "time": 1781008117189.8398,
+      "time": 1781168874516.4326,
       "uuid": "7901ca3a-8aac-4e8a-a0cb-25dad591b541"
     },
     "resources/images/home/feedback.png": {
@@ -434,7 +434,7 @@
       "uuid": "16b21acf-1d72-4b19-9f9a-edbc40eb88bd"
     },
     "resources/images/play/play_bg.png": {
-      "time": 1781082156485.4517,
+      "time": 1781172464498.859,
       "uuid": "24fde945-5bde-4c15-b2c0-ade381d3a7aa"
     },
     "resources/images/play/setting.png": {
@@ -469,6 +469,48 @@
     "resources/images/play/piece_bg.png": {
       "time": 1781146840192.531,
       "uuid": "22d73e5e-afff-4dfa-be41-109be2cf57e2"
+    },
+    "prefabs/pages/GamePage.prefab": {
+      "time": 1781171174100.8105,
+      "uuid": "9c962845-cc39-4bcf-abff-fa0abdb40807"
+    },
+    "prefabs/pages/HomePage.prefab": {
+      "time": 1781170739478.8552,
+      "uuid": "45fef6ee-bb46-4f3e-aa9f-6dcd82168974"
+    },
+    "prefabs/pages/LoadingPage.prefab": {
+      "time": 1781166703629.8442,
+      "uuid": "c5538084-1788-483f-8491-0796031b2813"
+    },
+    "prefabs/popups/SettingPopup.prefab": {
+      "time": 1781158166449.9026,
+      "uuid": "a37a4ed6-3b8c-47bd-afd5-52f10ed88395"
+    },
+    "prefabs/popups/SettingPopup.prefab.meta": {
+      "time": 1781158166455.09
+    },
+    "prefabs/pages/GamePage.prefab.meta": {
+      "time": 1781158166455.4302
+    },
+    "prefabs/pages/HomePage.prefab.meta": {
+      "time": 1781158166455.6677
+    },
+    "prefabs/pages/LoadingPage.prefab.meta": {
+      "time": 1781158166456.7937
+    },
+    "resources/images/popup.meta": {
+      "time": 1781166220416.443
+    },
+    "resources/images/popup": {
+      "time": 1781166062611.3625,
+      "uuid": "f03b3c50-62b4-457d-b203-a3995117295f"
+    },
+    "resources/images/home/home-bg.png": {
+      "time": 1781170299285.9873,
+      "uuid": "ffafbfa1-0a57-471d-9ade-5ed50a3e7410"
+    },
+    "resources/images/home/home-bg.png.meta": {
+      "time": 1781170363782.339
     }
   },
   "missing": {}

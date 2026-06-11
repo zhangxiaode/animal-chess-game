@@ -1,7 +1,7 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7", "__unresolved_8"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, resources, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, UserSystem, _dec, _dec2, _class, _class2, _descriptor, _class3, _crd, ccclass, property, GameMain;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, Widget, Vec3, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, UserSystem, _dec, _dec2, _class, _class2, _descriptor, _class3, _crd, ccclass, property, GameMain;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
@@ -56,7 +56,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       js = _cc.js;
       Prefab = _cc.Prefab;
       instantiate = _cc.instantiate;
-      resources = _cc.resources;
+      Widget = _cc.Widget;
+      Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
       UIManager = _unresolved_2.UIManager;
     }, function (_unresolved_3) {
@@ -72,13 +73,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       getPlatformGameInfo = _unresolved_7.getPlatformGameInfo;
     }, function (_unresolved_8) {
       UserSystem = _unresolved_8.UserSystem;
-    }],
+    }, function (_unresolved_9) {}],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "39bb6f/NKBBp698AMS0ih+l", "GameMain", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Node', 'game', 'UITransform', 'js', 'Prefab', 'instantiate', 'resources']);
+      __checkObsolete__(['_decorator', 'Component', 'Node', 'game', 'UITransform', 'js', 'Prefab', 'instantiate', 'Widget', 'Vec3']);
 
       ({
         ccclass,
@@ -169,8 +170,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           var _loadingPageNode$getC;
 
           const loadingPageNode = await this._createLoadingPage();
+          loadingPageNode.active = false;
           loadingPageNode.layer = this._uiRoot.layer;
-          loadingPageNode.parent = this._uiRoot;
+
+          this._disableWidgets(loadingPageNode);
+
           const loadingTransform = (_loadingPageNode$getC = loadingPageNode.getComponent(UITransform)) != null ? _loadingPageNode$getC : loadingPageNode.addComponent(UITransform);
 
           const uiTransform = this._uiRoot.getComponent(UITransform);
@@ -179,38 +183,25 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
             loadingTransform.setContentSize(uiTransform.contentSize);
           }
 
+          loadingPageNode.setPosition(Vec3.ZERO);
+          loadingPageNode.parent = this._uiRoot;
+          loadingPageNode.active = true;
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
         }
 
         async _createLoadingPage() {
-          var _this$loadingPagePref;
-
-          const prefab = (_this$loadingPagePref = this.loadingPagePrefab) != null ? _this$loadingPagePref : await this._loadLoadingPrefab();
-
-          if (prefab) {
-            return instantiate(prefab);
+          if (!this.loadingPagePrefab) {
+            throw new Error('[GameMain] 请在编辑器中绑定 assets/prefabs/pages/LoadingPage.prefab 到 loadingPagePrefab，Loading 页面不再使用 TS 动态渲染。');
           }
 
-          const loadingPageNode = new Node('LoadingPage');
-          const {
-            LoadingPage
-          } = await _context.import("__unresolved_8");
-          loadingPageNode.addComponent(LoadingPage);
-          return loadingPageNode;
+          return instantiate(this.loadingPagePrefab);
         }
 
-        _loadLoadingPrefab() {
-          return new Promise(resolve => {
-            resources.load('prefabs/pages/LoadingPage', Prefab, (error, prefab) => {
-              if (error || !prefab) {
-                resolve(null);
-                return;
-              }
-
-              resolve(prefab);
-            });
+        _disableWidgets(root) {
+          root.getComponentsInChildren(Widget).forEach(widget => {
+            widget.enabled = false;
           });
         }
 

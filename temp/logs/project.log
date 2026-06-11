@@ -1,10 +1,139 @@
-6-11-2026 11:59:42 - log: Load engine in /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine
-6-11-2026 11:59:42 - log: Register native engine in /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/native
-6-11-2026 11:59:43 - log: Request namespace: device-list
-6-11-2026 11:59:51 - log: [Scene] meshopt wasm decoder initialized
-6-11-2026 11:59:51 - log: [Scene] [bullet]:bullet wasm lib loaded.
-6-11-2026 11:59:51 - log: [Scene] [box2d]:box2d wasm lib loaded.
-6-11-2026 11:59:51 - log: [Scene] [PHYSICS]: using builtin.
-6-11-2026 11:59:51 - log: [Scene] Cocos Creator v3.8.8
-6-11-2026 11:59:51 - log: [Scene] Using custom pipeline: Builtin
-6-11-2026 11:59:51 - log: [Scene] [PHYSICS2D]: switch from builtin to box2d.
+6-11-2026 19:17:57 - log: Load engine in /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine
+6-11-2026 19:17:57 - log: Register native engine in /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/native
+6-11-2026 19:17:57 - log: Request namespace: device-list
+6-11-2026 19:18:04 - log: waiting the ready of builder worker...
+6-11-2026 19:18:05 - log: [Scene] [box2d]:box2d wasm lib loaded.
+6-11-2026 19:18:05 - log: [Scene] meshopt wasm decoder initialized
+6-11-2026 19:18:05 - log: [Scene] [bullet]:bullet wasm lib loaded.
+6-11-2026 19:18:05 - log: [Scene] [PHYSICS]: using builtin.
+6-11-2026 19:18:05 - log: [Scene] Cocos Creator v3.8.8
+6-11-2026 19:18:05 - log: [Scene] Using custom pipeline: Builtin
+6-11-2026 19:18:05 - log: [Scene] [PHYSICS2D]: switch from builtin to box2d.
+6-11-2026 19:18:35 - info: [Window] Download the Vue Devtools extension for a better development experience:
+https://github.com/vuejs/vue-devtools
+6-11-2026 19:18:35 - info: [Window] You are running Vue in development mode.
+Make sure to turn on production mode when deploying for production.
+See more tips at https://vuejs.org/guide/deployment.html
+6-11-2026 19:20:25 - error: [Scene] A Class already exists with the same __cid__ : LoadingPage. Error: [Scene] A Class already exists with the same __cid__ : LoadingPage. 
+    at console.error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@sentry/core/src/utils-hoist/instrument/console.ts:40:14)
+    at error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153771:12)
+    at errorID (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153949:5)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168528:11)
+    at Module.setClassName (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168563:9)
+    at doDefine (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145711:8)
+    at define (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145728:17)
+    at CCClass (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145828:17)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:276601:21)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:277285:18)
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/ff/ffe9cd0e8cb59dde53df7b5ab2ff09cbfa7c4bc7.js:51:618)
+    at doExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:517:30)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:508:21)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:493:28
+    at Array.forEach (<anonymous>)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:491:10)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:440:12
+    at file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:8:13
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:4:1)
+    at Executor._importPrerequisiteModules (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:358:13)
+    at Executor.reload (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:235:13)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
+    at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
+    at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)
+6-11-2026 19:20:25 - error: [Scene] A Class already exists with the same __cid__ : GameMain. Error: [Scene] A Class already exists with the same __cid__ : GameMain. 
+    at console.error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@sentry/core/src/utils-hoist/instrument/console.ts:40:14)
+    at error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153771:12)
+    at errorID (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153949:5)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168528:11)
+    at Module.setClassName (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168563:9)
+    at doDefine (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145711:8)
+    at define (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145728:17)
+    at CCClass (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145828:17)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:276601:21)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:277285:18)
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/67/674419a804a675bdc259110656ab1bc65e04f002.js:89:93)
+    at doExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:517:30)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:508:21)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:440:12
+    at file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:8:13
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:4:1)
+    at Executor._importPrerequisiteModules (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:358:13)
+    at Executor.reload (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:235:13)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
+    at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
+    at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)
+6-11-2026 19:20:25 - error: [Scene] "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5" has already been set as name or alias of another class.Error: [Scene] "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5" has already been set as name or alias of another class.
+    at console.error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@sentry/core/src/utils-hoist/instrument/console.ts:40:14)
+    at error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153771:12)
+    at errorID (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153949:5)
+    at Module.setClassAlias (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168585:7)
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/67/file:/Users/zxd/workspace/person/animal-chess-game/assets/scripts/GameMain.ts:106:4)
+    at doExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:517:30)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:508:21)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:440:12
+    at file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:8:13
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:4:1)
+    at Executor._importPrerequisiteModules (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:358:13)
+    at Executor.reload (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:235:13)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
+    at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
+    at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)
+6-11-2026 19:20:25 - error: [Scene] "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5" has already been set as id or alias of another class.Error: [Scene] "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5" has already been set as id or alias of another class.
+    at console.error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@sentry/core/src/utils-hoist/instrument/console.ts:40:14)
+    at error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153771:12)
+    at errorID (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153949:5)
+    at Module.setClassAlias (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168589:7)
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/67/file:/Users/zxd/workspace/person/animal-chess-game/assets/scripts/GameMain.ts:106:4)
+    at doExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:517:30)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:508:21)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:440:12
+    at file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:8:13
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:4:1)
+    at Executor._importPrerequisiteModules (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:358:13)
+    at Executor.reload (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:235:13)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
+    at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
+    at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)
+6-11-2026 19:20:25 - error: [Scene] A Class already exists with the same __cid__ : GamePage. Error: [Scene] A Class already exists with the same __cid__ : GamePage. 
+    at console.error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@sentry/core/src/utils-hoist/instrument/console.ts:40:14)
+    at error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153771:12)
+    at errorID (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153949:5)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168528:11)
+    at Module.setClassName (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168563:9)
+    at doDefine (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145711:8)
+    at define (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145728:17)
+    at CCClass (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145828:17)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:276601:21)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:277285:18)
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/84/848fe469dcc60a4988d015a0af6329f6c3412ea8.js:54:67)
+    at doExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:517:30)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:508:21)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:440:12
+    at file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:8:13
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:4:1)
+    at Executor._importPrerequisiteModules (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:358:13)
+    at Executor.reload (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:235:13)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
+    at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
+    at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)
+6-11-2026 19:20:25 - error: [Scene] A Class already exists with the same __cid__ : HomePage. Error: [Scene] A Class already exists with the same __cid__ : HomePage. 
+    at console.error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@sentry/core/src/utils-hoist/instrument/console.ts:40:14)
+    at error (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153771:12)
+    at errorID (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:153949:5)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168528:11)
+    at Module.setClassName (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:168563:9)
+    at doDefine (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145711:8)
+    at define (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145728:17)
+    at CCClass (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:145828:17)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:276601:21)
+    at eval (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/bin/.cache/dev/editor/bundled/index.js:277285:18)
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/27/27f7d2dcaceeafc067989faa637fb436045f6323.js:52:67)
+    at doExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:517:30)
+    at postOrderExec (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:508:21)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/static/executor/systemjs-bridge/out/index.js:440:12
+    at file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:8:13
+    at Object.execute (file:///Users/zxd/workspace/person/animal-chess-game/temp/programming/packer-driver/targets/editor/chunks/6d/cce:/internal/x/prerequisite-imports:4:1)
+    at Executor._importPrerequisiteModules (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:358:13)
+    at Executor.reload (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/node_modules/@editor/lib-programming/src/executor/index.ts:235:13)
+    at /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:1893
+    at GlobalEnv.processQueue (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2290)
+    at GlobalEnv.record (/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/app.asar/builtin/scene/dist/script/3d/manager/scripts.ccc:1:2061)

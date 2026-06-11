@@ -142,7 +142,9 @@
   "de734e68-f879-44d5-9f8c-06a7f6b793ca": {
     "url": "db://assets/scenes/Main.scene",
     "value": {
-      "depends": [],
+      "depends": [
+        "c5538084-1788-483f-8491-0796031b2813"
+      ],
       "dependScripts": []
     },
     "versionCode": 2
@@ -721,6 +723,69 @@
     "value": {
       "depends": [
         "22d73e5e-afff-4dfa-be41-109be2cf57e2"
+      ]
+    },
+    "versionCode": 1
+  },
+  "9c962845-cc39-4bcf-abff-fa0abdb40807": {
+    "url": "db://assets/prefabs/pages/GamePage.prefab",
+    "value": {
+      "depends": [
+        "3d45d52c-da29-425e-b794-7b7612175d33"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "45fef6ee-bb46-4f3e-aa9f-6dcd82168974": {
+    "url": "db://assets/prefabs/pages/HomePage.prefab",
+    "value": {
+      "depends": [
+        "3d45d52c-da29-425e-b794-7b7612175d33"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "c5538084-1788-483f-8491-0796031b2813": {
+    "url": "db://assets/prefabs/pages/LoadingPage.prefab",
+    "value": {
+      "depends": [
+        "3d45d52c-da29-425e-b794-7b7612175d33"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "a37a4ed6-3b8c-47bd-afd5-52f10ed88395": {
+    "url": "db://assets/prefabs/popups/SettingPopup.prefab",
+    "value": {
+      "depends": [
+        "3d45d52c-da29-425e-b794-7b7612175d33"
+      ],
+      "dependScripts": [
+        "426e53c7-9b60-4747-bf24-e8b871427424"
+      ]
+    },
+    "versionCode": 2
+  },
+  "f03b3c50-62b4-457d-b203-a3995117295f": {
+    "url": "db://assets/resources/images/popup",
+    "value": {},
+    "versionCode": 1
+  },
+  "ffafbfa1-0a57-471d-9ade-5ed50a3e7410": {
+    "url": "db://assets/resources/images/home/home-bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "ffafbfa1-0a57-471d-9ade-5ed50a3e7410@6c48a": {
+    "url": "db://assets/resources/images/home/home-bg.png@6c48a",
+    "value": {
+      "depends": [
+        "ffafbfa1-0a57-471d-9ade-5ed50a3e7410"
       ]
     },
     "versionCode": 1

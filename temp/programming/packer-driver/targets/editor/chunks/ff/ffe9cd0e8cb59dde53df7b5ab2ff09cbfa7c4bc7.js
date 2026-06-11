@@ -1,17 +1,13 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Color, Component, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _crd, ccclass, property, LoadingPage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Color, Component, js, Label, Rect, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, resources, UIManager, _dec, _dec2, _dec3, _dec4, _dec5, _dec6, _dec7, _dec8, _dec9, _dec10, _dec11, _dec12, _dec13, _dec14, _dec15, _dec16, _dec17, _dec18, _dec19, _dec20, _class, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _crd, ccclass, property, LoadingPage;
 
   function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
   function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
 
   function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'transform-class-properties is enabled and runs after the decorators transform.'); }
-
-  function _reportPossibleCrUseOfResManager(extras) {
-    _reporterNs.report("ResManager", "../framework/ResManager", _context.meta, extras);
-  }
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
@@ -27,8 +23,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       _decorator = _cc._decorator;
       Color = _cc.Color;
       Component = _cc.Component;
+      js = _cc.js;
       Label = _cc.Label;
-      Node = _cc.Node;
       Rect = _cc.Rect;
       Size = _cc.Size;
       Sprite = _cc.Sprite;
@@ -36,18 +32,16 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       Texture2D = _cc.Texture2D;
       UITransform = _cc.UITransform;
       Vec2 = _cc.Vec2;
-      Vec3 = _cc.Vec3;
+      resources = _cc.resources;
     }, function (_unresolved_2) {
-      ResManager = _unresolved_2.ResManager;
-    }, function (_unresolved_3) {
-      UIManager = _unresolved_3.UIManager;
+      UIManager = _unresolved_2.UIManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "745d7eIhMBMAYiqIp+taaIn", "LoadingPage", undefined);
 
-      __checkObsolete__(['_decorator', 'Color', 'Component', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2', 'Vec3']);
+      __checkObsolete__(['_decorator', 'Color', 'Component', 'js', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2', 'resources']);
 
       ({
         ccclass,
@@ -96,6 +90,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           _initializerDefineProperty(this, "progressActivedFrame", _descriptor19, this);
 
+          this._firstLoadTipLabel = null;
           this._hasEnteredHome = false;
           this._loadedAssetCount = 0;
           this._loadingStartTime = 0;
@@ -109,7 +104,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             this.node.layer = this.node.parent.layer;
           }
 
+          this._hideLegacyEmptyNodes();
+
           this._bindPrefabReferences();
+
+          this._applyTextContent();
 
           this._startLoading();
         }
@@ -124,11 +123,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._setLoadingProgress(0);
 
-          this._ensureTextContent();
-
-          this._ensureStaticLayout();
-
-          await this._ensureImageContent();
+          await this._loadImageContent();
 
           this._setLoadingProgress(1);
 
@@ -137,93 +132,58 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._enterHome();
         }
 
+        _hideLegacyEmptyNodes() {
+          ['background', 'content', 'ske'].forEach(name => {
+            const node = this.node.getChildByName(name);
+            if (node) node.active = false;
+          });
+        }
+
         _bindPrefabReferences() {
           var _this$backgroundSprit, _this$lionSprite, _this$elephantSprite, _this$tigerSprite, _this$logoSprite, _this$dragonSprite, _this$progressBackgro, _this$progressActived, _this$subtitleLabel, _this$enterTipLabel, _this$progressLabel;
 
-          (_this$backgroundSprit = this.backgroundSprite) != null ? _this$backgroundSprit : this.backgroundSprite = this._findSprite('Background');
-          (_this$lionSprite = this.lionSprite) != null ? _this$lionSprite : this.lionSprite = this._findSprite('Lion');
-          (_this$elephantSprite = this.elephantSprite) != null ? _this$elephantSprite : this.elephantSprite = this._findSprite('Elephant');
-          (_this$tigerSprite = this.tigerSprite) != null ? _this$tigerSprite : this.tigerSprite = this._findSprite('Tiger');
-          (_this$logoSprite = this.logoSprite) != null ? _this$logoSprite : this.logoSprite = this._findSprite('Logo');
-          (_this$dragonSprite = this.dragonSprite) != null ? _this$dragonSprite : this.dragonSprite = this._findSprite('Dragon');
-          (_this$progressBackgro = this.progressBackgroundSprite) != null ? _this$progressBackgro : this.progressBackgroundSprite = this._findSprite('ProgressBar/ProgressBackground');
-          (_this$progressActived = this.progressActivedSprite) != null ? _this$progressActived : this.progressActivedSprite = this._findSprite('ProgressBar/ProgressActived');
-          (_this$subtitleLabel = this.subtitleLabel) != null ? _this$subtitleLabel : this.subtitleLabel = this._findLabel('Subtitle');
-          (_this$enterTipLabel = this.enterTipLabel) != null ? _this$enterTipLabel : this.enterTipLabel = this._findLabel('EnterTip');
-          (_this$progressLabel = this.progressLabel) != null ? _this$progressLabel : this.progressLabel = this._findLabel('ProgressBar/ProgressPercent');
+          (_this$backgroundSprit = this.backgroundSprite) != null ? _this$backgroundSprit : this.backgroundSprite = this._bindSprite('Background');
+          (_this$lionSprite = this.lionSprite) != null ? _this$lionSprite : this.lionSprite = this._bindSprite('Lion');
+          (_this$elephantSprite = this.elephantSprite) != null ? _this$elephantSprite : this.elephantSprite = this._bindSprite('Elephant');
+          (_this$tigerSprite = this.tigerSprite) != null ? _this$tigerSprite : this.tigerSprite = this._bindSprite('Tiger');
+          (_this$logoSprite = this.logoSprite) != null ? _this$logoSprite : this.logoSprite = this._bindSprite('Logo');
+          (_this$dragonSprite = this.dragonSprite) != null ? _this$dragonSprite : this.dragonSprite = this._bindSprite('Dragon');
+          (_this$progressBackgro = this.progressBackgroundSprite) != null ? _this$progressBackgro : this.progressBackgroundSprite = this._bindSprite('ProgressBar/ProgressBackground');
+          (_this$progressActived = this.progressActivedSprite) != null ? _this$progressActived : this.progressActivedSprite = this._bindSprite('ProgressBar/ProgressActived');
+          (_this$subtitleLabel = this.subtitleLabel) != null ? _this$subtitleLabel : this.subtitleLabel = this._bindLabel('Subtitle');
+          (_this$enterTipLabel = this.enterTipLabel) != null ? _this$enterTipLabel : this.enterTipLabel = this._bindLabel('EnterTip');
+          (_this$progressLabel = this.progressLabel) != null ? _this$progressLabel : this.progressLabel = this._bindLabel('ProgressBar/ProgressPercent');
+          this._firstLoadTipLabel = this._bindLabel('ProgressBar/FirstLoadTip');
         }
 
-        _findSprite(path) {
-          var _this$_findNode$getCo, _this$_findNode;
-
-          return (_this$_findNode$getCo = (_this$_findNode = this._findNode(path)) == null ? void 0 : _this$_findNode.getComponent(Sprite)) != null ? _this$_findNode$getCo : null;
-        }
-
-        _findLabel(path) {
-          var _this$_findNode$getCo2, _this$_findNode2;
-
-          return (_this$_findNode$getCo2 = (_this$_findNode2 = this._findNode(path)) == null ? void 0 : _this$_findNode2.getComponent(Label)) != null ? _this$_findNode$getCo2 : null;
-        }
-
-        _findNode(path) {
-          const parts = path.split('/');
-          let current = this.node;
-
-          for (const part of parts) {
-            var _current$getChildByNa, _current;
-
-            current = (_current$getChildByNa = (_current = current) == null ? void 0 : _current.getChildByName(part)) != null ? _current$getChildByNa : null;
-            if (!current) return null;
+        _applyTextContent() {
+          if (this.subtitleLabel) {
+            this.subtitleLabel.string = '经典策略 · 趣味对战';
+            this.subtitleLabel.fontSize = 30;
+            this.subtitleLabel.lineHeight = 38;
           }
 
-          return current;
-        }
-
-        _ensureTextContent() {
-          if (!this.subtitleLabel) {
-            this.subtitleLabel = this._createLabel('Subtitle', '经典策略 · 趣味对战', new Vec3(0, this._pageHeight / 2 - 540, 0), 360, 42, 30);
+          if (this.enterTipLabel) {
+            this.enterTipLabel.string = '正在进入游戏...';
+            this.enterTipLabel.fontSize = 28;
+            this.enterTipLabel.lineHeight = 36;
           }
 
-          if (!this.enterTipLabel) {
-            this.enterTipLabel = this._createLabel('EnterTip', '正在进入游戏...', new Vec3(0, this._pageHeight / 2 - 970, 0), 360, 42, 28);
+          if (this.progressLabel) {
+            this.progressLabel.fontSize = 26;
+            this.progressLabel.lineHeight = 34;
+            this.progressLabel.string = this._getProgressText();
           }
 
-          this.subtitleLabel.string = '经典策略 · 趣味对战';
-          this.enterTipLabel.string = '正在进入游戏...';
+          if (this._firstLoadTipLabel) {
+            this._firstLoadTipLabel.string = '首次加载可能需要一些时间';
+            this._firstLoadTipLabel.fontSize = 24;
+            this._firstLoadTipLabel.lineHeight = 32;
+            this._firstLoadTipLabel.color = new Color(255, 255, 255, 128);
+          }
         }
 
-        _ensureStaticLayout() {
-          var _this$backgroundSprit2, _this$lionSprite2, _this$elephantSprite2, _this$tigerSprite2, _this$logoSprite2, _this$dragonSprite2, _this$progressBackgro2, _this$progressActived2;
-
-          this._syncNodeSizeAndPosition((_this$backgroundSprit2 = this.backgroundSprite) == null ? void 0 : _this$backgroundSprit2.node, this._pageWidth, this._pageHeight, Vec3.ZERO, 0);
-
-          this._syncNodeSizeAndPosition((_this$lionSprite2 = this.lionSprite) == null ? void 0 : _this$lionSprite2.node, 88, 88, new Vec3(-108, this._pageHeight / 2 - 150, 0));
-
-          this._syncNodeSizeAndPosition((_this$elephantSprite2 = this.elephantSprite) == null ? void 0 : _this$elephantSprite2.node, 120, 120, new Vec3(0, this._pageHeight / 2 - 150, 0));
-
-          this._syncNodeSizeAndPosition((_this$tigerSprite2 = this.tigerSprite) == null ? void 0 : _this$tigerSprite2.node, 88, 88, new Vec3(108, this._pageHeight / 2 - 150, 0));
-
-          this._syncNodeSizeAndPosition((_this$logoSprite2 = this.logoSprite) == null ? void 0 : _this$logoSprite2.node, 240, 200, new Vec3(0, this._pageHeight / 2 - 420, 0));
-
-          this._syncNodeSizeAndPosition((_this$dragonSprite2 = this.dragonSprite) == null ? void 0 : _this$dragonSprite2.node, 320, 320, new Vec3(0, this._pageHeight / 2 - 770, 0));
-
-          this._syncNodeSizeAndPosition((_this$progressBackgro2 = this.progressBackgroundSprite) == null ? void 0 : _this$progressBackgro2.node, 310, 16, Vec3.ZERO);
-
-          this._syncNodeSizeAndPosition((_this$progressActived2 = this.progressActivedSprite) == null ? void 0 : _this$progressActived2.node, 310, 16, Vec3.ZERO);
-        }
-
-        async _ensureImageContent() {
-          var _this$backgroundSprit3, _this$lionSprite3, _this$elephantSprite3, _this$tigerSprite3, _this$logoSprite3, _this$dragonSprite3;
-
-          (_this$backgroundSprit3 = this.backgroundSprite) != null ? _this$backgroundSprit3 : this.backgroundSprite = this._createImage('Background', this._pageWidth, this._pageHeight, Vec3.ZERO, 0);
-          (_this$lionSprite3 = this.lionSprite) != null ? _this$lionSprite3 : this.lionSprite = this._createImage('Lion', 88, 88, new Vec3(-108, this._pageHeight / 2 - 150, 0));
-          (_this$elephantSprite3 = this.elephantSprite) != null ? _this$elephantSprite3 : this.elephantSprite = this._createImage('Elephant', 120, 120, new Vec3(0, this._pageHeight / 2 - 150, 0));
-          (_this$tigerSprite3 = this.tigerSprite) != null ? _this$tigerSprite3 : this.tigerSprite = this._createImage('Tiger', 88, 88, new Vec3(108, this._pageHeight / 2 - 150, 0));
-          (_this$logoSprite3 = this.logoSprite) != null ? _this$logoSprite3 : this.logoSprite = this._createImage('Logo', 240, 200, new Vec3(0, this._pageHeight / 2 - 420, 0));
-          (_this$dragonSprite3 = this.dragonSprite) != null ? _this$dragonSprite3 : this.dragonSprite = this._createImage('Dragon', 320, 320, new Vec3(0, this._pageHeight / 2 - 770, 0));
-
-          this._ensureProgressBar();
-
+        async _loadImageContent() {
           const imageConfigs = [{
             name: 'Background',
             path: 'images/loading/bg',
@@ -268,35 +228,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           await Promise.all(imageConfigs.map(config => this._applyImageConfig(config)));
         }
 
-        _ensureProgressBar() {
-          var _this$progressBackgro3, _this$progressActived3;
-
-          let progressRoot = this._findNode('ProgressBar');
-
-          if (!progressRoot) {
-            progressRoot = new Node('ProgressBar');
-            progressRoot.layer = this.node.layer;
-            progressRoot.parent = this.node;
-            progressRoot.setPosition(new Vec3(0, this._pageHeight / 2 - 1060, 0));
-            progressRoot.addComponent(UITransform).setContentSize(310, 16);
-          }
-
-          (_this$progressBackgro3 = this.progressBackgroundSprite) != null ? _this$progressBackgro3 : this.progressBackgroundSprite = this._createImage('ProgressBackground', 310, 16, Vec3.ZERO, undefined, progressRoot);
-          (_this$progressActived3 = this.progressActivedSprite) != null ? _this$progressActived3 : this.progressActivedSprite = this._createImage('ProgressActived', 310, 16, Vec3.ZERO, undefined, progressRoot);
-
-          if (!this.progressLabel) {
-            this.progressLabel = this._createLabel('ProgressPercent', this._getProgressText(), new Vec3(0, -42, 0), 160, 36, 26, progressRoot);
-          }
-
-          if (!this._findNode('ProgressBar/FirstLoadTip')) {
-            const firstLoadTipLabel = this._createLabel('FirstLoadTip', '首次加载可能需要一些时间', new Vec3(0, -90, 0), 360, 36, 24, progressRoot);
-
-            firstLoadTipLabel.color = new Color(255, 255, 255, 128);
-          }
-
-          this._ensureStaticLayout();
-        }
-
         async _applyImageConfig(config) {
           var _config$frame;
 
@@ -321,10 +252,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           sprite.spriteFrame = spriteFrame;
 
           if (config.name === 'Background') {
+            const pageTransform = this.node.getComponent(UITransform);
             const transform = sprite.node.getComponent(UITransform);
 
-            if (transform) {
-              this._setCoverSize(transform, spriteFrame, this._pageWidth, this._pageHeight);
+            if (pageTransform && transform) {
+              this._setCoverSize(transform, spriteFrame, pageTransform.contentSize.width, pageTransform.contentSize.height);
             }
           }
 
@@ -333,50 +265,56 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           }
         }
 
-        _createImage(name, width, height, position, siblingIndex, parent = this.node) {
-          const imageNode = new Node(name);
-          imageNode.layer = this.node.layer;
-          imageNode.parent = parent;
-          imageNode.setPosition(position);
+        _bindSprite(path) {
+          var _node$getComponent;
 
-          if (siblingIndex !== undefined) {
-            imageNode.setSiblingIndex(siblingIndex);
-          }
+          const node = this._findPrefabNode(path);
 
-          imageNode.addComponent(UITransform).setContentSize(width, height);
-          const sprite = imageNode.addComponent(Sprite);
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          const sprite = (_node$getComponent = node.getComponent(Sprite)) != null ? _node$getComponent : node.addComponent(Sprite);
           sprite.sizeMode = Sprite.SizeMode.CUSTOM;
           return sprite;
         }
 
-        _createLabel(name, text, position, width, height, fontSize, parent = this.node) {
-          const labelNode = new Node(name);
-          labelNode.layer = this.node.layer;
-          labelNode.parent = parent;
-          labelNode.setPosition(position);
-          labelNode.addComponent(UITransform).setContentSize(width, height);
-          const label = labelNode.addComponent(Label);
-          label.string = text;
-          label.fontSize = fontSize;
-          label.color = new Color(255, 255, 255, 255);
+        _bindLabel(path) {
+          var _node$getComponent2, _label$color;
+
+          const node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          const label = (_node$getComponent2 = node.getComponent(Label)) != null ? _node$getComponent2 : node.addComponent(Label);
+          label.color = (_label$color = label.color) != null ? _label$color : new Color(255, 255, 255, 255);
           label.horizontalAlign = Label.HorizontalAlign.CENTER;
           label.verticalAlign = Label.VerticalAlign.CENTER;
           label.overflow = Label.Overflow.CLAMP;
           return label;
         }
 
-        _syncNodeSizeAndPosition(node, width, height, position, siblingIndex) {
-          var _node$getComponent;
+        _preparePrefabNode(node) {
+          var _node$getComponent3;
 
-          if (!node) return;
           node.layer = this.node.layer;
-          node.setPosition(position);
-          const transform = (_node$getComponent = node.getComponent(UITransform)) != null ? _node$getComponent : node.addComponent(UITransform);
-          transform.setContentSize(width, height);
+          (_node$getComponent3 = node.getComponent(UITransform)) != null ? _node$getComponent3 : node.addComponent(UITransform);
+        }
 
-          if (siblingIndex !== undefined) {
-            node.setSiblingIndex(siblingIndex);
+        _findPrefabNode(path) {
+          const node = path.split('/').reduce((current, name) => {
+            var _current$getChildByNa;
+
+            return (_current$getChildByNa = current == null ? void 0 : current.getChildByName(name)) != null ? _current$getChildByNa : null;
+          }, this.node);
+
+          if (!node) {
+            console.warn(`[LoadingPage] prefab 缺少节点: ${path}`);
           }
+
+          return node;
         }
 
         _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
@@ -388,17 +326,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         async _loadImageSpriteFrame(path) {
-          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().loadFirst([`${path}/spriteFrame`, path], SpriteFrame);
+          const spriteFrame = await this._loadOptional(`${path}/spriteFrame`, SpriteFrame);
           if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
-          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().load(`${path}/texture`, Texture2D);
+          const texture = await this._loadOptional(`${path}/texture`, Texture2D);
           if (!texture) return null;
           const generatedSpriteFrame = new SpriteFrame();
           generatedSpriteFrame.texture = texture;
           return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+        }
+
+        async _loadOptional(path, type) {
+          return new Promise(resolve => {
+            resources.load(path, type, (error, asset) => {
+              resolve(error || !asset ? null : asset);
+            });
+          });
         }
 
         _ensureSpriteFrameSize(spriteFrame, fallbackWidth = 0, fallbackHeight = 0) {
@@ -429,7 +371,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _configureProgressFill(sprite) {
-          if (!sprite.spriteFrame) return;
           sprite.sizeMode = Sprite.SizeMode.CUSTOM;
           sprite.type = Sprite.Type.FILLED;
           sprite.fillType = Sprite.FillType.HORIZONTAL;
@@ -438,11 +379,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _setLoadingProgress(value) {
-          var _this$progressActived4;
-
           this._progress = Math.max(0, Math.min(1, value));
 
-          if ((_this$progressActived4 = this.progressActivedSprite) != null && _this$progressActived4.spriteFrame) {
+          if (this.progressActivedSprite) {
             this.progressActivedSprite.fillRange = this._progress;
           }
 
@@ -469,19 +408,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._hasEnteredHome = true;
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
-          }), UIManager) : UIManager).getInstance().openPage('HomePage');
-        }
-
-        get _pageWidth() {
-          var _this$node$getCompone, _this$node$getCompone2;
-
-          return (_this$node$getCompone = (_this$node$getCompone2 = this.node.getComponent(UITransform)) == null ? void 0 : _this$node$getCompone2.contentSize.width) != null ? _this$node$getCompone : 750;
-        }
-
-        get _pageHeight() {
-          var _this$node$getCompone3, _this$node$getCompone4;
-
-          return (_this$node$getCompone3 = (_this$node$getCompone4 = this.node.getComponent(UITransform)) == null ? void 0 : _this$node$getCompone4.contentSize.height) != null ? _this$node$getCompone3 : 1334;
+          }), UIManager) : UIManager).getInstance().openPage('prefabs/pages/HomePage');
         }
 
       }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "backgroundSprite", [_dec2], {
@@ -618,6 +545,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           return null;
         }
       })), _class2)) || _class));
+
+      js.setClassAlias(LoadingPage, 'LoadingPage');
 
       _cclegacy._RF.pop();
 

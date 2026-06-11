@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, js, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
 
   function _reportPossibleCrUseOfResManager(extras) {
     _reporterNs.report("ResManager", "../framework/ResManager", _context.meta, extras);
@@ -23,6 +23,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       Color = _cc.Color;
       Component = _cc.Component;
       Graphics = _cc.Graphics;
+      js = _cc.js;
       Label = _cc.Label;
       Node = _cc.Node;
       Rect = _cc.Rect;
@@ -44,7 +45,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
       _cclegacy._RF.push({}, "8b116Z08uZFSLOZ3edZ6E3o", "GamePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'tween', 'UITransform', 'Vec2', 'Vec3']);
+      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'js', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'tween', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
         ccclass
@@ -54,81 +55,55 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         constructor(...args) {
           super(...args);
           this._backBtn = null;
+          this._backgroundSprite = null;
+          this._settingSprite = null;
+          this._titleSprite = null;
+          this._titleLabel = null;
+          this._boardNode = null;
+          this._boardSprite = null;
           this._pieceBackFrame = null;
           this._turnTipLabel = null;
           this._redInfoLabel = null;
           this._blueInfoLabel = null;
+          this._bottomIconSprites = {};
           this._pieces = [];
           this._selectedPiece = null;
           this._currentTurn = 'red';
+          this._playerCamp = null;
+          this._aiCamp = null;
           this._isBusy = false;
           this._isGameOver = false;
           this._aiProfile = null;
-          this._boardCellSize = 160;
-          this._boardStartX = -240;
-          this._boardStartY = 240;
+          this._cellHighlights = [];
+          this._pieceHighlights = new Map();
+          this._aiActionRepeatCounts = new Map();
+          this._isAICompromising = false;
+          this._boardDimension = 8;
+          this._boardCellWidth = 80;
+          this._boardCellHeight = 78.5;
+          this._boardStartX = -280;
+          this._boardStartY = 281;
         }
 
         async start() {
-          await this._createUI();
+          this._hideLegacyEmptyNodes();
+
+          this._bindPrefabReferences();
+
+          this._applyStaticText();
+
+          this._drawStaticGraphics();
+
+          this._bindEvents();
+
+          await this._loadStaticImages();
+          await this._createPieces(this._boardNode);
         }
 
-        async _createUI() {
-          var _pageTransform$conten, _pageTransform$conten2;
+        onDestroy() {
+          var _this$_backBtn;
 
-          const pageRoot = this.node;
-          const pageTransform = pageRoot.getComponent(UITransform);
-          const pageWidth = (_pageTransform$conten = pageTransform == null ? void 0 : pageTransform.contentSize.width) != null ? _pageTransform$conten : 640;
-          const pageHeight = (_pageTransform$conten2 = pageTransform == null ? void 0 : pageTransform.contentSize.height) != null ? _pageTransform$conten2 : 960;
-          await this._createBackground(pageRoot, pageWidth, pageHeight);
-          await this._createSettingButton(pageRoot, pageWidth, pageHeight);
-          await this._createTitle(pageRoot, pageWidth, pageHeight);
-
-          this._createPlayerInfoBoxes(pageRoot, pageWidth, pageHeight);
-
-          this._createTurnTip(pageRoot, pageHeight);
-
-          await this._createBoard(pageRoot, pageHeight);
-          await this._createBottomActionButtons(pageRoot, pageHeight);
-        }
-
-        async _createBackground(parent, pageWidth, pageHeight) {
-          const backgroundNode = new Node('Background');
-          backgroundNode.layer = parent.layer;
-          backgroundNode.parent = parent;
-          backgroundNode.setPosition(Vec3.ZERO);
-          backgroundNode.setSiblingIndex(0);
-          const backgroundTransform = backgroundNode.addComponent(UITransform);
-          backgroundTransform.setContentSize(pageWidth, pageHeight);
-          const backgroundSprite = backgroundNode.addComponent(Sprite);
-          backgroundSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadBackgroundSpriteFrame();
-
-          if (!spriteFrame || !backgroundNode.isValid) {
-            const backgroundGraphics = backgroundNode.addComponent(Graphics);
-            backgroundGraphics.fillColor = new Color(245, 247, 250, 255);
-            backgroundGraphics.rect(-pageWidth / 2, -pageHeight / 2, pageWidth, pageHeight);
-            backgroundGraphics.fill();
-            return;
-          }
-
-          backgroundSprite.spriteFrame = spriteFrame;
-
-          this._setCoverSize(backgroundTransform, spriteFrame, pageWidth, pageHeight);
-        }
-
-        async _loadBackgroundSpriteFrame() {
-          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().loadFirst(['images/play/bg/spriteFrame', 'images/play/bg'], SpriteFrame);
-          if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
-          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().load('images/play/bg/texture', Texture2D);
-          if (!texture) return null;
-          const generatedSpriteFrame = new SpriteFrame();
-          generatedSpriteFrame.texture = texture;
-          return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+          (_this$_backBtn = this._backBtn) == null || _this$_backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
         }
 
         _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
@@ -160,187 +135,215 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           return spriteFrame;
         }
 
-        async _createSettingButton(parent, pageWidth, pageHeight) {
-          const buttonSize = 96;
-          const margin = 36;
-          const settingBtnNode = new Node('SettingButton');
-          settingBtnNode.layer = parent.layer;
-          settingBtnNode.parent = parent;
-          settingBtnNode.setPosition(-pageWidth / 2 + buttonSize / 2 + margin, pageHeight / 2 - buttonSize / 2 - margin, 0);
-          const settingBtnTransform = settingBtnNode.addComponent(UITransform);
-          settingBtnTransform.setContentSize(buttonSize, buttonSize);
-          const settingSprite = settingBtnNode.addComponent(Sprite);
-          settingSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          this._backBtn = settingBtnNode.addComponent(Button);
-          this._backBtn.interactable = true;
+        _hideLegacyEmptyNodes() {
+          ['background', 'content', 'ske'].forEach(name => {
+            const node = this.node.getChildByName(name);
+            if (node) node.active = false;
+          });
+        }
 
-          this._backBtn.node.on(Button.EventType.CLICK, this._onBack, this);
+        _bindPrefabReferences() {
+          this._backgroundSprite = this._bindSprite('Background');
+          this._settingSprite = this._bindSprite('SettingButton');
+          this._backBtn = this._bindButton('SettingButton');
+          this._titleSprite = this._bindSprite('Title');
+          this._titleLabel = this._bindLabel('Title/TitleLabel');
+          this._redInfoLabel = this._bindLabel('RedPlayerBox/Label');
+          this._blueInfoLabel = this._bindLabel('BluePlayerBox/Label');
+          this._turnTipLabel = this._bindLabel('TurnTip');
+          this._boardNode = this._findPrefabNode('Board');
+          this._boardSprite = this._bindSprite('Board');
+          this._bottomIconSprites = {
+            RestartButton: this._bindButtonIcon('RestartButton'),
+            UndoButton: this._bindButtonIcon('UndoButton'),
+            HintButton: this._bindButtonIcon('HintButton')
+          };
+        }
 
-          const spriteFrame = await this._loadSettingSpriteFrame();
-
-          if (!spriteFrame || !settingBtnNode.isValid) {
-            console.warn('[GamePage] 设置按钮图片加载失败: images/play/setting');
-            return;
+        _applyStaticText() {
+          if (this._titleLabel) {
+            this._titleLabel.string = '欢乐斗兽棋';
+            this._titleLabel.fontSize = 48;
+            this._titleLabel.lineHeight = 58;
           }
 
-          settingSprite.spriteFrame = spriteFrame;
-        }
+          this._configureInfoLabel(this._redInfoLabel, '红方 16枚');
 
-        async _loadSettingSpriteFrame() {
-          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().loadFirst(['images/play/setting/spriteFrame', 'images/play/setting'], SpriteFrame);
-          if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
-          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().load('images/play/setting/texture', Texture2D);
-          if (!texture) return null;
-          const generatedSpriteFrame = new SpriteFrame();
-          generatedSpriteFrame.texture = texture;
-          return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
-        }
+          this._configureInfoLabel(this._blueInfoLabel, '蓝方 16枚');
 
-        async _createTitle(parent, pageWidth, pageHeight) {
-          const titleWidth = 488;
-          const titleHeight = 154;
-          const topMargin = 22;
-          const titleNode = new Node('Title');
-          titleNode.layer = parent.layer;
-          titleNode.parent = parent;
-          titleNode.setPosition(0, pageHeight / 2 - titleHeight / 2 - topMargin, 0);
-          const titleTransform = titleNode.addComponent(UITransform);
-          titleTransform.setContentSize(titleWidth, titleHeight);
-          const titleSprite = titleNode.addComponent(Sprite);
-          titleSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadTitleSpriteFrame();
-
-          if (!spriteFrame || !titleNode.isValid) {
-            console.warn('[GamePage] 标题背景图片加载失败: images/play/title_bg');
-          } else {
-            titleSprite.spriteFrame = spriteFrame;
+          if (this._turnTipLabel) {
+            this._turnTipLabel.string = '请翻开第一枚棋子决定阵营';
+            this._turnTipLabel.fontSize = 30;
+            this._turnTipLabel.lineHeight = 38;
+            this._turnTipLabel.color = new Color(255, 255, 255, 255);
           }
 
-          const labelNode = new Node('TitleLabel');
-          labelNode.layer = parent.layer;
-          labelNode.parent = titleNode;
-          labelNode.setPosition(Vec3.ZERO);
-          const labelTransform = labelNode.addComponent(UITransform);
-          labelTransform.setContentSize(titleWidth, titleHeight);
-          const titleLabel = labelNode.addComponent(Label);
-          titleLabel.string = '欢乐斗兽棋';
-          titleLabel.fontSize = 48;
-          titleLabel.color = new Color(255, 255, 255, 255);
-          titleLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          titleLabel.verticalAlign = Label.VerticalAlign.CENTER;
+          this._configureBottomLabel('RestartButton/Label', '重来');
+
+          this._configureBottomLabel('UndoButton/Label', '悔棋');
+
+          this._configureBottomLabel('HintButton/Label', '提示');
         }
 
-        async _loadTitleSpriteFrame() {
-          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().loadFirst(['images/play/title_bg/spriteFrame', 'images/play/title_bg'], SpriteFrame);
-          if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
-          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().load('images/play/title_bg/texture', Texture2D);
-          if (!texture) return null;
-          const generatedSpriteFrame = new SpriteFrame();
-          generatedSpriteFrame.texture = texture;
-          return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
-        }
-
-        _createPlayerInfoBoxes(parent, pageWidth, pageHeight) {
-          const boxWidth = 294;
-          const boxHeight = 164;
-          const centerY = pageHeight / 2 - 352;
-          const centerOffsetX = pageWidth * 0.26;
-          this._redInfoLabel = this._createPlayerInfoBox(parent, 'RedPlayerBox', '玩家红方 8枚', new Vec3(-centerOffsetX, centerY, 0), boxWidth, boxHeight, new Color(224, 68, 68, 255));
-          this._blueInfoLabel = this._createPlayerInfoBox(parent, 'BluePlayerBox', 'AI蓝方 8枚', new Vec3(centerOffsetX, centerY, 0), boxWidth, boxHeight, new Color(70, 142, 230, 255));
-        }
-
-        _createPlayerInfoBox(parent, nodeName, text, position, width, height, accentColor) {
-          const boxNode = new Node(nodeName);
-          boxNode.layer = parent.layer;
-          boxNode.parent = parent;
-          boxNode.setPosition(position);
-          const boxTransform = boxNode.addComponent(UITransform);
-          boxTransform.setContentSize(width, height);
-          const boxGraphics = boxNode.addComponent(Graphics);
-          boxGraphics.fillColor = new Color(5, 88, 55, 150);
-          boxGraphics.roundRect(-width / 2, -height / 2, width, height, 18);
-          boxGraphics.fill();
-          boxGraphics.strokeColor = accentColor;
-          boxGraphics.lineWidth = 4;
-          boxGraphics.roundRect(-width / 2, -height / 2, width, height, 18);
-          boxGraphics.stroke();
-          const labelNode = new Node('Label');
-          labelNode.layer = parent.layer;
-          labelNode.parent = boxNode;
-          labelNode.setPosition(Vec3.ZERO);
-          const labelTransform = labelNode.addComponent(UITransform);
-          labelTransform.setContentSize(width, height);
-          const label = labelNode.addComponent(Label);
+        _configureInfoLabel(label, text) {
+          if (!label) return;
           label.string = text;
           label.fontSize = 32;
           label.lineHeight = 42;
           label.color = new Color(255, 255, 255, 255);
-          label.horizontalAlign = Label.HorizontalAlign.CENTER;
-          label.verticalAlign = Label.VerticalAlign.CENTER;
-          return label;
         }
 
-        _createTurnTip(parent, pageHeight) {
-          const tipWidth = 360;
-          const tipHeight = 72;
-          const tipNode = new Node('TurnTip');
-          tipNode.layer = parent.layer;
-          tipNode.parent = parent;
-          tipNode.setPosition(0, pageHeight / 2 - 560, 0);
-          const tipTransform = tipNode.addComponent(UITransform);
-          tipTransform.setContentSize(tipWidth, tipHeight);
-          this._turnTipLabel = tipNode.addComponent(Label);
-          this._turnTipLabel.string = '红方回合 - 翻开暗子或选择己方棋子';
-          this._turnTipLabel.fontSize = 30;
-          this._turnTipLabel.color = new Color(255, 255, 255, 255);
-          this._turnTipLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
-          this._turnTipLabel.verticalAlign = Label.VerticalAlign.CENTER;
+        _configureBottomLabel(path, text) {
+          const label = this._bindLabel(path);
+
+          if (!label) return;
+          label.string = text;
+          label.fontSize = 28;
+          label.lineHeight = 36;
+          label.color = new Color(255, 255, 255, 255);
         }
 
-        async _createBoard(parent, pageHeight) {
-          const boardSize = 750;
-          const boardNode = new Node('Board');
-          boardNode.layer = parent.layer;
-          boardNode.parent = parent;
-          boardNode.setPosition(0, pageHeight / 2 - 990, 0);
-          const boardTransform = boardNode.addComponent(UITransform);
-          boardTransform.setContentSize(boardSize, boardSize);
-          const boardSprite = boardNode.addComponent(Sprite);
-          boardSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadBoardSpriteFrame();
+        _drawStaticGraphics() {
+          this._drawPlayerInfoBox('RedPlayerBox', new Color(224, 68, 68, 255));
 
-          if (!spriteFrame || !boardNode.isValid) {
-            console.warn('[GamePage] 棋盘背景图片加载失败: images/play/play_bg');
+          this._drawPlayerInfoBox('BluePlayerBox', new Color(70, 142, 230, 255));
+        }
+
+        _drawPlayerInfoBox(path, accentColor) {
+          var _node$getComponent;
+
+          const node = this._findPrefabNode(path);
+
+          const transform = node == null ? void 0 : node.getComponent(UITransform);
+          if (!node || !transform) return;
+          const width = transform.contentSize.width;
+          const height = transform.contentSize.height;
+          const graphics = (_node$getComponent = node.getComponent(Graphics)) != null ? _node$getComponent : node.addComponent(Graphics);
+          graphics.clear();
+          graphics.fillColor = new Color(5, 88, 55, 150);
+          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
+          graphics.fill();
+          graphics.strokeColor = accentColor;
+          graphics.lineWidth = 4;
+          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
+          graphics.stroke();
+        }
+
+        _bindEvents() {
+          if (!this._backBtn) return;
+
+          this._backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
+
+          this._backBtn.node.on(Button.EventType.CLICK, this._onBack, this);
+        }
+
+        async _loadStaticImages() {
+          await Promise.all([this._setSpriteFrame(this._backgroundSprite, 'images/play/bg', '[GamePage] 背景图加载失败: images/play/bg', true), this._setSpriteFrame(this._settingSprite, 'images/play/setting', '[GamePage] 设置按钮图片加载失败: images/play/setting'), this._setSpriteFrame(this._titleSprite, 'images/play/title_bg', '[GamePage] 标题背景图片加载失败: images/play/title_bg'), this._setSpriteFrame(this._boardSprite, 'images/play/play_bg', '[GamePage] 棋盘背景图片加载失败: images/play/play_bg'), this._setSpriteFrame(this._bottomIconSprites.RestartButton, 'images/play/icon1', '[GamePage] 底部按钮图标加载失败: images/play/icon1'), this._setSpriteFrame(this._bottomIconSprites.UndoButton, 'images/play/icon2', '[GamePage] 底部按钮图标加载失败: images/play/icon2'), this._setSpriteFrame(this._bottomIconSprites.HintButton, 'images/play/icon3', '[GamePage] 底部按钮图标加载失败: images/play/icon3')]);
+        }
+
+        async _setSpriteFrame(sprite, imagePath, failMessage, coverPage = false) {
+          if (!sprite) {
+            console.warn(failMessage);
             return;
           }
 
-          boardSprite.spriteFrame = spriteFrame;
-          await this._createPieces(boardNode);
+          const spriteFrame = await this._loadImageSpriteFrame(imagePath);
+
+          if (!spriteFrame || !sprite.node.isValid) {
+            console.warn(failMessage);
+            return;
+          }
+
+          sprite.spriteFrame = spriteFrame;
+
+          if (coverPage) {
+            const pageTransform = this.node.getComponent(UITransform);
+            const transform = sprite.node.getComponent(UITransform);
+
+            if (pageTransform && transform) {
+              this._setCoverSize(transform, spriteFrame, pageTransform.contentSize.width, pageTransform.contentSize.height);
+            }
+          }
         }
 
-        async _loadBoardSpriteFrame() {
-          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().loadFirst(['images/play/play_bg/spriteFrame', 'images/play/play_bg'], SpriteFrame);
-          if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
-          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().load('images/play/play_bg/texture', Texture2D);
-          if (!texture) return null;
-          const generatedSpriteFrame = new SpriteFrame();
-          generatedSpriteFrame.texture = texture;
-          return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+        _bindButtonIcon(path) {
+          this._bindButton(path);
+
+          return this._bindSprite(`${path}/Icon`);
+        }
+
+        _bindButton(path) {
+          var _node$getComponent2;
+
+          const node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          const button = (_node$getComponent2 = node.getComponent(Button)) != null ? _node$getComponent2 : node.addComponent(Button);
+          button.interactable = true;
+          return button;
+        }
+
+        _bindSprite(path) {
+          var _node$getComponent3;
+
+          const node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          const sprite = (_node$getComponent3 = node.getComponent(Sprite)) != null ? _node$getComponent3 : node.addComponent(Sprite);
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          return sprite;
+        }
+
+        _bindLabel(path) {
+          var _node$getComponent4;
+
+          const node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          const label = (_node$getComponent4 = node.getComponent(Label)) != null ? _node$getComponent4 : node.addComponent(Label);
+          label.horizontalAlign = Label.HorizontalAlign.CENTER;
+          label.verticalAlign = Label.VerticalAlign.CENTER;
+          label.overflow = Label.Overflow.CLAMP;
+          return label;
+        }
+
+        _preparePrefabNode(node) {
+          var _node$getComponent5;
+
+          node.layer = this.node.layer;
+          (_node$getComponent5 = node.getComponent(UITransform)) != null ? _node$getComponent5 : node.addComponent(UITransform);
+        }
+
+        _findPrefabNode(path) {
+          const node = path.split('/').reduce((current, name) => {
+            var _current$getChildByNa;
+
+            return (_current$getChildByNa = current == null ? void 0 : current.getChildByName(name)) != null ? _current$getChildByNa : null;
+          }, this.node);
+
+          if (!node) {
+            console.warn(`[GamePage] prefab 缺少节点: ${path}`);
+          }
+
+          return node;
         }
 
         async _createPieces(boardNode) {
+          if (!boardNode) {
+            console.warn('[GamePage] prefab 缺少节点: Board');
+            return;
+          }
+
+          [...boardNode.children].forEach(child => child.destroy());
           this._pieceBackFrame = await this._loadImageSpriteFrame('images/play/piece_bg');
 
           if (!this._pieceBackFrame) {
@@ -350,19 +353,32 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._pieces = [];
           this._selectedPiece = null;
           this._currentTurn = 'red';
+          this._playerCamp = null;
+          this._aiCamp = null;
           this._isBusy = false;
           this._isGameOver = false;
           this._aiProfile = this._createRandomAIProfile();
+          this._cellHighlights = [];
+
+          this._pieceHighlights.clear();
+
+          this._aiActionRepeatCounts.clear();
+
+          this._isAICompromising = false;
 
           const pieces = this._shufflePieces(this._createPieceData());
 
-          const pieceSize = 146;
+          const piecePositions = this._shufflePiecePositions(this._createPiecePositions());
+
+          const pieceSize = 70;
 
           this._createBoardCells(boardNode);
 
           pieces.forEach((piece, index) => {
-            const row = Math.floor(index / 4);
-            const col = index % 4;
+            const {
+              row,
+              col
+            } = piecePositions[index];
 
             const gamePiece = this._createPieceNode(piece, index, row, col, pieceSize, boardNode.layer);
 
@@ -384,7 +400,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.7,
             minThinkTime: 0.35,
             maxThinkTime: 0.95,
-            moodTexts: ['蓝方有点犹豫...', '蓝方随手试探', '蓝方想先看一眼局面']
+            moodTexts: ['AI有点犹豫...', 'AI随手试探', 'AI想先看一眼局面']
           }, {
             difficulty: '中级',
             depth: 1,
@@ -393,7 +409,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.35,
             minThinkTime: 0.55,
             maxThinkTime: 1.15,
-            moodTexts: ['蓝方正在权衡一步棋', '蓝方观察相邻威胁', '蓝方试着保持节奏']
+            moodTexts: ['AI正在权衡一步棋', 'AI观察相邻威胁', 'AI试着保持节奏']
           }, {
             difficulty: '高级',
             depth: 2,
@@ -402,7 +418,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.18,
             minThinkTime: 0.8,
             maxThinkTime: 1.45,
-            moodTexts: ['蓝方开始算后续变化', '蓝方盯上了关键位置', '蓝方放慢节奏寻找机会']
+            moodTexts: ['AI开始算后续变化', 'AI盯上了关键位置', 'AI放慢节奏寻找机会']
           }, {
             difficulty: '地狱',
             depth: 3,
@@ -411,44 +427,145 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             riskBias: 0.05,
             minThinkTime: 1.05,
             maxThinkTime: 1.75,
-            moodTexts: ['蓝方冷静计算三步变化', '蓝方几乎没有破绽', '蓝方在压缩你的活动空间']
+            moodTexts: ['AI冷静计算三步变化', 'AI几乎没有破绽', 'AI在压缩你的活动空间']
           }];
           return profiles[Math.floor(Math.random() * profiles.length)];
         }
 
+        _assignCamps(playerCamp) {
+          this._playerCamp = playerCamp;
+          this._aiCamp = playerCamp === 'red' ? 'blue' : 'red';
+          this._currentTurn = playerCamp;
+
+          this._refreshGameInfo();
+
+          this._setTurnTip(`你成为${this._getCampLabel(playerCamp)}，AI为${this._getCampLabel(this._aiCamp)}`);
+        }
+
+        _isPlayerTurn() {
+          return !!this._playerCamp && this._currentTurn === this._playerCamp;
+        }
+
+        _isAITurn() {
+          return !!this._aiCamp && this._currentTurn === this._aiCamp;
+        }
+
+        _getCampLabel(camp) {
+          if (camp === 'red') return '红方';
+          if (camp === 'blue') return '蓝方';
+          return '';
+        }
+
         _createBoardCells(boardNode) {
-          for (let row = 0; row < 4; row++) {
-            for (let col = 0; col < 4; col++) {
+          for (let row = 0; row < this._boardDimension; row++) {
+            this._cellHighlights[row] = [];
+
+            for (let col = 0; col < this._boardDimension; col++) {
               const cellNode = new Node(`Cell_${row}_${col}`);
               cellNode.layer = boardNode.layer;
               cellNode.parent = boardNode;
               cellNode.setPosition(this._getCellPosition(row, col));
               const cellTransform = cellNode.addComponent(UITransform);
-              cellTransform.setContentSize(this._boardCellSize, this._boardCellSize);
+              cellTransform.setContentSize(this._boardCellWidth, this._boardCellHeight);
               const button = cellNode.addComponent(Button);
               button.interactable = true;
               cellNode.on(Button.EventType.CLICK, () => this._onCellClick(row, col), this);
+              const highlightNode = new Node('MoveHighlight');
+              highlightNode.layer = boardNode.layer;
+              highlightNode.parent = cellNode;
+              highlightNode.active = false;
+              const highlightTransform = highlightNode.addComponent(UITransform);
+              highlightTransform.setContentSize(this._boardCellWidth - 18, this._boardCellHeight - 18);
+              const highlightGraphics = highlightNode.addComponent(Graphics);
+              const halfWidth = (this._boardCellWidth - 18) / 2;
+              const halfHeight = (this._boardCellHeight - 18) / 2;
+              highlightGraphics.fillColor = new Color(103, 232, 151, 90);
+              highlightGraphics.roundRect(-halfWidth, -halfHeight, this._boardCellWidth - 18, this._boardCellHeight - 18, 14);
+              highlightGraphics.fill();
+              highlightGraphics.strokeColor = new Color(103, 232, 151, 220);
+              highlightGraphics.lineWidth = 4;
+              highlightGraphics.roundRect(-halfWidth, -halfHeight, this._boardCellWidth - 18, this._boardCellHeight - 18, 14);
+              highlightGraphics.stroke();
+              this._cellHighlights[row][col] = highlightNode;
             }
           }
         }
 
         _getCellPosition(row, col) {
-          return new Vec3(this._boardStartX + col * this._boardCellSize, this._boardStartY - row * this._boardCellSize, 0);
+          return new Vec3(this._boardStartX + col * this._boardCellWidth, this._boardStartY - row * this._boardCellHeight, 0);
         }
 
         _createPieceData() {
           const animals = ['象', '狮', '虎', '豹', '狼', '狗', '猫', '鼠'];
-          return [...animals.map(animal => ({
+          return [...animals.flatMap(animal => [{
             animal,
             camp: 'red'
-          })), ...animals.map(animal => ({
+          }, {
+            animal,
+            camp: 'red'
+          }]), ...animals.flatMap(animal => [{
             animal,
             camp: 'blue'
-          }))];
+          }, {
+            animal,
+            camp: 'blue'
+          }])];
+        }
+
+        _createPiecePositions() {
+          const positions = [];
+          const lastIndex = this._boardDimension - 1;
+
+          for (let col = 0; col < this._boardDimension; col++) {
+            positions.push({
+              row: 0,
+              col
+            });
+            positions.push({
+              row: lastIndex,
+              col
+            });
+          }
+
+          for (let row = 1; row < lastIndex; row++) {
+            positions.push({
+              row,
+              col: 0
+            });
+            positions.push({
+              row,
+              col: lastIndex
+            });
+          }
+
+          const centerLeft = this._boardDimension / 2 - 1;
+          const centerRight = this._boardDimension / 2;
+          positions.push({
+            row: centerLeft,
+            col: centerLeft
+          }, {
+            row: centerLeft,
+            col: centerRight
+          }, {
+            row: centerRight,
+            col: centerLeft
+          }, {
+            row: centerRight,
+            col: centerRight
+          });
+          return positions;
+        }
+
+        _shufflePiecePositions(positions) {
+          return this._shuffleArray(positions);
         }
 
         _shufflePieces(pieces) {
-          const shuffled = [...pieces];
+          return this._shuffleArray(pieces);
+        }
+
+        _shuffleArray(items) {
+          const shuffled = [...items];
 
           for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -488,6 +605,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           frontNode.parent = pieceNode;
           frontNode.layer = layer;
           frontNode.active = false;
+
+          const highlightNode = this._createPieceHighlightNode(size, layer);
+
+          highlightNode.parent = pieceNode;
+          highlightNode.active = false;
           const gamePiece = {
             id,
             row,
@@ -501,7 +623,25 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             isAlive: true
           };
           pieceNode.on(Button.EventType.CLICK, () => this._onPieceClick(gamePiece), this);
+
+          this._pieceHighlights.set(id, highlightNode);
+
           return gamePiece;
+        }
+
+        _createPieceHighlightNode(size, layer) {
+          const highlightNode = new Node('CaptureHighlight');
+          highlightNode.layer = layer;
+          highlightNode.setPosition(Vec3.ZERO);
+          const transform = highlightNode.addComponent(UITransform);
+          transform.setContentSize(size + 14, size + 14);
+          const graphics = highlightNode.addComponent(Graphics);
+          const half = (size + 14) / 2;
+          graphics.strokeColor = new Color(255, 238, 88, 255);
+          graphics.lineWidth = Math.max(4, Math.round(size * 0.055));
+          graphics.roundRect(-half, -half, size + 14, size + 14, Math.round(size * 0.12));
+          graphics.stroke();
+          return highlightNode;
         }
 
         _createPieceFrontNode(piece, size, layer) {
@@ -513,11 +653,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           const graphics = frontNode.addComponent(Graphics);
           const half = size / 2;
           graphics.fillColor = new Color(244, 189, 133, 255);
-          graphics.roundRect(-half, -half, size, size, 14);
+          graphics.roundRect(-half, -half, size, size, Math.round(size * 0.1));
           graphics.fill();
           graphics.strokeColor = piece.camp === 'red' ? new Color(225, 52, 44, 255) : new Color(40, 124, 232, 255);
-          graphics.lineWidth = 5;
-          graphics.roundRect(-half + 4, -half + 4, size - 8, size - 8, 12);
+          const lineWidth = Math.max(3, Math.round(size * 0.045));
+          graphics.lineWidth = lineWidth;
+          graphics.roundRect(-half + lineWidth, -half + lineWidth, size - lineWidth * 2, size - lineWidth * 2, Math.round(size * 0.09));
           graphics.stroke();
           const labelNode = new Node('Label');
           labelNode.parent = frontNode;
@@ -527,8 +668,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           labelTransform.setContentSize(size, size);
           const label = labelNode.addComponent(Label);
           label.string = piece.animal;
-          label.fontSize = 76;
-          label.lineHeight = 86;
+          label.fontSize = Math.round(size * 0.52);
+          label.lineHeight = Math.round(size * 0.6);
           label.color = piece.camp === 'red' ? new Color(214, 44, 36, 255) : new Color(34, 112, 224, 255);
           label.horizontalAlign = Label.HorizontalAlign.CENTER;
           label.verticalAlign = Label.VerticalAlign.CENTER;
@@ -539,16 +680,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           const graphics = pieceNode.addComponent(Graphics);
           const half = size / 2;
           graphics.fillColor = new Color(147, 92, 46, 255);
-          graphics.roundRect(-half, -half, size, size, 14);
+          graphics.roundRect(-half, -half, size, size, Math.round(size * 0.1));
           graphics.fill();
           graphics.strokeColor = new Color(190, 130, 75, 255);
-          graphics.lineWidth = 4;
-          graphics.roundRect(-half + 3, -half + 3, size - 6, size - 6, 12);
+          const lineWidth = Math.max(3, Math.round(size * 0.04));
+          graphics.lineWidth = lineWidth;
+          graphics.roundRect(-half + lineWidth, -half + lineWidth, size - lineWidth * 2, size - lineWidth * 2, Math.round(size * 0.09));
           graphics.stroke();
         }
 
         _onCellClick(row, col) {
-          if (this._isBusy || this._isGameOver || this._currentTurn !== 'red' || !this._selectedPiece) return;
+          if (this._isBusy || this._isGameOver || !this._isPlayerTurn() || !this._selectedPiece) return;
           if (this._getAlivePieceAt(row, col)) return;
 
           if (!this._isAdjacent(this._selectedPiece.row, this._selectedPiece.col, row, col)) {
@@ -561,7 +703,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _onPieceClick(piece) {
-          if (this._isBusy || this._isGameOver || this._currentTurn !== 'red' || !piece.isAlive) return;
+          if (this._isBusy || this._isGameOver || !piece.isAlive) return;
+          if (!this._playerCamp && piece.isRevealed) return;
+          if (this._playerCamp && !this._isPlayerTurn()) return;
 
           if (!piece.isRevealed) {
             this._playRevealTurn(piece);
@@ -569,20 +713,20 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             return;
           }
 
-          if (piece.camp === 'red') {
+          if (piece.camp === this._playerCamp) {
             this._selectPiece(piece);
 
             return;
           }
 
           if (!this._selectedPiece) {
-            this._setTurnTip('请选择一个红方棋子');
+            this._setTurnTip(`请选择一个${this._getCampLabel(this._playerCamp)}棋子`);
 
             return;
           }
 
           if (!this._canMoveTo(this._selectedPiece, piece)) {
-            this._setTurnTip('只能攻击相邻的蓝方棋子');
+            this._setTurnTip(`只能攻击相邻的${this._getCampLabel(this._aiCamp)}棋子`);
 
             return;
           }
@@ -601,12 +745,16 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._clearSelection();
 
-          this._setTurnTip('红方翻开棋子...');
+          this._setTurnTip(this._playerCamp ? `${this._getCampLabel(this._playerCamp)}翻开棋子...` : '首翻定阵营...');
 
           this._revealPiece(piece, () => {
+            if (!this._playerCamp) {
+              this._assignCamps(piece.camp);
+            }
+
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('blue');
+            this._switchTurn(this._aiCamp);
 
             this._scheduleAITurn();
           });
@@ -617,12 +765,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._clearSelection();
 
-          this._setTurnTip(attacker.animal === target.animal ? `红方 ${attacker.animal} 与 ${target.animal} 火并` : `红方 ${attacker.animal} 吃掉 ${target.animal}`);
+          this._setTurnTip(attacker.animal === target.animal ? `${this._getCampLabel(attacker.camp)} ${attacker.animal} 与 ${target.animal} 火并` : `${this._getCampLabel(attacker.camp)} ${attacker.animal} 吃掉 ${target.animal}`);
 
           this._capturePiece(attacker, target, () => {
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('blue');
+            this._switchTurn(this._aiCamp);
 
             this._scheduleAITurn();
           });
@@ -633,12 +781,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           this._clearSelection();
 
-          this._setTurnTip(`红方 ${piece.animal} 移动`);
+          this._setTurnTip(`${this._getCampLabel(piece.camp)} ${piece.animal} 移动`);
 
           this._movePiece(piece, row, col, () => {
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('blue');
+            this._switchTurn(this._aiCamp);
 
             this._scheduleAITurn();
           });
@@ -657,12 +805,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _runAITurn() {
-          if (this._isGameOver || this._currentTurn !== 'blue') return;
+          if (this._isGameOver || !this._isAITurn()) return;
 
           const action = this._chooseAIAction();
 
           if (!action) {
-            this._switchTurn('red');
+            this._switchTurn(this._playerCamp);
 
             return;
           }
@@ -673,17 +821,19 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             const target = this._getPieceById(action.targetId);
 
             if (!attacker || !target) {
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
 
               return;
             }
 
-            this._setTurnTip(attacker.animal === target.animal ? `蓝方 ${attacker.animal} 与 ${target.animal} 火并` : `蓝方 ${attacker.animal} 吃掉 ${target.animal}`);
+            this._setTurnTip(attacker.animal === target.animal ? `${this._getCampLabel(attacker.camp)} ${attacker.animal} 与 ${target.animal} 火并` : `${this._getCampLabel(attacker.camp)} ${attacker.animal} 吃掉 ${target.animal}`);
+
+            this._recordAIAction(action, attacker);
 
             this._capturePiece(attacker, target, () => {
               if (this._finishTurnIfNeeded()) return;
 
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
             });
 
             return;
@@ -693,17 +843,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             const piece = this._getPieceById(action.pieceId);
 
             if (!piece) {
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
 
               return;
             }
 
-            this._setTurnTip('蓝方翻开棋子...');
+            this._setTurnTip(`${this._getCampLabel(this._aiCamp)}翻开棋子...`);
 
             this._revealPiece(piece, () => {
               if (this._finishTurnIfNeeded()) return;
 
-              this._switchTurn('red');
+              this._switchTurn(this._playerCamp);
             });
 
             return;
@@ -712,17 +862,19 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           const piece = this._getPieceById(action.pieceId);
 
           if (!piece || action.row === undefined || action.col === undefined) {
-            this._switchTurn('red');
+            this._switchTurn(this._playerCamp);
 
             return;
           }
 
-          this._setTurnTip(`蓝方 ${piece.animal} 移动`);
+          this._setTurnTip(`${this._getCampLabel(piece.camp)} ${piece.animal} 移动`);
+
+          this._recordAIAction(action, piece);
 
           this._movePiece(piece, action.row, action.col, () => {
             if (this._finishTurnIfNeeded()) return;
 
-            this._switchTurn('red');
+            this._switchTurn(this._playerCamp);
           });
         }
 
@@ -730,20 +882,29 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var _this$_aiProfile, _humanPool$pickIndex;
 
           const profile = (_this$_aiProfile = this._aiProfile) != null ? _this$_aiProfile : this._createRandomAIProfile();
+          const aiCamp = this._aiCamp;
+          const playerCamp = this._playerCamp;
+          if (!aiCamp || !playerCamp) return null;
 
           const simPieces = this._createSimPieces();
 
-          const actions = this._generateSimActions(simPieces, 'blue');
+          const actions = this._generateSimActions(simPieces, aiCamp);
 
           if (actions.length <= 0) return null;
-          const scoredActions = actions.map(action => {
+          let scoredActions = actions.map(action => {
             const nextPieces = this._applySimAction(simPieces, action);
 
-            const futureScore = profile.depth <= 0 ? this._evaluateSimBoard(nextPieces, profile) : this._scoreFutureBoard(nextPieces, 'red', profile.depth, profile);
+            const futureScore = profile.depth <= 0 ? this._evaluateSimBoard(nextPieces, profile) : this._scoreFutureBoard(nextPieces, playerCamp, profile.depth, profile);
             return { ...action,
-              score: this._scoreImmediateAction(simPieces, action, 'blue', profile) + futureScore
+              score: this._scoreImmediateAction(simPieces, action, aiCamp, profile) + futureScore
             };
           }).sort((a, b) => b.score - a.score);
+          const compromiseActions = scoredActions.filter(action => !this._shouldAICompromiseOnAction(simPieces, action));
+          this._isAICompromising = compromiseActions.length > 0 && compromiseActions[0] !== scoredActions[0];
+
+          if (compromiseActions.length > 0) {
+            scoredActions = compromiseActions;
+          }
 
           if (Math.random() < profile.mistakeRate) {
             const mistakePoolSize = Math.max(1, Math.ceil(scoredActions.length * 0.45));
@@ -754,6 +915,41 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           const humanPool = scoredActions.slice(0, Math.min(scoredActions.length, profile.difficulty === '地狱' ? 1 : 3));
           const pickIndex = profile.difficulty === '地狱' ? 0 : Math.floor(Math.random() * humanPool.length);
           return (_humanPool$pickIndex = humanPool[pickIndex]) != null ? _humanPool$pickIndex : scoredActions[0];
+        }
+
+        _shouldAICompromiseOnAction(pieces, action) {
+          var _this$_aiActionRepeat;
+
+          const key = this._getAIRepeatActionKey(pieces, action);
+
+          return !!key && ((_this$_aiActionRepeat = this._aiActionRepeatCounts.get(key)) != null ? _this$_aiActionRepeat : 0) >= 2;
+        }
+
+        _recordAIAction(action, piece) {
+          var _this$_aiActionRepeat2;
+
+          const key = this._getAIRepeatActionKey(this._createSimPieces(), action, piece);
+
+          if (!key) return;
+
+          this._aiActionRepeatCounts.set(key, ((_this$_aiActionRepeat2 = this._aiActionRepeatCounts.get(key)) != null ? _this$_aiActionRepeat2 : 0) + 1);
+
+          if (this._isAICompromising) {
+            this._setTurnTip('AI放弃重复追击，换一种走法');
+
+            this._isAICompromising = false;
+          }
+        }
+
+        _getAIRepeatActionKey(pieces, action, livePiece) {
+          if (action.type !== 'move') return null;
+          if (action.row === undefined || action.col === undefined) return null;
+          const piece = livePiece != null ? livePiece : pieces.find(item => item.id === action.pieceId);
+          if (!piece) return null;
+          const from = `${piece.row},${piece.col}`;
+          const to = `${action.row},${action.col}`;
+          const edge = [from, to].sort().join('<>');
+          return `move:${piece.id}:${edge}`;
         }
 
         _createSimPieces() {
@@ -769,24 +965,28 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _scoreFutureBoard(pieces, turn, depth, profile) {
+          const aiCamp = this._aiCamp;
+          const playerCamp = this._playerCamp;
+          if (!aiCamp || !playerCamp) return 0;
+
           const winner = this._getSimWinner(pieces);
 
-          if (winner === 'blue') return 10000 + depth * 100;
-          if (winner === 'red') return -10000 - depth * 100;
+          if (winner === aiCamp) return 10000 + depth * 100;
+          if (winner === playerCamp) return -10000 - depth * 100;
           if (winner === 'draw') return 0;
           if (depth <= 0) return this._evaluateSimBoard(pieces, profile);
 
           const actions = this._generateSimActions(pieces, turn).map(action => ({ ...action,
             score: this._scoreImmediateAction(pieces, action, turn, profile)
-          })).sort((a, b) => turn === 'blue' ? b.score - a.score : a.score - b.score).slice(0, profile.depth >= 2 ? 10 : 16);
+          })).sort((a, b) => turn === aiCamp ? b.score - a.score : a.score - b.score).slice(0, profile.depth >= 2 ? 10 : 16);
 
           if (actions.length <= 0) return this._evaluateSimBoard(pieces, profile);
           const scores = actions.map(action => {
             const nextPieces = this._applySimAction(pieces, action);
 
-            return this._scoreFutureBoard(nextPieces, turn === 'blue' ? 'red' : 'blue', depth - 1, profile);
+            return this._scoreFutureBoard(nextPieces, turn === aiCamp ? playerCamp : aiCamp, depth - 1, profile);
           });
-          return turn === 'blue' ? Math.max(...scores) : Math.min(...scores);
+          return turn === aiCamp ? Math.max(...scores) : Math.min(...scores);
         }
 
         _generateSimActions(pieces, camp) {
@@ -877,7 +1077,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           }
 
           if (action.type === 'reveal') {
-            const centerBias = 2 - (Math.abs(piece.row - 1.5) + Math.abs(piece.col - 1.5)) * 0.2;
+            const boardCenter = (this._boardDimension - 1) / 2;
+            const centerBias = 2 - (Math.abs(piece.row - boardCenter) + Math.abs(piece.col - boardCenter)) * 0.2;
             return profile.revealBias * 10 + centerBias;
           }
 
@@ -888,11 +1089,15 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _evaluateSimBoard(pieces, profile) {
-          const blueScore = this._evaluateCampInSim(pieces, 'blue', profile);
+          const aiCamp = this._aiCamp;
+          const playerCamp = this._playerCamp;
+          if (!aiCamp || !playerCamp) return 0;
 
-          const redScore = this._evaluateCampInSim(pieces, 'red', profile);
+          const aiScore = this._evaluateCampInSim(pieces, aiCamp, profile);
 
-          return blueScore - redScore;
+          const playerScore = this._evaluateCampInSim(pieces, playerCamp, profile);
+
+          return aiScore - playerScore;
         }
 
         _evaluateCampInSim(pieces, camp, profile) {
@@ -928,7 +1133,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             row,
             col: col + 1
           }];
-          return candidates.filter(cell => cell.row >= 0 && cell.row < 4 && cell.col >= 0 && cell.col < 4 && !pieces.some(piece => piece.isAlive && piece.row === cell.row && piece.col === cell.col));
+          return candidates.filter(cell => cell.row >= 0 && cell.row < this._boardDimension && cell.col >= 0 && cell.col < this._boardDimension && !pieces.some(piece => piece.isAlive && piece.row === cell.row && piece.col === cell.col));
         }
 
         _canSimCapture(attacker, target) {
@@ -952,7 +1157,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         _revealPiece(piece, onComplete) {
           const button = piece.node.getComponent(Button);
           if (button) button.interactable = false;
-          tween(piece.node).to(0.12, {
+          piece.node.setScale(Vec3.ONE);
+          piece.backNode.setScale(Vec3.ONE);
+          piece.frontNode.setScale(new Vec3(0.04, 1.06, 1));
+          piece.backNode.active = true;
+          piece.frontNode.active = false;
+          tween(piece.backNode).to(0.12, {
             scale: new Vec3(0.04, 1.06, 1)
           }, {
             easing: 'quadIn'
@@ -960,14 +1170,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             piece.isRevealed = true;
             piece.backNode.active = false;
             piece.frontNode.active = true;
-            if (button) button.interactable = true;
 
             this._refreshGameInfo();
-          }).to(0.16, {
-            scale: Vec3.ONE
-          }, {
-            easing: 'backOut'
-          }).call(onComplete).start();
+
+            tween(piece.frontNode).to(0.16, {
+              scale: Vec3.ONE
+            }, {
+              easing: 'backOut'
+            }).call(() => {
+              piece.node.setScale(Vec3.ONE);
+              piece.backNode.setScale(Vec3.ONE);
+              piece.frontNode.setScale(Vec3.ONE);
+              if (button) button.interactable = true;
+              onComplete();
+            }).start();
+          }).start();
         }
 
         _capturePiece(attacker, target, onComplete) {
@@ -1056,7 +1273,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           if (this._selectedPiece === piece) {
             this._clearSelection();
 
-            this._setTurnTip('红方回合 - 翻开暗子或选择己方棋子');
+            this._setTurnTip(`${this._getCampLabel(this._playerCamp)}回合 - 翻开暗子或选择己方棋子`);
 
             return;
           }
@@ -1066,17 +1283,51 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           this._selectedPiece = piece;
           piece.node.setScale(new Vec3(1.08, 1.08, 1));
 
-          this._setTurnTip(`已选择红方 ${piece.animal}`);
+          this._refreshSelectionHighlights(piece);
+
+          this._setTurnTip(`已选择${this._getCampLabel(piece.camp)} ${piece.animal}`);
         }
 
         _clearSelection() {
+          this._clearHighlights();
+
           if (!this._selectedPiece) return;
 
-          if (this._selectedPiece.node.isValid) {
+          if (this._selectedPiece.node.isValid && this._selectedPiece.isAlive) {
             this._selectedPiece.node.setScale(Vec3.ONE);
           }
 
           this._selectedPiece = null;
+        }
+
+        _refreshSelectionHighlights(piece) {
+          this._clearHighlights();
+
+          this._getEmptyAdjacentCells(piece.row, piece.col).forEach(cell => {
+            var _this$_cellHighlights;
+
+            const highlight = (_this$_cellHighlights = this._cellHighlights[cell.row]) == null ? void 0 : _this$_cellHighlights[cell.col];
+            if (highlight) highlight.active = true;
+          });
+
+          this._pieces.forEach(target => {
+            if (!target.isAlive || !target.isRevealed || target.camp === piece.camp) return;
+            if (!this._canMoveTo(piece, target) || !this._canCapture(piece, target)) return;
+
+            const highlight = this._pieceHighlights.get(target.id);
+
+            if (highlight) highlight.active = true;
+          });
+        }
+
+        _clearHighlights() {
+          this._cellHighlights.forEach(row => row.forEach(highlight => {
+            if (highlight != null && highlight.isValid) highlight.active = false;
+          }));
+
+          this._pieceHighlights.forEach(highlight => {
+            if (highlight != null && highlight.isValid) highlight.active = false;
+          });
         }
 
         _switchTurn(turn) {
@@ -1100,7 +1351,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           if (winner === 'draw') {
             this._setTurnTip('双方同归于尽，平局！');
           } else {
-            this._setTurnTip(winner === 'red' ? '红方获胜！蓝方棋子已被吃完' : '蓝方获胜！红方棋子已被吃完');
+            const winnerRole = winner === this._playerCamp ? '你获胜' : 'AI获胜';
+
+            this._setTurnTip(`${winnerRole}！${this._getCampLabel(winner === 'red' ? 'blue' : 'red')}棋子已被吃完`);
           }
 
           this._setAllPieceButtonsEnabled(false);
@@ -1129,6 +1382,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _refreshGameInfo() {
+          var _this$_aiProfile$diff, _this$_aiProfile2;
+
           const redAlive = this._countAlivePieces('red');
 
           const blueAlive = this._countAlivePieces('blue');
@@ -1137,18 +1392,26 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
           const blueRevealed = this._countRevealedPieces('blue');
 
+          const aiDifficulty = (_this$_aiProfile$diff = (_this$_aiProfile2 = this._aiProfile) == null ? void 0 : _this$_aiProfile2.difficulty) != null ? _this$_aiProfile$diff : '';
+          const redRole = this._playerCamp === 'red' ? '玩家红方' : this._aiCamp === 'red' ? `AI${aiDifficulty}红方` : '红方';
+          const blueRole = this._playerCamp === 'blue' ? '玩家蓝方' : this._aiCamp === 'blue' ? `AI${aiDifficulty}蓝方` : '蓝方';
+
           if (this._redInfoLabel) {
-            this._redInfoLabel.string = `玩家红方 ${redAlive}枚\n明子 ${redRevealed}`;
+            this._redInfoLabel.string = `${redRole} ${redAlive}枚\n明子 ${redRevealed}`;
           }
 
           if (this._blueInfoLabel) {
-            var _this$_aiProfile$diff, _this$_aiProfile2;
-
-            this._blueInfoLabel.string = `AI${(_this$_aiProfile$diff = (_this$_aiProfile2 = this._aiProfile) == null ? void 0 : _this$_aiProfile2.difficulty) != null ? _this$_aiProfile$diff : '蓝方'} ${blueAlive}枚\n明子 ${blueRevealed}`;
+            this._blueInfoLabel.string = `${blueRole} ${blueAlive}枚\n明子 ${blueRevealed}`;
           }
 
-          if (!this._isGameOver) {
-            this._setTurnTip(this._currentTurn === 'red' ? '红方回合 - 翻开暗子或选择己方棋子' : '蓝方回合 - AI思考中');
+          if (!this._isGameOver && !this._isBusy) {
+            if (!this._playerCamp) {
+              this._setTurnTip('请翻开第一枚棋子决定阵营');
+            } else if (this._isPlayerTurn()) {
+              this._setTurnTip(`${this._getCampLabel(this._playerCamp)}回合 - 翻开暗子或选择己方棋子`);
+            } else {
+              this._setTurnTip(`${this._getCampLabel(this._aiCamp)}回合 - AI思考中`);
+            }
           }
         }
 
@@ -1196,7 +1459,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
             row,
             col: col + 1
           }];
-          return candidates.filter(cell => cell.row >= 0 && cell.row < 4 && cell.col >= 0 && cell.col < 4 && !this._getAlivePieceAt(cell.row, cell.col));
+          return candidates.filter(cell => cell.row >= 0 && cell.row < this._boardDimension && cell.col >= 0 && cell.col < this._boardDimension && !this._getAlivePieceAt(cell.row, cell.col));
         }
 
         _canCapture(attacker, target) {
@@ -1222,56 +1485,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           return (_powers$animal = powers[animal]) != null ? _powers$animal : 0;
         }
 
-        async _createBottomActionButtons(parent, pageHeight) {
-          const centerY = -pageHeight / 2 + 102;
-          const spacing = 150;
-          await this._createBottomActionButton(parent, 'RestartButton', 'images/play/icon1', '重来', new Vec3(-spacing, centerY, 0));
-          await this._createBottomActionButton(parent, 'UndoButton', 'images/play/icon2', '悔棋', new Vec3(0, centerY, 0));
-          await this._createBottomActionButton(parent, 'HintButton', 'images/play/icon3', '提示', new Vec3(spacing, centerY, 0));
-        }
-
-        async _createBottomActionButton(parent, nodeName, iconPath, text, position) {
-          const buttonWidth = 120;
-          const buttonHeight = 132;
-          const iconSize = 74;
-          const buttonNode = new Node(nodeName);
-          buttonNode.layer = parent.layer;
-          buttonNode.parent = parent;
-          buttonNode.setPosition(position);
-          const buttonTransform = buttonNode.addComponent(UITransform);
-          buttonTransform.setContentSize(buttonWidth, buttonHeight);
-          const button = buttonNode.addComponent(Button);
-          button.interactable = true;
-          const iconNode = new Node('Icon');
-          iconNode.layer = parent.layer;
-          iconNode.parent = buttonNode;
-          iconNode.setPosition(0, 24, 0);
-          const iconTransform = iconNode.addComponent(UITransform);
-          iconTransform.setContentSize(iconSize, iconSize);
-          const iconSprite = iconNode.addComponent(Sprite);
-          iconSprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          const spriteFrame = await this._loadImageSpriteFrame(iconPath);
-
-          if (!spriteFrame || !buttonNode.isValid) {
-            console.warn(`[GamePage] 底部按钮图标加载失败: ${iconPath}`);
-          } else {
-            iconSprite.spriteFrame = spriteFrame;
-          }
-
-          const labelNode = new Node('Label');
-          labelNode.layer = parent.layer;
-          labelNode.parent = buttonNode;
-          labelNode.setPosition(0, -46, 0);
-          const labelTransform = labelNode.addComponent(UITransform);
-          labelTransform.setContentSize(buttonWidth, 40);
-          const label = labelNode.addComponent(Label);
-          label.string = text;
-          label.fontSize = 28;
-          label.color = new Color(255, 255, 255, 255);
-          label.horizontalAlign = Label.HorizontalAlign.CENTER;
-          label.verticalAlign = Label.VerticalAlign.CENTER;
-        }
-
         async _loadImageSpriteFrame(path) {
           const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
             error: Error()
@@ -1293,6 +1506,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
       }) || _class));
+
+      js.setClassAlias(GamePage, 'GamePage');
 
       _cclegacy._RF.pop();
 

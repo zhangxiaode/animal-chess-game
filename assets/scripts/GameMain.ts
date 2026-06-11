@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, resources } from 'cc';
+import { _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, Widget, Vec3 } from 'cc';
 import { UIManager } from './framework/UIManager';
 import { PopupManager } from './framework/PopupManager';
 import { SoundManager } from './framework/SoundManager';
@@ -6,6 +6,7 @@ import { DataManager } from './framework/DataManager';
 import { HttpManager } from './framework/HttpManager';
 import { getCurrentPlatform, getPlatformGameInfo } from './utils/Constants';
 import { UserSystem } from './system/UserSystem';
+import './pages/LoadingPage';
 
 const { ccclass, property } = _decorator;
 
@@ -69,40 +70,33 @@ export class GameMain extends Component {
 
     async start() {
         const loadingPageNode = await this._createLoadingPage();
+        loadingPageNode.active = false;
         loadingPageNode.layer = this._uiRoot.layer;
-        loadingPageNode.parent = this._uiRoot;
+        this._disableWidgets(loadingPageNode);
 
         const loadingTransform = loadingPageNode.getComponent(UITransform) ?? loadingPageNode.addComponent(UITransform);
         const uiTransform = this._uiRoot.getComponent(UITransform);
         if (uiTransform) {
             loadingTransform.setContentSize(uiTransform.contentSize);
         }
+        loadingPageNode.setPosition(Vec3.ZERO);
+        loadingPageNode.parent = this._uiRoot;
+        loadingPageNode.active = true;
 
         UIManager.getInstance().registerInitialPage(loadingPageNode, 'LoadingPage');
     }
 
     private async _createLoadingPage(): Promise<Node> {
-        const prefab = this.loadingPagePrefab ?? await this._loadLoadingPrefab();
-        if (prefab) {
-            return instantiate(prefab) as Node;
+        if (!this.loadingPagePrefab) {
+            throw new Error('[GameMain] 请在编辑器中绑定 assets/prefabs/pages/LoadingPage.prefab 到 loadingPagePrefab，Loading 页面不再使用 TS 动态渲染。');
         }
 
-        const loadingPageNode = new Node('LoadingPage');
-        const { LoadingPage } = await import('./pages/LoadingPage');
-        loadingPageNode.addComponent(LoadingPage);
-        return loadingPageNode;
+        return instantiate(this.loadingPagePrefab) as Node;
     }
 
-    private _loadLoadingPrefab(): Promise<Prefab | null> {
-        return new Promise((resolve) => {
-            resources.load('prefabs/pages/LoadingPage', Prefab, (error, prefab) => {
-                if (error || !prefab) {
-                    resolve(null);
-                    return;
-                }
-
-                resolve(prefab);
-            });
+    private _disableWidgets(root: Node) {
+        root.getComponentsInChildren(Widget).forEach((widget) => {
+            widget.enabled = false;
         });
     }
 }
