@@ -1,13 +1,15 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Button, Toggle, PopupManager, SoundManager, DataManager, _dec, _dec2, _dec3, _dec4, _class, _class2, _descriptor, _descriptor2, _descriptor3, _crd, ccclass, property, SettingPopup;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, js, Label, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, DataManager, PopupManager, SoundManager, _dec, _class, _crd, ccclass, SettingPopup;
 
-  function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
+  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
+  function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-  function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'transform-class-properties is enabled and runs after the decorators transform.'); }
+  function _reportPossibleCrUseOfDataManager(extras) {
+    _reporterNs.report("DataManager", "../framework/DataManager", _context.meta, extras);
+  }
 
   function _reportPossibleCrUseOfPopupManager(extras) {
     _reporterNs.report("PopupManager", "../framework/PopupManager", _context.meta, extras);
@@ -15,10 +17,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
   function _reportPossibleCrUseOfSoundManager(extras) {
     _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
-  }
-
-  function _reportPossibleCrUseOfDataManager(extras) {
-    _reporterNs.report("DataManager", "../framework/DataManager", _context.meta, extras);
   }
 
   return {
@@ -29,144 +27,367 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
-      Component = _cc.Component;
       Button = _cc.Button;
-      Toggle = _cc.Toggle;
+      Color = _cc.Color;
+      Component = _cc.Component;
+      Graphics = _cc.Graphics;
+      js = _cc.js;
+      Label = _cc.Label;
+      Rect = _cc.Rect;
+      resources = _cc.resources;
+      Size = _cc.Size;
+      Sprite = _cc.Sprite;
+      SpriteFrame = _cc.SpriteFrame;
+      Texture2D = _cc.Texture2D;
+      UITransform = _cc.UITransform;
+      Vec2 = _cc.Vec2;
     }, function (_unresolved_2) {
-      PopupManager = _unresolved_2.PopupManager;
+      DataManager = _unresolved_2.DataManager;
     }, function (_unresolved_3) {
-      SoundManager = _unresolved_3.SoundManager;
+      PopupManager = _unresolved_3.PopupManager;
     }, function (_unresolved_4) {
-      DataManager = _unresolved_4.DataManager;
+      SoundManager = _unresolved_4.SoundManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "64a46F5YopOObjnvwlORReG", "SettingPopup", undefined);
 
-      __checkObsolete__(['_decorator', 'Component', 'Button', 'Toggle']);
+      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'js', 'Label', 'Node', 'Rect', 'resources', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2']);
 
       ({
-        ccclass,
-        property
+        ccclass
       } = _decorator);
 
-      _export("SettingPopup", SettingPopup = (_dec = ccclass('SettingPopup'), _dec2 = property(Toggle), _dec3 = property(Toggle), _dec4 = property(Button), _dec(_class = (_class2 = class SettingPopup extends Component {
+      _export("SettingPopup", SettingPopup = (_dec = ccclass('SettingPopup'), _dec(_class = class SettingPopup extends Component {
         constructor() {
           super(...arguments);
-
-          // 在编辑器中拖拽绑定这些组件
-          _initializerDefineProperty(this, "bgmToggle", _descriptor, this);
-
-          _initializerDefineProperty(this, "effectToggle", _descriptor2, this);
-
-          _initializerDefineProperty(this, "closeBtn", _descriptor3, this);
+          this._dialogSprite = null;
+          this._titleSprite = null;
+          this._titleLabel = null;
+          this._closeButton = null;
+          this._bgmButton = null;
+          this._effectButton = null;
+          this._bgmStateLabel = null;
+          this._effectStateLabel = null;
+          this._bgmEnabled = true;
+          this._effectEnabled = true;
         }
 
         start() {
-          // 从本地存储读取设置，初始化开关状态
-          this.bgmToggle.isChecked = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().getLocal('bgm_enabled', true);
-          this.effectToggle.isChecked = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().getLocal('effect_enabled', true); // 绑定事件
+          this._bindPrefabReferences();
 
-          this.bgmToggle.node.on(Toggle.EventType.TOGGLE, this._onBgmToggle, this);
-          this.effectToggle.node.on(Toggle.EventType.TOGGLE, this._onEffectToggle, this);
-          this.closeBtn.node.on(Button.EventType.CLICK, this._onClose, this);
+          this._bindEvents();
+
+          this._loadImages();
+
+          this._loadSettings();
+
+          this._refreshView();
         }
-        /**
-         * 背景音乐开关切换
-         */
 
+        onDestroy() {
+          var _this$_closeButton, _this$_bgmButton, _this$_effectButton;
 
-        _onBgmToggle(toggle) {
-          // 更新音效管理器状态
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().setBGMEnabled(toggle.isChecked); // 保存到本地存储
-
-          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().setLocal('bgm_enabled', toggle.isChecked); // 播放点击音效
-
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          (_this$_closeButton = this._closeButton) == null || _this$_closeButton.node.off(Button.EventType.CLICK, this._onClose, this);
+          (_this$_bgmButton = this._bgmButton) == null || _this$_bgmButton.node.off(Button.EventType.CLICK, this._onBgmToggle, this);
+          (_this$_effectButton = this._effectButton) == null || _this$_effectButton.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
         }
-        /**
-         * 音效开关切换
-         */
-
-
-        _onEffectToggle(toggle) {
-          // 更新音效管理器状态
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().setEffectEnabled(toggle.isChecked); // 保存到本地存储
-
-          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().setLocal('effect_enabled', toggle.isChecked); // 播放点击音效（如果音效开启的话）
-
-          if (toggle.isChecked) {
-            (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-              error: Error()
-            }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
-          }
-        }
-        /**
-         * 点击关闭按钮
-         */
-
-
-        _onClose() {
-          // 播放点击音效
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click'); // 关闭弹窗，返回结果
-
-          (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
-            error: Error()
-          }), PopupManager) : PopupManager).getInstance().closePopup({
-            saved: true,
-            bgmEnabled: this.bgmToggle.isChecked,
-            effectEnabled: this.effectToggle.isChecked
-          });
-        }
-        /**
-         * 弹窗显示时自动调用（由PopupManager触发）
-         * @param params 传递给弹窗的参数
-         */
-
 
         onShow(params) {
           console.log('设置弹窗显示，参数：', params);
         }
 
-      }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "bgmToggle", [_dec2], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
+        _bindPrefabReferences() {
+          this._dialogSprite = this._bindSprite('Dialog');
+          this._titleSprite = this._bindSprite('Dialog/TitleBg');
+          this._titleLabel = this._bindLabel('Dialog/TitleBg/TitleLabel');
+          this._closeButton = this._bindButton('Dialog/CloseButton');
+
+          this._bindLabel('Dialog/CloseButton/CloseLabel');
+
+          this._bgmButton = this._bindButton('Dialog/BgmToggle');
+          this._effectButton = this._bindButton('Dialog/EffectToggle');
+
+          this._bindLabel('Dialog/BgmToggle/BgmLabel');
+
+          this._bindLabel('Dialog/EffectToggle/EffectLabel');
+
+          this._bgmStateLabel = this._bindLabel('Dialog/BgmToggle/BgmState');
+          this._effectStateLabel = this._bindLabel('Dialog/EffectToggle/EffectState');
         }
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, "effectToggle", [_dec3], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
+
+        _bindEvents() {
+          var _this$_closeButton2, _this$_bgmButton2, _this$_effectButton2;
+
+          (_this$_closeButton2 = this._closeButton) == null || _this$_closeButton2.node.on(Button.EventType.CLICK, this._onClose, this);
+          (_this$_bgmButton2 = this._bgmButton) == null || _this$_bgmButton2.node.on(Button.EventType.CLICK, this._onBgmToggle, this);
+          (_this$_effectButton2 = this._effectButton) == null || _this$_effectButton2.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
         }
-      }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, "closeBtn", [_dec4], {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        initializer: function initializer() {
-          return null;
+
+        _loadSettings() {
+          this._bgmEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().getLocal('bgm_enabled', true);
+          this._effectEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().getLocal('effect_enabled', true);
         }
-      })), _class2)) || _class));
+
+        _refreshView() {
+          var _this$_bgmButton$node, _this$_bgmButton3, _this$_effectButton$n, _this$_effectButton3;
+
+          if (this._titleLabel) {
+            this._titleLabel.string = '设置';
+            this._titleLabel.fontSize = 40;
+            this._titleLabel.lineHeight = 48;
+            this._titleLabel.color = new Color(255, 255, 255, 255);
+          }
+
+          this._setLabel('Dialog/CloseButton/CloseLabel', '×', 42);
+
+          this._setLabel('Dialog/BgmToggle/BgmLabel', '背景音乐', 30);
+
+          this._setLabel('Dialog/EffectToggle/EffectLabel', '游戏音效', 30);
+
+          this._updateToggleState((_this$_bgmButton$node = (_this$_bgmButton3 = this._bgmButton) == null ? void 0 : _this$_bgmButton3.node) != null ? _this$_bgmButton$node : null, this._bgmStateLabel, this._bgmEnabled);
+
+          this._updateToggleState((_this$_effectButton$n = (_this$_effectButton3 = this._effectButton) == null ? void 0 : _this$_effectButton3.node) != null ? _this$_effectButton$n : null, this._effectStateLabel, this._effectEnabled);
+        }
+
+        _loadImages() {
+          var _this = this;
+
+          return _asyncToGenerator(function* () {
+            yield Promise.all([_this._setSpriteFrame(_this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'), _this._setSpriteFrame(_this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg')]);
+          })();
+        }
+
+        _onBgmToggle() {
+          this._bgmEnabled = !this._bgmEnabled;
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().setBGMEnabled(this._bgmEnabled);
+          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().setLocal('bgm_enabled', this._bgmEnabled);
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+
+          this._refreshView();
+        }
+
+        _onEffectToggle() {
+          this._effectEnabled = !this._effectEnabled;
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().setEffectEnabled(this._effectEnabled);
+          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().setLocal('effect_enabled', this._effectEnabled);
+
+          if (this._effectEnabled) {
+            (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+              error: Error()
+            }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          }
+
+          this._refreshView();
+        }
+
+        _onClose() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
+            error: Error()
+          }), PopupManager) : PopupManager).getInstance().closePopup({
+            saved: true,
+            bgmEnabled: this._bgmEnabled,
+            effectEnabled: this._effectEnabled
+          });
+        }
+
+        _updateToggleState(node, label, enabled) {
+          var _node$getComponent;
+
+          if (label) {
+            label.string = enabled ? '开启' : '关闭';
+            label.fontSize = 28;
+            label.lineHeight = 36;
+            label.color = enabled ? new Color(49, 132, 72, 255) : new Color(150, 82, 70, 255);
+          }
+
+          if (!node) return;
+          var transform = node.getComponent(UITransform);
+          if (!transform) return;
+          var graphics = (_node$getComponent = node.getComponent(Graphics)) != null ? _node$getComponent : node.addComponent(Graphics);
+          var width = transform.contentSize.width;
+          var height = transform.contentSize.height;
+          graphics.clear();
+          graphics.fillColor = new Color(255, 248, 225, 235);
+          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
+          graphics.fill();
+          graphics.strokeColor = enabled ? new Color(98, 196, 116, 255) : new Color(214, 116, 98, 255);
+          graphics.lineWidth = 3;
+          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
+          graphics.stroke();
+        }
+
+        _setLabel(path, text, fontSize) {
+          var label = this._bindLabel(path);
+
+          if (!label) return;
+          label.string = text;
+          label.fontSize = fontSize;
+          label.lineHeight = Math.round(fontSize * 1.25);
+          label.color = new Color(116, 70, 35, 255);
+        }
+
+        _bindButton(path) {
+          var _node$getComponent2;
+
+          var node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          var button = (_node$getComponent2 = node.getComponent(Button)) != null ? _node$getComponent2 : node.addComponent(Button);
+          button.interactable = true;
+          button.transition = Button.Transition.SCALE;
+          button.target = node;
+          return button;
+        }
+
+        _bindSprite(path) {
+          var _node$getComponent3;
+
+          var node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          var sprite = (_node$getComponent3 = node.getComponent(Sprite)) != null ? _node$getComponent3 : node.addComponent(Sprite);
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          return sprite;
+        }
+
+        _bindLabel(path) {
+          var _node$getComponent4;
+
+          var node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          var label = (_node$getComponent4 = node.getComponent(Label)) != null ? _node$getComponent4 : node.addComponent(Label);
+          label.horizontalAlign = Label.HorizontalAlign.CENTER;
+          label.verticalAlign = Label.VerticalAlign.CENTER;
+          label.overflow = Label.Overflow.CLAMP;
+          return label;
+        }
+
+        _preparePrefabNode(node) {
+          var _node$getComponent5;
+
+          node.layer = this.node.layer;
+          (_node$getComponent5 = node.getComponent(UITransform)) != null ? _node$getComponent5 : node.addComponent(UITransform);
+        }
+
+        _findPrefabNode(path) {
+          var node = path.split('/').reduce((current, name) => {
+            var _current$getChildByNa;
+
+            return (_current$getChildByNa = current == null ? void 0 : current.getChildByName(name)) != null ? _current$getChildByNa : null;
+          }, this.node);
+
+          if (!node) {
+            console.warn("[SettingPopup] prefab \u7F3A\u5C11\u8282\u70B9: " + path);
+          }
+
+          return node;
+        }
+
+        _setSpriteFrame(sprite, imagePath, failMessage) {
+          var _this2 = this;
+
+          return _asyncToGenerator(function* () {
+            if (!sprite) {
+              console.warn(failMessage);
+              return;
+            }
+
+            var spriteFrame = yield _this2._loadImageSpriteFrame(imagePath);
+
+            if (!spriteFrame || !sprite.node.isValid) {
+              console.warn(failMessage);
+              return;
+            }
+
+            sprite.spriteFrame = spriteFrame;
+          })();
+        }
+
+        _loadImageSpriteFrame(path) {
+          var _this3 = this;
+
+          return _asyncToGenerator(function* () {
+            var spriteFrame = yield _this3._loadOptional(path + "/spriteFrame", SpriteFrame);
+            if (spriteFrame) return _this3._ensureSpriteFrameSize(spriteFrame);
+            var texture = yield _this3._loadOptional(path + "/texture", Texture2D);
+            if (!texture) return null;
+            var generatedSpriteFrame = new SpriteFrame();
+            generatedSpriteFrame.texture = texture;
+            return _this3._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+          })();
+        }
+
+        _loadOptional(path, type) {
+          return _asyncToGenerator(function* () {
+            return new Promise(resolve => {
+              resources.load(path, type, (error, asset) => {
+                resolve(error || !asset ? null : asset);
+              });
+            });
+          })();
+        }
+
+        _ensureSpriteFrameSize(spriteFrame, fallbackWidth, fallbackHeight) {
+          if (fallbackWidth === void 0) {
+            fallbackWidth = 0;
+          }
+
+          if (fallbackHeight === void 0) {
+            fallbackHeight = 0;
+          }
+
+          var rect = spriteFrame.rect;
+          var originalSize = spriteFrame.originalSize;
+          var width = (rect == null ? void 0 : rect.width) || (originalSize == null ? void 0 : originalSize.width) || spriteFrame.width || fallbackWidth;
+          var height = (rect == null ? void 0 : rect.height) || (originalSize == null ? void 0 : originalSize.height) || spriteFrame.height || fallbackHeight;
+
+          if (width > 0 && height > 0) {
+            if (!rect || !rect.width || !rect.height) {
+              spriteFrame.rect = new Rect(0, 0, width, height);
+            }
+
+            if (!originalSize || !originalSize.width || !originalSize.height) {
+              spriteFrame.originalSize = new Size(width, height);
+            }
+
+            spriteFrame.offset = Vec2.ZERO;
+          }
+
+          return spriteFrame;
+        }
+
+      }) || _class));
+
+      js.setClassAlias(SettingPopup, 'SettingPopup');
 
       _cclegacy._RF.pop();
 

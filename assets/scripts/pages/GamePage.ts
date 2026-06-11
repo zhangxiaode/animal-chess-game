@@ -1,5 +1,4 @@
-import { _decorator, Button, Color, Component, Graphics, js, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3 } from 'cc';
-import { ResManager } from '../framework/ResManager';
+import { _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3 } from 'cc';
 import { UIManager } from '../framework/UIManager';
 
 const { ccclass } = _decorator;
@@ -1366,18 +1365,41 @@ export class GamePage extends Component {
     }
 
     private async _loadImageSpriteFrame(path: string): Promise<SpriteFrame | null> {
-        const spriteFrame = await ResManager.getInstance().loadFirst(
-            [`${path}/spriteFrame`, path],
-            SpriteFrame,
-        );
+        const spriteFrame = await this._loadOptional(`${path}/spriteFrame`, SpriteFrame);
         if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
 
-        const texture = await ResManager.getInstance().load(`${path}/texture`, Texture2D);
+        const texture = await this._loadOptional(`${path}/texture`, Texture2D);
         if (!texture) return null;
 
         const generatedSpriteFrame = new SpriteFrame();
         generatedSpriteFrame.texture = texture;
         return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+    }
+
+    private async _loadOptional<T extends SpriteFrame | Texture2D>(path: string, type: new () => T): Promise<T | null> {
+        const resourceAsset = await new Promise<T | null>((resolve) => {
+            resources.load(path, type, (error, asset) => {
+                resolve(error || !asset ? null : asset as T);
+            });
+        });
+        if (resourceAsset) return resourceAsset;
+
+        return this._loadBundleOptional('game', path, type);
+    }
+
+    private async _loadBundleOptional<T extends SpriteFrame | Texture2D>(bundleName: string, path: string, type: new () => T): Promise<T | null> {
+        return new Promise<T | null>((resolve) => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+                if (bundleError || !bundle) {
+                    resolve(null);
+                    return;
+                }
+
+                bundle.load(path, type, (assetError, asset) => {
+                    resolve(assetError || !asset ? null : asset as T);
+                });
+            });
+        });
     }
 
     private _onBack() {

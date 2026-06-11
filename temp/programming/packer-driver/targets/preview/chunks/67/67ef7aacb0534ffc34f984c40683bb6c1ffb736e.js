@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Vec3, Widget, Singleton, _dec, _class, _crd, ccclass, PAGE_MODULE_MAP, PAGE_PREFAB_UUID_MAP, UIManager;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Vec3, Widget, Singleton, _dec, _class, _crd, ccclass, PAGE_MODULE_MAP, PAGE_PREFAB_UUID_MAP, PAGE_BUNDLE_MAP, UIManager;
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -93,6 +93,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         LoadingPage: 'c5538084-1788-483f-8491-0796031b2813',
         HomePage: '45fef6ee-bb46-4f3e-aa9f-6dcd82168974',
         GamePage: '9c962845-cc39-4bcf-abff-fa0abdb40807'
+      };
+      PAGE_BUNDLE_MAP = {
+        HomePage: 'home',
+        GamePage: 'game'
       };
 
       _export("UIManager", UIManager = (_dec = ccclass('UIManager'), _dec(_class = class UIManager extends (_crd && Singleton === void 0 ? (_reportPossibleCrUseOfSingleton({
@@ -250,6 +254,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           var _this2 = this;
 
           return _asyncToGenerator(function* () {
+            var bundleName = PAGE_BUNDLE_MAP[pageName];
+
+            if (bundleName) {
+              var bundlePrefab = yield _this2._loadBundlePrefab(bundleName, prefabPath);
+              if (bundlePrefab) return bundlePrefab;
+            }
+
             var prefab = yield _this2._loadResourcePrefab(prefabPath);
             if (prefab) return prefab;
             var uuid = PAGE_PREFAB_UUID_MAP[pageName];
@@ -265,6 +276,30 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
                 }
 
                 resolve(asset);
+              });
+            });
+          })();
+        }
+
+        _loadBundlePrefab(bundleName, prefabPath) {
+          return _asyncToGenerator(function* () {
+            return new Promise(resolve => {
+              assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+                if (bundleError || !bundle) {
+                  console.warn("\u52A0\u8F7D\u8D44\u6E90\u5206\u5305\u5931\u8D25: " + bundleName, bundleError);
+                  resolve(null);
+                  return;
+                }
+
+                bundle.load(prefabPath, Prefab, (prefabError, prefab) => {
+                  if (prefabError || !prefab) {
+                    console.warn("\u5206\u5305\u9884\u5236\u4F53\u52A0\u8F7D\u5931\u8D25 " + bundleName + ":" + prefabPath, prefabError);
+                    resolve(null);
+                    return;
+                  }
+
+                  resolve(prefab);
+                });
               });
             });
           })();

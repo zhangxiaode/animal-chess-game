@@ -760,12 +760,8 @@
   "a37a4ed6-3b8c-47bd-afd5-52f10ed88395": {
     "url": "db://assets/prefabs/popups/SettingPopup.prefab",
     "value": {
-      "depends": [
-        "3d45d52c-da29-425e-b794-7b7612175d33"
-      ],
-      "dependScripts": [
-        "426e53c7-9b60-4747-bf24-e8b871427424"
-      ]
+      "depends": [],
+      "dependScripts": []
     },
     "versionCode": 2
   },
@@ -788,6 +784,132 @@
         "ffafbfa1-0a57-471d-9ade-5ed50a3e7410"
       ]
     },
+    "versionCode": 1
+  },
+  "a7796f27-6463-4064-a5ff-f7bc62e10f01": {
+    "url": "db://assets/bundles/game/prefabs/pages/GamePage.prefab",
+    "value": {
+      "depends": [
+        "3d45d52c-da29-425e-b794-7b7612175d33"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "68a3f6a3-ef4f-4ba8-a32a-a2e46003ca0c": {
+    "url": "db://assets/bundles/home/prefabs/pages/HomePage.prefab",
+    "value": {
+      "depends": [
+        "3d45d52c-da29-425e-b794-7b7612175d33"
+      ],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "5f78eefc-69c2-4c99-8832-ae60e26bdc9e": {
+    "url": "db://assets/bundles",
+    "value": {},
+    "versionCode": 1
+  },
+  "0f5a7985-cb31-4a59-ac88-c9287714e2b8": {
+    "url": "db://assets/bundles/game",
+    "value": {},
+    "versionCode": 1
+  },
+  "0f1c34a8-8ea9-43bf-a807-0ae40b15e19e": {
+    "url": "db://assets/bundles/home",
+    "value": {},
+    "versionCode": 1
+  },
+  "902848cb-6fae-485e-bde1-904c057e8160": {
+    "url": "db://assets/bundles/game/images",
+    "value": {},
+    "versionCode": 1
+  },
+  "0def5c2d-5266-4b23-8bfb-0268d616c973": {
+    "url": "db://assets/bundles/game/prefabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "77240d0d-399a-4338-b553-4e96e0dfca82": {
+    "url": "db://assets/bundles/home/images",
+    "value": {},
+    "versionCode": 1
+  },
+  "9898a8dd-f511-4f8a-929f-6a73e7ec5862": {
+    "url": "db://assets/bundles/home/prefabs",
+    "value": {},
+    "versionCode": 1
+  },
+  "2c1e8ba2-1964-4bcf-822a-9d139dbe4b35": {
+    "url": "db://assets/bundles/game/prefabs/pages",
+    "value": {},
+    "versionCode": 1
+  },
+  "e2c36218-26f7-43f6-a72b-2d1a82f30337": {
+    "url": "db://assets/bundles/home/prefabs/pages",
+    "value": {},
+    "versionCode": 1
+  },
+  "d64b03c3-d85b-4f9f-8985-52d7244be709": {
+    "url": "db://assets/resources/images/popup/dialog_bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "825a9527-1f03-4ef7-a426-089a7ef3ecc8": {
+    "url": "db://assets/resources/images/popup/model_bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "889e3d06-48cb-4b64-a81d-01d4e57c6f83": {
+    "url": "db://assets/resources/images/popup/title_bg.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d64b03c3-d85b-4f9f-8985-52d7244be709@6c48a": {
+    "url": "db://assets/resources/images/popup/dialog_bg.png@6c48a",
+    "value": {
+      "depends": [
+        "d64b03c3-d85b-4f9f-8985-52d7244be709"
+      ]
+    },
+    "versionCode": 1
+  },
+  "825a9527-1f03-4ef7-a426-089a7ef3ecc8@6c48a": {
+    "url": "db://assets/resources/images/popup/model_bg.png@6c48a",
+    "value": {
+      "depends": [
+        "825a9527-1f03-4ef7-a426-089a7ef3ecc8"
+      ]
+    },
+    "versionCode": 1
+  },
+  "889e3d06-48cb-4b64-a81d-01d4e57c6f83@6c48a": {
+    "url": "db://assets/resources/images/popup/title_bg.png@6c48a",
+    "value": {
+      "depends": [
+        "889e3d06-48cb-4b64-a81d-01d4e57c6f83"
+      ]
+    },
+    "versionCode": 1
+  },
+  "18d37f05-a9c2-4abe-aabe-7977737f3aa4": {
+    "url": "db://assets/resources/prefabs/popups/SettingPopup.prefab",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "95b2d95a-9f92-4b2e-b8fc-17ca7314fd5a": {
+    "url": "db://assets/resources/prefabs/pages",
+    "value": {},
     "versionCode": 1
   }
 }

@@ -43,7 +43,7 @@ export const GAME_INFO_CONFIG: Record<'wechat' | 'douyin', GameInfo> = {
 		version: '1.0.0',
 		buildNumber: 1,
 		apiBaseUrl: 'https://www.chengyaokj.com/apis',
-		shareTitle: '来快杀，体验精彩的对弈！',
+		shareTitle: '来欢乐斗兽棋，体验精彩的对弈！',
 		shareImage: 'images/logo.png',
 		privacyPolicyUrl: 'https://www.chengyaokj.com/animal-chess/privacy.html',
 		serviceEmail: 'chengyaokeji4@126.com',

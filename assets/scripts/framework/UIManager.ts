@@ -17,6 +17,11 @@ const PAGE_PREFAB_UUID_MAP: Record<string, string> = {
     GamePage: '9c962845-cc39-4bcf-abff-fa0abdb40807',
 };
 
+const PAGE_BUNDLE_MAP: Record<string, string> = {
+    HomePage: 'home',
+    GamePage: 'game',
+};
+
 @ccclass('UIManager')
 export class UIManager extends Singleton<UIManager> {
     private _root: Node = null!;
@@ -135,6 +140,12 @@ export class UIManager extends Singleton<UIManager> {
     }
 
     private async _loadPagePrefab(prefabPath: string, pageName: string): Promise<Prefab | null> {
+        const bundleName = PAGE_BUNDLE_MAP[pageName];
+        if (bundleName) {
+            const bundlePrefab = await this._loadBundlePrefab(bundleName, prefabPath);
+            if (bundlePrefab) return bundlePrefab;
+        }
+
         const prefab = await this._loadResourcePrefab(prefabPath);
         if (prefab) return prefab;
 
@@ -150,6 +161,28 @@ export class UIManager extends Singleton<UIManager> {
                 }
 
                 resolve(asset as Prefab);
+            });
+        });
+    }
+
+    private async _loadBundlePrefab(bundleName: string, prefabPath: string): Promise<Prefab | null> {
+        return new Promise<Prefab | null>((resolve) => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+                if (bundleError || !bundle) {
+                    console.warn(`加载资源分包失败: ${bundleName}`, bundleError);
+                    resolve(null);
+                    return;
+                }
+
+                bundle.load(prefabPath, Prefab, (prefabError, prefab) => {
+                    if (prefabError || !prefab) {
+                        console.warn(`分包预制体加载失败 ${bundleName}:${prefabPath}`, prefabError);
+                        resolve(null);
+                        return;
+                    }
+
+                    resolve(prefab);
+                });
             });
         });
     }

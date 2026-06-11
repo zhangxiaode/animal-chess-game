@@ -1,4 +1,5 @@
-import { _decorator, Button, Color, Component, js, Label, LabelOutline, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2 } from 'cc';
+import { _decorator, assetManager, Button, Color, Component, js, Label, LabelOutline, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2 } from 'cc';
+import { PopupManager } from '../framework/PopupManager';
 import { SoundManager } from '../framework/SoundManager';
 import { UIManager } from '../framework/UIManager';
 
@@ -29,6 +30,7 @@ export class HomePage extends Component {
     }
 
     protected onDestroy() {
+        this._settingButton?.node.off(Button.EventType.CLICK, this._onSetting, this);
         this._startGameButton?.node.off(Button.EventType.CLICK, this._onStartGame, this);
     }
 
@@ -84,10 +86,10 @@ export class HomePage extends Component {
     }
 
     private _bindEvents() {
-        if (!this._startGameButton) return;
-
-        this._startGameButton.node.off(Button.EventType.CLICK, this._onStartGame, this);
-        this._startGameButton.node.on(Button.EventType.CLICK, this._onStartGame, this);
+        this._settingButton?.node.off(Button.EventType.CLICK, this._onSetting, this);
+        this._settingButton?.node.on(Button.EventType.CLICK, this._onSetting, this);
+        this._startGameButton?.node.off(Button.EventType.CLICK, this._onStartGame, this);
+        this._startGameButton?.node.on(Button.EventType.CLICK, this._onStartGame, this);
     }
 
     private async _loadImageContent() {
@@ -187,6 +189,11 @@ export class HomePage extends Component {
         UIManager.getInstance().openPage('prefabs/pages/GamePage', { level: 1 });
     }
 
+    private _onSetting() {
+        SoundManager.getInstance().playEffect('sounds/click');
+        PopupManager.getInstance().openPopup('prefabs/popups/SettingPopup', { source: 'home' });
+    }
+
     private async _loadImageSpriteFrame(path: string): Promise<SpriteFrame | null> {
         const spriteFrame = await this._loadOptional(`${path}/spriteFrame`, SpriteFrame);
         if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
@@ -200,9 +207,27 @@ export class HomePage extends Component {
     }
 
     private async _loadOptional<T extends SpriteFrame | Texture2D>(path: string, type: new () => T): Promise<T | null> {
-        return new Promise<T | null>((resolve) => {
+        const resourceAsset = await new Promise<T | null>((resolve) => {
             resources.load(path, type, (error, asset) => {
                 resolve(error || !asset ? null : asset as T);
+            });
+        });
+        if (resourceAsset) return resourceAsset;
+
+        return this._loadBundleOptional('home', path, type);
+    }
+
+    private async _loadBundleOptional<T extends SpriteFrame | Texture2D>(bundleName: string, path: string, type: new () => T): Promise<T | null> {
+        return new Promise<T | null>((resolve) => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+                if (bundleError || !bundle) {
+                    resolve(null);
+                    return;
+                }
+
+                bundle.load(path, type, (assetError, asset) => {
+                    resolve(assetError || !asset ? null : asset as T);
+                });
             });
         });
     }

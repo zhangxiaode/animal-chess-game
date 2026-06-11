@@ -12,163 +12,21 @@
       "asyncFunctions": true
     },
     "buildPath": "project://build",
-    "outputName": "bytedance-mini-game",
+    "outputName": "wechatgame-001",
     "mainBundleCompressionType": "merge_dep",
-    "platform": "bytedance-mini-game",
+    "platform": "wechatgame",
     "name": "欢乐斗兽棋"
   },
   "BuildTaskManager": {
     "taskMap": {
-      "1778584398660": {
-        "type": "build",
-        "id": "1778584398660",
-        "progress": 1,
-        "state": "success",
-        "stage": "build",
-        "message": "2026-5-12 19:14:00 build success in 41 s!",
-        "detailMessage": "// ---- build task cocos-service：onBeforeCompressSettings ----\r",
-        "options": {
-          "name": "animal-chess",
-          "server": "",
-          "engineModulesConfigKey": "defaultConfig",
-          "platform": "web-desktop",
-          "buildPath": "project://build",
-          "debug": false,
-          "buildMode": "normal",
-          "mangleProperties": false,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "overwriteProjectSettings": {
-            "includeModules": {
-              "gfx-webgl2": "on",
-              "physics": "inherit-project-setting",
-              "physics-2d": "inherit-project-setting"
-            },
-            "macroConfig": {
-              "cleanupImageCache": "inherit-project-setting"
-            }
-          },
-          "nativeCodeBundleMode": "both",
-          "polyfills": {
-            "asyncFunctions": true
-          },
-          "experimentalEraseModules": false,
-          "startSceneAssetBundle": false,
-          "bundleConfigs": [],
-          "inlineEnum": true,
-          "useBuiltinServer": false,
-          "md5CacheOptions": {
-            "excludes": [],
-            "includes": [],
-            "replaceOnly": [],
-            "handleTemplateMd5Link": true
-          },
-          "mainBundleIsRemote": false,
-          "mainBundleCompressionType": "merge_dep",
-          "useSplashScreen": true,
-          "bundleCommonChunk": false,
-          "packAutoAtlas": true,
-          "startScene": "de734e68-f879-44d5-9f8c-06a7f6b793ca",
-          "outputName": "web-desktop",
-          "taskName": "web-desktop",
-          "scenes": [
-            {
-              "url": "db://assets/scenes/Main.scene",
-              "uuid": "de734e68-f879-44d5-9f8c-06a7f6b793ca"
-            }
-          ],
-          "wasmCompressionMode": false,
-          "binGroupConfig": {
-            "threshold": 16,
-            "enable": false
-          },
-          "packages": {},
-          "__version__": "1.3.9",
-          "logDest": "project://temp/builder/log/web-desktop5-12-2026 19-13.log"
-        },
-        "time": "5-12-2026 19:13:18",
-        "dirty": false
-      },
-      "1778585804985": {
-        "type": "build",
-        "id": "1778585804985",
-        "progress": 1,
-        "state": "success",
-        "stage": "build",
-        "message": "2026-5-12 20:57:39 build success in 5 s!",
-        "detailMessage": "Build project script start..., progress: 49%\r",
-        "options": {
-          "name": "animal-chess",
-          "server": "",
-          "engineModulesConfigKey": "defaultConfig",
-          "platform": "wechatgame",
-          "buildPath": "project://build",
-          "debug": false,
-          "buildMode": "bundle",
-          "mangleProperties": false,
-          "md5Cache": false,
-          "skipCompressTexture": false,
-          "sourceMaps": false,
-          "overwriteProjectSettings": {
-            "macroConfig": {
-              "cleanupImageCache": "on"
-            },
-            "includeModules": {
-              "physics": "inherit-project-setting",
-              "physics-2d": "inherit-project-setting",
-              "gfx-webgl2": "off"
-            }
-          },
-          "nativeCodeBundleMode": "wasm",
-          "polyfills": {
-            "asyncFunctions": false
-          },
-          "experimentalEraseModules": false,
-          "startSceneAssetBundle": false,
-          "bundleConfigs": [],
-          "inlineEnum": true,
-          "useBuiltinServer": false,
-          "md5CacheOptions": {
-            "excludes": [],
-            "includes": [],
-            "replaceOnly": [],
-            "handleTemplateMd5Link": true
-          },
-          "mainBundleIsRemote": false,
-          "mainBundleCompressionType": "merge_dep",
-          "useSplashScreen": true,
-          "bundleCommonChunk": false,
-          "packAutoAtlas": true,
-          "startScene": "de734e68-f879-44d5-9f8c-06a7f6b793ca",
-          "outputName": "wechatgame",
-          "taskName": "wechatgame",
-          "scenes": [
-            {
-              "url": "db://assets/scenes/Main.scene",
-              "uuid": "de734e68-f879-44d5-9f8c-06a7f6b793ca"
-            }
-          ],
-          "wasmCompressionMode": false,
-          "binGroupConfig": {
-            "threshold": 16,
-            "enable": false
-          },
-          "packages": {},
-          "__version__": "1.3.9",
-          "logDest": "project://temp/builder/log/wechatgame5-12-2026 19-36.log"
-        },
-        "time": "5-12-2026 20:57:33",
-        "dirty": false
-      },
       "1781176847763": {
         "type": "build",
         "id": "1781176847763",
-        "progress": 0.19090909090909092,
-        "state": "processing",
+        "progress": 1,
+        "state": "success",
         "stage": "build",
-        "message": "构建引擎脚本 start...",
-        "detailMessage": "[buildEngineCommand]Rollup warning 'THIS_IS_UNDEFINED' is omitted for /Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine/node_modules/@cocos/dragonbones-js/out/d...",
+        "message": "2026-6-11 20:24:32 build success in 8 s!",
+        "detailMessage": "// ---- build task cocos-service：onAfterCompressSettings ----\r",
         "options": {
           "name": "欢乐斗兽棋",
           "server": "",
@@ -229,7 +87,78 @@
           "__version__": "1.3.9",
           "logDest": "project://temp/builder/log/bytedance-mini-game6-11-2026 19-20.log"
         },
-        "time": "6-11-2026 19:20:47",
+        "time": "6-11-2026 20:24:24",
+        "dirty": false
+      },
+      "1781181007072": {
+        "type": "build",
+        "id": "1781181007072",
+        "progress": 1,
+        "state": "success",
+        "stage": "build",
+        "message": "2026-6-11 20:43:09 build success in 12 s!",
+        "detailMessage": "// ---- build task adsense-h5g-plugin：onAfterBuild ----\r",
+        "options": {
+          "name": "animal-chess",
+          "server": "",
+          "engineModulesConfigKey": "defaultConfig",
+          "platform": "wechatgame",
+          "buildPath": "project://build",
+          "debug": false,
+          "buildMode": "normal",
+          "mangleProperties": false,
+          "md5Cache": false,
+          "skipCompressTexture": false,
+          "sourceMaps": false,
+          "overwriteProjectSettings": {
+            "macroConfig": {
+              "cleanupImageCache": "on"
+            },
+            "includeModules": {
+              "physics": "inherit-project-setting",
+              "physics-2d": "inherit-project-setting",
+              "gfx-webgl2": "off"
+            }
+          },
+          "nativeCodeBundleMode": "wasm",
+          "polyfills": {
+            "asyncFunctions": false
+          },
+          "experimentalEraseModules": false,
+          "startSceneAssetBundle": false,
+          "bundleConfigs": [],
+          "inlineEnum": true,
+          "useBuiltinServer": false,
+          "md5CacheOptions": {
+            "excludes": [],
+            "includes": [],
+            "replaceOnly": [],
+            "handleTemplateMd5Link": true
+          },
+          "mainBundleIsRemote": false,
+          "mainBundleCompressionType": "merge_dep",
+          "useSplashScreen": true,
+          "bundleCommonChunk": false,
+          "packAutoAtlas": true,
+          "startScene": "de734e68-f879-44d5-9f8c-06a7f6b793ca",
+          "outputName": "wechatgame",
+          "taskName": "wechatgame",
+          "scenes": [
+            {
+              "url": "db://assets/scenes/Main.scene",
+              "uuid": "de734e68-f879-44d5-9f8c-06a7f6b793ca"
+            }
+          ],
+          "wasmCompressionMode": false,
+          "binGroupConfig": {
+            "threshold": 16,
+            "enable": false
+          },
+          "packages": {},
+          "__version__": "1.3.9",
+          "logDest": "project://temp/builder/log/wechatgame6-11-2026 20-30.log"
+        },
+        "time": "6-11-2026 20:42:56",
         "dirty": false
       }
     }

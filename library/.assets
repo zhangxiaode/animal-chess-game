@@ -2,11 +2,14 @@
     "version": "1.0.1",
     "data": {
         "paths": [
+            "bundles",
             "prefabs",
             "resources",
             "scenes",
             "scripts",
             "static",
+            "bundles/game",
+            "bundles/home",
             "prefabs/pages",
             "prefabs/popups",
             "resources/images",
@@ -17,12 +20,18 @@
             "scripts/popups",
             "scripts/system",
             "scripts/utils",
+            "bundles/game/images",
+            "bundles/game/prefabs",
+            "bundles/home/images",
+            "bundles/home/prefabs",
             "resources/images/home",
             "resources/images/loading",
             "resources/images/play",
             "resources/images/popup",
             "resources/prefabs/pages",
             "resources/prefabs/popups",
+            "bundles/game/prefabs/pages",
+            "bundles/home/prefabs/pages",
             "scripts/GameMain.ts",
             "scripts/framework/DataManager.ts",
             "scripts/framework/HttpManager.ts",
@@ -74,7 +83,13 @@
             "resources/images/play/piece_bg.png",
             "resources/images/play/play_bg.png",
             "resources/images/play/setting.png",
-            "resources/images/play/title_bg.png"
+            "resources/images/play/title_bg.png",
+            "resources/images/popup/dialog_bg.png",
+            "resources/images/popup/model_bg.png",
+            "resources/images/popup/title_bg.png",
+            "resources/prefabs/popups/SettingPopup.prefab",
+            "bundles/game/prefabs/pages/GamePage.prefab",
+            "bundles/home/prefabs/pages/HomePage.prefab"
         ]
     }
 }

@@ -1,7 +1,11 @@
-import { _decorator, Node, Prefab, resources, instantiate, tween, UITransform, Color, Sprite, Input, EventTouch, Vec3, UIOpacity } from 'cc';
+import { _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, Color, Sprite, Input, EventTouch, Vec3, UIOpacity } from 'cc';
 import { Singleton } from './Singleton';
 
 const { ccclass } = _decorator;
+
+const POPUP_PREFAB_UUID_MAP: Record<string, string> = {
+    SettingPopup: 'a37a4ed6-3b8c-47bd-afd5-52f10ed88395',
+};
 
 @ccclass('PopupManager')
 export class PopupManager extends Singleton<PopupManager> {
@@ -42,7 +46,12 @@ export class PopupManager extends Singleton<PopupManager> {
      */
     async openPopup(prefabPath: string, params?: any, callback?: Function, closeOnMaskClick: boolean = true) {
         // 加载并实例化弹窗
-        const prefab = (await resources.load(prefabPath, Prefab)) as unknown as Prefab;
+        const popupName = this._extractPopupName(prefabPath);
+        const prefab = await this._loadPopupPrefab(prefabPath, popupName);
+        if (!prefab) {
+            console.warn(`弹窗预制体加载失败: ${prefabPath}`);
+            return;
+        }
         const popupNode = instantiate(prefab) as Node;
         popupNode.parent = this._root;
         const popupOpacity = popupNode.addComponent(UIOpacity);
@@ -132,5 +141,28 @@ export class PopupManager extends Singleton<PopupManager> {
         if (this._mask['closeOnMaskClick']) {
             this.closePopup();
         }
+    }
+
+    private _extractPopupName(path: string) {
+        const parts = path.split('/');
+        return parts[parts.length - 1];
+    }
+
+    private async _loadPopupPrefab(prefabPath: string, popupName: string): Promise<Prefab | null> {
+        const resourcePrefab = await new Promise<Prefab | null>((resolve) => {
+            resources.load(prefabPath, Prefab, (error, prefab) => {
+                resolve(error || !prefab ? null : prefab);
+            });
+        });
+        if (resourcePrefab) return resourcePrefab;
+
+        const uuid = POPUP_PREFAB_UUID_MAP[popupName];
+        if (!uuid) return null;
+
+        return new Promise<Prefab | null>((resolve) => {
+            assetManager.loadAny({ uuid }, Prefab, (error, asset) => {
+                resolve(error || !asset ? null : asset as Prefab);
+            });
+        });
     }
 }

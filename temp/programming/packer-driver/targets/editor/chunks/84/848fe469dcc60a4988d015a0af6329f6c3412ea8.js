@@ -1,11 +1,7 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, js, Label, Node, Rect, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, ResManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
-
-  function _reportPossibleCrUseOfResManager(extras) {
-    _reporterNs.report("ResManager", "../framework/ResManager", _context.meta, extras);
-  }
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, UIManager, _dec, _class, _crd, ccclass, GamePage;
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
@@ -19,6 +15,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
+      assetManager = _cc.assetManager;
       Button = _cc.Button;
       Color = _cc.Color;
       Component = _cc.Component;
@@ -27,6 +24,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       Label = _cc.Label;
       Node = _cc.Node;
       Rect = _cc.Rect;
+      resources = _cc.resources;
       Size = _cc.Size;
       Sprite = _cc.Sprite;
       SpriteFrame = _cc.SpriteFrame;
@@ -36,16 +34,14 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       Vec2 = _cc.Vec2;
       Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
-      ResManager = _unresolved_2.ResManager;
-    }, function (_unresolved_3) {
-      UIManager = _unresolved_3.UIManager;
+      UIManager = _unresolved_2.UIManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "8b116Z08uZFSLOZ3edZ6E3o", "GamePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'js', 'Label', 'Node', 'Rect', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'tween', 'UITransform', 'Vec2', 'Vec3']);
+      __checkObsolete__(['_decorator', 'assetManager', 'Button', 'Color', 'Component', 'Graphics', 'js', 'Label', 'Node', 'Rect', 'resources', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'tween', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
         ccclass
@@ -1486,17 +1482,38 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         async _loadImageSpriteFrame(path) {
-          const spriteFrame = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().loadFirst([`${path}/spriteFrame`, path], SpriteFrame);
+          const spriteFrame = await this._loadOptional(`${path}/spriteFrame`, SpriteFrame);
           if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
-          const texture = await (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
-            error: Error()
-          }), ResManager) : ResManager).getInstance().load(`${path}/texture`, Texture2D);
+          const texture = await this._loadOptional(`${path}/texture`, Texture2D);
           if (!texture) return null;
           const generatedSpriteFrame = new SpriteFrame();
           generatedSpriteFrame.texture = texture;
           return this._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+        }
+
+        async _loadOptional(path, type) {
+          const resourceAsset = await new Promise(resolve => {
+            resources.load(path, type, (error, asset) => {
+              resolve(error || !asset ? null : asset);
+            });
+          });
+          if (resourceAsset) return resourceAsset;
+          return this._loadBundleOptional('game', path, type);
+        }
+
+        async _loadBundleOptional(bundleName, path, type) {
+          return new Promise(resolve => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+              if (bundleError || !bundle) {
+                resolve(null);
+                return;
+              }
+
+              bundle.load(path, type, (assetError, asset) => {
+                resolve(assetError || !asset ? null : asset);
+              });
+            });
+          });
         }
 
         _onBack() {

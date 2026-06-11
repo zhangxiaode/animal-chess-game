@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Vec3, Widget, Singleton, _dec, _class, _crd, ccclass, PAGE_MODULE_MAP, PAGE_PREFAB_UUID_MAP, UIManager;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, UIOpacity, Vec3, Widget, Singleton, _dec, _class, _crd, ccclass, PAGE_MODULE_MAP, PAGE_PREFAB_UUID_MAP, PAGE_BUNDLE_MAP, UIManager;
 
   function _reportPossibleCrUseOfSingleton(extras) {
     _reporterNs.report("Singleton", "./Singleton", _context.meta, extras);
@@ -49,6 +49,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         LoadingPage: 'c5538084-1788-483f-8491-0796031b2813',
         HomePage: '45fef6ee-bb46-4f3e-aa9f-6dcd82168974',
         GamePage: '9c962845-cc39-4bcf-abff-fa0abdb40807'
+      };
+      PAGE_BUNDLE_MAP = {
+        HomePage: 'home',
+        GamePage: 'game'
       };
 
       _export("UIManager", UIManager = (_dec = ccclass('UIManager'), _dec(_class = class UIManager extends (_crd && Singleton === void 0 ? (_reportPossibleCrUseOfSingleton({
@@ -193,6 +197,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         async _loadPagePrefab(prefabPath, pageName) {
+          const bundleName = PAGE_BUNDLE_MAP[pageName];
+
+          if (bundleName) {
+            const bundlePrefab = await this._loadBundlePrefab(bundleName, prefabPath);
+            if (bundlePrefab) return bundlePrefab;
+          }
+
           const prefab = await this._loadResourcePrefab(prefabPath);
           if (prefab) return prefab;
           const uuid = PAGE_PREFAB_UUID_MAP[pageName];
@@ -208,6 +219,28 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
               }
 
               resolve(asset);
+            });
+          });
+        }
+
+        async _loadBundlePrefab(bundleName, prefabPath) {
+          return new Promise(resolve => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+              if (bundleError || !bundle) {
+                console.warn(`加载资源分包失败: ${bundleName}`, bundleError);
+                resolve(null);
+                return;
+              }
+
+              bundle.load(prefabPath, Prefab, (prefabError, prefab) => {
+                if (prefabError || !prefab) {
+                  console.warn(`分包预制体加载失败 ${bundleName}:${prefabPath}`, prefabError);
+                  resolve(null);
+                  return;
+                }
+
+                resolve(prefab);
+              });
             });
           });
         }

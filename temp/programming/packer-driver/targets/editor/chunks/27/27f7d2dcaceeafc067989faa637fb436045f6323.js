@@ -1,7 +1,11 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, js, Label, LabelOutline, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, SoundManager, UIManager, _dec, _class, _crd, ccclass, HomePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Button, Color, Component, js, Label, LabelOutline, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, PopupManager, SoundManager, UIManager, _dec, _class, _crd, ccclass, HomePage;
+
+  function _reportPossibleCrUseOfPopupManager(extras) {
+    _reporterNs.report("PopupManager", "../framework/PopupManager", _context.meta, extras);
+  }
 
   function _reportPossibleCrUseOfSoundManager(extras) {
     _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
@@ -19,6 +23,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
+      assetManager = _cc.assetManager;
       Button = _cc.Button;
       Color = _cc.Color;
       Component = _cc.Component;
@@ -34,16 +39,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       UITransform = _cc.UITransform;
       Vec2 = _cc.Vec2;
     }, function (_unresolved_2) {
-      SoundManager = _unresolved_2.SoundManager;
+      PopupManager = _unresolved_2.PopupManager;
     }, function (_unresolved_3) {
-      UIManager = _unresolved_3.UIManager;
+      SoundManager = _unresolved_3.SoundManager;
+    }, function (_unresolved_4) {
+      UIManager = _unresolved_4.UIManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "8233bqCptxI1IfYpg/wfSfC", "HomePage", undefined);
 
-      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'js', 'Label', 'LabelOutline', 'Node', 'Rect', 'resources', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2']);
+      __checkObsolete__(['_decorator', 'assetManager', 'Button', 'Color', 'Component', 'js', 'Label', 'LabelOutline', 'Node', 'Rect', 'resources', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2']);
 
       ({
         ccclass
@@ -80,8 +87,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         onDestroy() {
-          var _this$_startGameButto;
+          var _this$_settingButton, _this$_startGameButto;
 
+          (_this$_settingButton = this._settingButton) == null || _this$_settingButton.node.off(Button.EventType.CLICK, this._onSetting, this);
           (_this$_startGameButto = this._startGameButton) == null || _this$_startGameButto.node.off(Button.EventType.CLICK, this._onStartGame, this);
         }
 
@@ -140,17 +148,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         _bindEvents() {
-          if (!this._startGameButton) return;
+          var _this$_settingButton2, _this$_settingButton3, _this$_startGameButto4, _this$_startGameButto5;
 
-          this._startGameButton.node.off(Button.EventType.CLICK, this._onStartGame, this);
-
-          this._startGameButton.node.on(Button.EventType.CLICK, this._onStartGame, this);
+          (_this$_settingButton2 = this._settingButton) == null || _this$_settingButton2.node.off(Button.EventType.CLICK, this._onSetting, this);
+          (_this$_settingButton3 = this._settingButton) == null || _this$_settingButton3.node.on(Button.EventType.CLICK, this._onSetting, this);
+          (_this$_startGameButto4 = this._startGameButton) == null || _this$_startGameButto4.node.off(Button.EventType.CLICK, this._onStartGame, this);
+          (_this$_startGameButto5 = this._startGameButton) == null || _this$_startGameButto5.node.on(Button.EventType.CLICK, this._onStartGame, this);
         }
 
         async _loadImageContent() {
-          var _this$_settingButton$, _this$_settingButton;
+          var _this$_settingButton$, _this$_settingButton4;
 
-          await Promise.all([this._setSpriteFrame(this._backgroundSprite, 'images/home/bg', '[HomePage] 背景图加载失败: images/home/bg', true), this._setSpriteFrame(this._homeDecorSprite, 'images/home/home-bg', '[HomePage] 中部装饰图加载失败: images/home/home-bg'), this._setSpriteFrame((_this$_settingButton$ = (_this$_settingButton = this._settingButton) == null ? void 0 : _this$_settingButton.node.getComponent(Sprite)) != null ? _this$_settingButton$ : null, 'images/home/setting', '[HomePage] 设置按钮图片加载失败: images/home/setting'), this._setSpriteFrame(this._logoSprite, 'images/home/logo', '[HomePage] Logo 图片加载失败: images/home/logo'), this._setSpriteFrame(this._rewardButtonSprite, 'images/home/reward', '[HomePage] 奖励按钮图片加载失败: images/home/reward'), this._setSpriteFrame(this._rankingButtonSprite, 'images/home/ranking', '[HomePage] 排行按钮图片加载失败: images/home/ranking'), this._setSpriteFrame(this._feedbackButtonSprite, 'images/home/feedback', '[HomePage] 反馈按钮图片加载失败: images/home/feedback'), this._setSpriteFrame(this._collectButtonSprite, 'images/home/collect', '[HomePage] 收藏按钮图片加载失败: images/home/collect'), this._setSpriteFrame(this._levelBadgeSprite, 'images/home/level_bg', '[HomePage] 关卡背景图片加载失败: images/home/level_bg'), this._setSpriteFrame(this._startGameButtonSprite, 'images/home/btn_yellow', '[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow')]);
+          await Promise.all([this._setSpriteFrame(this._backgroundSprite, 'images/home/bg', '[HomePage] 背景图加载失败: images/home/bg', true), this._setSpriteFrame(this._homeDecorSprite, 'images/home/home-bg', '[HomePage] 中部装饰图加载失败: images/home/home-bg'), this._setSpriteFrame((_this$_settingButton$ = (_this$_settingButton4 = this._settingButton) == null ? void 0 : _this$_settingButton4.node.getComponent(Sprite)) != null ? _this$_settingButton$ : null, 'images/home/setting', '[HomePage] 设置按钮图片加载失败: images/home/setting'), this._setSpriteFrame(this._logoSprite, 'images/home/logo', '[HomePage] Logo 图片加载失败: images/home/logo'), this._setSpriteFrame(this._rewardButtonSprite, 'images/home/reward', '[HomePage] 奖励按钮图片加载失败: images/home/reward'), this._setSpriteFrame(this._rankingButtonSprite, 'images/home/ranking', '[HomePage] 排行按钮图片加载失败: images/home/ranking'), this._setSpriteFrame(this._feedbackButtonSprite, 'images/home/feedback', '[HomePage] 反馈按钮图片加载失败: images/home/feedback'), this._setSpriteFrame(this._collectButtonSprite, 'images/home/collect', '[HomePage] 收藏按钮图片加载失败: images/home/collect'), this._setSpriteFrame(this._levelBadgeSprite, 'images/home/level_bg', '[HomePage] 关卡背景图片加载失败: images/home/level_bg'), this._setSpriteFrame(this._startGameButtonSprite, 'images/home/btn_yellow', '[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow')]);
         }
 
         _bindButtonSprite(path) {
@@ -268,6 +277,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           });
         }
 
+        _onSetting() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
+            error: Error()
+          }), PopupManager) : PopupManager).getInstance().openPopup('prefabs/popups/SettingPopup', {
+            source: 'home'
+          });
+        }
+
         async _loadImageSpriteFrame(path) {
           const spriteFrame = await this._loadOptional(`${path}/spriteFrame`, SpriteFrame);
           if (spriteFrame) return this._ensureSpriteFrameSize(spriteFrame);
@@ -279,9 +299,26 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         }
 
         async _loadOptional(path, type) {
-          return new Promise(resolve => {
+          const resourceAsset = await new Promise(resolve => {
             resources.load(path, type, (error, asset) => {
               resolve(error || !asset ? null : asset);
+            });
+          });
+          if (resourceAsset) return resourceAsset;
+          return this._loadBundleOptional('home', path, type);
+        }
+
+        async _loadBundleOptional(bundleName, path, type) {
+          return new Promise(resolve => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+              if (bundleError || !bundle) {
+                resolve(null);
+                return;
+              }
+
+              bundle.load(path, type, (assetError, asset) => {
+                resolve(assetError || !asset ? null : asset);
+              });
             });
           });
         }

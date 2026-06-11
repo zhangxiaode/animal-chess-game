@@ -7,6 +7,7 @@ import { HttpManager } from './framework/HttpManager';
 import { getCurrentPlatform, getPlatformGameInfo } from './utils/Constants';
 import { UserSystem } from './system/UserSystem';
 import './pages/LoadingPage';
+import './popups/SettingPopup';
 
 const { ccclass, property } = _decorator;
 

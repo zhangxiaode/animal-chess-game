@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Node, Prefab, resources, instantiate, tween, UITransform, Color, Sprite, Input, Vec3, UIOpacity, Singleton, _dec, _class, _crd, ccclass, PopupManager;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, Color, Sprite, Input, Vec3, UIOpacity, Singleton, _dec, _class, _crd, ccclass, POPUP_PREFAB_UUID_MAP, PopupManager;
 
   function _reportPossibleCrUseOfSingleton(extras) {
     _reporterNs.report("Singleton", "./Singleton", _context.meta, extras);
@@ -15,6 +15,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
       __checkObsolete__ = _cc.__checkObsolete__;
       __checkObsoleteInNamespace__ = _cc.__checkObsoleteInNamespace__;
       _decorator = _cc._decorator;
+      assetManager = _cc.assetManager;
       Node = _cc.Node;
       Prefab = _cc.Prefab;
       resources = _cc.resources;
@@ -34,11 +35,14 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
       _cclegacy._RF.push({}, "d74c1nHNyhAvbPfxpsABXVB", "PopupManager", undefined);
 
-      __checkObsolete__(['_decorator', 'Node', 'Prefab', 'resources', 'instantiate', 'tween', 'UITransform', 'Color', 'Sprite', 'Input', 'EventTouch', 'Vec3', 'UIOpacity']);
+      __checkObsolete__(['_decorator', 'assetManager', 'Node', 'Prefab', 'resources', 'instantiate', 'tween', 'UITransform', 'Color', 'Sprite', 'Input', 'EventTouch', 'Vec3', 'UIOpacity']);
 
       ({
         ccclass
       } = _decorator);
+      POPUP_PREFAB_UUID_MAP = {
+        SettingPopup: 'a37a4ed6-3b8c-47bd-afd5-52f10ed88395'
+      };
 
       _export("PopupManager", PopupManager = (_dec = ccclass('PopupManager'), _dec(_class = class PopupManager extends (_crd && Singleton === void 0 ? (_reportPossibleCrUseOfSingleton({
         error: Error()
@@ -90,7 +94,15 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
 
         async openPopup(prefabPath, params, callback, closeOnMaskClick = true) {
           // 加载并实例化弹窗
-          const prefab = await resources.load(prefabPath, Prefab);
+          const popupName = this._extractPopupName(prefabPath);
+
+          const prefab = await this._loadPopupPrefab(prefabPath, popupName);
+
+          if (!prefab) {
+            console.warn(`弹窗预制体加载失败: ${prefabPath}`);
+            return;
+          }
+
           const popupNode = instantiate(prefab);
           popupNode.parent = this._root;
           const popupOpacity = popupNode.addComponent(UIOpacity); // 传递参数
@@ -189,6 +201,29 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           if (this._mask['closeOnMaskClick']) {
             this.closePopup();
           }
+        }
+
+        _extractPopupName(path) {
+          const parts = path.split('/');
+          return parts[parts.length - 1];
+        }
+
+        async _loadPopupPrefab(prefabPath, popupName) {
+          const resourcePrefab = await new Promise(resolve => {
+            resources.load(prefabPath, Prefab, (error, prefab) => {
+              resolve(error || !prefab ? null : prefab);
+            });
+          });
+          if (resourcePrefab) return resourcePrefab;
+          const uuid = POPUP_PREFAB_UUID_MAP[popupName];
+          if (!uuid) return null;
+          return new Promise(resolve => {
+            assetManager.loadAny({
+              uuid
+            }, Prefab, (error, asset) => {
+              resolve(error || !asset ? null : asset);
+            });
+          });
         }
 
       }) || _class));

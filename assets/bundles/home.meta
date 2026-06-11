@@ -1,0 +1,16 @@
+{
+  "ver": "1.2.0",
+  "importer": "directory",
+  "imported": true,
+  "uuid": "0f1c34a8-8ea9-43bf-a807-0ae40b15e19e",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "isBundle": true,
+    "bundleConfigID": "default",
+    "bundleName": "home",
+    "priority": 6,
+    "compressionType": "subpackage",
+    "isRemote": false
+  }
+}
