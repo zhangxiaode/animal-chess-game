@@ -15,7 +15,7 @@
     "outputName": "wechatgame-001",
     "mainBundleCompressionType": "merge_dep",
     "platform": "wechatgame",
-    "name": "欢乐斗兽棋"
+    "name": "丞尧斗兽棋"
   },
   "BuildTaskManager": {
     "taskMap": {
@@ -25,10 +25,10 @@
         "progress": 1,
         "state": "success",
         "stage": "build",
-        "message": "2026-6-12 11:19:03 build success in 10 s!",
-        "detailMessage": "build task(bytedance-mini-game) in 10497!\r",
+        "message": "2026-6-12 17:23:12 build success in 7 s!",
+        "detailMessage": "构建项目脚本 start..., progress: 13%\r",
         "options": {
-          "name": "欢乐斗兽棋",
+          "name": "丞尧斗兽棋",
           "server": "",
           "engineModulesConfigKey": "defaultConfig",
           "platform": "bytedance-mini-game",
@@ -87,7 +87,7 @@
           "__version__": "1.3.9",
           "logDest": "project://temp/builder/log/bytedance-mini-game6-11-2026 19-20.log"
         },
-        "time": "6-12-2026 11:18:53",
+        "time": "6-12-2026 17:23:05",
         "dirty": false
       },
       "1781181007072": {
@@ -96,8 +96,8 @@
         "progress": 1,
         "state": "success",
         "stage": "build",
-        "message": "2026-6-12 10:39:52 build success in 8 s!",
-        "detailMessage": "// ---- build task cocos-service：onAfterCompressSettings ----\r",
+        "message": "2026-6-12 17:23:04 build success in 9 s!",
+        "detailMessage": "// ---- build task wechatgame：onAfterBuild ----\r",
         "options": {
           "name": "animal-chess",
           "server": "",
@@ -158,7 +158,7 @@
           "__version__": "1.3.9",
           "logDest": "project://temp/builder/log/wechatgame6-11-2026 20-30.log"
         },
-        "time": "6-12-2026 10:39:43",
+        "time": "6-12-2026 17:22:55",
         "dirty": false
       }
     }

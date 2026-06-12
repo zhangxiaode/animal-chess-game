@@ -1,55 +1,38 @@
 import { _decorator, Button, Color, Component, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3 } from 'cc';
-import { DataManager } from '../framework/DataManager';
 import { PopupManager } from '../framework/PopupManager';
 import { SoundManager } from '../framework/SoundManager';
+import { addToSidebar } from '../utils/SidebarUtils';
 
 const { ccclass } = _decorator;
 
-type SettingKey = 'vibration' | 'effect' | 'music';
-
-type SwitchNodes = {
-    button: Button | null;
-    background: Sprite | null;
-    knob: Sprite | null;
-};
-
-@ccclass('SettingPopup')
-export class SettingPopup extends Component {
+@ccclass('SidebarPopup')
+export class SidebarPopup extends Component {
     private _dialogSprite: Sprite | null = null;
     private _titleSprite: Sprite | null = null;
     private _titleLabel: Label | null = null;
     private _closeButton: Button | null = null;
     private _closeSprite: Sprite | null = null;
     private _closeLabel: Label | null = null;
-    private _switches: Record<SettingKey, SwitchNodes> = {
-        vibration: { button: null, background: null, knob: null },
-        effect: { button: null, background: null, knob: null },
-        music: { button: null, background: null, knob: null },
-    };
-    private _vibrationEnabled = true;
-    private _effectEnabled = true;
-    private _musicEnabled = true;
-    private _switchBgFrame: SpriteFrame | null = null;
-    private _switchActiveFrame: SpriteFrame | null = null;
-    private _switchCircleFrame: SpriteFrame | null = null;
+    private _contentSprite: Sprite | null = null;
+    private _submitButton: Button | null = null;
+    private _submitButtonSprite: Sprite | null = null;
+    private _submitLabel: Label | null = null;
+    private _isSubmitting = false;
 
     start() {
         this._bindPrefabReferences();
         this._bindEvents();
         this._loadImages();
-        this._loadSettings();
         this._refreshView();
     }
 
     protected onDestroy() {
-        this._closeButton?.node.off(Button.EventType.CLICK, this._onClose, this);
-        this._switches.vibration.button?.node.off(Button.EventType.CLICK, this._onVibrationToggle, this);
-        this._switches.effect.button?.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
-        this._switches.music.button?.node.off(Button.EventType.CLICK, this._onMusicToggle, this);
+        this._closeButton?.node?.off(Button.EventType.CLICK, this._onClose, this);
+        this._submitButton?.node?.off(Button.EventType.CLICK, this._onSubmit, this);
     }
 
     onShow(params?: any) {
-        console.log('设置弹窗显示，参数：', params);
+        console.log('我的小程序弹窗显示，参数：', params);
     }
 
     private _bindPrefabReferences() {
@@ -60,123 +43,71 @@ export class SettingPopup extends Component {
         this._closeSprite = this._bindSprite('Dialog/CloseButton');
         this._closeLabel = this._bindLabel('Dialog/CloseButton/CloseLabel');
         this._setNodeSize('Dialog/CloseButton', 90, 88);
-        this._bindSwitch('vibration', 'Dialog/VibrationToggle', 'Vibration');
-        this._bindSwitch('effect', 'Dialog/EffectToggle', 'Effect');
-        this._bindSwitch('music', 'Dialog/MusicToggle', 'Music');
+        this._contentSprite = this._createContentSprite();
+        this._bindSubmitButton();
+
+        ['Dialog/VibrationToggle', 'Dialog/EffectToggle', 'Dialog/MusicToggle'].forEach((path) => {
+            const node = this._findPrefabNode(path);
+            if (node) node.active = false;
+        });
     }
 
     private _bindEvents() {
         this._closeButton?.node.on(Button.EventType.CLICK, this._onClose, this);
-        this._switches.vibration.button?.node.on(Button.EventType.CLICK, this._onVibrationToggle, this);
-        this._switches.effect.button?.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
-        this._switches.music.button?.node.on(Button.EventType.CLICK, this._onMusicToggle, this);
-    }
-
-    private _loadSettings() {
-        this._vibrationEnabled = DataManager.getInstance().getLocal('vibration_enabled', true);
-        this._effectEnabled = DataManager.getInstance().getLocal('effect_enabled', true);
-        this._musicEnabled = DataManager.getInstance().getLocal('bgm_enabled', true);
+        this._submitButton?.node.on(Button.EventType.CLICK, this._onSubmit, this);
     }
 
     private _refreshView() {
         if (this._titleLabel) {
-            this._titleLabel.string = '设置';
-            this._titleLabel.fontSize = 40;
-            this._titleLabel.lineHeight = 48;
+            this._titleLabel.string = '我的小程序';
+            this._titleLabel.fontSize = 36;
+            this._titleLabel.lineHeight = 44;
             this._titleLabel.color = new Color(255, 255, 255, 255);
         }
 
         if (this._closeLabel) {
             this._closeLabel.string = '';
         }
-        this._setLabel('Dialog/VibrationToggle/VibrationLabel', '震动', 30);
-        this._setLabel('Dialog/EffectToggle/EffectLabel', '音效', 30);
-        this._setLabel('Dialog/MusicToggle/MusicLabel', '音乐', 30);
-        this._updateSwitchState('vibration', this._vibrationEnabled);
-        this._updateSwitchState('effect', this._effectEnabled);
-        this._updateSwitchState('music', this._musicEnabled);
+
+        if (this._submitLabel) {
+            this._submitLabel.string = '提交';
+            this._submitLabel.fontSize = 42;
+            this._submitLabel.lineHeight = 52;
+            this._submitLabel.color = new Color(255, 255, 255, 255);
+        }
     }
 
     private async _loadImages() {
-        const [, , , switchBgFrame, switchActiveFrame, switchCircleFrame] = await Promise.all([
-            this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'),
-            this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg'),
-            this._setSpriteFrame(this._closeSprite, 'images/popup/close', '[SettingPopup] 关闭按钮图片加载失败: images/popup/close'),
-            this._loadImageSpriteFrame('images/popup/switch_bg'),
-            this._loadImageSpriteFrame('images/popup/switch_actived'),
-            this._loadImageSpriteFrame('images/popup/circle'),
+        await Promise.all([
+            this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SidebarPopup] 弹框背景加载失败: images/popup/dialog_bg'),
+            this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SidebarPopup] 标题背景加载失败: images/popup/title_bg'),
+            this._setSpriteFrame(this._closeSprite, 'images/popup/close', '[SidebarPopup] 关闭按钮图片加载失败: images/popup/close'),
+            this._setSpriteFrame(this._contentSprite, 'images/popup/sidebar-img', '[SidebarPopup] 内容图片加载失败: images/popup/sidebar-img'),
+            this._setSpriteFrame(this._submitButtonSprite, 'images/popup/btn_yellow', '[SidebarPopup] 提交按钮背景加载失败: images/popup/btn_yellow'),
         ]);
-
-        this._switchBgFrame = switchBgFrame;
-        this._switchActiveFrame = switchActiveFrame;
-        this._switchCircleFrame = switchCircleFrame;
-        this._refreshView();
-    }
-
-    private _onVibrationToggle() {
-        SoundManager.getInstance().playClickFeedback();
-        this._vibrationEnabled = !this._vibrationEnabled;
-        DataManager.getInstance().setLocal('vibration_enabled', this._vibrationEnabled);
-        this._refreshView();
-    }
-
-    private _onEffectToggle() {
-        SoundManager.getInstance().playClickFeedback();
-        this._effectEnabled = !this._effectEnabled;
-        SoundManager.getInstance().setEffectEnabled(this._effectEnabled);
-        DataManager.getInstance().setLocal('effect_enabled', this._effectEnabled);
-        this._refreshView();
-    }
-
-    private _onMusicToggle() {
-        SoundManager.getInstance().playClickFeedback();
-        this._musicEnabled = !this._musicEnabled;
-        SoundManager.getInstance().setBGMEnabled(this._musicEnabled);
-        DataManager.getInstance().setLocal('bgm_enabled', this._musicEnabled);
-        this._refreshView();
     }
 
     private _onClose() {
         SoundManager.getInstance().playClickFeedback();
+        PopupManager.getInstance().closePopup({ action: 'close' });
+    }
+
+    private async _onSubmit() {
+        if (this._isSubmitting) return;
+
+        SoundManager.getInstance().playClickFeedback();
+        this._isSubmitting = true;
+        if (this._submitButton) {
+            this._submitButton.interactable = false;
+        }
+
+        const result = await addToSidebar();
+        if (!this.node?.isValid) return;
+
         PopupManager.getInstance().closePopup({
-            saved: true,
-            vibrationEnabled: this._vibrationEnabled,
-            bgmEnabled: this._musicEnabled,
-            effectEnabled: this._effectEnabled,
+            action: 'submit',
+            addSidebarResult: result,
         });
-    }
-
-    private _bindSwitch(key: SettingKey, togglePath: string, nodePrefix: string) {
-        this._switches[key] = {
-            button: this._bindButton(togglePath),
-            background: this._bindSprite(`${togglePath}/${nodePrefix}SwitchBg`),
-            knob: this._bindSprite(`${togglePath}/${nodePrefix}SwitchBg/${nodePrefix}SwitchKnob`),
-        };
-
-        this._bindLabel(`${togglePath}/${nodePrefix}Label`);
-        this._setNodeSize(`${togglePath}/${nodePrefix}SwitchBg`, 154, 72);
-        this._setNodeSize(`${togglePath}/${nodePrefix}SwitchBg/${nodePrefix}SwitchKnob`, 72, 72);
-    }
-
-    private _updateSwitchState(key: SettingKey, enabled: boolean) {
-        const item = this._switches[key];
-        if (item.background) {
-            item.background.spriteFrame = enabled ? this._switchActiveFrame : this._switchBgFrame;
-        }
-        if (item.knob) {
-            item.knob.spriteFrame = this._switchCircleFrame;
-            item.knob.node.setPosition(new Vec3(enabled ? 41 : -41, 0, 0));
-        }
-    }
-
-    private _setLabel(path: string, text: string, fontSize: number) {
-        const label = this._bindLabel(path);
-        if (!label) return;
-
-        label.string = text;
-        label.fontSize = fontSize;
-        label.lineHeight = Math.round(fontSize * 1.25);
-        label.color = new Color(116, 70, 35, 255);
     }
 
     private _bindButton(path: string): Button | null {
@@ -213,6 +144,62 @@ export class SettingPopup extends Component {
         return label;
     }
 
+    private _createContentSprite(): Sprite | null {
+        const dialog = this._findPrefabNode('Dialog');
+        if (!dialog) return null;
+
+        const node = dialog.getChildByName('ContentImage') ?? new Node('ContentImage');
+        if (!node.parent) {
+            dialog.addChild(node);
+        }
+        this._preparePrefabNode(node);
+        node.setPosition(new Vec3(0, 28, 0));
+
+        const transform = node.getComponent(UITransform) ?? node.addComponent(UITransform);
+        transform.setContentSize(456, 548);
+
+        const sprite = node.getComponent(Sprite) ?? node.addComponent(Sprite);
+        sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+        return sprite;
+    }
+
+    private _bindSubmitButton() {
+        const dialog = this._findPrefabNode('Dialog');
+        if (!dialog) return;
+
+        const node = dialog.getChildByName('SubmitButton') ?? new Node('SubmitButton');
+        if (!node.parent) {
+            dialog.addChild(node);
+        }
+        this._preparePrefabNode(node);
+        node.setPosition(new Vec3(0, -302, 0));
+
+        const transform = node.getComponent(UITransform) ?? node.addComponent(UITransform);
+        transform.setContentSize(418, 162);
+
+        this._submitButtonSprite = node.getComponent(Sprite) ?? node.addComponent(Sprite);
+        this._submitButtonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+        this._submitButton = node.getComponent(Button) ?? node.addComponent(Button);
+        this._submitButton.interactable = true;
+        this._submitButton.transition = Button.Transition.SCALE;
+        this._submitButton.target = node;
+
+        const labelNode = node.getChildByName('Label') ?? new Node('Label');
+        if (!labelNode.parent) {
+            node.addChild(labelNode);
+        }
+        this._preparePrefabNode(labelNode);
+        labelNode.setPosition(Vec3.ZERO);
+
+        const labelTransform = labelNode.getComponent(UITransform) ?? labelNode.addComponent(UITransform);
+        labelTransform.setContentSize(300, 70);
+
+        this._submitLabel = labelNode.getComponent(Label) ?? labelNode.addComponent(Label);
+        this._submitLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
+        this._submitLabel.verticalAlign = Label.VerticalAlign.CENTER;
+        this._submitLabel.overflow = Label.Overflow.CLAMP;
+    }
+
     private _setNodeSize(path: string, width: number, height: number) {
         const node = this._findPrefabNode(path);
         if (!node) return;
@@ -229,7 +216,7 @@ export class SettingPopup extends Component {
     private _findPrefabNode(path: string): Node | null {
         const node = path.split('/').reduce<Node | null>((current, name) => current?.getChildByName(name) ?? null, this.node);
         if (!node) {
-            console.warn(`[SettingPopup] prefab 缺少节点: ${path}`);
+            console.warn(`[SidebarPopup] prefab 缺少节点: ${path}`);
         }
         return node;
     }
@@ -263,16 +250,19 @@ export class SettingPopup extends Component {
     }
 
     private async _loadOptional<T extends SpriteFrame | Texture2D>(path: string, type: new () => T): Promise<T | null> {
-        return new Promise<T | null>((resolve) => {
+        const resourceAsset = await new Promise<T | null>((resolve) => {
             resources.load(path, type, (error, asset) => {
                 resolve(error || !asset ? null : asset as T);
             });
         });
+        if (resourceAsset) return resourceAsset;
+
+        return null;
     }
 
     private _ensureSpriteFrameSize(spriteFrame: SpriteFrame, fallbackWidth = 0, fallbackHeight = 0) {
-        const rect = spriteFrame.rect as { width?: number; height?: number } | null;
-        const originalSize = spriteFrame.originalSize as { width?: number; height?: number } | null;
+        const rect = spriteFrame.rect as Rect | null;
+        const originalSize = spriteFrame.originalSize as Size | null;
         const width = rect?.width || originalSize?.width || spriteFrame.width || fallbackWidth;
         const height = rect?.height || originalSize?.height || spriteFrame.height || fallbackHeight;
 
@@ -283,11 +273,11 @@ export class SettingPopup extends Component {
             if (!originalSize || !originalSize.width || !originalSize.height) {
                 spriteFrame.originalSize = new Size(width, height);
             }
-            spriteFrame.offset = Vec2.ZERO;
+            spriteFrame.offset = new Vec2(0, 0);
         }
 
         return spriteFrame;
     }
 }
 
-js.setClassAlias(SettingPopup, 'SettingPopup');
+js.setClassAlias(SidebarPopup, 'SidebarPopup');

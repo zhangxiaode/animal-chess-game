@@ -1,15 +1,11 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, js, Label, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, DataManager, PopupManager, SoundManager, _dec, _class, _crd, ccclass, SettingPopup;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, PopupManager, SoundManager, addToSidebar, _dec, _class, _crd, ccclass, SidebarPopup;
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
   function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-  function _reportPossibleCrUseOfDataManager(extras) {
-    _reporterNs.report("DataManager", "../framework/DataManager", _context.meta, extras);
-  }
 
   function _reportPossibleCrUseOfPopupManager(extras) {
     _reporterNs.report("PopupManager", "../framework/PopupManager", _context.meta, extras);
@@ -17,6 +13,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
   function _reportPossibleCrUseOfSoundManager(extras) {
     _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
+  }
+
+  function _reportPossibleCrUseOfaddToSidebar(extras) {
+    _reporterNs.report("addToSidebar", "../utils/SidebarUtils", _context.meta, extras);
   }
 
   return {
@@ -32,6 +32,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       Component = _cc.Component;
       js = _cc.js;
       Label = _cc.Label;
+      Node = _cc.Node;
       Rect = _cc.Rect;
       resources = _cc.resources;
       Size = _cc.Size;
@@ -42,11 +43,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       Vec2 = _cc.Vec2;
       Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
-      DataManager = _unresolved_2.DataManager;
+      PopupManager = _unresolved_2.PopupManager;
     }, function (_unresolved_3) {
-      PopupManager = _unresolved_3.PopupManager;
+      SoundManager = _unresolved_3.SoundManager;
     }, function (_unresolved_4) {
-      SoundManager = _unresolved_4.SoundManager;
+      addToSidebar = _unresolved_4.addToSidebar;
     }],
     execute: function () {
       _crd = true;
@@ -59,7 +60,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         ccclass
       } = _decorator);
 
-      _export("SettingPopup", SettingPopup = (_dec = ccclass('SettingPopup'), _dec(_class = class SettingPopup extends Component {
+      _export("SidebarPopup", SidebarPopup = (_dec = ccclass('SidebarPopup'), _dec(_class = class SidebarPopup extends Component {
         constructor() {
           super(...arguments);
           this._dialogSprite = null;
@@ -68,29 +69,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._closeButton = null;
           this._closeSprite = null;
           this._closeLabel = null;
-          this._switches = {
-            vibration: {
-              button: null,
-              background: null,
-              knob: null
-            },
-            effect: {
-              button: null,
-              background: null,
-              knob: null
-            },
-            music: {
-              button: null,
-              background: null,
-              knob: null
-            }
-          };
-          this._vibrationEnabled = true;
-          this._effectEnabled = true;
-          this._musicEnabled = true;
-          this._switchBgFrame = null;
-          this._switchActiveFrame = null;
-          this._switchCircleFrame = null;
+          this._contentSprite = null;
+          this._submitButton = null;
+          this._submitButtonSprite = null;
+          this._submitLabel = null;
+          this._isSubmitting = false;
         }
 
         start() {
@@ -100,22 +83,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           this._loadImages();
 
-          this._loadSettings();
-
           this._refreshView();
         }
 
         onDestroy() {
-          var _this$_closeButton, _this$_switches$vibra, _this$_switches$effec, _this$_switches$music;
+          var _this$_closeButton, _this$_submitButton;
 
-          (_this$_closeButton = this._closeButton) == null || _this$_closeButton.node.off(Button.EventType.CLICK, this._onClose, this);
-          (_this$_switches$vibra = this._switches.vibration.button) == null || _this$_switches$vibra.node.off(Button.EventType.CLICK, this._onVibrationToggle, this);
-          (_this$_switches$effec = this._switches.effect.button) == null || _this$_switches$effec.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
-          (_this$_switches$music = this._switches.music.button) == null || _this$_switches$music.node.off(Button.EventType.CLICK, this._onMusicToggle, this);
+          (_this$_closeButton = this._closeButton) == null || (_this$_closeButton = _this$_closeButton.node) == null || _this$_closeButton.off(Button.EventType.CLICK, this._onClose, this);
+          (_this$_submitButton = this._submitButton) == null || (_this$_submitButton = _this$_submitButton.node) == null || _this$_submitButton.off(Button.EventType.CLICK, this._onSubmit, this);
         }
 
         onShow(params) {
-          console.log('设置弹窗显示，参数：', params);
+          console.log('我的小程序弹窗显示，参数：', params);
         }
 
         _bindPrefabReferences() {
@@ -128,39 +107,29 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           this._setNodeSize('Dialog/CloseButton', 90, 88);
 
-          this._bindSwitch('vibration', 'Dialog/VibrationToggle', 'Vibration');
+          this._contentSprite = this._createContentSprite();
 
-          this._bindSwitch('effect', 'Dialog/EffectToggle', 'Effect');
+          this._bindSubmitButton();
 
-          this._bindSwitch('music', 'Dialog/MusicToggle', 'Music');
+          ['Dialog/VibrationToggle', 'Dialog/EffectToggle', 'Dialog/MusicToggle'].forEach(path => {
+            var node = this._findPrefabNode(path);
+
+            if (node) node.active = false;
+          });
         }
 
         _bindEvents() {
-          var _this$_closeButton2, _this$_switches$vibra2, _this$_switches$effec2, _this$_switches$music2;
+          var _this$_closeButton2, _this$_submitButton2;
 
           (_this$_closeButton2 = this._closeButton) == null || _this$_closeButton2.node.on(Button.EventType.CLICK, this._onClose, this);
-          (_this$_switches$vibra2 = this._switches.vibration.button) == null || _this$_switches$vibra2.node.on(Button.EventType.CLICK, this._onVibrationToggle, this);
-          (_this$_switches$effec2 = this._switches.effect.button) == null || _this$_switches$effec2.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
-          (_this$_switches$music2 = this._switches.music.button) == null || _this$_switches$music2.node.on(Button.EventType.CLICK, this._onMusicToggle, this);
-        }
-
-        _loadSettings() {
-          this._vibrationEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().getLocal('vibration_enabled', true);
-          this._effectEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().getLocal('effect_enabled', true);
-          this._musicEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().getLocal('bgm_enabled', true);
+          (_this$_submitButton2 = this._submitButton) == null || _this$_submitButton2.node.on(Button.EventType.CLICK, this._onSubmit, this);
         }
 
         _refreshView() {
           if (this._titleLabel) {
-            this._titleLabel.string = '设置';
-            this._titleLabel.fontSize = 40;
-            this._titleLabel.lineHeight = 48;
+            this._titleLabel.string = '我的小程序';
+            this._titleLabel.fontSize = 36;
+            this._titleLabel.lineHeight = 44;
             this._titleLabel.color = new Color(255, 255, 255, 255);
           }
 
@@ -168,72 +137,20 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
             this._closeLabel.string = '';
           }
 
-          this._setLabel('Dialog/VibrationToggle/VibrationLabel', '震动', 30);
-
-          this._setLabel('Dialog/EffectToggle/EffectLabel', '音效', 30);
-
-          this._setLabel('Dialog/MusicToggle/MusicLabel', '音乐', 30);
-
-          this._updateSwitchState('vibration', this._vibrationEnabled);
-
-          this._updateSwitchState('effect', this._effectEnabled);
-
-          this._updateSwitchState('music', this._musicEnabled);
+          if (this._submitLabel) {
+            this._submitLabel.string = '提交';
+            this._submitLabel.fontSize = 42;
+            this._submitLabel.lineHeight = 52;
+            this._submitLabel.color = new Color(255, 255, 255, 255);
+          }
         }
 
         _loadImages() {
           var _this = this;
 
           return _asyncToGenerator(function* () {
-            var [,,, switchBgFrame, switchActiveFrame, switchCircleFrame] = yield Promise.all([_this._setSpriteFrame(_this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'), _this._setSpriteFrame(_this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg'), _this._setSpriteFrame(_this._closeSprite, 'images/popup/close', '[SettingPopup] 关闭按钮图片加载失败: images/popup/close'), _this._loadImageSpriteFrame('images/popup/switch_bg'), _this._loadImageSpriteFrame('images/popup/switch_actived'), _this._loadImageSpriteFrame('images/popup/circle')]);
-            _this._switchBgFrame = switchBgFrame;
-            _this._switchActiveFrame = switchActiveFrame;
-            _this._switchCircleFrame = switchCircleFrame;
-
-            _this._refreshView();
+            yield Promise.all([_this._setSpriteFrame(_this._dialogSprite, 'images/popup/dialog_bg', '[SidebarPopup] 弹框背景加载失败: images/popup/dialog_bg'), _this._setSpriteFrame(_this._titleSprite, 'images/popup/title_bg', '[SidebarPopup] 标题背景加载失败: images/popup/title_bg'), _this._setSpriteFrame(_this._closeSprite, 'images/popup/close', '[SidebarPopup] 关闭按钮图片加载失败: images/popup/close'), _this._setSpriteFrame(_this._contentSprite, 'images/popup/sidebar-img', '[SidebarPopup] 内容图片加载失败: images/popup/sidebar-img'), _this._setSpriteFrame(_this._submitButtonSprite, 'images/popup/btn_yellow', '[SidebarPopup] 提交按钮背景加载失败: images/popup/btn_yellow')]);
           })();
-        }
-
-        _onVibrationToggle() {
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
-          this._vibrationEnabled = !this._vibrationEnabled;
-          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().setLocal('vibration_enabled', this._vibrationEnabled);
-
-          this._refreshView();
-        }
-
-        _onEffectToggle() {
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
-          this._effectEnabled = !this._effectEnabled;
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().setEffectEnabled(this._effectEnabled);
-          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().setLocal('effect_enabled', this._effectEnabled);
-
-          this._refreshView();
-        }
-
-        _onMusicToggle() {
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
-          this._musicEnabled = !this._musicEnabled;
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().setBGMEnabled(this._musicEnabled);
-          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
-            error: Error()
-          }), DataManager) : DataManager).getInstance().setLocal('bgm_enabled', this._musicEnabled);
-
-          this._refreshView();
         }
 
         _onClose() {
@@ -243,48 +160,37 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
             error: Error()
           }), PopupManager) : PopupManager).getInstance().closePopup({
-            saved: true,
-            vibrationEnabled: this._vibrationEnabled,
-            bgmEnabled: this._musicEnabled,
-            effectEnabled: this._effectEnabled
+            action: 'close'
           });
         }
 
-        _bindSwitch(key, togglePath, nodePrefix) {
-          this._switches[key] = {
-            button: this._bindButton(togglePath),
-            background: this._bindSprite(togglePath + "/" + nodePrefix + "SwitchBg"),
-            knob: this._bindSprite(togglePath + "/" + nodePrefix + "SwitchBg/" + nodePrefix + "SwitchKnob")
-          };
+        _onSubmit() {
+          var _this2 = this;
 
-          this._bindLabel(togglePath + "/" + nodePrefix + "Label");
+          return _asyncToGenerator(function* () {
+            var _this2$node;
 
-          this._setNodeSize(togglePath + "/" + nodePrefix + "SwitchBg", 154, 72);
+            if (_this2._isSubmitting) return;
+            (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+              error: Error()
+            }), SoundManager) : SoundManager).getInstance().playClickFeedback();
+            _this2._isSubmitting = true;
 
-          this._setNodeSize(togglePath + "/" + nodePrefix + "SwitchBg/" + nodePrefix + "SwitchKnob", 72, 72);
-        }
+            if (_this2._submitButton) {
+              _this2._submitButton.interactable = false;
+            }
 
-        _updateSwitchState(key, enabled) {
-          var item = this._switches[key];
-
-          if (item.background) {
-            item.background.spriteFrame = enabled ? this._switchActiveFrame : this._switchBgFrame;
-          }
-
-          if (item.knob) {
-            item.knob.spriteFrame = this._switchCircleFrame;
-            item.knob.node.setPosition(new Vec3(enabled ? 41 : -41, 0, 0));
-          }
-        }
-
-        _setLabel(path, text, fontSize) {
-          var label = this._bindLabel(path);
-
-          if (!label) return;
-          label.string = text;
-          label.fontSize = fontSize;
-          label.lineHeight = Math.round(fontSize * 1.25);
-          label.color = new Color(116, 70, 35, 255);
+            var result = yield (_crd && addToSidebar === void 0 ? (_reportPossibleCrUseOfaddToSidebar({
+              error: Error()
+            }), addToSidebar) : addToSidebar)();
+            if (!((_this2$node = _this2.node) != null && _this2$node.isValid)) return;
+            (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
+              error: Error()
+            }), PopupManager) : PopupManager).getInstance().closePopup({
+              action: 'submit',
+              addSidebarResult: result
+            });
+          })();
         }
 
         _bindButton(path) {
@@ -333,21 +239,83 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           return label;
         }
 
+        _createContentSprite() {
+          var _dialog$getChildByNam, _node$getComponent4, _node$getComponent5;
+
+          var dialog = this._findPrefabNode('Dialog');
+
+          if (!dialog) return null;
+          var node = (_dialog$getChildByNam = dialog.getChildByName('ContentImage')) != null ? _dialog$getChildByNam : new Node('ContentImage');
+
+          if (!node.parent) {
+            dialog.addChild(node);
+          }
+
+          this._preparePrefabNode(node);
+
+          node.setPosition(new Vec3(0, 28, 0));
+          var transform = (_node$getComponent4 = node.getComponent(UITransform)) != null ? _node$getComponent4 : node.addComponent(UITransform);
+          transform.setContentSize(456, 548);
+          var sprite = (_node$getComponent5 = node.getComponent(Sprite)) != null ? _node$getComponent5 : node.addComponent(Sprite);
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          return sprite;
+        }
+
+        _bindSubmitButton() {
+          var _dialog$getChildByNam2, _node$getComponent6, _node$getComponent7, _node$getComponent8, _node$getChildByName, _labelNode$getCompone, _labelNode$getCompone2;
+
+          var dialog = this._findPrefabNode('Dialog');
+
+          if (!dialog) return;
+          var node = (_dialog$getChildByNam2 = dialog.getChildByName('SubmitButton')) != null ? _dialog$getChildByNam2 : new Node('SubmitButton');
+
+          if (!node.parent) {
+            dialog.addChild(node);
+          }
+
+          this._preparePrefabNode(node);
+
+          node.setPosition(new Vec3(0, -302, 0));
+          var transform = (_node$getComponent6 = node.getComponent(UITransform)) != null ? _node$getComponent6 : node.addComponent(UITransform);
+          transform.setContentSize(418, 162);
+          this._submitButtonSprite = (_node$getComponent7 = node.getComponent(Sprite)) != null ? _node$getComponent7 : node.addComponent(Sprite);
+          this._submitButtonSprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          this._submitButton = (_node$getComponent8 = node.getComponent(Button)) != null ? _node$getComponent8 : node.addComponent(Button);
+          this._submitButton.interactable = true;
+          this._submitButton.transition = Button.Transition.SCALE;
+          this._submitButton.target = node;
+          var labelNode = (_node$getChildByName = node.getChildByName('Label')) != null ? _node$getChildByName : new Node('Label');
+
+          if (!labelNode.parent) {
+            node.addChild(labelNode);
+          }
+
+          this._preparePrefabNode(labelNode);
+
+          labelNode.setPosition(Vec3.ZERO);
+          var labelTransform = (_labelNode$getCompone = labelNode.getComponent(UITransform)) != null ? _labelNode$getCompone : labelNode.addComponent(UITransform);
+          labelTransform.setContentSize(300, 70);
+          this._submitLabel = (_labelNode$getCompone2 = labelNode.getComponent(Label)) != null ? _labelNode$getCompone2 : labelNode.addComponent(Label);
+          this._submitLabel.horizontalAlign = Label.HorizontalAlign.CENTER;
+          this._submitLabel.verticalAlign = Label.VerticalAlign.CENTER;
+          this._submitLabel.overflow = Label.Overflow.CLAMP;
+        }
+
         _setNodeSize(path, width, height) {
-          var _node$getComponent4;
+          var _node$getComponent9;
 
           var node = this._findPrefabNode(path);
 
           if (!node) return;
-          var transform = (_node$getComponent4 = node.getComponent(UITransform)) != null ? _node$getComponent4 : node.addComponent(UITransform);
+          var transform = (_node$getComponent9 = node.getComponent(UITransform)) != null ? _node$getComponent9 : node.addComponent(UITransform);
           transform.setContentSize(width, height);
         }
 
         _preparePrefabNode(node) {
-          var _node$getComponent5;
+          var _node$getComponent10;
 
           node.layer = this.node.layer;
-          (_node$getComponent5 = node.getComponent(UITransform)) != null ? _node$getComponent5 : node.addComponent(UITransform);
+          (_node$getComponent10 = node.getComponent(UITransform)) != null ? _node$getComponent10 : node.addComponent(UITransform);
         }
 
         _findPrefabNode(path) {
@@ -358,14 +326,14 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           }, this.node);
 
           if (!node) {
-            console.warn("[SettingPopup] prefab \u7F3A\u5C11\u8282\u70B9: " + path);
+            console.warn("[SidebarPopup] prefab \u7F3A\u5C11\u8282\u70B9: " + path);
           }
 
           return node;
         }
 
         _setSpriteFrame(sprite, imagePath, failMessage) {
-          var _this2 = this;
+          var _this3 = this;
 
           return _asyncToGenerator(function* () {
             if (!sprite) {
@@ -373,7 +341,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
               return null;
             }
 
-            var spriteFrame = yield _this2._loadImageSpriteFrame(imagePath);
+            var spriteFrame = yield _this3._loadImageSpriteFrame(imagePath);
 
             if (!spriteFrame || !sprite.node.isValid) {
               console.warn(failMessage);
@@ -386,26 +354,28 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         _loadImageSpriteFrame(path) {
-          var _this3 = this;
+          var _this4 = this;
 
           return _asyncToGenerator(function* () {
-            var spriteFrame = yield _this3._loadOptional(path + "/spriteFrame", SpriteFrame);
-            if (spriteFrame) return _this3._ensureSpriteFrameSize(spriteFrame);
-            var texture = yield _this3._loadOptional(path + "/texture", Texture2D);
+            var spriteFrame = yield _this4._loadOptional(path + "/spriteFrame", SpriteFrame);
+            if (spriteFrame) return _this4._ensureSpriteFrameSize(spriteFrame);
+            var texture = yield _this4._loadOptional(path + "/texture", Texture2D);
             if (!texture) return null;
             var generatedSpriteFrame = new SpriteFrame();
             generatedSpriteFrame.texture = texture;
-            return _this3._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
+            return _this4._ensureSpriteFrameSize(generatedSpriteFrame, texture.width, texture.height);
           })();
         }
 
         _loadOptional(path, type) {
           return _asyncToGenerator(function* () {
-            return new Promise(resolve => {
+            var resourceAsset = yield new Promise(resolve => {
               resources.load(path, type, (error, asset) => {
                 resolve(error || !asset ? null : asset);
               });
             });
+            if (resourceAsset) return resourceAsset;
+            return null;
           })();
         }
 
@@ -432,7 +402,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
               spriteFrame.originalSize = new Size(width, height);
             }
 
-            spriteFrame.offset = Vec2.ZERO;
+            spriteFrame.offset = new Vec2(0, 0);
           }
 
           return spriteFrame;
@@ -440,7 +410,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
       }) || _class));
 
-      js.setClassAlias(SettingPopup, 'SettingPopup');
+      js.setClassAlias(SidebarPopup, 'SidebarPopup');
 
       _cclegacy._RF.pop();
 

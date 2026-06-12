@@ -57,7 +57,8 @@
             "resources",
             "main",
             "home",
-            "game"
+            "game",
+            "popups"
         ],
         "downloadMaxConcurrency": 15
     },

@@ -97,7 +97,7 @@ export class GamePage extends Component {
     }
 
     protected onDestroy() {
-        this._backBtn?.node.off(Button.EventType.CLICK, this._onBack, this);
+        this._backBtn?.node?.off(Button.EventType.CLICK, this._onBack, this);
         ['RestartButton', 'UndoButton', 'HintButton'].forEach((path) => {
             const node = this._findPrefabNode(path);
             node?.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
@@ -159,7 +159,7 @@ export class GamePage extends Component {
 
     private _applyStaticText() {
         if (this._titleLabel) {
-            this._titleLabel.string = '欢乐斗兽棋';
+            this._titleLabel.string = '丞尧斗兽棋';
             this._titleLabel.fontSize = 48;
             this._titleLabel.lineHeight = 58;
         }
@@ -472,7 +472,7 @@ export class GamePage extends Component {
     }
 
     private _createPieceData(): AnimalPiece[] {
-        const animals = ['象', '狮', '虎', '豹', '狼', '狗', '猫', '鼠'];
+        const animals: any = ['象', '狮', '虎', '豹', '狼', '狗', '猫', '鼠'];
         return [
             ...animals.flatMap(animal => [
                 { animal, camp: 'red' as PieceCamp },

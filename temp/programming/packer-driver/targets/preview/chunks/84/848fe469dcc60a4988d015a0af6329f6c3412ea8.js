@@ -115,7 +115,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         onDestroy() {
           var _this$_backBtn;
 
-          (_this$_backBtn = this._backBtn) == null || _this$_backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
+          (_this$_backBtn = this._backBtn) == null || (_this$_backBtn = _this$_backBtn.node) == null || _this$_backBtn.off(Button.EventType.CLICK, this._onBack, this);
           ['RestartButton', 'UndoButton', 'HintButton'].forEach(path => {
             var node = this._findPrefabNode(path);
 
@@ -187,7 +187,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
         _applyStaticText() {
           if (this._titleLabel) {
-            this._titleLabel.string = '欢乐斗兽棋';
+            this._titleLabel.string = '丞尧斗兽棋';
             this._titleLabel.fontSize = 48;
             this._titleLabel.lineHeight = 58;
           }

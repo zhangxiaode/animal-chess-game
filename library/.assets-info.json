@@ -46,15 +46,15 @@
       "uuid": "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af"
     },
     "scripts/popups": {
-      "time": 1781247014795.436,
+      "time": 1781251554251.6606,
       "uuid": "aa115011-db3f-4d67-9e8d-e895dbcc9d75"
     },
     "scripts/utils": {
-      "time": 1778555100479.2659,
+      "time": 1781255349734.5732,
       "uuid": "067cce4e-4c73-4565-9cf9-f3f38590c7ec"
     },
     "scripts/GameMain.ts": {
-      "time": 1781236621439.1057,
+      "time": 1781251587439.516,
       "uuid": "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5"
     },
     "scripts/framework/DataManager.ts": {
@@ -66,7 +66,7 @@
       "uuid": "4b961aa1-1832-46d4-b37b-5dba2d3ec1bd"
     },
     "scripts/framework/PopupManager.ts": {
-      "time": 1781234221617.3496,
+      "time": 1781255826230.1482,
       "uuid": "d74c19c7-3728-40bd-b3df-c69b00057541"
     },
     "scripts/framework/ResManager.ts": {
@@ -86,15 +86,15 @@
       "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
     },
     "scripts/pages/GamePage.ts": {
-      "time": 1781236964879.993,
+      "time": 1781253203146.7637,
       "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
     },
     "scripts/pages/HomePage.ts": {
-      "time": 1781247083848.6191,
+      "time": 1781253247876.207,
       "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
     },
     "scripts/popups/SettingPopup.ts": {
-      "time": 1781236859129.852,
+      "time": 1781253168350.214,
       "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
     },
     "scripts/utils/Constants.ts": {
@@ -476,7 +476,7 @@
       "time": 1781166220416.443
     },
     "resources/images/popup": {
-      "time": 1781235629829.805,
+      "time": 1781252460600.9836,
       "uuid": "f03b3c50-62b4-457d-b203-a3995117295f"
     },
     "resources/images/home/home-bg.png": {
@@ -505,7 +505,7 @@
       "uuid": "5f78eefc-69c2-4c99-8832-ae60e26bdc9e"
     },
     "bundles/game": {
-      "time": 1781179663889.1558,
+      "time": 1781248053694.6343,
       "uuid": "0f5a7985-cb31-4a59-ac88-c9287714e2b8"
     },
     "bundles/home": {
@@ -517,7 +517,7 @@
       "uuid": "902848cb-6fae-485e-bde1-904c057e8160"
     },
     "bundles/game/prefabs": {
-      "time": 1781179663889.3123,
+      "time": 1781248053693.37,
       "uuid": "0def5c2d-5266-4b23-8bfb-0268d616c973"
     },
     "bundles/home/images": {
@@ -525,7 +525,7 @@
       "uuid": "77240d0d-399a-4338-b553-4e96e0dfca82"
     },
     "bundles/home/prefabs": {
-      "time": 1781179663888.9001,
+      "time": 1781248036150.3887,
       "uuid": "9898a8dd-f511-4f8a-929f-6a73e7ec5862"
     },
     "bundles/game/prefabs/pages": {
@@ -580,7 +580,7 @@
       "uuid": "a7796f27-6463-4064-a5ff-f7bc62e10f01"
     },
     "bundles/home/prefabs/pages/HomePage.prefab": {
-      "time": 1781177240030.8765,
+      "time": 1781248280736.2234,
       "uuid": "68a3f6a3-ef4f-4ba8-a32a-a2e46003ca0c"
     },
     "bundles/game/prefabs/pages/GamePage.prefab.meta": {
@@ -657,11 +657,11 @@
       "time": 1781246930926.5637
     },
     "scripts/popups/DesktopPopup.ts": {
-      "time": 1781236859129.852,
+      "time": 1781253698275.8616,
       "uuid": "a628a221-2185-40d8-8016-26d02ebaddfb"
     },
     "scripts/popups/SidebarPopup.ts": {
-      "time": 1781236859129.852,
+      "time": 1781254147017.846,
       "uuid": "7a42b990-7fe9-4045-b2a7-c3f1d8af7063"
     },
     "prefabs/popups/DesktopPopup.prefab.meta": {
@@ -677,11 +677,11 @@
       "time": 1781247877391.7385
     },
     "prefabs/popups/SidebarPopup.prefab": {
-      "time": 1781246930974.4402,
+      "time": 1781251629928.07,
       "uuid": "7a6e7c96-5288-4ff5-ad9b-c8146f540077"
     },
     "prefabs/popups/DesktopPopup.prefab": {
-      "time": 1781246930974.4841,
+      "time": 1781249192821.9695,
       "uuid": "935abeee-ba86-4ee2-835f-4dfd7252e256"
     },
     "resources/images/home/desktop.png": {
@@ -691,6 +691,41 @@
     "resources/images/home/sidebar.png": {
       "time": 1781247790977.0015,
       "uuid": "05066383-4d40-498d-b904-bf49859b8694"
+    },
+    "resources/images/popup/desktop-img.png": {
+      "time": 1781251955688.1062,
+      "uuid": "5d3c36b9-a678-479d-a0a2-71713cd6f340"
+    },
+    "resources/images/popup/sidebar-img.png": {
+      "time": 1781251956682.9058,
+      "uuid": "6da27e18-64cf-4249-8a7b-2224cb852ae6"
+    },
+    "resources/images/popup/sidebar-img.png.meta": {
+      "time": 1781252003900.3564
+    },
+    "resources/images/popup/desktop-img.png.meta": {
+      "time": 1781252003900.7341
+    },
+    "resources/images/popup/btn_yellow.png": {
+      "time": 1780996656412.3994,
+      "uuid": "357ab45e-8dc9-419f-88d3-9e8366114c56"
+    },
+    "resources/images/popup/btn_yellow.png.meta": {
+      "time": 1781252460637.1519
+    },
+    "scripts/utils/ShortcutUtils.ts.meta": {
+      "time": 1781255349736.6138
+    },
+    "scripts/utils/SidebarUtils.ts.meta": {
+      "time": 1781255349736.9634
+    },
+    "scripts/utils/ShortcutUtils.ts": {
+      "time": 1781253567079.681,
+      "uuid": "a7ce3418-816d-4870-be11-454463c97ae6"
+    },
+    "scripts/utils/SidebarUtils.ts": {
+      "time": 1781255664022.1545,
+      "uuid": "391d2faf-aca7-407e-8c8e-db60a405d8be"
     }
   },
   "missing": {}

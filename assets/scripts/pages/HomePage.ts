@@ -30,9 +30,11 @@ export class HomePage extends Component {
     }
 
     protected onDestroy() {
-        this._settingButton?.node.off(Button.EventType.CLICK, this._onSetting, this);
-        this._startGameButton?.node.off(Button.EventType.CLICK, this._onStartGame, this);
-        ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach((path) => {
+        this._settingButton?.node?.off(Button.EventType.CLICK, this._onSetting, this);
+        this._startGameButton?.node?.off(Button.EventType.CLICK, this._onStartGame, this);
+        this._rewardButtonSprite?.node?.off(Button.EventType.CLICK, this._onDesktop, this);
+        this._collectButtonSprite?.node?.off(Button.EventType.CLICK, this._onSidebar, this);
+        ['RankingButton', 'FeedbackButton'].forEach((path) => {
             const node = this._findPrefabNode(path);
             node?.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
         });
@@ -90,11 +92,15 @@ export class HomePage extends Component {
     }
 
     private _bindEvents() {
-        this._settingButton?.node.off(Button.EventType.CLICK, this._onSetting, this);
+        this._settingButton?.node?.off(Button.EventType.CLICK, this._onSetting, this);
         this._settingButton?.node.on(Button.EventType.CLICK, this._onSetting, this);
-        this._startGameButton?.node.off(Button.EventType.CLICK, this._onStartGame, this);
+        this._startGameButton?.node?.off(Button.EventType.CLICK, this._onStartGame, this);
         this._startGameButton?.node.on(Button.EventType.CLICK, this._onStartGame, this);
-        ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach((path) => {
+        this._rewardButtonSprite?.node?.off(Button.EventType.CLICK, this._onDesktop, this);
+        this._rewardButtonSprite?.node.on(Button.EventType.CLICK, this._onDesktop, this);
+        this._collectButtonSprite?.node?.off(Button.EventType.CLICK, this._onSidebar, this);
+        this._collectButtonSprite?.node.on(Button.EventType.CLICK, this._onSidebar, this);
+        ['RankingButton', 'FeedbackButton'].forEach((path) => {
             const node = this._findPrefabNode(path);
             node?.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
             node?.on(Button.EventType.CLICK, this._onEntryButtonClick, this);
@@ -201,6 +207,16 @@ export class HomePage extends Component {
     private _onSetting() {
         SoundManager.getInstance().playClickFeedback();
         PopupManager.getInstance().openPopup('prefabs/popups/SettingPopup', { source: 'home' });
+    }
+
+    private _onDesktop() {
+        SoundManager.getInstance().playClickFeedback();
+        PopupManager.getInstance().openPopup('prefabs/popups/DesktopPopup', { source: 'home' });
+    }
+
+    private _onSidebar() {
+        SoundManager.getInstance().playClickFeedback();
+        PopupManager.getInstance().openPopup('prefabs/popups/SidebarPopup', { source: 'home' });
     }
 
     private _onEntryButtonClick() {

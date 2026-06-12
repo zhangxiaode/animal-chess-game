@@ -5,10 +5,14 @@ const { ccclass } = _decorator;
 
 const POPUP_PREFAB_UUID_MAP: Record<string, string> = {
     SettingPopup: 'a37a4ed6-3b8c-47bd-afd5-52f10ed88395',
+    DesktopPopup: '935abeee-ba86-4ee2-835f-4dfd7252e256',
+    SidebarPopup: '7a6e7c96-5288-4ff5-ad9b-c8146f540077',
 };
 
 const POPUP_BUNDLE_MAP: Record<string, string> = {
     SettingPopup: 'popups',
+    DesktopPopup: 'popups',
+    SidebarPopup: 'popups',
 };
 
 @ccclass('PopupManager')

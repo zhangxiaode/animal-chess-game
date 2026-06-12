@@ -108,10 +108,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         onDestroy() {
           var _this$_closeButton, _this$_switches$vibra, _this$_switches$effec, _this$_switches$music;
 
-          (_this$_closeButton = this._closeButton) == null || _this$_closeButton.node.off(Button.EventType.CLICK, this._onClose, this);
-          (_this$_switches$vibra = this._switches.vibration.button) == null || _this$_switches$vibra.node.off(Button.EventType.CLICK, this._onVibrationToggle, this);
-          (_this$_switches$effec = this._switches.effect.button) == null || _this$_switches$effec.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
-          (_this$_switches$music = this._switches.music.button) == null || _this$_switches$music.node.off(Button.EventType.CLICK, this._onMusicToggle, this);
+          (_this$_closeButton = this._closeButton) == null || (_this$_closeButton = _this$_closeButton.node) == null || _this$_closeButton.off(Button.EventType.CLICK, this._onClose, this);
+          (_this$_switches$vibra = this._switches.vibration.button) == null || (_this$_switches$vibra = _this$_switches$vibra.node) == null || _this$_switches$vibra.off(Button.EventType.CLICK, this._onVibrationToggle, this);
+          (_this$_switches$effec = this._switches.effect.button) == null || (_this$_switches$effec = _this$_switches$effec.node) == null || _this$_switches$effec.off(Button.EventType.CLICK, this._onEffectToggle, this);
+          (_this$_switches$music = this._switches.music.button) == null || (_this$_switches$music = _this$_switches$music.node) == null || _this$_switches$music.off(Button.EventType.CLICK, this._onMusicToggle, this);
         }
 
         onShow(params) {

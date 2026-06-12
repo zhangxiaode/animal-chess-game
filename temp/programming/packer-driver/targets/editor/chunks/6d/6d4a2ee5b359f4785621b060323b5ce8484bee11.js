@@ -40,10 +40,14 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         ccclass
       } = _decorator);
       POPUP_PREFAB_UUID_MAP = {
-        SettingPopup: 'a37a4ed6-3b8c-47bd-afd5-52f10ed88395'
+        SettingPopup: 'a37a4ed6-3b8c-47bd-afd5-52f10ed88395',
+        DesktopPopup: '935abeee-ba86-4ee2-835f-4dfd7252e256',
+        SidebarPopup: '7a6e7c96-5288-4ff5-ad9b-c8146f540077'
       };
       POPUP_BUNDLE_MAP = {
-        SettingPopup: 'popups'
+        SettingPopup: 'popups',
+        DesktopPopup: 'popups',
+        SidebarPopup: 'popups'
       };
 
       _export("PopupManager", PopupManager = (_dec = ccclass('PopupManager'), _dec(_class = class PopupManager extends (_crd && Singleton === void 0 ? (_reportPossibleCrUseOfSingleton({

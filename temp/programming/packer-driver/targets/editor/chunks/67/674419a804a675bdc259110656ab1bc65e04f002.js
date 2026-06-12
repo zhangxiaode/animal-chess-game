@@ -1,4 +1,4 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7", "__unresolved_8", "__unresolved_9"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3", "__unresolved_4", "__unresolved_5", "__unresolved_6", "__unresolved_7", "__unresolved_8", "__unresolved_9", "__unresolved_10", "__unresolved_11"], function (_export, _context) {
   "use strict";
 
   var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Component, Node, game, UITransform, js, Prefab, instantiate, Widget, Vec3, UIManager, PopupManager, SoundManager, DataManager, HttpManager, getCurrentPlatform, getPlatformGameInfo, UserSystem, _dec, _dec2, _class, _class2, _descriptor, _class3, _crd, ccclass, property, GameMain;
@@ -73,7 +73,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       getPlatformGameInfo = _unresolved_7.getPlatformGameInfo;
     }, function (_unresolved_8) {
       UserSystem = _unresolved_8.UserSystem;
-    }, function (_unresolved_9) {}, function (_unresolved_10) {}],
+    }, function (_unresolved_9) {}, function (_unresolved_10) {}, function (_unresolved_11) {}, function (_unresolved_12) {}],
     execute: function () {
       _crd = true;
 

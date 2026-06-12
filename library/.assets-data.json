@@ -1022,5 +1022,63 @@
       "dependScripts": []
     },
     "versionCode": 2
+  },
+  "5d3c36b9-a678-479d-a0a2-71713cd6f340": {
+    "url": "db://assets/resources/images/popup/desktop-img.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "6da27e18-64cf-4249-8a7b-2224cb852ae6": {
+    "url": "db://assets/resources/images/popup/sidebar-img.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "6da27e18-64cf-4249-8a7b-2224cb852ae6@6c48a": {
+    "url": "db://assets/resources/images/popup/sidebar-img.png@6c48a",
+    "value": {
+      "depends": [
+        "6da27e18-64cf-4249-8a7b-2224cb852ae6"
+      ]
+    },
+    "versionCode": 1
+  },
+  "5d3c36b9-a678-479d-a0a2-71713cd6f340@6c48a": {
+    "url": "db://assets/resources/images/popup/desktop-img.png@6c48a",
+    "value": {
+      "depends": [
+        "5d3c36b9-a678-479d-a0a2-71713cd6f340"
+      ]
+    },
+    "versionCode": 1
+  },
+  "357ab45e-8dc9-419f-88d3-9e8366114c56": {
+    "url": "db://assets/resources/images/popup/btn_yellow.png",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "357ab45e-8dc9-419f-88d3-9e8366114c56@6c48a": {
+    "url": "db://assets/resources/images/popup/btn_yellow.png@6c48a",
+    "value": {
+      "depends": [
+        "357ab45e-8dc9-419f-88d3-9e8366114c56"
+      ]
+    },
+    "versionCode": 1
+  },
+  "a7ce3418-816d-4870-be11-454463c97ae6": {
+    "url": "db://assets/scripts/utils/ShortcutUtils.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "391d2faf-aca7-407e-8c8e-db60a405d8be": {
+    "url": "db://assets/scripts/utils/SidebarUtils.ts",
+    "value": {},
+    "versionCode": 1
   }
 }

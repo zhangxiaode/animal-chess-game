@@ -94,7 +94,7 @@
     }
   },
   {
-    "__type__": "SettingPopup",
+    "__type__": "SidebarPopup",
     "node": {
       "__id__": 1
     }

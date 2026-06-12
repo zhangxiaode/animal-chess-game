@@ -42,10 +42,10 @@ export class SettingPopup extends Component {
     }
 
     protected onDestroy() {
-        this._closeButton?.node.off(Button.EventType.CLICK, this._onClose, this);
-        this._switches.vibration.button?.node.off(Button.EventType.CLICK, this._onVibrationToggle, this);
-        this._switches.effect.button?.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
-        this._switches.music.button?.node.off(Button.EventType.CLICK, this._onMusicToggle, this);
+        this._closeButton?.node?.off(Button.EventType.CLICK, this._onClose, this);
+        this._switches.vibration.button?.node?.off(Button.EventType.CLICK, this._onVibrationToggle, this);
+        this._switches.effect.button?.node?.off(Button.EventType.CLICK, this._onEffectToggle, this);
+        this._switches.music.button?.node?.off(Button.EventType.CLICK, this._onMusicToggle, this);
     }
 
     onShow(params?: any) {

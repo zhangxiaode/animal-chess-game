@@ -91,11 +91,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         onDestroy() {
-          var _this$_settingButton, _this$_startGameButto;
+          var _this$_settingButton, _this$_startGameButto, _this$_rewardButtonSp, _this$_collectButtonS;
 
-          (_this$_settingButton = this._settingButton) == null || _this$_settingButton.node.off(Button.EventType.CLICK, this._onSetting, this);
-          (_this$_startGameButto = this._startGameButton) == null || _this$_startGameButto.node.off(Button.EventType.CLICK, this._onStartGame, this);
-          ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach(path => {
+          (_this$_settingButton = this._settingButton) == null || (_this$_settingButton = _this$_settingButton.node) == null || _this$_settingButton.off(Button.EventType.CLICK, this._onSetting, this);
+          (_this$_startGameButto = this._startGameButton) == null || (_this$_startGameButto = _this$_startGameButto.node) == null || _this$_startGameButto.off(Button.EventType.CLICK, this._onStartGame, this);
+          (_this$_rewardButtonSp = this._rewardButtonSprite) == null || (_this$_rewardButtonSp = _this$_rewardButtonSp.node) == null || _this$_rewardButtonSp.off(Button.EventType.CLICK, this._onDesktop, this);
+          (_this$_collectButtonS = this._collectButtonSprite) == null || (_this$_collectButtonS = _this$_collectButtonS.node) == null || _this$_collectButtonS.off(Button.EventType.CLICK, this._onSidebar, this);
+          ['RankingButton', 'FeedbackButton'].forEach(path => {
             var node = this._findPrefabNode(path);
 
             node == null || node.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
@@ -157,13 +159,17 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         _bindEvents() {
-          var _this$_settingButton2, _this$_settingButton3, _this$_startGameButto4, _this$_startGameButto5;
+          var _this$_settingButton2, _this$_settingButton3, _this$_startGameButto4, _this$_startGameButto5, _this$_rewardButtonSp2, _this$_rewardButtonSp3, _this$_collectButtonS2, _this$_collectButtonS3;
 
-          (_this$_settingButton2 = this._settingButton) == null || _this$_settingButton2.node.off(Button.EventType.CLICK, this._onSetting, this);
+          (_this$_settingButton2 = this._settingButton) == null || (_this$_settingButton2 = _this$_settingButton2.node) == null || _this$_settingButton2.off(Button.EventType.CLICK, this._onSetting, this);
           (_this$_settingButton3 = this._settingButton) == null || _this$_settingButton3.node.on(Button.EventType.CLICK, this._onSetting, this);
-          (_this$_startGameButto4 = this._startGameButton) == null || _this$_startGameButto4.node.off(Button.EventType.CLICK, this._onStartGame, this);
+          (_this$_startGameButto4 = this._startGameButton) == null || (_this$_startGameButto4 = _this$_startGameButto4.node) == null || _this$_startGameButto4.off(Button.EventType.CLICK, this._onStartGame, this);
           (_this$_startGameButto5 = this._startGameButton) == null || _this$_startGameButto5.node.on(Button.EventType.CLICK, this._onStartGame, this);
-          ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach(path => {
+          (_this$_rewardButtonSp2 = this._rewardButtonSprite) == null || (_this$_rewardButtonSp2 = _this$_rewardButtonSp2.node) == null || _this$_rewardButtonSp2.off(Button.EventType.CLICK, this._onDesktop, this);
+          (_this$_rewardButtonSp3 = this._rewardButtonSprite) == null || _this$_rewardButtonSp3.node.on(Button.EventType.CLICK, this._onDesktop, this);
+          (_this$_collectButtonS2 = this._collectButtonSprite) == null || (_this$_collectButtonS2 = _this$_collectButtonS2.node) == null || _this$_collectButtonS2.off(Button.EventType.CLICK, this._onSidebar, this);
+          (_this$_collectButtonS3 = this._collectButtonSprite) == null || _this$_collectButtonS3.node.on(Button.EventType.CLICK, this._onSidebar, this);
+          ['RankingButton', 'FeedbackButton'].forEach(path => {
             var node = this._findPrefabNode(path);
 
             node == null || node.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
@@ -312,6 +318,28 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
             error: Error()
           }), PopupManager) : PopupManager).getInstance().openPopup('prefabs/popups/SettingPopup', {
+            source: 'home'
+          });
+        }
+
+        _onDesktop() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
+          (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
+            error: Error()
+          }), PopupManager) : PopupManager).getInstance().openPopup('prefabs/popups/DesktopPopup', {
+            source: 'home'
+          });
+        }
+
+        _onSidebar() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
+          (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
+            error: Error()
+          }), PopupManager) : PopupManager).getInstance().openPopup('prefabs/popups/SidebarPopup', {
             source: 'home'
           });
         }
