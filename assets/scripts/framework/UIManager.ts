@@ -46,7 +46,7 @@ export class UIManager extends Singleton<UIManager> {
 
     /**
      * 打开新页面（支持预制体加载和动态创建）
-     * @param prefabPath 预制体路径（resources/prefabs/pages/xxx）或页面名称
+     * @param prefabPath 预制体路径（如 prefabs/pages/xxx）或页面名称
      * @param params 传递给页面的参数
      * @param animation 是否显示切换动画
      */

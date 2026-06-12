@@ -1,0 +1,11 @@
+{
+  "name": "wechat-subpackage-builder",
+  "title": "Mini Game Subpackage Builder",
+  "package_version": 2,
+  "version": "1.0.0",
+  "author": "animal-chess-game",
+  "description": "Automatically moves Cocos bundles to mini game subpackages after build.",
+  "contributions": {
+    "builder": "./dist/builder.js"
+  }
+}

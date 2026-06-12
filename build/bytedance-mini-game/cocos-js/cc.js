@@ -1,1 +1,146 @@
-System.register(["./_virtual_cc-Ck0z5SIV.js"],(function(e){"use strict";return{setters:[function(a){e({Acceleration:a.ed,AffineTransform:a.a7,AlphaKey:a.cf,AmbientInfo:a.df,AnimCurve:a.ad,Animation:a.ab,AnimationClip:a.a9,AnimationComponent:a.ab,AnimationManager:a.ah,AnimationState:a.aa,Asset:a.dG,AssetLibrary:a.d_,AssetManager:a.dW,AsyncDelegate:a.bP,Atlas:a.A,AudioClip:a.al,AudioPCMDataView:a.am,AudioSource:a.ak,AudioSourceComponent:a.ak,BASELINE_RATIO:a.z,BITMASK_TAG:a.cI,BaseNode:a.d3,BaseRenderData:a.r,BitMask:a.bh,BitmapFont:a.B,BlockInputEvents:a.fr,BlockInputEventsComponent:a.fr,BoxCollider2D:a.eL,BufferAsset:a.dH,BuiltinResMgr:a.e0,Button:a.fc,ButtonComponent:a.fc,CCBoolean:a.bF,CCClass:a.bz,CCFloat:a.bE,CCInteger:a.bD,CCLoader:a.dY,CCObject:a.bB,CCObjectFlags:a.bC,CCString:a.bG,CacheMode:a.n,CachedArray:a.bg,CallbacksInvoker:a.cM,Camera:a.dt,CameraComponent:a.dt,Canvas:a.C,CanvasComponent:a.C,CircleCollider2D:a.eM,Collider2D:a.eK,Color:a.aL,ColorKey:a.ce,CompactValueTypeArray:a.bH,Component:a.d8,Contact2DType:a.eE,DEFAULT_OCTREE_DEPTH:a.dl,DEFAULT_WORLD_MAX_POS:a.dk,DEFAULT_WORLD_MIN_POS:a.dj,DebugMode:a.c1,DebugView:a.d0,Details:a.dE,Director:a.dz,DirectorEvent:a.dy,DistanceJoint2D:a.eP,DynamicAtlasManager:a.a3,ECollider2DType:a.ez,EJoint2DType:a.eA,ENUM_TAG:a.cH,EPSILON:a.aQ,EPhysics2DDrawFlags:a.eF,ERaycast2DType:a.eD,ERigidBody2DType:a.ey,EasingMethod:a.cL,EditBox:a.fd,EditBoxComponent:a.fd,EditorExtendable:a.bM,EffectAsset:a.dP,Enum:a.bi,Event:a.e4,EventAcceleration:a.e5,EventGamepad:a.e9,EventHMD:a.eb,EventHandheld:a.ec,EventHandle:a.ea,EventHandler:a.d7,EventInfo:a.ae,EventKeyboard:a.e6,EventMouse:a.e7,EventTarget:a.bN,EventTouch:a.e8,Eventify:a.bO,ExtrapolationMode:a.c9,FixedJoint2D:a.eU,FogInfo:a.dh,Font:a.F,GCObject:a.cE,Game:a.dB,Gradient:a.cg,Graphics:a.G,GraphicsComponent:a.G,HALF_PI:a.aO,HingeJoint2D:a.eW,HorizontalTextAlignment:a.H,HtmlTextParser:a.y,ImageAsset:a.dM,Input:a.eh,InstanceMaterialType:a.I,InstancedBuffer:a.cY,Intersection2D:a.ep,JavaScript:a.dT,Joint2D:a.eO,JsonAsset:a.dL,KeyCode:a.ee,LRUCache:a.J,Label:a.o,LabelAtlas:a.L,LabelComponent:a.o,LabelOutline:a.i,LabelOutlineComponent:a.i,LabelShadow:a.k,Layers:a.d5,Layout:a.fe,LayoutComponent:a.fe,LightProbeInfo:a.dq,MATH_FLOAT_ARRAY:a.bc,MIDDLE_RATIO:a.D,Mask:a.p,MaskComponent:a.p,MaskType:a.eq,Mat3:a.aE,Mat4:a.aF,Material:a.dQ,MathBase:a.bd,MeshBuffer:a.M,MeshRenderData:a.u,MissingScript:a.dw,MobilityMode:a.dd,ModelRenderer:a.du,MotionStreak:a.es,MotionStreakAssemblerManager:a.et,MouseJoint2D:a.eR,Node:a.d3,NodeActivator:a.d9,NodeEventType:a.de,NodePool:a.e2,NodeSpace:a.db,ObjectCurve:a.cd,OctreeInfo:a.dm,Overflow:a.O,PHYSICS_2D_PTM_RATIO:a.eG,PageView:a.fn,PageViewComponent:a.fn,PageViewIndicator:a.fo,PageViewIndicatorComponent:a.fo,ParticleAsset:a.ev,ParticleSystem2D:a.er,ParticleSystem2DAssembler:a.eu,Physics2DManifoldType:a.eI,Physics2DUtils:a.ew,PhysicsGroup:a.eC,PhysicsGroup2D:a.eB,PhysicsSystem2D:a.eH,PipelineEventProcessor:a.c_,PipelineEventType:a.c$,PipelineInputAssemblerData:a.d2,PipelineSceneData:a.cX,PipelineStateManager:a.cZ,PolygonCollider2D:a.eN,Pool:a.be,PostSettingsInfo:a.dp,Prefab:a.da,PrefabLink:a.dx,PrivateNode:a.ds,Profiler:a.eX,ProgressBar:a.ff,ProgressBarComponent:a.ff,QuadRenderData:a.Q,Quat:a.aC,QuatCurve:a.cb,QuatInterpolationMode:a.cc,RatioSampler:a.ac,RealCurve:a.c7,RealInterpolationMode:a.c8,Rect:a.aJ,RecyclePool:a.bf,RelativeJoint2D:a.eS,RenderComponent:a.d,RenderData:a.t,RenderRoot2D:a.R,RenderTexture:a.dR,Renderable2D:a.d,RenderableComponent:a.du,Renderer:a.dv,RenderingSubMesh:a.dI,ResolutionPolicy:a.fv,RichText:a.q,RichTextComponent:a.q,RigidBody2D:a.eJ,Root:a.ap,SafeArea:a.fp,SafeAreaComponent:a.fp,Scene:a.d4,SceneAsset:a.dJ,SceneGlobals:a.dr,Scheduler:a.c6,Script:a.dS,ScrollBar:a.fg,ScrollBarComponent:a.fg,ScrollView:a.fh,ScrollViewComponent:a.fh,Settings:a.ci,SettingsCategory:a.ch,ShadowsInfo:a.di,Size:a.aH,SkinInfo:a.dn,SkyboxInfo:a.dg,Slider:a.fi,SliderComponent:a.fi,SliderJoint2D:a.eT,Sorting:a.a6,SortingLayers:a.a5,SpringJoint2D:a.eQ,Sprite:a.g,SpriteAtlas:a.a,SpriteComponent:a.g,SpriteFrame:a.c,SpriteFrameEvent:a.b,SpriteRenderer:a.f,StencilManager:a.S,SubContextView:a.fs,System:a.cl,SystemEvent:a.ej,SystemEventType:a.e3,SystemPriority:a.ck,TTFFont:a.T,TWO_PI:a.aP,TangentWeightMode:a.ca,TextAsset:a.dK,Texture2D:a.dN,TextureCube:a.dO,TiledLayer:a.f2,TiledMap:a.e$,TiledMapAsset:a.f0,TiledObjectGroup:a.f3,TiledTile:a.f4,TiledUserNodeData:a.f1,Toggle:a.fj,ToggleComponent:a.fj,ToggleContainer:a.fk,ToggleContainerComponent:a.fk,Touch:a.ef,TransformBit:a.dc,Tween:a.f9,TweenAction:a.f8,TweenSystem:a.f7,TypeScript:a.dU,UI:a.w,UIComponent:a.U,UICoordinateTracker:a.fq,UICoordinateTrackerComponent:a.fq,UIDrawBatch:a.x,UIMeshRenderer:a.h,UIModelComponent:a.h,UIOpacity:a.m,UIOpacityComponent:a.m,UIRenderable:a.d,UIRenderer:a.d,UIReorderComponent:a.fx,UIStaticBatch:a.j,UIStaticBatchComponent:a.j,UITransform:a.e,UITransformComponent:a.e,UIVertexFormat:a.v,VERSION:a.at,ValueType:a.bk,Vec2:a.aw,Vec3:a.ay,Vec4:a.aA,VerticalTextAlignment:a.V,VideoClip:a.fy,VideoPlayer:a.fz,View:a.fu,ViewGroup:a.fl,WebGLDevice:a.en,WebView:a.fA,WheelJoint2D:a.eV,Widget:a.fm,WidgetComponent:a.fm,WorldNode3DToLocalNodeUI:a.bv,WorldNode3DToWorldNodeUI:a.bw,__checkObsoleteInNamespace__:a.bu,__checkObsolete__:a.bt,_decorator:a.by,_resetDebugSetting:a.cO,absMax:a.b8,absMaxComponent:a.b7,animation:a.a8,applyMixins:a.cN,approx:a.aS,assert:a.bU,assertID:a.bZ,assertIsNonNullable:a.cS,assertIsTrue:a.cT,assertsArrayIndex:a.cU,assetManager:a.dV,bezier:a.co,bezierByTime:a.cp,binarySearch:a.cP,binarySearchBy:a.cR,binarySearchEpsilon:a.cQ,bits:a.av,builtinResMgr:a.e1,ccenum:a.bj,cclegacy:a.au,clamp:a.aT,clamp01:a.aU,color:a.aM,computeRatioByType:a.ag,convertUtils:a.bx,debug:a.bQ,debugID:a.bV,deprecateModuleExportedName:a.bs,deserialize:a.dD,deserializeTag:a.bJ,director:a.dA,disallowAnimation:a.cy,displayName:a.ct,displayOrder:a.cu,dragonBones:a.em,dynamicAtlasManager:a.a4,easing:a.cm,editable:a.cq,editorExtrasTag:a.bI,enumerableProps:a.b9,equals:a.aR,error:a.bS,errorID:a.bX,find:a.d6,flattenCodeArray:a.cV,floatToHalf:a.ba,formerlySerializedAs:a.cA,fragmentText:a.a2,game:a.dC,garbageCollectionManager:a.cD,geometry:a.as,getBaselineOffset:a.E,getEnglishWordPartAtFirst:a.a0,getEnglishWordPartAtLast:a.a1,getError:a.c0,getPathFromRoot:a.ai,getPhaseID:a.d1,getSerializationMetadata:a.bL,getSymbolAt:a.X,getSymbolCodeAt:a.Y,getSymbolLength:a.W,getWorldTransformUntilRoot:a.aj,gfx:a.an,graphicsAssembler:a.eo,halfToFloat:a.bb,input:a.eg,instantiate:a.dF,inverseLerp:a.b6,isCCClassOrFastDefined:a.bA,isCCObject:a.cJ,isDisplayStats:a.b_,isEnglishWordPartAtFirst:a.Z,isEnglishWordPartAtLast:a.$,isUnicodeCJK:a.K,isUnicodeSpace:a.N,isValid:a.cK,js:a.bl,labelAssembler:a.l,lerp:a.aV,loadWasmModuleSpine:a.e_,loader:a.dZ,log:a.bR,logID:a.bW,macro:a.c4,markAsWarning:a.br,mat4:a.aG,math:a.aq,memop:a.ar,misc:a.bm,murmurhash2_32_gc:a.cn,native:a.ek,nextPow2:a.b3,override:a.cz,path:a.bn,pingPong:a.b5,pipeline:a.cW,preTransforms:a.aN,profiler:a.eY,pseudoRandom:a.b0,pseudoRandomRange:a.b1,pseudoRandomRangeInt:a.b2,quat:a.aD,random:a.aY,randomRange:a.a_,randomRangeInt:a.a$,range:a.cv,rangeStep:a.cw,rect:a.aK,removeProperty:a.bq,renderer:a.ao,rendering:a.el,repeat:a.b4,replaceProperty:a.bp,resources:a.dX,safeMeasureText:a.P,sampleAnimationCurve:a.af,screen:a.c2,selector:a.ex,serializable:a.cB,serializeTag:a.bK,setDefaultLogTimes:a.bo,setDisplayStats:a.b$,setPropertyEnumType:a.cF,setPropertyEnumTypeOnAttrs:a.cG,setRandGenerator:a.aZ,settings:a.cj,shift:a.cC,size:a.aI,slide:a.cx,sp:a.eZ,spriteAssembler:a.s,sys:a.c3,systemEvent:a.ei,tiledLayerAssembler:a.f5,toDegree:a.aX,toRadian:a.aW,tooltip:a.cr,tween:a.fa,tweenProgress:a.f6,tweenUtil:a.fb,url:a.d$,v2:a.ax,v3:a.az,v4:a.aB,view:a.fw,visible:a.cs,visibleRect:a.c5,warn:a.bT,warnID:a.bY,widgetManager:a.ft})}],execute:function(){}}}));
+System.register(["plugin:cocos/2d.js", "plugin:cocos/sorting.js", "./affine-transform.js", "./animation.js", "plugin:cocos/audio.js", "plugin:cocos/base.js", "./custom-pipeline.js", "plugin:cocos/dragon-bones.js", "plugin:cocos/gfx-webgl.js", "plugin:cocos/graphics.js", "plugin:cocos/intersection-2d.js", "plugin:cocos/mask.js", "plugin:cocos/particle-2d.js", "./physics-2d-box2d.js", "./physics-2d-framework.js", "plugin:cocos/profiler.js", "plugin:cocos/rich-text.js", "plugin:cocos/spine.js", "plugin:cocos/tiled-map.js", "plugin:cocos/tween.js", "plugin:cocos/ui.js", "plugin:cocos/video.js", "plugin:cocos/webview.js"], function (_export, _context) {
+  "use strict";
+
+  return {
+    setters: [function (_pluginCocos2dJs) {
+      var _exportObj = {};
+      for (var _key in _pluginCocos2dJs) {
+        if (_key !== "default" && _key !== "__esModule") _exportObj[_key] = _pluginCocos2dJs[_key];
+      }
+      _export(_exportObj);
+    }, function (_pluginCocosSortingJs) {
+      var _exportObj2 = {};
+      for (var _key2 in _pluginCocosSortingJs) {
+        if (_key2 !== "default" && _key2 !== "__esModule") _exportObj2[_key2] = _pluginCocosSortingJs[_key2];
+      }
+      _export(_exportObj2);
+    }, function (_affineTransformJs) {
+      var _exportObj3 = {};
+      for (var _key3 in _affineTransformJs) {
+        if (_key3 !== "default" && _key3 !== "__esModule") _exportObj3[_key3] = _affineTransformJs[_key3];
+      }
+      _export(_exportObj3);
+    }, function (_animationJs) {
+      var _exportObj4 = {};
+      for (var _key4 in _animationJs) {
+        if (_key4 !== "default" && _key4 !== "__esModule") _exportObj4[_key4] = _animationJs[_key4];
+      }
+      _export(_exportObj4);
+    }, function (_pluginCocosAudioJs) {
+      var _exportObj5 = {};
+      for (var _key5 in _pluginCocosAudioJs) {
+        if (_key5 !== "default" && _key5 !== "__esModule") _exportObj5[_key5] = _pluginCocosAudioJs[_key5];
+      }
+      _export(_exportObj5);
+    }, function (_pluginCocosBaseJs) {
+      var _exportObj6 = {};
+      for (var _key6 in _pluginCocosBaseJs) {
+        if (_key6 !== "default" && _key6 !== "__esModule") _exportObj6[_key6] = _pluginCocosBaseJs[_key6];
+      }
+      _export(_exportObj6);
+    }, function (_customPipelineJs) {
+      var _exportObj7 = {};
+      for (var _key7 in _customPipelineJs) {
+        if (_key7 !== "default" && _key7 !== "__esModule") _exportObj7[_key7] = _customPipelineJs[_key7];
+      }
+      _export(_exportObj7);
+    }, function (_pluginCocosDragonBonesJs) {
+      var _exportObj8 = {};
+      for (var _key8 in _pluginCocosDragonBonesJs) {
+        if (_key8 !== "default" && _key8 !== "__esModule") _exportObj8[_key8] = _pluginCocosDragonBonesJs[_key8];
+      }
+      _export(_exportObj8);
+    }, function (_pluginCocosGfxWebglJs) {
+      var _exportObj9 = {};
+      for (var _key9 in _pluginCocosGfxWebglJs) {
+        if (_key9 !== "default" && _key9 !== "__esModule") _exportObj9[_key9] = _pluginCocosGfxWebglJs[_key9];
+      }
+      _export(_exportObj9);
+    }, function (_pluginCocosGraphicsJs) {
+      var _exportObj10 = {};
+      for (var _key10 in _pluginCocosGraphicsJs) {
+        if (_key10 !== "default" && _key10 !== "__esModule") _exportObj10[_key10] = _pluginCocosGraphicsJs[_key10];
+      }
+      _export(_exportObj10);
+    }, function (_pluginCocosIntersection2dJs) {
+      var _exportObj11 = {};
+      for (var _key11 in _pluginCocosIntersection2dJs) {
+        if (_key11 !== "default" && _key11 !== "__esModule") _exportObj11[_key11] = _pluginCocosIntersection2dJs[_key11];
+      }
+      _export(_exportObj11);
+    }, function (_pluginCocosMaskJs) {
+      var _exportObj12 = {};
+      for (var _key12 in _pluginCocosMaskJs) {
+        if (_key12 !== "default" && _key12 !== "__esModule") _exportObj12[_key12] = _pluginCocosMaskJs[_key12];
+      }
+      _export(_exportObj12);
+    }, function (_pluginCocosParticle2dJs) {
+      var _exportObj13 = {};
+      for (var _key13 in _pluginCocosParticle2dJs) {
+        if (_key13 !== "default" && _key13 !== "__esModule") _exportObj13[_key13] = _pluginCocosParticle2dJs[_key13];
+      }
+      _export(_exportObj13);
+    }, function (_physics2dBox2dJs) {
+      var _exportObj14 = {};
+      for (var _key14 in _physics2dBox2dJs) {
+        if (_key14 !== "default" && _key14 !== "__esModule") _exportObj14[_key14] = _physics2dBox2dJs[_key14];
+      }
+      _export(_exportObj14);
+    }, function (_physics2dFrameworkJs) {
+      var _exportObj15 = {};
+      for (var _key15 in _physics2dFrameworkJs) {
+        if (_key15 !== "default" && _key15 !== "__esModule") _exportObj15[_key15] = _physics2dFrameworkJs[_key15];
+      }
+      _export(_exportObj15);
+    }, function (_pluginCocosProfilerJs) {
+      var _exportObj16 = {};
+      for (var _key16 in _pluginCocosProfilerJs) {
+        if (_key16 !== "default" && _key16 !== "__esModule") _exportObj16[_key16] = _pluginCocosProfilerJs[_key16];
+      }
+      _export(_exportObj16);
+    }, function (_pluginCocosRichTextJs) {
+      var _exportObj17 = {};
+      for (var _key17 in _pluginCocosRichTextJs) {
+        if (_key17 !== "default" && _key17 !== "__esModule") _exportObj17[_key17] = _pluginCocosRichTextJs[_key17];
+      }
+      _export(_exportObj17);
+    }, function (_pluginCocosSpineJs) {
+      var _exportObj18 = {};
+      for (var _key18 in _pluginCocosSpineJs) {
+        if (_key18 !== "default" && _key18 !== "__esModule") _exportObj18[_key18] = _pluginCocosSpineJs[_key18];
+      }
+      _export(_exportObj18);
+    }, function (_pluginCocosTiledMapJs) {
+      var _exportObj19 = {};
+      for (var _key19 in _pluginCocosTiledMapJs) {
+        if (_key19 !== "default" && _key19 !== "__esModule") _exportObj19[_key19] = _pluginCocosTiledMapJs[_key19];
+      }
+      _export(_exportObj19);
+    }, function (_pluginCocosTweenJs) {
+      var _exportObj20 = {};
+      for (var _key20 in _pluginCocosTweenJs) {
+        if (_key20 !== "default" && _key20 !== "__esModule") _exportObj20[_key20] = _pluginCocosTweenJs[_key20];
+      }
+      _export(_exportObj20);
+    }, function (_pluginCocosUiJs) {
+      var _exportObj21 = {};
+      for (var _key21 in _pluginCocosUiJs) {
+        if (_key21 !== "default" && _key21 !== "__esModule") _exportObj21[_key21] = _pluginCocosUiJs[_key21];
+      }
+      _export(_exportObj21);
+    }, function (_pluginCocosVideoJs) {
+      var _exportObj22 = {};
+      for (var _key22 in _pluginCocosVideoJs) {
+        if (_key22 !== "default" && _key22 !== "__esModule") _exportObj22[_key22] = _pluginCocosVideoJs[_key22];
+      }
+      _export(_exportObj22);
+    }, function (_pluginCocosWebviewJs) {
+      var _exportObj23 = {};
+      for (var _key23 in _pluginCocosWebviewJs) {
+        if (_key23 !== "default" && _key23 !== "__esModule") _exportObj23[_key23] = _pluginCocosWebviewJs[_key23];
+      }
+      _export(_exportObj23);
+    }],
+    execute: function () {}
+  };
+});

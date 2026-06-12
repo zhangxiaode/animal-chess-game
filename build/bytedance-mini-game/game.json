@@ -6,5 +6,25 @@
         "connectSocket": 5000,
         "uploadFile": 5000,
         "downloadFile": 500000
-    }
+    },
+    "plugins": {
+        "cocos": {
+            "version": "3.8.8",
+            "provider": "tt8bf0fd4d14fb3db712"
+        }
+    },
+    "subpackages": [
+        {
+            "name": "resources",
+            "root": "subpackages/resources"
+        },
+        {
+            "name": "home",
+            "root": "subpackages/home"
+        },
+        {
+            "name": "game",
+            "root": "subpackages/game"
+        }
+    ]
 }

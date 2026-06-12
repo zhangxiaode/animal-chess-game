@@ -2,7 +2,8 @@
   "name": "animal-chess",
   "uuid": "3d45326d-f5fb-4e80-b7e9-95cfa4c308c9",
   "scripts": {
-    "wechat:subpackage": "node tools/postprocess-wechat-subpackages.mjs"
+    "wechat:subpackage": "node tools/postprocess-wechat-subpackages.mjs wechatgame",
+    "bytedance:subpackage": "node tools/postprocess-wechat-subpackages.mjs bytedance-mini-game"
   },
   "creator": {
     "version": "3.8.8"

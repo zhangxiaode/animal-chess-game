@@ -25,7 +25,7 @@
           "epsilon": 0.001
         },
         "devToolsLaunchMethod": "lite",
-        "separateEngine": false,
+        "separateEngine": true,
         "__version__": "1.0.3"
       }
     },
@@ -42,7 +42,7 @@
           "epsilon": 0.001
         },
         "devToolsLaunchMethod": "lite",
-        "separateEngine": false,
+        "separateEngine": true,
         "__version__": "1.0.3"
       }
     },

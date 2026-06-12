@@ -1,7 +1,7 @@
 System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, Graphics, js, Label, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, DataManager, PopupManager, SoundManager, _dec, _class, _crd, ccclass, SettingPopup;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, Button, Color, Component, js, Label, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3, DataManager, PopupManager, SoundManager, _dec, _class, _crd, ccclass, SettingPopup;
 
   function _reportPossibleCrUseOfDataManager(extras) {
     _reporterNs.report("DataManager", "../framework/DataManager", _context.meta, extras);
@@ -26,7 +26,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       Button = _cc.Button;
       Color = _cc.Color;
       Component = _cc.Component;
-      Graphics = _cc.Graphics;
       js = _cc.js;
       Label = _cc.Label;
       Rect = _cc.Rect;
@@ -37,6 +36,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
       Texture2D = _cc.Texture2D;
       UITransform = _cc.UITransform;
       Vec2 = _cc.Vec2;
+      Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
       DataManager = _unresolved_2.DataManager;
     }, function (_unresolved_3) {
@@ -49,7 +49,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
       _cclegacy._RF.push({}, "64a46F5YopOObjnvwlORReG", "SettingPopup", undefined);
 
-      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'Graphics', 'js', 'Label', 'Node', 'Rect', 'resources', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2']);
+      __checkObsolete__(['_decorator', 'Button', 'Color', 'Component', 'js', 'Label', 'Node', 'Rect', 'resources', 'Size', 'Sprite', 'SpriteFrame', 'Texture2D', 'UITransform', 'Vec2', 'Vec3']);
 
       ({
         ccclass
@@ -62,12 +62,29 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._titleSprite = null;
           this._titleLabel = null;
           this._closeButton = null;
-          this._bgmButton = null;
-          this._effectButton = null;
-          this._bgmStateLabel = null;
-          this._effectStateLabel = null;
-          this._bgmEnabled = true;
+          this._switches = {
+            vibration: {
+              button: null,
+              background: null,
+              knob: null
+            },
+            effect: {
+              button: null,
+              background: null,
+              knob: null
+            },
+            music: {
+              button: null,
+              background: null,
+              knob: null
+            }
+          };
+          this._vibrationEnabled = true;
           this._effectEnabled = true;
+          this._musicEnabled = true;
+          this._switchBgFrame = null;
+          this._switchActiveFrame = null;
+          this._switchCircleFrame = null;
         }
 
         start() {
@@ -83,11 +100,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         onDestroy() {
-          var _this$_closeButton, _this$_bgmButton, _this$_effectButton;
+          var _this$_closeButton, _this$_switches$vibra, _this$_switches$effec, _this$_switches$music;
 
           (_this$_closeButton = this._closeButton) == null || _this$_closeButton.node.off(Button.EventType.CLICK, this._onClose, this);
-          (_this$_bgmButton = this._bgmButton) == null || _this$_bgmButton.node.off(Button.EventType.CLICK, this._onBgmToggle, this);
-          (_this$_effectButton = this._effectButton) == null || _this$_effectButton.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
+          (_this$_switches$vibra = this._switches.vibration.button) == null || _this$_switches$vibra.node.off(Button.EventType.CLICK, this._onVibrationToggle, this);
+          (_this$_switches$effec = this._switches.effect.button) == null || _this$_switches$effec.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
+          (_this$_switches$music = this._switches.music.button) == null || _this$_switches$music.node.off(Button.EventType.CLICK, this._onMusicToggle, this);
         }
 
         onShow(params) {
@@ -102,37 +120,35 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           this._bindLabel('Dialog/CloseButton/CloseLabel');
 
-          this._bgmButton = this._bindButton('Dialog/BgmToggle');
-          this._effectButton = this._bindButton('Dialog/EffectToggle');
+          this._bindSwitch('vibration', 'Dialog/VibrationToggle', 'Vibration');
 
-          this._bindLabel('Dialog/BgmToggle/BgmLabel');
+          this._bindSwitch('effect', 'Dialog/EffectToggle', 'Effect');
 
-          this._bindLabel('Dialog/EffectToggle/EffectLabel');
-
-          this._bgmStateLabel = this._bindLabel('Dialog/BgmToggle/BgmState');
-          this._effectStateLabel = this._bindLabel('Dialog/EffectToggle/EffectState');
+          this._bindSwitch('music', 'Dialog/MusicToggle', 'Music');
         }
 
         _bindEvents() {
-          var _this$_closeButton2, _this$_bgmButton2, _this$_effectButton2;
+          var _this$_closeButton2, _this$_switches$vibra2, _this$_switches$effec2, _this$_switches$music2;
 
           (_this$_closeButton2 = this._closeButton) == null || _this$_closeButton2.node.on(Button.EventType.CLICK, this._onClose, this);
-          (_this$_bgmButton2 = this._bgmButton) == null || _this$_bgmButton2.node.on(Button.EventType.CLICK, this._onBgmToggle, this);
-          (_this$_effectButton2 = this._effectButton) == null || _this$_effectButton2.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
+          (_this$_switches$vibra2 = this._switches.vibration.button) == null || _this$_switches$vibra2.node.on(Button.EventType.CLICK, this._onVibrationToggle, this);
+          (_this$_switches$effec2 = this._switches.effect.button) == null || _this$_switches$effec2.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
+          (_this$_switches$music2 = this._switches.music.button) == null || _this$_switches$music2.node.on(Button.EventType.CLICK, this._onMusicToggle, this);
         }
 
         _loadSettings() {
-          this._bgmEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+          this._vibrationEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
             error: Error()
-          }), DataManager) : DataManager).getInstance().getLocal('bgm_enabled', true);
+          }), DataManager) : DataManager).getInstance().getLocal('vibration_enabled', true);
           this._effectEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
             error: Error()
           }), DataManager) : DataManager).getInstance().getLocal('effect_enabled', true);
+          this._musicEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().getLocal('bgm_enabled', true);
         }
 
         _refreshView() {
-          var _this$_bgmButton$node, _this$_bgmButton3, _this$_effectButton$n, _this$_effectButton3;
-
           if (this._titleLabel) {
             this._titleLabel.string = '设置';
             this._titleLabel.fontSize = 40;
@@ -142,27 +158,33 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           this._setLabel('Dialog/CloseButton/CloseLabel', '×', 42);
 
-          this._setLabel('Dialog/BgmToggle/BgmLabel', '背景音乐', 30);
+          this._setLabel('Dialog/VibrationToggle/VibrationLabel', '震动', 30);
 
-          this._setLabel('Dialog/EffectToggle/EffectLabel', '游戏音效', 30);
+          this._setLabel('Dialog/EffectToggle/EffectLabel', '音效', 30);
 
-          this._updateToggleState((_this$_bgmButton$node = (_this$_bgmButton3 = this._bgmButton) == null ? void 0 : _this$_bgmButton3.node) != null ? _this$_bgmButton$node : null, this._bgmStateLabel, this._bgmEnabled);
+          this._setLabel('Dialog/MusicToggle/MusicLabel', '音乐', 30);
 
-          this._updateToggleState((_this$_effectButton$n = (_this$_effectButton3 = this._effectButton) == null ? void 0 : _this$_effectButton3.node) != null ? _this$_effectButton$n : null, this._effectStateLabel, this._effectEnabled);
+          this._updateSwitchState('vibration', this._vibrationEnabled);
+
+          this._updateSwitchState('effect', this._effectEnabled);
+
+          this._updateSwitchState('music', this._musicEnabled);
         }
 
         async _loadImages() {
-          await Promise.all([this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'), this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg')]);
+          const [,, switchBgFrame, switchActiveFrame, switchCircleFrame] = await Promise.all([this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'), this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg'), this._loadImageSpriteFrame('images/popup/switch_bg'), this._loadImageSpriteFrame('images/popup/switch_actived'), this._loadImageSpriteFrame('images/popup/circle')]);
+          this._switchBgFrame = switchBgFrame;
+          this._switchActiveFrame = switchActiveFrame;
+          this._switchCircleFrame = switchCircleFrame;
+
+          this._refreshView();
         }
 
-        _onBgmToggle() {
-          this._bgmEnabled = !this._bgmEnabled;
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().setBGMEnabled(this._bgmEnabled);
+        _onVibrationToggle() {
+          this._vibrationEnabled = !this._vibrationEnabled;
           (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
             error: Error()
-          }), DataManager) : DataManager).getInstance().setLocal('bgm_enabled', this._bgmEnabled);
+          }), DataManager) : DataManager).getInstance().setLocal('vibration_enabled', this._vibrationEnabled);
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
           }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
@@ -188,6 +210,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._refreshView();
         }
 
+        _onMusicToggle() {
+          this._musicEnabled = !this._musicEnabled;
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().setBGMEnabled(this._musicEnabled);
+          (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().setLocal('bgm_enabled', this._musicEnabled);
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+
+          this._refreshView();
+        }
+
         _onClose() {
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
@@ -196,35 +233,37 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
             error: Error()
           }), PopupManager) : PopupManager).getInstance().closePopup({
             saved: true,
-            bgmEnabled: this._bgmEnabled,
+            vibrationEnabled: this._vibrationEnabled,
+            bgmEnabled: this._musicEnabled,
             effectEnabled: this._effectEnabled
           });
         }
 
-        _updateToggleState(node, label, enabled) {
-          var _node$getComponent;
+        _bindSwitch(key, togglePath, nodePrefix) {
+          this._switches[key] = {
+            button: this._bindButton(togglePath),
+            background: this._bindSprite(`${togglePath}/${nodePrefix}SwitchBg`),
+            knob: this._bindSprite(`${togglePath}/${nodePrefix}SwitchBg/${nodePrefix}SwitchKnob`)
+          };
 
-          if (label) {
-            label.string = enabled ? '开启' : '关闭';
-            label.fontSize = 28;
-            label.lineHeight = 36;
-            label.color = enabled ? new Color(49, 132, 72, 255) : new Color(150, 82, 70, 255);
+          this._bindLabel(`${togglePath}/${nodePrefix}Label`);
+
+          this._setNodeSize(`${togglePath}/${nodePrefix}SwitchBg`, 154, 72);
+
+          this._setNodeSize(`${togglePath}/${nodePrefix}SwitchBg/${nodePrefix}SwitchKnob`, 72, 72);
+        }
+
+        _updateSwitchState(key, enabled) {
+          const item = this._switches[key];
+
+          if (item.background) {
+            item.background.spriteFrame = enabled ? this._switchActiveFrame : this._switchBgFrame;
           }
 
-          if (!node) return;
-          const transform = node.getComponent(UITransform);
-          if (!transform) return;
-          const graphics = (_node$getComponent = node.getComponent(Graphics)) != null ? _node$getComponent : node.addComponent(Graphics);
-          const width = transform.contentSize.width;
-          const height = transform.contentSize.height;
-          graphics.clear();
-          graphics.fillColor = new Color(255, 248, 225, 235);
-          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
-          graphics.fill();
-          graphics.strokeColor = enabled ? new Color(98, 196, 116, 255) : new Color(214, 116, 98, 255);
-          graphics.lineWidth = 3;
-          graphics.roundRect(-width / 2, -height / 2, width, height, 18);
-          graphics.stroke();
+          if (item.knob) {
+            item.knob.spriteFrame = this._switchCircleFrame;
+            item.knob.node.setPosition(new Vec3(enabled ? 41 : -41, 0, 0));
+          }
         }
 
         _setLabel(path, text, fontSize) {
@@ -238,6 +277,22 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         _bindButton(path) {
+          var _node$getComponent;
+
+          const node = this._findPrefabNode(path);
+
+          if (!node) return null;
+
+          this._preparePrefabNode(node);
+
+          const button = (_node$getComponent = node.getComponent(Button)) != null ? _node$getComponent : node.addComponent(Button);
+          button.interactable = true;
+          button.transition = Button.Transition.SCALE;
+          button.target = node;
+          return button;
+        }
+
+        _bindSprite(path) {
           var _node$getComponent2;
 
           const node = this._findPrefabNode(path);
@@ -246,14 +301,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           this._preparePrefabNode(node);
 
-          const button = (_node$getComponent2 = node.getComponent(Button)) != null ? _node$getComponent2 : node.addComponent(Button);
-          button.interactable = true;
-          button.transition = Button.Transition.SCALE;
-          button.target = node;
-          return button;
+          const sprite = (_node$getComponent2 = node.getComponent(Sprite)) != null ? _node$getComponent2 : node.addComponent(Sprite);
+          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
+          return sprite;
         }
 
-        _bindSprite(path) {
+        _bindLabel(path) {
           var _node$getComponent3;
 
           const node = this._findPrefabNode(path);
@@ -262,25 +315,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           this._preparePrefabNode(node);
 
-          const sprite = (_node$getComponent3 = node.getComponent(Sprite)) != null ? _node$getComponent3 : node.addComponent(Sprite);
-          sprite.sizeMode = Sprite.SizeMode.CUSTOM;
-          return sprite;
-        }
-
-        _bindLabel(path) {
-          var _node$getComponent4;
-
-          const node = this._findPrefabNode(path);
-
-          if (!node) return null;
-
-          this._preparePrefabNode(node);
-
-          const label = (_node$getComponent4 = node.getComponent(Label)) != null ? _node$getComponent4 : node.addComponent(Label);
+          const label = (_node$getComponent3 = node.getComponent(Label)) != null ? _node$getComponent3 : node.addComponent(Label);
           label.horizontalAlign = Label.HorizontalAlign.CENTER;
           label.verticalAlign = Label.VerticalAlign.CENTER;
           label.overflow = Label.Overflow.CLAMP;
           return label;
+        }
+
+        _setNodeSize(path, width, height) {
+          var _node$getComponent4;
+
+          const node = this._findPrefabNode(path);
+
+          if (!node) return;
+          const transform = (_node$getComponent4 = node.getComponent(UITransform)) != null ? _node$getComponent4 : node.addComponent(UITransform);
+          transform.setContentSize(width, height);
         }
 
         _preparePrefabNode(node) {
@@ -307,17 +356,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         async _setSpriteFrame(sprite, imagePath, failMessage) {
           if (!sprite) {
             console.warn(failMessage);
-            return;
+            return null;
           }
 
           const spriteFrame = await this._loadImageSpriteFrame(imagePath);
 
           if (!spriteFrame || !sprite.node.isValid) {
             console.warn(failMessage);
-            return;
+            return null;
           }
 
           sprite.spriteFrame = spriteFrame;
+          return spriteFrame;
         }
 
         async _loadImageSpriteFrame(path) {

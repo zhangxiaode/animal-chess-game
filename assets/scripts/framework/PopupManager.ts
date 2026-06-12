@@ -1,10 +1,14 @@
-import { _decorator, assetManager, Node, Prefab, resources, instantiate, tween, UITransform, Color, Sprite, Input, EventTouch, Vec3, UIOpacity } from 'cc';
+import { _decorator, assetManager, Node, Prefab, instantiate, tween, UITransform, Color, Graphics, Input, EventTouch, Vec3, UIOpacity } from 'cc';
 import { Singleton } from './Singleton';
 
 const { ccclass } = _decorator;
 
 const POPUP_PREFAB_UUID_MAP: Record<string, string> = {
     SettingPopup: 'a37a4ed6-3b8c-47bd-afd5-52f10ed88395',
+};
+
+const POPUP_BUNDLE_MAP: Record<string, string> = {
+    SettingPopup: 'popups',
 };
 
 @ccclass('PopupManager')
@@ -25,21 +29,37 @@ export class PopupManager extends Singleton<PopupManager> {
     private _createMask() {
         this._mask = new Node('popup_mask');
         const uiTransform = this._mask.addComponent(UITransform);
-        uiTransform.setContentSize(750, 1334);
         uiTransform.anchorX = 0.5;
         uiTransform.anchorY = 0.5;
 
-        const sprite = this._mask.addComponent(Sprite);
-        sprite.color = new Color(0, 0, 0, 180);
+        this._mask.addComponent(Graphics);
+        this._refreshMask();
 
         this._mask.on(Input.EventType.TOUCH_END, this._onMaskClick, this);
         this._mask.active = false;
         this._root.addChild(this._mask);
     }
 
+    private _refreshMask() {
+        if (!this._mask) return;
+
+        const rootTransform = this._root.getComponent(UITransform);
+        const width = rootTransform?.contentSize.width ?? 750;
+        const height = rootTransform?.contentSize.height ?? 1334;
+
+        const uiTransform = this._mask.getComponent(UITransform) ?? this._mask.addComponent(UITransform);
+        uiTransform.setContentSize(width, height);
+
+        const graphics = this._mask.getComponent(Graphics) ?? this._mask.addComponent(Graphics);
+        graphics.clear();
+        graphics.fillColor = new Color(0, 0, 0, 150);
+        graphics.rect(-width / 2, -height / 2, width, height);
+        graphics.fill();
+    }
+
     /**
      * 打开弹窗
-     * @param prefabPath 预制体路径（resources/prefabs/popups/xxx）
+     * @param prefabPath 预制体路径（如 prefabs/popups/xxx）
      * @param params 传递给弹窗的参数
      * @param callback 弹窗关闭回调
      * @param closeOnMaskClick 点击遮罩是否关闭
@@ -68,6 +88,7 @@ export class PopupManager extends Singleton<PopupManager> {
         this._popupStack.push({ node: popupNode, path: prefabPath, callback });
 
         // 显示遮罩
+        this._refreshMask();
         this._mask.active = true;
         this._mask['closeOnMaskClick'] = closeOnMaskClick;
         this._mask.setSiblingIndex(popupNode.getSiblingIndex() - 1);
@@ -100,8 +121,6 @@ export class PopupManager extends Singleton<PopupManager> {
             .to(0.2, { scale: new Vec3(0.8, 0.8, 1) })
             .call(() => {
                 popupNode.destroy();
-                resources.release(current.path);
-
                 // 执行回调
                 if (current.callback) {
                     current.callback(result);
@@ -132,7 +151,6 @@ export class PopupManager extends Singleton<PopupManager> {
         while (this._popupStack.length > 0) {
             const current = this._popupStack.pop()!;
             current.node.destroy();
-            resources.release(current.path);
         }
         this._mask.active = false;
     }
@@ -149,12 +167,11 @@ export class PopupManager extends Singleton<PopupManager> {
     }
 
     private async _loadPopupPrefab(prefabPath: string, popupName: string): Promise<Prefab | null> {
-        const resourcePrefab = await new Promise<Prefab | null>((resolve) => {
-            resources.load(prefabPath, Prefab, (error, prefab) => {
-                resolve(error || !prefab ? null : prefab);
-            });
-        });
-        if (resourcePrefab) return resourcePrefab;
+        const bundleName = POPUP_BUNDLE_MAP[popupName];
+        if (bundleName) {
+            const bundlePrefab = await this._loadBundlePrefab(bundleName, popupName);
+            if (bundlePrefab) return bundlePrefab;
+        }
 
         const uuid = POPUP_PREFAB_UUID_MAP[popupName];
         if (!uuid) return null;
@@ -162,6 +179,28 @@ export class PopupManager extends Singleton<PopupManager> {
         return new Promise<Prefab | null>((resolve) => {
             assetManager.loadAny({ uuid }, Prefab, (error, asset) => {
                 resolve(error || !asset ? null : asset as Prefab);
+            });
+        });
+    }
+
+    private async _loadBundlePrefab(bundleName: string, popupName: string): Promise<Prefab | null> {
+        return new Promise<Prefab | null>((resolve) => {
+            assetManager.loadBundle(bundleName, (bundleError, bundle) => {
+                if (bundleError || !bundle) {
+                    console.warn(`加载弹窗资源包失败: ${bundleName}`, bundleError);
+                    resolve(null);
+                    return;
+                }
+
+                bundle.load(popupName, Prefab, (prefabError, prefab) => {
+                    if (prefabError || !prefab) {
+                        console.warn(`弹窗资源包预制体加载失败 ${bundleName}:${popupName}`, prefabError);
+                        resolve(null);
+                        return;
+                    }
+
+                    resolve(prefab);
+                });
             });
         });
     }

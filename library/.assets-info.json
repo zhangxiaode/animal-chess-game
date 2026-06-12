@@ -6,7 +6,7 @@
       "uuid": "43964ec5-c883-4384-878c-4c5d1f8376a0"
     },
     "resources": {
-      "time": 1778587221228.1995,
+      "time": 1781234627513.6594,
       "uuid": "2180a15f-e33d-42a7-9127-7591c96aa3cb"
     },
     "scenes": {
@@ -33,10 +33,6 @@
       "time": 1781179977669.9753,
       "uuid": "3ddd492f-d3ae-4772-b2b1-7514bb816956"
     },
-    "resources/prefabs": {
-      "time": 1781181752755.109,
-      "uuid": "a8ee7670-d3e2-452d-a076-4c84ef7373e3"
-    },
     "resources/sounds": {
       "time": 1778554315948.7734,
       "uuid": "67e579f9-8acb-4002-ad54-06da3387c0c2"
@@ -50,20 +46,12 @@
       "uuid": "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af"
     },
     "scripts/popups": {
-      "time": 1781180453911.3828,
+      "time": 1781235344145.7336,
       "uuid": "aa115011-db3f-4d67-9e8d-e895dbcc9d75"
     },
     "scripts/utils": {
       "time": 1778555100479.2659,
       "uuid": "067cce4e-4c73-4565-9cf9-f3f38590c7ec"
-    },
-    "resources/prefabs/pages": {
-      "time": 1781179663689.4575,
-      "uuid": "95b2d95a-9f92-4b2e-b8fc-17ca7314fd5a"
-    },
-    "resources/prefabs/popups": {
-      "time": 1781180539825.037,
-      "uuid": "5d33d264-c977-477a-8b8c-15757094c815"
     },
     "scripts/GameMain.ts": {
       "time": 1781180559180.2705,
@@ -78,7 +66,7 @@
       "uuid": "4b961aa1-1832-46d4-b37b-5dba2d3ec1bd"
     },
     "scripts/framework/PopupManager.ts": {
-      "time": 1781180500797.8997,
+      "time": 1781234221617.3496,
       "uuid": "d74c19c7-3728-40bd-b3df-c69b00057541"
     },
     "scripts/framework/ResManager.ts": {
@@ -94,7 +82,7 @@
       "uuid": "4e629007-d0c7-442d-b6e2-95a2ac37f8be"
     },
     "scripts/framework/UIManager.ts": {
-      "time": 1781179684282.0806,
+      "time": 1781233815476.4973,
       "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
     },
     "scripts/pages/GamePage.ts": {
@@ -106,7 +94,7 @@
       "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
     },
     "scripts/popups/SettingPopup.ts": {
-      "time": 1781180453911.4832,
+      "time": 1781235344145.8447,
       "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
     },
     "scripts/utils/Constants.ts": {
@@ -132,7 +120,7 @@
       "time": 1778555100481.0059
     },
     "prefabs/popups.meta": {
-      "time": 1778555100481.1746
+      "time": 1781233628783.077
     },
     "resources/images.meta": {
       "time": 1778555100481.3418
@@ -483,7 +471,7 @@
       "uuid": "c5538084-1788-483f-8491-0796031b2813"
     },
     "prefabs/popups/SettingPopup.prefab": {
-      "time": 1781180392202.1577,
+      "time": 1781235175897.81,
       "uuid": "a37a4ed6-3b8c-47bd-afd5-52f10ed88395"
     },
     "prefabs/popups/SettingPopup.prefab.meta": {
@@ -502,7 +490,7 @@
       "time": 1781166220416.443
     },
     "resources/images/popup": {
-      "time": 1781180071802.459,
+      "time": 1781235629829.805,
       "uuid": "f03b3c50-62b4-457d-b203-a3995117295f"
     },
     "resources/images/home/home-bg.png": {
@@ -624,12 +612,36 @@
     "resources/images/popup/title_bg.png.meta": {
       "time": 1781180071816.9849
     },
-    "resources/prefabs/popups/SettingPopup.prefab": {
-      "time": 1781180539790.937,
-      "uuid": "18d37f05-a9c2-4abe-aabe-7977737f3aa4"
-    },
     "resources/prefabs/popups/SettingPopup.prefab.meta": {
       "time": 1781180539825.1973
+    },
+    "resources/images/popup/circle.png.meta": {
+      "time": 1781235444104.5132
+    },
+    "resources/images/popup/close.png.meta": {
+      "time": 1781235629849.9602
+    },
+    "resources/images/popup/switch_actived.png.meta": {
+      "time": 1781235443892.011
+    },
+    "resources/images/popup/switch_bg.png.meta": {
+      "time": 1781235443672.0767
+    },
+    "resources/images/popup/circle.png": {
+      "time": 1780277557725.7178,
+      "uuid": "9cf2f32e-0bdf-4e78-bfcb-c4b8bb60378f"
+    },
+    "resources/images/popup/close.png": {
+      "time": 1780051294875.8188,
+      "uuid": "6d5248ee-7e34-40a3-a9cc-0104b4d6d3c4"
+    },
+    "resources/images/popup/switch_bg.png": {
+      "time": 1780277560173.5996,
+      "uuid": "6a8e7765-9c9d-4b19-9b89-c1ec4a6f2f1a"
+    },
+    "resources/images/popup/switch_actived.png": {
+      "time": 1780277556653.3223,
+      "uuid": "e857a5eb-9a44-4a61-aad8-7f862c9d72a0"
     }
   },
   "missing": {}

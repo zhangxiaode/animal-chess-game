@@ -1,7 +1,7 @@
 {
   "modules": {
     "cce:/internal/x/cc": {
-      "mTimestamp": 6481.136666,
+      "mTimestamp": 5915.394667,
       "chunkId": "93ba276ea7b26ffcdc433fab14afc1ed6f05647b",
       "imports": [
         {
@@ -997,7 +997,7 @@
       ]
     },
     "cce:/internal/x/prerequisite-imports": {
-      "mTimestamp": 8492.271791,
+      "mTimestamp": 7955.414583,
       "chunkId": "6d8fd2b0177941b032ddc0733af48a561fb60657",
       "imports": [
         {
@@ -3355,7 +3355,7 @@
       ]
     },
     "cce:/internal/code-quality/cr.mjs": {
-      "mTimestamp": 1781181746373,
+      "mTimestamp": 1781235778836,
       "chunkId": "6a5019a719a9014c047e67aa1cf34453ab8392ce",
       "imports": [],
       "type": "esm",
@@ -4029,7 +4029,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/PopupManager.ts": {
       "mTimestamp": {
-        "mtime": 1781180500797.8997,
+        "mtime": 1781234221617.3496,
         "uuid": "d74c19c7-3728-40bd-b3df-c69b00057541"
       },
       "chunkId": "6d4a2ee5b359f4785621b060323b5ce8484bee11",
@@ -4049,11 +4049,11 @@
           "loc": {
             "start": {
               "line": 1,
-              "column": 150
+              "column": 141
             },
             "end": {
               "line": 1,
-              "column": 154
+              "column": 145
             }
           }
         },
@@ -4324,7 +4324,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/framework/UIManager.ts": {
       "mTimestamp": {
-        "mtime": 1781179684282.0806,
+        "mtime": 1781233815476.4973,
         "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
       },
       "chunkId": "67ef7aacb0534ffc34f984c40683bb6c1ffb736e",
@@ -4905,7 +4905,7 @@
     },
     "file:///Users/zxd/workspace/person/animal-chess-game/assets/scripts/popups/SettingPopup.ts": {
       "mTimestamp": {
-        "mtime": 1781180453911.4832,
+        "mtime": 1781235344145.8447,
         "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
       },
       "chunkId": "0d402ab8eb38bca077e3adb03fde75526f6f2b86",
@@ -4925,11 +4925,11 @@
           "loc": {
             "start": {
               "line": 1,
-              "column": 154
+              "column": 150
             },
             "end": {
               "line": 1,
-              "column": 158
+              "column": 154
             }
           }
         },

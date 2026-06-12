@@ -6,6 +6,12 @@
         "uploadFile": 5000,
         "downloadFile": 500000
     },
+    "plugins": {
+        "cocos": {
+            "version": "3.8.8",
+            "provider": "wx0446ba2621dda60a"
+        }
+    },
     "subpackages": [
         {
             "name": "resources",

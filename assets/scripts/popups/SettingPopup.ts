@@ -1,9 +1,17 @@
-import { _decorator, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2 } from 'cc';
+import { _decorator, Button, Color, Component, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, UITransform, Vec2, Vec3 } from 'cc';
 import { DataManager } from '../framework/DataManager';
 import { PopupManager } from '../framework/PopupManager';
 import { SoundManager } from '../framework/SoundManager';
 
 const { ccclass } = _decorator;
+
+type SettingKey = 'vibration' | 'effect' | 'music';
+
+type SwitchNodes = {
+    button: Button | null;
+    background: Sprite | null;
+    knob: Sprite | null;
+};
 
 @ccclass('SettingPopup')
 export class SettingPopup extends Component {
@@ -11,12 +19,19 @@ export class SettingPopup extends Component {
     private _titleSprite: Sprite | null = null;
     private _titleLabel: Label | null = null;
     private _closeButton: Button | null = null;
-    private _bgmButton: Button | null = null;
-    private _effectButton: Button | null = null;
-    private _bgmStateLabel: Label | null = null;
-    private _effectStateLabel: Label | null = null;
-    private _bgmEnabled = true;
+    private _closeSprite: Sprite | null = null;
+    private _closeLabel: Label | null = null;
+    private _switches: Record<SettingKey, SwitchNodes> = {
+        vibration: { button: null, background: null, knob: null },
+        effect: { button: null, background: null, knob: null },
+        music: { button: null, background: null, knob: null },
+    };
+    private _vibrationEnabled = true;
     private _effectEnabled = true;
+    private _musicEnabled = true;
+    private _switchBgFrame: SpriteFrame | null = null;
+    private _switchActiveFrame: SpriteFrame | null = null;
+    private _switchCircleFrame: SpriteFrame | null = null;
 
     start() {
         this._bindPrefabReferences();
@@ -28,8 +43,9 @@ export class SettingPopup extends Component {
 
     protected onDestroy() {
         this._closeButton?.node.off(Button.EventType.CLICK, this._onClose, this);
-        this._bgmButton?.node.off(Button.EventType.CLICK, this._onBgmToggle, this);
-        this._effectButton?.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
+        this._switches.vibration.button?.node.off(Button.EventType.CLICK, this._onVibrationToggle, this);
+        this._switches.effect.button?.node.off(Button.EventType.CLICK, this._onEffectToggle, this);
+        this._switches.music.button?.node.off(Button.EventType.CLICK, this._onMusicToggle, this);
     }
 
     onShow(params?: any) {
@@ -41,24 +57,25 @@ export class SettingPopup extends Component {
         this._titleSprite = this._bindSprite('Dialog/TitleBg');
         this._titleLabel = this._bindLabel('Dialog/TitleBg/TitleLabel');
         this._closeButton = this._bindButton('Dialog/CloseButton');
-        this._bindLabel('Dialog/CloseButton/CloseLabel');
-        this._bgmButton = this._bindButton('Dialog/BgmToggle');
-        this._effectButton = this._bindButton('Dialog/EffectToggle');
-        this._bindLabel('Dialog/BgmToggle/BgmLabel');
-        this._bindLabel('Dialog/EffectToggle/EffectLabel');
-        this._bgmStateLabel = this._bindLabel('Dialog/BgmToggle/BgmState');
-        this._effectStateLabel = this._bindLabel('Dialog/EffectToggle/EffectState');
+        this._closeSprite = this._bindSprite('Dialog/CloseButton');
+        this._closeLabel = this._bindLabel('Dialog/CloseButton/CloseLabel');
+        this._setNodeSize('Dialog/CloseButton', 90, 88);
+        this._bindSwitch('vibration', 'Dialog/VibrationToggle', 'Vibration');
+        this._bindSwitch('effect', 'Dialog/EffectToggle', 'Effect');
+        this._bindSwitch('music', 'Dialog/MusicToggle', 'Music');
     }
 
     private _bindEvents() {
         this._closeButton?.node.on(Button.EventType.CLICK, this._onClose, this);
-        this._bgmButton?.node.on(Button.EventType.CLICK, this._onBgmToggle, this);
-        this._effectButton?.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
+        this._switches.vibration.button?.node.on(Button.EventType.CLICK, this._onVibrationToggle, this);
+        this._switches.effect.button?.node.on(Button.EventType.CLICK, this._onEffectToggle, this);
+        this._switches.music.button?.node.on(Button.EventType.CLICK, this._onMusicToggle, this);
     }
 
     private _loadSettings() {
-        this._bgmEnabled = DataManager.getInstance().getLocal('bgm_enabled', true);
+        this._vibrationEnabled = DataManager.getInstance().getLocal('vibration_enabled', true);
         this._effectEnabled = DataManager.getInstance().getLocal('effect_enabled', true);
+        this._musicEnabled = DataManager.getInstance().getLocal('bgm_enabled', true);
     }
 
     private _refreshView() {
@@ -69,24 +86,36 @@ export class SettingPopup extends Component {
             this._titleLabel.color = new Color(255, 255, 255, 255);
         }
 
-        this._setLabel('Dialog/CloseButton/CloseLabel', '×', 42);
-        this._setLabel('Dialog/BgmToggle/BgmLabel', '背景音乐', 30);
-        this._setLabel('Dialog/EffectToggle/EffectLabel', '游戏音效', 30);
-        this._updateToggleState(this._bgmButton?.node ?? null, this._bgmStateLabel, this._bgmEnabled);
-        this._updateToggleState(this._effectButton?.node ?? null, this._effectStateLabel, this._effectEnabled);
+        if (this._closeLabel) {
+            this._closeLabel.string = '';
+        }
+        this._setLabel('Dialog/VibrationToggle/VibrationLabel', '震动', 30);
+        this._setLabel('Dialog/EffectToggle/EffectLabel', '音效', 30);
+        this._setLabel('Dialog/MusicToggle/MusicLabel', '音乐', 30);
+        this._updateSwitchState('vibration', this._vibrationEnabled);
+        this._updateSwitchState('effect', this._effectEnabled);
+        this._updateSwitchState('music', this._musicEnabled);
     }
 
     private async _loadImages() {
-        await Promise.all([
+        const [, , , switchBgFrame, switchActiveFrame, switchCircleFrame] = await Promise.all([
             this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'),
             this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg'),
+            this._setSpriteFrame(this._closeSprite, 'images/popup/close', '[SettingPopup] 关闭按钮图片加载失败: images/popup/close'),
+            this._loadImageSpriteFrame('images/popup/switch_bg'),
+            this._loadImageSpriteFrame('images/popup/switch_actived'),
+            this._loadImageSpriteFrame('images/popup/circle'),
         ]);
+
+        this._switchBgFrame = switchBgFrame;
+        this._switchActiveFrame = switchActiveFrame;
+        this._switchCircleFrame = switchCircleFrame;
+        this._refreshView();
     }
 
-    private _onBgmToggle() {
-        this._bgmEnabled = !this._bgmEnabled;
-        SoundManager.getInstance().setBGMEnabled(this._bgmEnabled);
-        DataManager.getInstance().setLocal('bgm_enabled', this._bgmEnabled);
+    private _onVibrationToggle() {
+        this._vibrationEnabled = !this._vibrationEnabled;
+        DataManager.getInstance().setLocal('vibration_enabled', this._vibrationEnabled);
         SoundManager.getInstance().playEffect('sounds/click');
         this._refreshView();
     }
@@ -101,38 +130,45 @@ export class SettingPopup extends Component {
         this._refreshView();
     }
 
+    private _onMusicToggle() {
+        this._musicEnabled = !this._musicEnabled;
+        SoundManager.getInstance().setBGMEnabled(this._musicEnabled);
+        DataManager.getInstance().setLocal('bgm_enabled', this._musicEnabled);
+        SoundManager.getInstance().playEffect('sounds/click');
+        this._refreshView();
+    }
+
     private _onClose() {
         SoundManager.getInstance().playEffect('sounds/click');
         PopupManager.getInstance().closePopup({
             saved: true,
-            bgmEnabled: this._bgmEnabled,
+            vibrationEnabled: this._vibrationEnabled,
+            bgmEnabled: this._musicEnabled,
             effectEnabled: this._effectEnabled,
         });
     }
 
-    private _updateToggleState(node: Node | null, label: Label | null, enabled: boolean) {
-        if (label) {
-            label.string = enabled ? '开启' : '关闭';
-            label.fontSize = 28;
-            label.lineHeight = 36;
-            label.color = enabled ? new Color(49, 132, 72, 255) : new Color(150, 82, 70, 255);
+    private _bindSwitch(key: SettingKey, togglePath: string, nodePrefix: string) {
+        this._switches[key] = {
+            button: this._bindButton(togglePath),
+            background: this._bindSprite(`${togglePath}/${nodePrefix}SwitchBg`),
+            knob: this._bindSprite(`${togglePath}/${nodePrefix}SwitchBg/${nodePrefix}SwitchKnob`),
+        };
+
+        this._bindLabel(`${togglePath}/${nodePrefix}Label`);
+        this._setNodeSize(`${togglePath}/${nodePrefix}SwitchBg`, 154, 72);
+        this._setNodeSize(`${togglePath}/${nodePrefix}SwitchBg/${nodePrefix}SwitchKnob`, 72, 72);
+    }
+
+    private _updateSwitchState(key: SettingKey, enabled: boolean) {
+        const item = this._switches[key];
+        if (item.background) {
+            item.background.spriteFrame = enabled ? this._switchActiveFrame : this._switchBgFrame;
         }
-        if (!node) return;
-
-        const transform = node.getComponent(UITransform);
-        if (!transform) return;
-
-        const graphics = node.getComponent(Graphics) ?? node.addComponent(Graphics);
-        const width = transform.contentSize.width;
-        const height = transform.contentSize.height;
-        graphics.clear();
-        graphics.fillColor = new Color(255, 248, 225, 235);
-        graphics.roundRect(-width / 2, -height / 2, width, height, 18);
-        graphics.fill();
-        graphics.strokeColor = enabled ? new Color(98, 196, 116, 255) : new Color(214, 116, 98, 255);
-        graphics.lineWidth = 3;
-        graphics.roundRect(-width / 2, -height / 2, width, height, 18);
-        graphics.stroke();
+        if (item.knob) {
+            item.knob.spriteFrame = this._switchCircleFrame;
+            item.knob.node.setPosition(new Vec3(enabled ? 41 : -41, 0, 0));
+        }
     }
 
     private _setLabel(path: string, text: string, fontSize: number) {
@@ -179,6 +215,14 @@ export class SettingPopup extends Component {
         return label;
     }
 
+    private _setNodeSize(path: string, width: number, height: number) {
+        const node = this._findPrefabNode(path);
+        if (!node) return;
+
+        const transform = node.getComponent(UITransform) ?? node.addComponent(UITransform);
+        transform.setContentSize(width, height);
+    }
+
     private _preparePrefabNode(node: Node) {
         node.layer = this.node.layer;
         node.getComponent(UITransform) ?? node.addComponent(UITransform);
@@ -195,16 +239,17 @@ export class SettingPopup extends Component {
     private async _setSpriteFrame(sprite: Sprite | null, imagePath: string, failMessage: string) {
         if (!sprite) {
             console.warn(failMessage);
-            return;
+            return null;
         }
 
         const spriteFrame = await this._loadImageSpriteFrame(imagePath);
         if (!spriteFrame || !sprite.node.isValid) {
             console.warn(failMessage);
-            return;
+            return null;
         }
 
         sprite.spriteFrame = spriteFrame;
+        return spriteFrame;
     }
 
     private async _loadImageSpriteFrame(path: string): Promise<SpriteFrame | null> {
