@@ -420,7 +420,7 @@
     "versionCode": 1
   },
   "05066383-4d40-498d-b904-bf49859b8694": {
-    "url": "db://assets/resources/images/home/collect.png",
+    "url": "db://assets/resources/images/home/sidebar.png",
     "value": {
       "depends": []
     },
@@ -443,7 +443,7 @@
     "versionCode": 1
   },
   "05066383-4d40-498d-b904-bf49859b8694@6c48a": {
-    "url": "db://assets/resources/images/home/collect.png@6c48a",
+    "url": "db://assets/resources/images/home/sidebar.png@6c48a",
     "value": {
       "depends": [
         "05066383-4d40-498d-b904-bf49859b8694"
@@ -500,7 +500,7 @@
     "versionCode": 1
   },
   "25280ce1-9e3c-4230-afba-7384bbf13f31": {
-    "url": "db://assets/resources/images/home/reward.png",
+    "url": "db://assets/resources/images/home/desktop.png",
     "value": {
       "depends": []
     },
@@ -557,7 +557,7 @@
     "versionCode": 1
   },
   "25280ce1-9e3c-4230-afba-7384bbf13f31@6c48a": {
-    "url": "db://assets/resources/images/home/reward.png@6c48a",
+    "url": "db://assets/resources/images/home/desktop.png@6c48a",
     "value": {
       "depends": [
         "25280ce1-9e3c-4230-afba-7384bbf13f31"
@@ -975,5 +975,52 @@
       ]
     },
     "versionCode": 1
+  },
+  "b68218ae-d917-43b9-9abd-f851933a95d0": {
+    "url": "db://assets/resources/sounds/bgm.mp3",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "d014be75-5cf8-4009-a88f-fb4f191fbe5f": {
+    "url": "db://assets/resources/sounds/click.mp3",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "e0825e13-45fa-4ee8-bf1c-328211a3aaca": {
+    "url": "db://assets/resources/sounds/win.mp3",
+    "value": {
+      "depends": []
+    },
+    "versionCode": 1
+  },
+  "a628a221-2185-40d8-8016-26d02ebaddfb": {
+    "url": "db://assets/scripts/popups/DesktopPopup.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "7a42b990-7fe9-4045-b2a7-c3f1d8af7063": {
+    "url": "db://assets/scripts/popups/SidebarPopup.ts",
+    "value": {},
+    "versionCode": 1
+  },
+  "935abeee-ba86-4ee2-835f-4dfd7252e256": {
+    "url": "db://assets/prefabs/popups/DesktopPopup.prefab",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
+  },
+  "7a6e7c96-5288-4ff5-ad9b-c8146f540077": {
+    "url": "db://assets/prefabs/popups/SidebarPopup.prefab",
+    "value": {
+      "depends": [],
+      "dependScripts": []
+    },
+    "versionCode": 2
   }
 }

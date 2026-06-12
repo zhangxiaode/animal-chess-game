@@ -145,6 +145,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
           }), SoundManager) : SoundManager).getInstance().init(this.node);
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playBGM('sounds/bgm');
           (_crd && HttpManager === void 0 ? (_reportPossibleCrUseOfHttpManager({
             error: Error()
           }), HttpManager) : HttpManager).getInstance().init(gameInfo.apiBaseUrl); // 初始化用户系统 - 游戏启动时创建或读取用户数据

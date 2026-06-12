@@ -274,7 +274,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
         _onBack() {
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().backPage();

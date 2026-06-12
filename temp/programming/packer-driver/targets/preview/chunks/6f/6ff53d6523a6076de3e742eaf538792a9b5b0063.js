@@ -1,7 +1,7 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__unresolved_3"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, AudioSource, game, Game, Node, Singleton, ResManager, _dec, _class, _crd, ccclass, SoundManager;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, AudioSource, game, Game, Node, Singleton, ResManager, DataManager, _dec, _class, _crd, ccclass, SoundManager;
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -13,6 +13,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
 
   function _reportPossibleCrUseOfResManager(extras) {
     _reporterNs.report("ResManager", "./ResManager", _context.meta, extras);
+  }
+
+  function _reportPossibleCrUseOfDataManager(extras) {
+    _reporterNs.report("DataManager", "./DataManager", _context.meta, extras);
   }
 
   return {
@@ -31,13 +35,15 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
       Singleton = _unresolved_2.Singleton;
     }, function (_unresolved_3) {
       ResManager = _unresolved_3.ResManager;
+    }, function (_unresolved_4) {
+      DataManager = _unresolved_4.DataManager;
     }],
     execute: function () {
       _crd = true;
 
       _cclegacy._RF.push({}, "4e629AH0MdELbbilaKsN/i+", "SoundManager", undefined);
 
-      __checkObsolete__(['_decorator', 'AudioSource', 'AudioClip', 'game', 'Game', 'Node']);
+      __checkObsolete__(['_decorator', 'AudioSource', 'game', 'Game', 'Node']);
 
       ({
         ccclass
@@ -62,7 +68,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
          * @param root 根节点
          */
         init(root) {
-          // 创建背景音乐节点
+          this._bgmEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().getLocal('bgm_enabled', true);
+          this._effectEnabled = (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().getLocal('effect_enabled', true); // 创建背景音乐节点
+
           var bgmNode = new Node('bgm_source');
           this._bgmSource = bgmNode.addComponent(AudioSource);
           this._bgmSource.loop = true;
@@ -82,7 +94,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           }); // 游戏回到前台时恢复音乐
 
           game.on(Game.EVENT_SHOW, () => {
-            if (this._bgmEnabled && !this._bgmSource.playing) {
+            if (this._bgmEnabled && this._bgmSource.clip && !this._bgmSource.playing) {
               this._bgmSource.play();
             }
           });
@@ -97,9 +109,16 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
           var _this = this;
 
           return _asyncToGenerator(function* () {
-            if (!_this._bgmEnabled) return;
-            if (_this._currentBgmPath === path) return;
+            if (_this._currentBgmPath === path && _this._bgmSource.clip) {
+              if (_this._bgmEnabled && !_this._bgmSource.playing) {
+                _this._bgmSource.play();
+              }
+
+              return;
+            }
+
             _this._currentBgmPath = path;
+            if (!_this._bgmEnabled) return;
 
             try {
               var clip = yield (_crd && ResManager === void 0 ? (_reportPossibleCrUseOfResManager({
@@ -160,6 +179,48 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], fu
               console.warn("[SoundManager] \u64AD\u653E\u97F3\u6548\u5931\u8D25: " + path, error);
             }
           })();
+        }
+        /**
+         * 播放通用按钮点击反馈：受设置中的震动和音效开关控制。
+         */
+
+
+        playClickFeedback() {
+          this.vibrateShort();
+          this.playEffect('sounds/click');
+        }
+        /**
+         * 触发短震动
+         */
+
+
+        vibrateShort() {
+          if (!(_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
+            error: Error()
+          }), DataManager) : DataManager).getInstance().getLocal('vibration_enabled', true)) return;
+          var runtime = globalThis;
+
+          try {
+            if (runtime.wx && typeof runtime.wx.vibrateShort === 'function') {
+              runtime.wx.vibrateShort({
+                type: 'light'
+              });
+              return;
+            }
+
+            if (runtime.tt && typeof runtime.tt.vibrateShort === 'function') {
+              runtime.tt.vibrateShort();
+              return;
+            }
+
+            var navigatorApi = runtime.navigator;
+
+            if (navigatorApi && typeof navigatorApi.vibrate === 'function') {
+              navigatorApi.vibrate(15);
+            }
+          } catch (error) {
+            console.warn('[SoundManager] 震动失败', error);
+          }
         }
         /**
          * 设置背景音乐音量

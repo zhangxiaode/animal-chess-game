@@ -32,6 +32,10 @@ export class HomePage extends Component {
     protected onDestroy() {
         this._settingButton?.node.off(Button.EventType.CLICK, this._onSetting, this);
         this._startGameButton?.node.off(Button.EventType.CLICK, this._onStartGame, this);
+        ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach((path) => {
+            const node = this._findPrefabNode(path);
+            node?.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
+        });
     }
 
     onShow(params?: any) {
@@ -90,6 +94,11 @@ export class HomePage extends Component {
         this._settingButton?.node.on(Button.EventType.CLICK, this._onSetting, this);
         this._startGameButton?.node.off(Button.EventType.CLICK, this._onStartGame, this);
         this._startGameButton?.node.on(Button.EventType.CLICK, this._onStartGame, this);
+        ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach((path) => {
+            const node = this._findPrefabNode(path);
+            node?.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
+            node?.on(Button.EventType.CLICK, this._onEntryButtonClick, this);
+        });
     }
 
     private async _loadImageContent() {
@@ -98,10 +107,10 @@ export class HomePage extends Component {
             this._setSpriteFrame(this._homeDecorSprite, 'images/home/home-bg', '[HomePage] 中部装饰图加载失败: images/home/home-bg'),
             this._setSpriteFrame(this._settingButton?.node.getComponent(Sprite) ?? null, 'images/home/setting', '[HomePage] 设置按钮图片加载失败: images/home/setting'),
             this._setSpriteFrame(this._logoSprite, 'images/home/logo', '[HomePage] Logo 图片加载失败: images/home/logo'),
-            this._setSpriteFrame(this._rewardButtonSprite, 'images/home/reward', '[HomePage] 奖励按钮图片加载失败: images/home/reward'),
+            this._setSpriteFrame(this._rewardButtonSprite, 'images/home/desktop', '[HomePage] 奖励按钮图片加载失败: images/home/desktop'),
             this._setSpriteFrame(this._rankingButtonSprite, 'images/home/ranking', '[HomePage] 排行按钮图片加载失败: images/home/ranking'),
             this._setSpriteFrame(this._feedbackButtonSprite, 'images/home/feedback', '[HomePage] 反馈按钮图片加载失败: images/home/feedback'),
-            this._setSpriteFrame(this._collectButtonSprite, 'images/home/collect', '[HomePage] 收藏按钮图片加载失败: images/home/collect'),
+            this._setSpriteFrame(this._collectButtonSprite, 'images/home/sidebar', '[HomePage] 收藏按钮图片加载失败: images/home/sidebar'),
             this._setSpriteFrame(this._levelBadgeSprite, 'images/home/level_bg', '[HomePage] 关卡背景图片加载失败: images/home/level_bg'),
             this._setSpriteFrame(this._startGameButtonSprite, 'images/home/btn_yellow', '[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow'),
         ]);
@@ -185,13 +194,17 @@ export class HomePage extends Component {
     }
 
     private _onStartGame() {
-        SoundManager.getInstance().playEffect('sounds/click');
+        SoundManager.getInstance().playClickFeedback();
         UIManager.getInstance().openPage('prefabs/pages/GamePage', { level: 1 });
     }
 
     private _onSetting() {
-        SoundManager.getInstance().playEffect('sounds/click');
+        SoundManager.getInstance().playClickFeedback();
         PopupManager.getInstance().openPopup('prefabs/popups/SettingPopup', { source: 'home' });
+    }
+
+    private _onEntryButtonClick() {
+        SoundManager.getInstance().playClickFeedback();
     }
 
     private async _loadImageSpriteFrame(path: string): Promise<SpriteFrame | null> {

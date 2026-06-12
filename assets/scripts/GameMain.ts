@@ -55,6 +55,7 @@ export class GameMain extends Component {
         UIManager.getInstance().init(this._uiRoot);
         PopupManager.getInstance().init(this._popupRoot);
         SoundManager.getInstance().init(this.node);
+        SoundManager.getInstance().playBGM('sounds/bgm');
         HttpManager.getInstance().init(gameInfo.apiBaseUrl);
 
         // 初始化用户系统 - 游戏启动时创建或读取用户数据

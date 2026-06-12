@@ -26,7 +26,7 @@
       "uuid": "5ac17572-65c2-46a9-9685-6e9a70086911"
     },
     "prefabs/popups": {
-      "time": 1781158166008.6636,
+      "time": 1781246822653.8413,
       "uuid": "f4cd014c-439e-4224-815e-e1fb52dd51f2"
     },
     "resources/images": {
@@ -34,7 +34,7 @@
       "uuid": "3ddd492f-d3ae-4772-b2b1-7514bb816956"
     },
     "resources/sounds": {
-      "time": 1778554315948.7734,
+      "time": 1781237450596.4175,
       "uuid": "67e579f9-8acb-4002-ad54-06da3387c0c2"
     },
     "scripts/framework": {
@@ -46,7 +46,7 @@
       "uuid": "3c2d0b87-4d4f-42c9-8ae1-a028e7fa92af"
     },
     "scripts/popups": {
-      "time": 1781235344145.7336,
+      "time": 1781247014795.436,
       "uuid": "aa115011-db3f-4d67-9e8d-e895dbcc9d75"
     },
     "scripts/utils": {
@@ -54,7 +54,7 @@
       "uuid": "067cce4e-4c73-4565-9cf9-f3f38590c7ec"
     },
     "scripts/GameMain.ts": {
-      "time": 1781180559180.2705,
+      "time": 1781236621439.1057,
       "uuid": "39bb67ff-34a0-41a7-af7c-00c4b48a1fa5"
     },
     "scripts/framework/DataManager.ts": {
@@ -78,7 +78,7 @@
       "uuid": "478dd293-4d96-405d-b4e0-6f720e03d3e2"
     },
     "scripts/framework/SoundManager.ts": {
-      "time": 1778570767796.9297,
+      "time": 1781236828721.876,
       "uuid": "4e629007-d0c7-442d-b6e2-95a2ac37f8be"
     },
     "scripts/framework/UIManager.ts": {
@@ -86,15 +86,15 @@
       "uuid": "f6610e04-f6d5-451b-8a0c-b62e5702b3a4"
     },
     "scripts/pages/GamePage.ts": {
-      "time": 1781180005317.1018,
+      "time": 1781236964879.993,
       "uuid": "8b116674-f2e6-4548-b399-dde759e84de8"
     },
     "scripts/pages/HomePage.ts": {
-      "time": 1781180479388.8518,
+      "time": 1781247083848.6191,
       "uuid": "8233ba82-a6dc-48d4-87d8-a60ff07d27c2"
     },
     "scripts/popups/SettingPopup.ts": {
-      "time": 1781235344145.8447,
+      "time": 1781236859129.852,
       "uuid": "64a46179-628a-4e39-b8e7-bf094e451786"
     },
     "scripts/utils/Constants.ts": {
@@ -196,7 +196,7 @@
       "time": 1778571032932.952
     },
     "scripts/pages/RulesPage.ts": {
-      "time": 1778572573401.3406,
+      "time": 1781236981661.4243,
       "uuid": "b2266d1f-bcda-4502-806b-3d90bed4ab65"
     },
     "scripts/system.meta": {
@@ -240,7 +240,7 @@
       "time": 1780641877679.9514
     },
     "resources/images/home": {
-      "time": 1781170363770.1272,
+      "time": 1781247802854.8447,
       "uuid": "235619ea-e160-4739-a5e4-44c03af8b10f"
     },
     "resources/images/loading": {
@@ -323,9 +323,6 @@
     "resources/images/home/btn_yellow.png.meta": {
       "time": 1780996751465.6194
     },
-    "resources/images/home/collect.png.meta": {
-      "time": 1781007098760.4502
-    },
     "resources/images/home/feedback.png.meta": {
       "time": 1781007098759.9124
     },
@@ -338,9 +335,6 @@
     "resources/images/home/ranking.png.meta": {
       "time": 1781007098761.3757
     },
-    "resources/images/home/reward.png.meta": {
-      "time": 1781007098761.134
-    },
     "resources/images/home/setting.png.meta": {
       "time": 1780996751477.1135
     },
@@ -350,10 +344,6 @@
     "resources/images/home/add.png": {
       "time": 1780996632783.805,
       "uuid": "bbe0d7e6-744c-46e7-b139-0f2508b10e3b"
-    },
-    "resources/images/home/collect.png": {
-      "time": 1781007630350.1384,
-      "uuid": "05066383-4d40-498d-b904-bf49859b8694"
     },
     "resources/images/home/btn_green.png": {
       "time": 1780996676848.1494,
@@ -382,10 +372,6 @@
     "resources/images/home/ranking.png": {
       "time": 1781007063041.4077,
       "uuid": "e49aa8a7-fc6a-4963-a00e-807770957b3b"
-    },
-    "resources/images/home/reward.png": {
-      "time": 1781007704714.1333,
-      "uuid": "25280ce1-9e3c-4230-afba-7384bbf13f31"
     },
     "resources/images/home/setting.png": {
       "time": 1781007265600.9062,
@@ -463,7 +449,7 @@
       "uuid": "9c962845-cc39-4bcf-abff-fa0abdb40807"
     },
     "prefabs/pages/HomePage.prefab": {
-      "time": 1781170739478.8552,
+      "time": 1781245746805.3452,
       "uuid": "45fef6ee-bb46-4f3e-aa9f-6dcd82168974"
     },
     "prefabs/pages/LoadingPage.prefab": {
@@ -471,7 +457,7 @@
       "uuid": "c5538084-1788-483f-8491-0796031b2813"
     },
     "prefabs/popups/SettingPopup.prefab": {
-      "time": 1781235175897.81,
+      "time": 1781236036232.446,
       "uuid": "a37a4ed6-3b8c-47bd-afd5-52f10ed88395"
     },
     "prefabs/popups/SettingPopup.prefab.meta": {
@@ -642,6 +628,69 @@
     "resources/images/popup/switch_actived.png": {
       "time": 1780277556653.3223,
       "uuid": "e857a5eb-9a44-4a61-aad8-7f862c9d72a0"
+    },
+    "resources/sounds/bgm.mp3": {
+      "time": 1753516853000,
+      "uuid": "b68218ae-d917-43b9-9abd-f851933a95d0"
+    },
+    "resources/sounds/click.mp3": {
+      "time": 1764210628000,
+      "uuid": "d014be75-5cf8-4009-a88f-fb4f191fbe5f"
+    },
+    "resources/sounds/win.mp3": {
+      "time": 1764210628000,
+      "uuid": "e0825e13-45fa-4ee8-bf1c-328211a3aaca"
+    },
+    "resources/sounds/click.mp3.meta": {
+      "time": 1781237450629.7397
+    },
+    "resources/sounds/bgm.mp3.meta": {
+      "time": 1781237450629.9734
+    },
+    "resources/sounds/win.mp3.meta": {
+      "time": 1781237450630.1785
+    },
+    "scripts/popups/DesktopPopup.ts.meta": {
+      "time": 1781246930925.33
+    },
+    "scripts/popups/SidebarPopup.ts.meta": {
+      "time": 1781246930926.5637
+    },
+    "scripts/popups/DesktopPopup.ts": {
+      "time": 1781236859129.852,
+      "uuid": "a628a221-2185-40d8-8016-26d02ebaddfb"
+    },
+    "scripts/popups/SidebarPopup.ts": {
+      "time": 1781236859129.852,
+      "uuid": "7a42b990-7fe9-4045-b2a7-c3f1d8af7063"
+    },
+    "prefabs/popups/DesktopPopup.prefab.meta": {
+      "time": 1781246930978.6868
+    },
+    "prefabs/popups/SidebarPopup.prefab.meta": {
+      "time": 1781246930978.0386
+    },
+    "resources/images/home/desktop.png.meta": {
+      "time": 1781247877390.8403
+    },
+    "resources/images/home/sidebar.png.meta": {
+      "time": 1781247877391.7385
+    },
+    "prefabs/popups/SidebarPopup.prefab": {
+      "time": 1781246930974.4402,
+      "uuid": "7a6e7c96-5288-4ff5-ad9b-c8146f540077"
+    },
+    "prefabs/popups/DesktopPopup.prefab": {
+      "time": 1781246930974.4841,
+      "uuid": "935abeee-ba86-4ee2-835f-4dfd7252e256"
+    },
+    "resources/images/home/desktop.png": {
+      "time": 1781247791712.441,
+      "uuid": "25280ce1-9e3c-4230-afba-7384bbf13f31"
+    },
+    "resources/images/home/sidebar.png": {
+      "time": 1781247790977.0015,
+      "uuid": "05066383-4d40-498d-b904-bf49859b8694"
     }
   },
   "missing": {}

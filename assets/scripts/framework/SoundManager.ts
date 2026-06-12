@@ -1,6 +1,7 @@
-import { _decorator, AudioSource, AudioClip, game, Game, Node } from 'cc';
+import { _decorator, AudioSource, game, Game, Node } from 'cc';
 import { Singleton } from './Singleton';
 import { ResManager } from './ResManager';
+import { DataManager } from './DataManager';
 
 const { ccclass } = _decorator;
 
@@ -19,6 +20,9 @@ export class SoundManager extends Singleton<SoundManager> {
      * @param root 根节点
      */
     init(root: Node) {
+        this._bgmEnabled = DataManager.getInstance().getLocal('bgm_enabled', true);
+        this._effectEnabled = DataManager.getInstance().getLocal('effect_enabled', true);
+
         // 创建背景音乐节点
         const bgmNode = new Node('bgm_source');
         this._bgmSource = bgmNode.addComponent(AudioSource);
@@ -42,7 +46,7 @@ export class SoundManager extends Singleton<SoundManager> {
 
         // 游戏回到前台时恢复音乐
         game.on(Game.EVENT_SHOW, () => {
-            if (this._bgmEnabled && !this._bgmSource.playing) {
+            if (this._bgmEnabled && this._bgmSource.clip && !this._bgmSource.playing) {
                 this._bgmSource.play();
             }
         });
@@ -53,10 +57,16 @@ export class SoundManager extends Singleton<SoundManager> {
      * @param path 音乐路径
      */
     async playBGM(path: string) {
-        if (!this._bgmEnabled) return;
-        if (this._currentBgmPath === path) return;
+        if (this._currentBgmPath === path && this._bgmSource.clip) {
+            if (this._bgmEnabled && !this._bgmSource.playing) {
+                this._bgmSource.play();
+            }
+            return;
+        }
 
         this._currentBgmPath = path;
+        if (!this._bgmEnabled) return;
+
         try {
             const clip = await ResManager.getInstance().loadAudioClip(path);
             if (!clip || !(clip as any)._nativeAsset) {
@@ -98,6 +108,41 @@ export class SoundManager extends Singleton<SoundManager> {
             this._effectSource.playOneShot(clip, this._effectVolume);
         } catch (error) {
             console.warn(`[SoundManager] 播放音效失败: ${path}`, error);
+        }
+    }
+
+    /**
+     * 播放通用按钮点击反馈：受设置中的震动和音效开关控制。
+     */
+    playClickFeedback() {
+        this.vibrateShort();
+        this.playEffect('sounds/click');
+    }
+
+    /**
+     * 触发短震动
+     */
+    vibrateShort() {
+        if (!DataManager.getInstance().getLocal('vibration_enabled', true)) return;
+
+        const runtime = globalThis as any;
+        try {
+            if (runtime.wx && typeof runtime.wx.vibrateShort === 'function') {
+                runtime.wx.vibrateShort({ type: 'light' });
+                return;
+            }
+
+            if (runtime.tt && typeof runtime.tt.vibrateShort === 'function') {
+                runtime.tt.vibrateShort();
+                return;
+            }
+
+            const navigatorApi = runtime.navigator;
+            if (navigatorApi && typeof navigatorApi.vibrate === 'function') {
+                navigatorApi.vibrate(15);
+            }
+        } catch (error) {
+            console.warn('[SoundManager] 震动失败', error);
         }
     }
 

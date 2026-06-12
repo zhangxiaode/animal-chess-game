@@ -62,6 +62,8 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._titleSprite = null;
           this._titleLabel = null;
           this._closeButton = null;
+          this._closeSprite = null;
+          this._closeLabel = null;
           this._switches = {
             vibration: {
               button: null,
@@ -117,8 +119,10 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           this._titleSprite = this._bindSprite('Dialog/TitleBg');
           this._titleLabel = this._bindLabel('Dialog/TitleBg/TitleLabel');
           this._closeButton = this._bindButton('Dialog/CloseButton');
+          this._closeSprite = this._bindSprite('Dialog/CloseButton');
+          this._closeLabel = this._bindLabel('Dialog/CloseButton/CloseLabel');
 
-          this._bindLabel('Dialog/CloseButton/CloseLabel');
+          this._setNodeSize('Dialog/CloseButton', 90, 88);
 
           this._bindSwitch('vibration', 'Dialog/VibrationToggle', 'Vibration');
 
@@ -156,7 +160,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
             this._titleLabel.color = new Color(255, 255, 255, 255);
           }
 
-          this._setLabel('Dialog/CloseButton/CloseLabel', '×', 42);
+          if (this._closeLabel) {
+            this._closeLabel.string = '';
+          }
 
           this._setLabel('Dialog/VibrationToggle/VibrationLabel', '震动', 30);
 
@@ -172,7 +178,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         async _loadImages() {
-          const [,, switchBgFrame, switchActiveFrame, switchCircleFrame] = await Promise.all([this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'), this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg'), this._loadImageSpriteFrame('images/popup/switch_bg'), this._loadImageSpriteFrame('images/popup/switch_actived'), this._loadImageSpriteFrame('images/popup/circle')]);
+          const [,,, switchBgFrame, switchActiveFrame, switchCircleFrame] = await Promise.all([this._setSpriteFrame(this._dialogSprite, 'images/popup/dialog_bg', '[SettingPopup] 弹框背景加载失败: images/popup/dialog_bg'), this._setSpriteFrame(this._titleSprite, 'images/popup/title_bg', '[SettingPopup] 标题背景加载失败: images/popup/title_bg'), this._setSpriteFrame(this._closeSprite, 'images/popup/close', '[SettingPopup] 关闭按钮图片加载失败: images/popup/close'), this._loadImageSpriteFrame('images/popup/switch_bg'), this._loadImageSpriteFrame('images/popup/switch_actived'), this._loadImageSpriteFrame('images/popup/circle')]);
           this._switchBgFrame = switchBgFrame;
           this._switchActiveFrame = switchActiveFrame;
           this._switchCircleFrame = switchCircleFrame;
@@ -181,18 +187,21 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         }
 
         _onVibrationToggle() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           this._vibrationEnabled = !this._vibrationEnabled;
           (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
             error: Error()
           }), DataManager) : DataManager).getInstance().setLocal('vibration_enabled', this._vibrationEnabled);
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
 
           this._refreshView();
         }
 
         _onEffectToggle() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           this._effectEnabled = !this._effectEnabled;
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
@@ -201,16 +210,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
             error: Error()
           }), DataManager) : DataManager).getInstance().setLocal('effect_enabled', this._effectEnabled);
 
-          if (this._effectEnabled) {
-            (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-              error: Error()
-            }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
-          }
-
           this._refreshView();
         }
 
         _onMusicToggle() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           this._musicEnabled = !this._musicEnabled;
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
@@ -218,9 +224,6 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           (_crd && DataManager === void 0 ? (_reportPossibleCrUseOfDataManager({
             error: Error()
           }), DataManager) : DataManager).getInstance().setLocal('bgm_enabled', this._musicEnabled);
-          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
-            error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
 
           this._refreshView();
         }
@@ -228,7 +231,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         _onClose() {
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
             error: Error()
           }), PopupManager) : PopupManager).getInstance().closePopup({

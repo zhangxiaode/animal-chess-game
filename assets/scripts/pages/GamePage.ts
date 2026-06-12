@@ -1,4 +1,5 @@
 import { _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3 } from 'cc';
+import { SoundManager } from '../framework/SoundManager';
 import { UIManager } from '../framework/UIManager';
 
 const { ccclass } = _decorator;
@@ -97,6 +98,10 @@ export class GamePage extends Component {
 
     protected onDestroy() {
         this._backBtn?.node.off(Button.EventType.CLICK, this._onBack, this);
+        ['RestartButton', 'UndoButton', 'HintButton'].forEach((path) => {
+            const node = this._findPrefabNode(path);
+            node?.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
+        });
     }
 
     private _setCoverSize(transform: UITransform, spriteFrame: SpriteFrame, containerWidth: number, containerHeight: number) {
@@ -221,6 +226,11 @@ export class GamePage extends Component {
 
         this._backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
         this._backBtn.node.on(Button.EventType.CLICK, this._onBack, this);
+        ['RestartButton', 'UndoButton', 'HintButton'].forEach((path) => {
+            const node = this._findPrefabNode(path);
+            node?.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
+            node?.on(Button.EventType.CLICK, this._onBottomButtonClick, this);
+        });
     }
 
     private async _loadStaticImages() {
@@ -648,6 +658,7 @@ export class GamePage extends Component {
     }
 
     private _onCellClick(row: number, col: number) {
+        SoundManager.getInstance().playClickFeedback();
         if (this._isBusy || this._isGameOver || !this._isPlayerTurn() || !this._selectedPiece) return;
         if (this._getAlivePieceAt(row, col)) return;
 
@@ -660,6 +671,7 @@ export class GamePage extends Component {
     }
 
     private _onPieceClick(piece: GamePieceState) {
+        SoundManager.getInstance().playClickFeedback();
         if (this._isBusy || this._isGameOver || !piece.isAlive) return;
         if (!this._playerCamp && piece.isRevealed) return;
         if (this._playerCamp && !this._isPlayerTurn()) return;
@@ -1403,7 +1415,12 @@ export class GamePage extends Component {
     }
 
     private _onBack() {
+        SoundManager.getInstance().playClickFeedback();
         UIManager.getInstance().backPage();
+    }
+
+    private _onBottomButtonClick() {
+        SoundManager.getInstance().playClickFeedback();
     }
 }
 

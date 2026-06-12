@@ -1,13 +1,17 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, UIManager, _dec, _class, _crd, ccclass, GamePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, SoundManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
 
   function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
   function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+  function _reportPossibleCrUseOfSoundManager(extras) {
+    _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
+  }
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
@@ -40,7 +44,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
       Vec2 = _cc.Vec2;
       Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
-      UIManager = _unresolved_2.UIManager;
+      SoundManager = _unresolved_2.SoundManager;
+    }, function (_unresolved_3) {
+      UIManager = _unresolved_3.UIManager;
     }],
     execute: function () {
       _crd = true;
@@ -110,6 +116,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           var _this$_backBtn;
 
           (_this$_backBtn = this._backBtn) == null || _this$_backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
+          ['RestartButton', 'UndoButton', 'HintButton'].forEach(path => {
+            var node = this._findPrefabNode(path);
+
+            node == null || node.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
+          });
         }
 
         _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
@@ -249,6 +260,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           this._backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
 
           this._backBtn.node.on(Button.EventType.CLICK, this._onBack, this);
+
+          ['RestartButton', 'UndoButton', 'HintButton'].forEach(path => {
+            var node = this._findPrefabNode(path);
+
+            node == null || node.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
+            node == null || node.on(Button.EventType.CLICK, this._onBottomButtonClick, this);
+          });
         }
 
         _loadStaticImages() {
@@ -731,6 +749,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         _onCellClick(row, col) {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           if (this._isBusy || this._isGameOver || !this._isPlayerTurn() || !this._selectedPiece) return;
           if (this._getAlivePieceAt(row, col)) return;
 
@@ -744,6 +765,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         _onPieceClick(piece) {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           if (this._isBusy || this._isGameOver || !piece.isAlive) return;
           if (!this._playerCamp && piece.isRevealed) return;
           if (this._playerCamp && !this._isPlayerTurn()) return;
@@ -1571,9 +1595,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         _onBack() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().backPage();
+        }
+
+        _onBottomButtonClick() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
         }
 
       }) || _class));

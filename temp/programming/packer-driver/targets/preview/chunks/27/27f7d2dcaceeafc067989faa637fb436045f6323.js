@@ -95,6 +95,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
 
           (_this$_settingButton = this._settingButton) == null || _this$_settingButton.node.off(Button.EventType.CLICK, this._onSetting, this);
           (_this$_startGameButto = this._startGameButton) == null || _this$_startGameButto.node.off(Button.EventType.CLICK, this._onStartGame, this);
+          ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach(path => {
+            var node = this._findPrefabNode(path);
+
+            node == null || node.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
+          });
         }
 
         onShow(params) {
@@ -158,6 +163,12 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           (_this$_settingButton3 = this._settingButton) == null || _this$_settingButton3.node.on(Button.EventType.CLICK, this._onSetting, this);
           (_this$_startGameButto4 = this._startGameButton) == null || _this$_startGameButto4.node.off(Button.EventType.CLICK, this._onStartGame, this);
           (_this$_startGameButto5 = this._startGameButton) == null || _this$_startGameButto5.node.on(Button.EventType.CLICK, this._onStartGame, this);
+          ['RewardButton', 'RankingButton', 'FeedbackButton', 'CollectButton'].forEach(path => {
+            var node = this._findPrefabNode(path);
+
+            node == null || node.off(Button.EventType.CLICK, this._onEntryButtonClick, this);
+            node == null || node.on(Button.EventType.CLICK, this._onEntryButtonClick, this);
+          });
         }
 
         _loadImageContent() {
@@ -166,7 +177,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
           return _asyncToGenerator(function* () {
             var _this$_settingButton$, _this$_settingButton4;
 
-            yield Promise.all([_this._setSpriteFrame(_this._backgroundSprite, 'images/home/bg', '[HomePage] 背景图加载失败: images/home/bg', true), _this._setSpriteFrame(_this._homeDecorSprite, 'images/home/home-bg', '[HomePage] 中部装饰图加载失败: images/home/home-bg'), _this._setSpriteFrame((_this$_settingButton$ = (_this$_settingButton4 = _this._settingButton) == null ? void 0 : _this$_settingButton4.node.getComponent(Sprite)) != null ? _this$_settingButton$ : null, 'images/home/setting', '[HomePage] 设置按钮图片加载失败: images/home/setting'), _this._setSpriteFrame(_this._logoSprite, 'images/home/logo', '[HomePage] Logo 图片加载失败: images/home/logo'), _this._setSpriteFrame(_this._rewardButtonSprite, 'images/home/reward', '[HomePage] 奖励按钮图片加载失败: images/home/reward'), _this._setSpriteFrame(_this._rankingButtonSprite, 'images/home/ranking', '[HomePage] 排行按钮图片加载失败: images/home/ranking'), _this._setSpriteFrame(_this._feedbackButtonSprite, 'images/home/feedback', '[HomePage] 反馈按钮图片加载失败: images/home/feedback'), _this._setSpriteFrame(_this._collectButtonSprite, 'images/home/collect', '[HomePage] 收藏按钮图片加载失败: images/home/collect'), _this._setSpriteFrame(_this._levelBadgeSprite, 'images/home/level_bg', '[HomePage] 关卡背景图片加载失败: images/home/level_bg'), _this._setSpriteFrame(_this._startGameButtonSprite, 'images/home/btn_yellow', '[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow')]);
+            yield Promise.all([_this._setSpriteFrame(_this._backgroundSprite, 'images/home/bg', '[HomePage] 背景图加载失败: images/home/bg', true), _this._setSpriteFrame(_this._homeDecorSprite, 'images/home/home-bg', '[HomePage] 中部装饰图加载失败: images/home/home-bg'), _this._setSpriteFrame((_this$_settingButton$ = (_this$_settingButton4 = _this._settingButton) == null ? void 0 : _this$_settingButton4.node.getComponent(Sprite)) != null ? _this$_settingButton$ : null, 'images/home/setting', '[HomePage] 设置按钮图片加载失败: images/home/setting'), _this._setSpriteFrame(_this._logoSprite, 'images/home/logo', '[HomePage] Logo 图片加载失败: images/home/logo'), _this._setSpriteFrame(_this._rewardButtonSprite, 'images/home/desktop', '[HomePage] 奖励按钮图片加载失败: images/home/desktop'), _this._setSpriteFrame(_this._rankingButtonSprite, 'images/home/ranking', '[HomePage] 排行按钮图片加载失败: images/home/ranking'), _this._setSpriteFrame(_this._feedbackButtonSprite, 'images/home/feedback', '[HomePage] 反馈按钮图片加载失败: images/home/feedback'), _this._setSpriteFrame(_this._collectButtonSprite, 'images/home/sidebar', '[HomePage] 收藏按钮图片加载失败: images/home/sidebar'), _this._setSpriteFrame(_this._levelBadgeSprite, 'images/home/level_bg', '[HomePage] 关卡背景图片加载失败: images/home/level_bg'), _this._setSpriteFrame(_this._startGameButtonSprite, 'images/home/btn_yellow', '[HomePage] 开始游戏按钮背景加载失败: images/home/btn_yellow')]);
           })();
         }
 
@@ -286,7 +297,7 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         _onStartGame() {
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().openPage('prefabs/pages/GamePage', {
@@ -297,12 +308,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2", "__
         _onSetting() {
           (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
             error: Error()
-          }), SoundManager) : SoundManager).getInstance().playEffect('sounds/click');
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           (_crd && PopupManager === void 0 ? (_reportPossibleCrUseOfPopupManager({
             error: Error()
           }), PopupManager) : PopupManager).getInstance().openPopup('prefabs/popups/SettingPopup', {
             source: 'home'
           });
+        }
+
+        _onEntryButtonClick() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
         }
 
         _loadImageSpriteFrame(path) {

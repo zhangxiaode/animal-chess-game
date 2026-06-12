@@ -1,7 +1,11 @@
-System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _context) {
+System.register(["__unresolved_0", "cc", "__unresolved_1", "__unresolved_2"], function (_export, _context) {
   "use strict";
 
-  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, UIManager, _dec, _class, _crd, ccclass, GamePage;
+  var _reporterNs, _cclegacy, __checkObsolete__, __checkObsoleteInNamespace__, _decorator, assetManager, Button, Color, Component, Graphics, js, Label, Node, Rect, resources, Size, Sprite, SpriteFrame, Texture2D, tween, UITransform, Vec2, Vec3, SoundManager, UIManager, _dec, _class, _crd, ccclass, GamePage;
+
+  function _reportPossibleCrUseOfSoundManager(extras) {
+    _reporterNs.report("SoundManager", "../framework/SoundManager", _context.meta, extras);
+  }
 
   function _reportPossibleCrUseOfUIManager(extras) {
     _reporterNs.report("UIManager", "../framework/UIManager", _context.meta, extras);
@@ -34,7 +38,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
       Vec2 = _cc.Vec2;
       Vec3 = _cc.Vec3;
     }, function (_unresolved_2) {
-      UIManager = _unresolved_2.UIManager;
+      SoundManager = _unresolved_2.SoundManager;
+    }, function (_unresolved_3) {
+      UIManager = _unresolved_3.UIManager;
     }],
     execute: function () {
       _crd = true;
@@ -100,6 +106,11 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           var _this$_backBtn;
 
           (_this$_backBtn = this._backBtn) == null || _this$_backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
+          ['RestartButton', 'UndoButton', 'HintButton'].forEach(path => {
+            const node = this._findPrefabNode(path);
+
+            node == null || node.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
+          });
         }
 
         _setCoverSize(transform, spriteFrame, containerWidth, containerHeight) {
@@ -231,6 +242,13 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
           this._backBtn.node.off(Button.EventType.CLICK, this._onBack, this);
 
           this._backBtn.node.on(Button.EventType.CLICK, this._onBack, this);
+
+          ['RestartButton', 'UndoButton', 'HintButton'].forEach(path => {
+            const node = this._findPrefabNode(path);
+
+            node == null || node.off(Button.EventType.CLICK, this._onBottomButtonClick, this);
+            node == null || node.on(Button.EventType.CLICK, this._onBottomButtonClick, this);
+          });
         }
 
         async _loadStaticImages() {
@@ -686,6 +704,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         _onCellClick(row, col) {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           if (this._isBusy || this._isGameOver || !this._isPlayerTurn() || !this._selectedPiece) return;
           if (this._getAlivePieceAt(row, col)) return;
 
@@ -699,6 +720,9 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         _onPieceClick(piece) {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           if (this._isBusy || this._isGameOver || !piece.isAlive) return;
           if (!this._playerCamp && piece.isRevealed) return;
           if (this._playerCamp && !this._isPlayerTurn()) return;
@@ -1517,9 +1541,18 @@ System.register(["__unresolved_0", "cc", "__unresolved_1"], function (_export, _
         }
 
         _onBack() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
           (_crd && UIManager === void 0 ? (_reportPossibleCrUseOfUIManager({
             error: Error()
           }), UIManager) : UIManager).getInstance().backPage();
+        }
+
+        _onBottomButtonClick() {
+          (_crd && SoundManager === void 0 ? (_reportPossibleCrUseOfSoundManager({
+            error: Error()
+          }), SoundManager) : SoundManager).getInstance().playClickFeedback();
         }
 
       }) || _class));

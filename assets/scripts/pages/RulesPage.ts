@@ -226,7 +226,7 @@ export class RulesPage extends Component {
     }
 
     private _onBack() {
-        SoundManager.getInstance().playEffect('sounds/click');
+        SoundManager.getInstance().playClickFeedback();
         UIManager.getInstance().backPage();
     }
 }
